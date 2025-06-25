@@ -20,7 +20,14 @@
 }
 
 body {
-  background: var(--background);
+  background-color: #ede8dc;
+  background-image: radial-gradient(at 47% 33%, #ffc3fd 0, transparent 59%),
+    radial-gradient(at 82% 65%, #a3ddf8 0, transparent 55%),
+    radial-gradient(at 20% 65%, #d2c3ff 0, transparent 55%);
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
