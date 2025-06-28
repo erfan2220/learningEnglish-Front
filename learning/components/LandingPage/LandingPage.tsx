@@ -55,8 +55,8 @@ const LandingPage = () => {
               <Country
                 flag={ukFlag}
                 countryName={"English"}
-                width={48}
-                textSize={"20px"}
+                width={32}
+                textSize={"18px"}
               />
             </Link>
 
@@ -64,8 +64,8 @@ const LandingPage = () => {
               <Country
                 flag={frenchFlag}
                 countryName={"French"}
-                width={48}
-                textSize={"20px"}
+                width={32}
+                textSize={"18px"}
               />
             </Link>
           </div>

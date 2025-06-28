@@ -5,12 +5,12 @@ import { socialMediaIcons } from "@/constant/socialMediaIcons";
 
 const Footer = () => {
   return (
-    <div className="bg-white/80 px-[60px] py-8">
-      <div className="flex items-center justify-evenly mb-8">
+    <div className="bg-white/70 backdrop-blur-md px-[80px] py-8">
+      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-8 text-[#737177] text-sm">
         {/* ///////////////////////////// */}
         <div>
           <ul>
-            <li className="font-bold mb-3">Languages</li>
+            <li className="font-bold mb-2 text-[#45444A]">Languages</li>
             <li>
               <Link href={"/corses/english"}>Learn English</Link>
             </li>
@@ -24,7 +24,7 @@ const Footer = () => {
 
         <div>
           <ul>
-            <li className="font-bold mb-3">Teacher & Tutor</li>
+            <li className="font-bold mb-3 text-[#45444A]">Teacher & Tutor</li>
             <li>
               <Link href={"/corses/english"}>English Tutor</Link>
             </li>
@@ -40,7 +40,9 @@ const Footer = () => {
 
         <div>
           <ul>
-            <li className="font-bold mb-3">Learning Resources</li>
+            <li className="font-bold mb-3 text-[#45444A]">
+              Learning Resources
+            </li>
             <li>
               <Link href={"/"}>Podcast</Link>
             </li>
@@ -58,7 +60,7 @@ const Footer = () => {
         <div>
           <div>
             <ul>
-              <li className="font-bold mb-3">More</li>
+              <li className="font-bold mb-3 text-[#45444A]">More</li>
               <li>
                 <Link href={"/"}>FAQ</Link>
               </li>
@@ -77,7 +79,7 @@ const Footer = () => {
       <div className="flex gap-4 mt-6">
         {socialMediaIcons.map((icon) => (
           <div key={icon.id}>
-            <SocialMediaIcon socialIcon={icon.icon} address={"/"} />
+            <SocialMediaIcon socialIcon={icon.icon} address={icon.address} />
           </div>
         ))}
       </div>
