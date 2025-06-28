@@ -13,6 +13,7 @@ import FeatureItemLandingPage from "../FeatureItemLandingPage/FeatureItemLanding
 import { featuresData } from "@/constant/features";
 import { becomeTutorData, becomeTutorListData } from "@/constant/becomeTutor";
 import Slide from "../Slide/Slide";
+import Button from "../Button/Button";
 
 const LandingPage = () => {
   return (
@@ -26,12 +27,15 @@ const LandingPage = () => {
               <h1 className="text-[#5C5A60] text-2xl md:text-4xl font-bold mb-4">
                 Speak Confidently, Learn Naturally
               </h1>
-              {featuresData.map((feature) => (
-                <FeatureItemLandingPage
-                  key={feature.id}
-                  detail={feature.text}
-                />
-              ))}
+              <div className="mb-10">
+                {featuresData.map((feature) => (
+                  <FeatureItemLandingPage
+                    key={feature.id}
+                    detail={feature.text}
+                  />
+                ))}
+              </div>
+              <Button label={"start now"} type="button" />
             </div>
 
             <div className="w-full md:w-1/2">
@@ -73,7 +77,7 @@ const LandingPage = () => {
 
       {/* ////////////////////////tutor cart section////////////////////// */}
 
-      <Layout marginTop={10}>
+      <Layout>
         <Slide />
       </Layout>
 
@@ -131,13 +135,15 @@ const LandingPage = () => {
             <p className="text-[#5C5A60] text-sm md:text-base font-semibold mt-4">
               {becomeTutorData.text}
             </p>
-            <ul className="text-[#5C5A60] text-sm md:text-base mt-4">
+            <ul className="text-[#5C5A60] text-sm md:text-base mt-4 mb-6">
               {becomeTutorListData.map((data) => (
                 <li key={data.id} className="list-disc ml-4 md:ml-8">
                   {data.text}
                 </li>
               ))}
             </ul>
+
+            <Button type="button" label={"become a tutor"} />
           </div>
 
           <div className="hidden md:block md:w-1/2">

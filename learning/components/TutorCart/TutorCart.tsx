@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Country from "../Country/Country";
 import Link from "next/link";
+import Button from "../Button/Button";
 
 const TutorCart = ({ tutorData }: { tutorData: TutorData }) => {
   return (
@@ -35,6 +36,8 @@ const TutorCart = ({ tutorData }: { tutorData: TutorData }) => {
           <p className="font-semibold text-[#5C5A60] text-sm">Price</p>
           <p className="font-bold text-lg text-[#45444A]">{tutorData.price}</p>
         </div>
+
+        <Button type="button" label={"try now"} widthBtn="100%" />
       </Link>
     </div>
   );
