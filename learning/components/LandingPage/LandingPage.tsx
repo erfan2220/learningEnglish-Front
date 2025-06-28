@@ -12,6 +12,7 @@ import { stepsData } from "@/constant/stepsData";
 import FeatureItemLandingPage from "../FeatureItemLandingPage/FeatureItemLandingPage";
 import { featuresData } from "@/constant/features";
 import { becomeTutorData, becomeTutorListData } from "@/constant/becomeTutor";
+import Slide from "../Slide/Slide";
 
 const LandingPage = () => {
   return (
@@ -48,37 +49,33 @@ const LandingPage = () => {
 
       {/* ////////////////////////language section////////////////////// */}
 
-      <div className="mt-10">
-        <Layout>
-          <div className="flex items-center justify-evenly p-1">
-            <Link href={"/courses/english"}>
-              <Country
-                flag={ukFlag}
-                countryName={"English"}
-                width={32}
-                textSize={"18px"}
-              />
-            </Link>
+      <Layout>
+        <div className="flex items-center justify-evenly p-1">
+          <Link href={"/courses/english"}>
+            <Country
+              flag={ukFlag}
+              countryName={"English"}
+              width={32}
+              textSize={"18px"}
+            />
+          </Link>
 
-            <Link href={"/courses/french"} className="flex gap-2 items-center">
-              <Country
-                flag={frenchFlag}
-                countryName={"French"}
-                width={32}
-                textSize={"18px"}
-              />
-            </Link>
-          </div>
-        </Layout>
-      </div>
+          <Link href={"/courses/french"} className="flex gap-2 items-center">
+            <Country
+              flag={frenchFlag}
+              countryName={"French"}
+              width={32}
+              textSize={"18px"}
+            />
+          </Link>
+        </div>
+      </Layout>
 
       {/* ////////////////////////tutor cart section////////////////////// */}
 
-      <div className="mt-10">
-        <Layout>
-          <div>tutor</div>
-        </Layout>
-      </div>
+      <Layout marginTop={10}>
+        <Slide />
+      </Layout>
 
       {/* ////////////////////////"how it works" section////////////////////// */}
 
@@ -125,39 +122,37 @@ const LandingPage = () => {
 
       {/* ////////////////////////"become a tutor" section////////////////////// */}
 
-      <div className="mt-10 ">
-        <Layout>
-          <div className="flex flex-col md:flex-row w-full px-[10%] py-6 items-center">
-            <div className="w-full md:w-1/2">
-              <h4 className="text-3xl md:text-4xl font-bold text-[#5C5A60]">
-                {becomeTutorData.title}
-              </h4>
-              <p className="text-[#5C5A60] text-sm md:text-base font-semibold mt-4">
-                {becomeTutorData.text}
-              </p>
-              <ul className="text-[#5C5A60] text-sm md:text-base mt-4">
-                {becomeTutorListData.map((data) => (
-                  <li key={data.id} className="list-disc ml-4 md:ml-8">
-                    {data.text}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="hidden md:block md:w-1/2">
-              <Image
-                src={tutorPic}
-                alt="become tutor pic"
-                width={100}
-                height={100}
-                className="object-contain"
-                style={{ width: "90%", height: "90%" }}
-                priority
-              />
-            </div>
+      <Layout>
+        <div className="flex flex-col md:flex-row w-full px-[10%] py-6 items-center">
+          <div className="w-full md:w-1/2">
+            <h4 className="text-3xl md:text-4xl font-bold text-[#5C5A60]">
+              {becomeTutorData.title}
+            </h4>
+            <p className="text-[#5C5A60] text-sm md:text-base font-semibold mt-4">
+              {becomeTutorData.text}
+            </p>
+            <ul className="text-[#5C5A60] text-sm md:text-base mt-4">
+              {becomeTutorListData.map((data) => (
+                <li key={data.id} className="list-disc ml-4 md:ml-8">
+                  {data.text}
+                </li>
+              ))}
+            </ul>
           </div>
-        </Layout>
-      </div>
+
+          <div className="hidden md:block md:w-1/2">
+            <Image
+              src={tutorPic}
+              alt="become tutor pic"
+              width={100}
+              height={100}
+              className="object-contain"
+              style={{ width: "90%", height: "90%" }}
+              priority
+            />
+          </div>
+        </div>
+      </Layout>
     </div>
   );
 };
