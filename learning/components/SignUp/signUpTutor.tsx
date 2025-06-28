@@ -5,24 +5,23 @@ import Inputs from "../Input/Input";
 import Link from "next/link";
 import eyeIconClose from "../../assets/icons/eyeCloseIcon.svg";
 import eyeIcon from "../../assets/icons/eyeIcon.svg";
-import signInIcon from "../../assets/icons/loginIcon.svg";
+import signUpIcon from "../../assets/icons/signupIconWhite.svg";
 import Image from "next/image";
 import googleIcon from "../../assets/icons/google.svg";
 
-const SignIn = () => {
+const SignUpTutor = () => {
   return (
     <div className="p-6 md:p-12 max-w-2xl mx-auto ">
       <div className="mt-[60px]">
         <Layout>
           <div className="flex flex-col gap-3 items-center justify-center px-8  pt-10 w-full">
-            <h1 className="font-bold text-3xl text-[#45444A] ">Sign In</h1>
+            <h1 className="font-bold text-3xl text-[#45444A] ">
+              Sign Up as a Tutor
+            </h1>
             <p className="text-[#45444A] text-sm ">
+              Already have an account?{" "}
               <u className="font-semibold">
-                <Link href={"/signupStudent"}>Sign up as a student</Link>
-              </u>{" "}
-              or{" "}
-              <u className="font-semibold">
-                <Link href={"/signupTutor"}>Sign up as a tutor</Link>
+                <Link href={"/signin"}>Sign In</Link>
               </u>
             </p>
 
@@ -42,7 +41,7 @@ const SignIn = () => {
             </Link>
           </div>
 
-          <div className="flex items-center justify-center gap-2 mb-4 mx-8">
+          <div className="flex items-center justify-center gap-2 mb-2 mx-8">
             <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
             <p className="text-[#45444A]">or</p>
             <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
@@ -76,7 +75,7 @@ const SignIn = () => {
               type="submit"
               label={"Sign In"}
               widthBtn="100%"
-              btnIcon={signInIcon}
+              btnIcon={signUpIcon}
             />
 
             <div className="text-sm text-[#45444A] mt-4 px-10 text-center">
@@ -97,4 +96,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUpTutor;

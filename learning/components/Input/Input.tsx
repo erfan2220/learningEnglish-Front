@@ -1,15 +1,7 @@
-import React from "react";
-
-interface InputsProps {
-  type: string;
-  label: string;
-  value?: string | number;
-  placeholder: string;
-  onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  borderColor?: string;
-  focusBorderColor?: string;
-  width?: string;
-}
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import { InputsProps } from "@/model/types";
 
 const Inputs: React.FC<InputsProps> = ({
   type,
@@ -18,20 +10,40 @@ const Inputs: React.FC<InputsProps> = ({
   placeholder,
   onchange,
   width = "300px",
+  icon1,
+  icon2,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div>
       <label className="text-xs mx-2 text-[#45444A]">{label}</label>
-      <input
-        className={`border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-2 py-3 mb-2 mx-2 bg-white/80 text-sm h-11 focus:outline-0`}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        style={{
-          width: width,
-        }}
-        onChange={onchange}
-      />
+      <div className="flex relative items-center ">
+        <input
+          className={`border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-4 py-3 mb-2 mx-2 bg-white/80 text-sm h-11 focus:outline-0`}
+          type={type === "password" && showPassword ? "text" : type}
+          placeholder={placeholder}
+          value={value}
+          style={{
+            width: width,
+          }}
+          onChange={onchange}
+        />
+        {icon1 && icon2 && (
+          <div
+            className="absolute right-8 cursor-pointer"
+            onClick={() => {
+              if (type === "password") setShowPassword((prev) => !prev);
+            }}
+          >
+            {showPassword ? (
+              <Image src={icon2} alt="icon pic" width={24} height={24} />
+            ) : (
+              <Image src={icon1} alt="icon pic" width={24} height={24} />
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
