@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Button from "../Button/Button";
 import Layout from "../Layout/Layout";
 import Inputs from "../Input/Input";
@@ -8,8 +10,35 @@ import eyeIcon from "../../assets/icons/eyeIcon.svg";
 import signInIcon from "../../assets/icons/loginIcon.svg";
 import Image from "next/image";
 import googleIcon from "../../assets/icons/google.svg";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const url = "http://127.0.0.1:8000/api/token/";
+
+      const response = await axios.post(url, { username, password });
+      const { access, refresh } = response.data;
+
+      localStorage.setItem("access_token", access);
+      localStorage.setItem("refresh_token", refresh);
+
+      router.push("/");
+    } catch (error) {
+      setError("Failed to authenticate");
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="p-6 md:p-12 max-w-2xl mx-auto ">
       <div className="mt-[60px]">
@@ -47,15 +76,19 @@ const SignIn = () => {
             <p className="text-[#45444A]">or</p>
             <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
           </div>
-          <form className="p-8 pt-0 w-full">
+          <form onSubmit={handleSubmit} className="p-8 pt-0 w-full">
             <Inputs
-              type="email"
+              type="text"
+              value={username}
+              onchange={(e) => setUsername(e.target.value)}
               placeholder="Enter your Email"
               label="Email"
               width="100%"
             />
             <Inputs
               type="password"
+              value={password}
+              onchange={(e) => setPassword(e.target.value)}
               placeholder="Enter your Password"
               label="Password"
               width="100%"
