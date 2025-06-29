@@ -11,6 +11,9 @@ import Image from "next/image";
 import googleIcon from "../../assets/icons/google.svg";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import userIcon from "../../assets/icons/userIconGray.svg";
+import passwordIcon from "../../assets/icons/passwordIconGray.svg";
+import emailIcon from "../../assets/icons/emailGray.svg";
 
 const SignUpStudent = () => {
   const [username, setUsername] = useState("");
@@ -83,6 +86,7 @@ const SignUpStudent = () => {
               placeholder="Enter your Username"
               label="UserName"
               width="100%"
+              inputIcon={userIcon}
             />
             <Inputs
               type="email"
@@ -91,6 +95,7 @@ const SignUpStudent = () => {
               placeholder="Enter your Email"
               label="Email"
               width="100%"
+              inputIcon={emailIcon}
             />
             <Inputs
               type="password"
@@ -101,6 +106,7 @@ const SignUpStudent = () => {
               width="100%"
               icon1={eyeIconClose}
               icon2={eyeIcon}
+              inputIcon={passwordIcon}
             />
 
             <div className="flex gap-2 mx-2 mt-2 mb-8">

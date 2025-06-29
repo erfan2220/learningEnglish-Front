@@ -15,6 +15,23 @@ export type TutorData = {
 };
 
 
+export type CourseData = {
+  id: number;
+  title: string;
+  tutor: string;
+  speaks:languageSpeak[] ;
+  activeStudents:number;
+  courseLevel:string;
+  courseDay:string;
+  courseTime:string;
+  courseLanguage:string;
+  price: string;
+  tutorPhoto: StaticImageData; 
+  coursePicture: StaticImageData;
+  courseDescription: string;
+};
+
+
 
 export type ButtonProps ={
   type: "button" | "submit" | "reset";
@@ -32,7 +49,7 @@ export type ButtonProps ={
 
 export type InputsProps ={
   type: string;
-  label: string;
+  label?: string;
   value?: string | number;
   placeholder: string;
   onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,4 +58,5 @@ export type InputsProps ={
   width?: string;
   icon1?: StaticImageData;
   icon2?: StaticImageData;
+  inputIcon?: StaticImageData;
 }

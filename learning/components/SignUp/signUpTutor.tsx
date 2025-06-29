@@ -11,6 +11,8 @@ import Image from "next/image";
 import googleIcon from "../../assets/icons/google.svg";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import userIcon from "../../assets/icons/userIconGray.svg";
+import passwordIcon from "../../assets/icons/passwordIconGray.svg";
 
 const SignUpTutor = () => {
   const [username, setUsername] = useState("");
@@ -82,6 +84,7 @@ const SignUpTutor = () => {
               placeholder="Enter your UserName"
               label="Username"
               width="100%"
+              inputIcon={userIcon}
             />
             <Inputs
               type="password"
@@ -92,6 +95,7 @@ const SignUpTutor = () => {
               width="100%"
               icon1={eyeIconClose}
               icon2={eyeIcon}
+              inputIcon={passwordIcon}
             />
             <div className=" text-[#45444A] text-sm mx-2">
               <u>

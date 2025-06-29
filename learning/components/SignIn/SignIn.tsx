@@ -12,6 +12,8 @@ import Image from "next/image";
 import googleIcon from "../../assets/icons/google.svg";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import userIcon from "../../assets/icons/userIconGray.svg";
+import passwordIcon from "../../assets/icons/passwordIconGray.svg";
 
 const SignIn = () => {
   const [password, setPassword] = useState("");
@@ -84,6 +86,7 @@ const SignIn = () => {
               placeholder="Enter your Email"
               label="Email"
               width="100%"
+              inputIcon={userIcon}
             />
             <Inputs
               type="password"
@@ -94,8 +97,9 @@ const SignIn = () => {
               width="100%"
               icon1={eyeIconClose}
               icon2={eyeIcon}
+              inputIcon={passwordIcon}
             />
-            <div className=" text-[#45444A] text-sm mx-2">
+            <div className=" text-[#45444A] text-sm mx-2 my-2">
               <u>
                 <Link href={"/forgotPassword"}>Forgot Your Password?</Link>
               </u>

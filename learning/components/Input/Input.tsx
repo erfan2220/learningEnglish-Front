@@ -12,15 +12,16 @@ const Inputs: React.FC<InputsProps> = ({
   width = "300px",
   icon1,
   icon2,
+  inputIcon,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div>
-      <label className="text-xs mx-2 text-[#45444A]">{label}</label>
+      {label && <label className="text-xs mx-2 text-[#45444A]">{label}</label>}
       <div className="flex relative items-center ">
         <input
-          className={`border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-4 py-3 mb-2 mx-2 bg-white/80 text-sm h-11 focus:outline-0`}
+          className={`border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-8 px-4 py-2  mx-2 bg-white/80 text-sm h-11 focus:outline-0`}
           type={type === "password" && showPassword ? "text" : type}
           placeholder={placeholder}
           value={value}
@@ -29,6 +30,11 @@ const Inputs: React.FC<InputsProps> = ({
           }}
           onChange={onchange}
         />
+        {inputIcon && (
+          <div className="absolute top-1/3 left-4 cursor-pointer">
+            <Image src={inputIcon} alt="input icon" width={20} height={20} />
+          </div>
+        )}
         {icon1 && icon2 && (
           <div
             className="absolute right-8 cursor-pointer"
