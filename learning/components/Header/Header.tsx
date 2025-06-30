@@ -21,7 +21,10 @@ const Header = () => {
             <Link href={"/tutor"}>Find Tutor</Link>
           </li>
           <li>
-            <Link href={"/signupTutor"}>Become a Tutor</Link>{" "}
+            <Link href={"/dashboard/tutor"}>tutor dashboard</Link>
+          </li>
+          <li>
+            <Link href={"/dashboard/student"}>student dashboard</Link>
           </li>
           <li>
             <Link href={"/signin"}>Sign In</Link>
