@@ -6,6 +6,7 @@ import SelectTime from "./SelectTime";
 import SelectDate from "./SelectDate";
 import { courseDetail } from "@/mock/courseDetail";
 import CourseCart from "../CourseCart/CourseCart";
+import SelectPrice from "./SelectPrice";
 
 const Courses = () => {
   return (
@@ -25,11 +26,12 @@ const Courses = () => {
             />
           </div>
 
-          <div className="flex flex-wrap items-start">
+          <div className="flex flex-wrap gap-2 items-start">
             <SelectLanguage />
             <SelectLevel />
             <SelectTime />
             <SelectDate />
+            <SelectPrice />
           </div>
         </div>
       </div>

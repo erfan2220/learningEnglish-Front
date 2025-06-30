@@ -7,12 +7,12 @@ import arrowIcon from "../../assets/icons/arrowDown.svg";
 const SelectLevel = () => {
   const [selectedLevel, setSelectedLevel] = useState("");
   return (
-    <div className="relative min-w-[200px] mx-2 my-1 flex-shrink-0">
+    <div className="relative my-1 flex-shrink-0">
       <select
         name="selectLevel"
         value={selectedLevel}
         onChange={(e) => setSelectedLevel(e.target.value)}
-        className="w-full appearance-none border-2 border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl pl-10 pr-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+        className="w-full appearance-none text-[#5C5A60] border-2 border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl px-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
       >
         <option value="" disabled hidden>
           Level
