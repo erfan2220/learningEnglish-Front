@@ -7,7 +7,7 @@ import arrowIcon from "../../assets/icons/arrowDown.svg";
 const SelectLevel = () => {
   const [selectedLevel, setSelectedLevel] = useState("");
   return (
-    <div className="relative my-1 flex-shrink-0">
+    <div className="relative my-1 w-[180px]">
       <select
         name="selectLevel"
         value={selectedLevel}

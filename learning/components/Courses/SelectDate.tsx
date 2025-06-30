@@ -5,13 +5,13 @@ import dayIcon from "../../assets/icons/dayIcon.svg";
 import arrowIcon from "../../assets/icons/arrowDown.svg";
 
 const SelectDate = () => {
-  const [selectedLevel, setSelectedLevel] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
   return (
-    <div className="relative min-w-[100px] my-1 flex-shrink-0">
+    <div className="relative w-[180px] my-1 ">
       <select
-        name="selectLevel"
-        value={selectedLevel}
-        onChange={(e) => setSelectedLevel(e.target.value)}
+        name="selectDate"
+        value={selectedDate}
+        onChange={(e) => setSelectedDate(e.target.value)}
         className="w-full appearance-none text-[#5C5A60] border-2 border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl px-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
       >
         <option value="" disabled hidden>

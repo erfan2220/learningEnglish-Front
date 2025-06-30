@@ -26,7 +26,7 @@ const Courses = () => {
             />
           </div>
 
-          <div className="flex flex-wrap gap-2 items-start">
+          <div className="flex flex-wrap items-start">
             <SelectLanguage />
             <SelectLevel />
             <SelectTime />
