@@ -21,7 +21,21 @@ export const courseDetail=[
         coursesList:["cr1001", "cr1002"],
         favoriteTutors:["pt1001", "pt1002"],
         studentEnrollmentDate:"2024-01-01",
-        
+        studentHomeworkCompleted:50, //grade
+        studentHomework:[
+            {
+                homeworkId:1,
+                homeworkTitle:"",
+                homeWorkSent:"document"
+            },
+            {
+                homeworkId:2,
+                homeworkTitle:"",
+                homeWorkSent:"document"
+            }
+        ],
+        studentActiveCourses:3,
+        studentActive:true,
         reviews:[
             {
                 reviewId:1,
