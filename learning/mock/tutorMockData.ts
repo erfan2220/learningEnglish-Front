@@ -694,7 +694,7 @@ export const tutorDetail=[
   reviews: [
     {
       reviewId: 1,
-      reviewerName: "Ava",
+      reviewerName: "Carlos",
       reviewText: "Michael's speaking tips helped me feel more confident for the IELTS exam.",
       reviewRating: 5,
       reviewDate: "2024-06-24"
