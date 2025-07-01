@@ -1,7 +1,12 @@
+import DashboardStudentFavorites from "@/components/StudentDashboardComponents/favorites/DashboardStudentFavorites";
 import React from "react";
 
-const DashboardStudentFavoriteTutorsPage = () => {
-  return <div>DashboardStudentFavoriteTutorsPage</div>;
+const DashboardStudentFavoritePage = () => {
+  return (
+    <div>
+      <DashboardStudentFavorites />
+    </div>
+  );
 };
 
-export default DashboardStudentFavoriteTutorsPage;
+export default DashboardStudentFavoritePage;

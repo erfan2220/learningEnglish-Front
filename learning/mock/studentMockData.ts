@@ -1,6 +1,6 @@
 import studentPhoto from "../assets/icons/tutorPhoto.svg";
 
-export const courseDetail=[
+export const studentDetail=[
     {
         id:1,
         studentId:"st1001",
@@ -16,7 +16,7 @@ export const courseDetail=[
         studentLastInstitutionCountry:"USA",
         studentField:"Computer Science",
         coursesList:["cr1001", "cr1003"],
-        favoriteTutors:["pt1001", "pt1002"],
+        favoriteTutors:["pt1001", "pt1002","pt1003","pt1004"],
         studentEnrollmentDate:"2024-01-01",
         studentHomeworkCompleted:[
             {
