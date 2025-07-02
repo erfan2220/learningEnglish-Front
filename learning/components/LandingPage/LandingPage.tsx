@@ -17,14 +17,14 @@ import Button from "../Button/Button";
 
 const LandingPage = () => {
   return (
-    <div className="p-6 md:p-12 max-w-[1320px] mx-auto">
+    <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto">
       {/* ////////////////////////header section////////////////////// */}
 
       <div className="mt-[60px]">
         <Layout>
-          <div className="flex flex-col md:flex-row items-center justify-between mx-[60px] my-2.5">
+          <div className="flex flex-col-reverse md:flex-row items-center justify-between mx-4 my-6 md:mx-[60px]">
             <div className="w-full md:w-1/2">
-              <h1 className="text-[#5C5A60] text-2xl md:text-4xl font-bold mb-4">
+              <h1 className="text-[#5C5A60] p-0 text-2xl md:text-4xl font-bold mb-4">
                 Speak Confidently, Learn Naturally
               </h1>
               <div className="mb-10">
@@ -38,7 +38,7 @@ const LandingPage = () => {
               <Button label={"start now"} type="button" />
             </div>
 
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 md:mb-0 mb-6">
               <Image
                 src={startPic}
                 alt="start pic"
@@ -83,12 +83,12 @@ const LandingPage = () => {
 
       {/* ////////////////////////"how it works" section////////////////////// */}
 
-      <div className="mt-10 px-4 md:px-0">
+      <div className="mt-10  md:px-0">
         <Layout>
-          <div className="mt-[60px] ml-[60px] text-4xl font-bold text-[#5C5A60]">
+          <div className="m-4 mt-6 md:mt-[60px] md:ml-[60px] text-3xl md:text-4xl font-bold text-[#5C5A60]">
             How it works:
           </div>
-          <hr className="flex-1 mx-[60px] h-px my-4 border-0 bg-[#45444A]" />
+          <hr className="flex-1 mx-4 md:mx-[60px] h-px my-4 border-0 bg-[#45444A]" />
           <TutorialStep
             stepNumber={stepsData[0].number}
             title={stepsData[0].title}

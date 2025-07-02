@@ -4,7 +4,7 @@ import ukFlag from "../assets/icons/ukFlag.svg"
 import franceFlag from "../assets/icons/frenchFlag.svg"
 import certificationPic from '../assets/images/cert1.png'
 
-export const tutorDetail=[
+export const tutorMockDetail=[
     {
         id:1,
         tutorId:"pt1001",
@@ -93,7 +93,7 @@ export const tutorDetail=[
                 level:"B1"
             },
         ],
-        introduceVideo:"../assets/video/sampleVideo.mp4",//upload introduce video
+        introduceVideo:"../public/video/sampleVideo.mp4",//upload introduce video
         
         personalSummary:"I am a passionate and experienced English teacher with over 5 years of teaching experience. I have a Bachelor's degree in English Language Teaching and a Master's degree in the same field. I am TEFL and CELTA certified, and I have taught students of all ages and levels, from beginners to advanced learners. My teaching style is interactive and communicative, focusing on real-life language use and practical skills.",
         classExpectations:"I am also fluent in French and Farsi, which allows me to connect with students from diverse backgrounds. I believe in creating a supportive and engaging learning environment where students feel comfortable to express themselves and make mistakes. My goal is to help students achieve their language learning goals while having fun along the way.",
@@ -267,7 +267,7 @@ export const tutorDetail=[
         reviewId: 1,
         reviewerName: "Sofia",
         reviewText: "I learned a lot, but sometimes the explanations were a bit fast for me.",
-        reviewRating: 4,
+        rating: 4,
         reviewDate: "2024-05-10"
       },
       
@@ -412,14 +412,14 @@ export const tutorDetail=[
         reviewId: 1,
         reviewerName: "Noah",
         reviewText: "Very kind and patient. Helped me a lot with pronunciation.",
-        reviewRating: 5,
+        rating: 5,
         reviewDate: "2024-03-01"
       },
       {
         reviewId: 1,
         reviewerName: "Ava",
         reviewText: "The tutor was friendly and made complex grammar topics easier to understand.",
-        reviewRating: 5,
+        rating: 5,
         reviewDate: "2024-06-01"
       },
       
@@ -564,7 +564,7 @@ export const tutorDetail=[
       reviewId: 1,
       reviewerName: "Yuki",
       reviewText: "Parisa was incredibly patient and helped me improve my Persian conversation skills quickly!",
-      reviewRating: 5,
+      rating: 5,
       reviewDate: "2024-04-18"
     },
   ],
@@ -696,7 +696,7 @@ export const tutorDetail=[
       reviewId: 1,
       reviewerName: "Carlos",
       reviewText: "Michael's speaking tips helped me feel more confident for the IELTS exam.",
-      reviewRating: 5,
+      rating: 5,
       reviewDate: "2024-06-24"
     },
   ],

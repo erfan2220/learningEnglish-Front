@@ -5,7 +5,7 @@ import coursePicture from "../assets/images/coursePicture.svg";
 import iranFlag from "../assets/icons/irFlag.svg"
 
 
-export const courseDetail=[
+export const courseMockDetail=[
     {
         id:1,
         courseId:"cr1001",

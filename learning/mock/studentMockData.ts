@@ -64,8 +64,19 @@ export const studentDetail=[
         messagesReceives:[{
                 messageId:1,
                 messageSender:"pt1001",
-                messageText:"hi there"
-            }],
+                messageText:"Hi Charlotte, I wanted to say thank you for today’s class. Your explanation about phrasal verbs was incredibly clear. I feel much more confident now using them in conversation. Looking forward to our next session on Tuesday. Have a great evening and take care!"
+            },
+        {
+                messageId:2,
+                messageSender:"pt1001",
+                messageText:"Hello, I’m writing to ask a question about our homework. I was reviewing the materials you gave us, but I’m a bit confused about the use of past perfect in certain contexts. Could you please explain it again or send me a short example? Thank you so much in advance"
+            },
+            {
+                messageId:3,
+                messageSender:"pt1002",
+                messageText:"Good evening! I just wanted to let you know that I’ve completed the reading assignment you recommended last week. I really enjoyed the story and learned some new vocabulary. Could you please check my summary and give me feedback in our next class?"
+            }
+        ],
         messagesSent:[{
                 messageId:1,
                 messageReceive:"pt1001",

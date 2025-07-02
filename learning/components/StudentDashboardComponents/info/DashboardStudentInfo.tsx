@@ -35,7 +35,7 @@ const DashboardStudentInfo = () => {
 
   return (
     <div className="my-8 px-1 md:px-2 lg:px-4">
-      <div className="flex flex-col justify-center items-center space-y-2">
+      <div className="flex flex-col justify-center items-center">
         <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-gray-300">
           <Image
             src={imagePreview}
@@ -112,11 +112,13 @@ const DashboardStudentInfo = () => {
 
           <div className="w-full flex flex-col gap-1 md:w-2/3">
             <div className="flex flex-col gap-1">
-              <label className="text-[#5C5A60] text-sm ">Latest Degree</label>
+              <label className="text-[#5C5A60] mx-2 text-sm ">
+                Latest Degree
+              </label>
               <div className="relative w-[80%]">
                 <select
                   name="selectDegree"
-                  className="text-[#5C5A60] w-full border-2  border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl px-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+                  className="text-[#5C5A60] mx-2 w-full border-2  border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl px-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                 >
                   <option disabled selected>{`Degree`}</option>
                   <option value="Pre-Diploma">{`Pre-Diploma`}</option>
@@ -172,21 +174,21 @@ const DashboardStudentInfo = () => {
 
           <div className="w-full flex flex-col gap-1 md:w-2/3">
             <div className="flex flex-col gap-1">
-              <label className="text-xs text-[#5C5A60] ">Password</label>
+              <label className="mx-2 text-xs text-[#5C5A60] ">Password</label>
               <div className="flex gap-2 items-center">
                 <div className="relative w-[80%]">
                   <input
                     type="password"
                     placeholder="*********"
                     disabled={isDisabled}
-                    className="bg-white/80 text-[#5C5A60] w-full border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-12 py-2 text-sm h-11 focus:outline-0"
+                    className="bg-white/80 mx-2 text-[#5C5A60] w-full border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-12 py-2 text-sm h-11 focus:outline-0"
                   />
                   <Image
                     src={passwordIcon}
                     alt="pass icon"
                     width={24}
                     height={24}
-                    className="absolute top-[20px] left-4 -translate-y-1/2"
+                    className="absolute top-[20px] left-5 -translate-y-1/2"
                   />
                 </div>
                 <Image

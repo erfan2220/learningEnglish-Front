@@ -11,11 +11,12 @@ import "swiper/css";
 import { tutorDetail } from "@/mock/tutorDetail";
 import TutorCart from "../TutorCart/TutorCart";
 import SwiperButton from "../SwiperButton/SwiperButton";
+import { tutorMockDetail } from "@/mock/tutorMockData";
 
 const Slide = () => {
   return (
     <div className="">
-      <div className="flex justify-between mt-[60px] mx-[60px] mb-2">
+      <div className="flex justify-between m-4 md:mt-[60px] md:mx-[60px] mb-2">
         <div className="text-3xl font-bold text-[#45444A] ">Tutors</div>
         <Link
           href={"/tutor"}
@@ -28,9 +29,9 @@ const Slide = () => {
         </Link>
       </div>
 
-      <hr className="flex-1 mx-[60px] h-px my-4 border-0 bg-[#45444A]" />
+      <hr className="flex-1 mx-4 md:mx-[60px] h-px my-4 border-0 bg-[#45444A]" />
 
-      <div className="relative mt-4 p-5 px-20">
+      <div className="relative mt-4 p-5 md:px-20">
         <Swiper
           spaceBetween={24}
           breakpoints={{
@@ -41,7 +42,7 @@ const Slide = () => {
         >
           <SwiperButton />
 
-          {tutorDetail.map((tutor) => (
+          {tutorMockDetail.map((tutor) => (
             <SwiperSlide key={tutor.id}>
               <TutorCart tutorData={tutor} />
             </SwiperSlide>
