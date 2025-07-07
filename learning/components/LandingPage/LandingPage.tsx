@@ -61,6 +61,7 @@ const LandingPage = () => {
               countryName={"English"}
               width={32}
               textSize={"18px"}
+              fontWeight={"bold"}
             />
           </Link>
 
