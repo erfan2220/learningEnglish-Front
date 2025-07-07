@@ -16,7 +16,6 @@ const Courses = () => {
   const ppg = 3;
   const CurrentPage = parseInt(searchParam.get("page") || "1");
   const firstIndex = (CurrentPage - 1) * ppg;
-  const lengthData = courseMockDetail.length;
   const endIndex = firstIndex + 3;
   const showTutors = courseMockDetail.slice(firstIndex, endIndex);
 
@@ -27,8 +26,8 @@ const Courses = () => {
           Filter Courses
         </h1>
 
-        <div className="flex flex-wrap gap-1 items-center">
-          <div className="min-w-[320px]">
+        <div className="mt-6 flex flex-wrap justify-between gap-1 items-center">
+          <div className="min-w-[320px] w-2/6">
             <Inputs
               type="text"
               placeholder={"search course"}
@@ -37,20 +36,18 @@ const Courses = () => {
             />
           </div>
 
-          <div className="flex flex-wrap items-start">
-            <SelectLanguage />
-            <SelectLevel />
-            <SelectTime />
-            <SelectDate />
-            <SelectPrice />
-          </div>
+          <SelectLanguage />
+          <SelectLevel />
+          <SelectTime />
+          <SelectDate />
+          <SelectPrice />
         </div>
       </div>
 
       <hr className="flex-1  h-px my-4 border-1  border-[#45444A]" />
       <div>
         <h2 className="flex mb-8 text-black text-2xl font-bold">Results</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-14">
           {showTutors.map((course) => (
             <div key={course.id}>
               <CourseCart course={course} />

@@ -18,7 +18,7 @@ const TutorShowCart = ({ tutorId }) => {
   const averageRating = totalReviews > 0 ? totalRatings / totalReviews : 0;
 
   return (
-    <div className="flex pb-4 px-4 flex-wrap items-center justify-center w-full  sm:mx-2 [@media(min-width:400px)]:w-[320px] sm:w-[320px] rounded-lg border border-gray-300 bg-white shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+    <div className="flex pb-4 px-4 flex-wrap items-center justify-center w-full h-[360px] sm:mx-2 [@media(min-width:400px)]:w-[320px] sm:w-[320px] rounded-lg border border-gray-300 bg-white shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
       <div className="flex flex-wrap w-full items-center justify-center gap-4 sm:p-2 sm:pb-0  p-1">
         <div>
           <Image
