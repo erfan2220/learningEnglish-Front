@@ -47,6 +47,7 @@ export const courseMockDetail=[
         courseTimeStart:10,
         courseTimeEnd:11,
         courseLanguage:"English",
+        courseLanguageFlag:ukFlag,
         courseLength:180, //lessons
         coursePicture:coursePicture,
         courseDescription:"This is a fun and interactive course designed to help you improve your English speaking skills while having a great time. Join us for engaging activities, discussions, and games that will boost your confidence and fluency in English.",
@@ -144,6 +145,7 @@ export const courseMockDetail=[
         courseTimeStart:10,
         courseTimeEnd:11,
         courseLanguage:"English",
+        courseLanguageFlag:ukFlag,
         courseLength:180, //lessons
         coursePicture:coursePicture,
         courseDescription:"This is a fun and interactive course designed to help you improve your English speaking skills while having a great time. Join us for engaging activities, discussions, and games that will boost your confidence and fluency in English.",
@@ -236,6 +238,7 @@ export const courseMockDetail=[
         courseTimeStart:15,
         courseTimeEnd:17,
         courseLanguage:"English",
+        courseLanguageFlag:ukFlag,
         courseLength:180, //lessons
         coursePicture:coursePicture,
         courseDescription:"This is a fun and interactive course designed to help you improve your English speaking skills while having a great time. Join us for engaging activities, discussions, and games that will boost your confidence and fluency in English.",
@@ -333,6 +336,7 @@ export const courseMockDetail=[
         courseTimeStart:12,
         courseTimeEnd:14,
         courseLanguage:"French",
+        courseLanguageFlag:franceFlag,
         courseLength:30, //lessons
         coursePicture:coursePicture,
         courseDescription:"This is a fun and interactive course designed to help you improve your English speaking skills while having a great time. Join us for engaging activities, discussions, and games that will boost your confidence and fluency in English.",
@@ -429,6 +433,7 @@ export const courseMockDetail=[
   courseTimeStart: 16,
   courseTimeEnd: 17,
   courseLanguage: "Persian",
+  courseLanguageFlag:iranFlag,
   courseLength: 24, // lessons
   coursePicture: coursePicture,
   courseDescription: "This course introduces Persian through storytelling and real-life dialogues, helping you improve listening and speaking skills in an enjoyable and natural way.",
@@ -523,6 +528,7 @@ export const courseMockDetail=[
   courseTimeStart: 18,
   courseTimeEnd: 19,
   courseLanguage: "English",
+  courseLanguageFlag:ukFlag,
   courseLength: 10, // lessons
   coursePicture: coursePicture,
   courseDescription: "A fast-track IELTS Speaking course designed to help intermediate and advanced learners improve fluency, accuracy, and confidence for the IELTS speaking test.",

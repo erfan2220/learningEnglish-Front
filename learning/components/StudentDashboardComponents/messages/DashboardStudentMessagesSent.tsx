@@ -11,7 +11,7 @@ const DashboardStudentMessagesSent = ({ mainData, secondData }) => {
   return (
     <div className="my-8">
       <h2 className="text-2xl font-bold text-[#45444A] m-4">
-        My Inbox Messages
+        My Sent Messages
       </h2>
 
       {mainData[personNumber].messagesSent.map((message) => {
