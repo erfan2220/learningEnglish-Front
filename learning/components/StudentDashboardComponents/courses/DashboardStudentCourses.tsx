@@ -1,20 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import arrowIcon from "../../../assets/icons/arrowBlue.svg";
 import { courseMockDetail } from "@/mock/courseMockData";
+import { studentDetail } from "@/mock/studentMockData";
 import Country from "@/components/Country/Country";
 import Image from "next/image";
 import Link from "next/link";
-import { studentDetail } from "@/mock/studentMockData";
 
 const DashboardStudentCourses = () => {
   const personNumber = 0;
-  const [] = useState();
+
   return (
-    <div className=" my-8">
+    <div className="my-8">
       <h2 className="text-2xl font-bold text-[#45444A] m-4">Courses List</h2>
 
-      {/* /////////////////////////////////////// */}
+      {/* Headers */}
       <div className="flex text-[#45444A] text-lg font-bold px-2 md:px-8 mt-6 justify-between sm:justify-start items-center w-full h-[60px] bg-white/80 rounded-2xl shadow-md">
         <p className="w-1/2 sm:w-1/4">Title</p>
         <p className="hidden sm:block sm:w-1/4">Tutor</p>
@@ -22,8 +22,7 @@ const DashboardStudentCourses = () => {
         <p className="w-1/2 sm:w-1/4">Time</p>
       </div>
 
-      {/* /////////////////////////////////////// */}
-
+      {/* Courses */}
       {studentDetail[personNumber].coursesList.map((stuCourseId) => {
         const course = courseMockDetail.find(
           (course) => course.courseId === stuCourseId
