@@ -1,7 +1,12 @@
+import DashboardStudentDetail from "@/components/StudentDashboardComponents/courses/DashboardStudentDetail";
 import React from "react";
 
-const page = () => {
-  return <div>page</div>;
+const DashboardStudentCoursesDetail = () => {
+  return (
+    <div>
+      <DashboardStudentDetail />
+    </div>
+  );
 };
 
-export default page;
+export default DashboardStudentCoursesDetail;
