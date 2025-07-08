@@ -71,7 +71,8 @@ export const tutorMockDetail=[
                 degreeId:2,
                 degree: "Master's Degree",
                 institutionName: "Allameh Tabataba'i University",
-                location: "Tehran, Iran",
+                institutionCity: "Tehran",
+                institutionCountry:"Iran",
                 field: "English Language Teaching",
                 startDate: "2021-09-01",
                 endDate: "2023-06-30"
@@ -93,7 +94,7 @@ export const tutorMockDetail=[
                 level:"B1"
             },
         ],
-        introduceVideo:"../public/video/sampleVideo.mp4",//upload introduce video
+        introduceVideo:"/video/sampleVideo.mp4",//upload introduce video
         
         personalSummary:"I am a passionate and experienced English teacher with over 5 years of teaching experience. I have a Bachelor's degree in English Language Teaching and a Master's degree in the same field. I am TEFL and CELTA certified, and I have taught students of all ages and levels, from beginners to advanced learners. My teaching style is interactive and communicative, focusing on real-life language use and practical skills.",
         classExpectations:"I am also fluent in French and Farsi, which allows me to connect with students from diverse backgrounds. I believe in creating a supportive and engaging learning environment where students feel comfortable to express themselves and make mistakes. My goal is to help students achieve their language learning goals while having fun along the way.",
@@ -135,6 +136,20 @@ export const tutorMockDetail=[
                     reviewDate:"2024-09-15",
                     reviewText:"I had a great experience learning with Charlotte. Her teaching style is very engaging and effective.",
                     rating:4
+                },
+                {
+                    reviewId:3,
+                    reviewerName:"Sara",
+                    reviewDate:"2024-09-15",
+                    reviewText:"I had a great experience learning with Charlotte. Her teaching style is very engaging and effective.",
+                    rating:5
+                },
+                {
+                    reviewId:4,
+                    reviewerName:"Sara",
+                    reviewDate:"2024-09-15",
+                    reviewText:"I had a great experience learning with Charlotte. Her teaching style is very engaging and effective.",
+                    rating:5
                 }
             ],
             messagesReceives:[{
@@ -210,7 +225,8 @@ export const tutorMockDetail=[
         degreeId: 2,
         degree: "Master's Degree",
         institutionName: "McGill University",
-        location: "Montreal, Canada",
+        institutionCity: "Toronto",
+        institutionCountry: "Canada",
         field: "TESOL",
         startDate: "2020-09-01",
         endDate: "2022-06-30"
@@ -224,7 +240,7 @@ export const tutorMockDetail=[
         level:"native"
       },
     ],
-    introduceVideo: "../assets/video/sampleVideo.mp4",
+    introduceVideo: "/video/sampleVideo.mp4",
     personalSummary:
       "Passionate English teacher with over 5 years of experience teaching students of all ages and backgrounds.",
     classExpectations:
@@ -377,7 +393,7 @@ export const tutorMockDetail=[
         level:"B2"
       }
     ],
-    introduceVideo: "../assets/video/sampleVideo.mp4",
+    introduceVideo: "/video/sampleVideo.mp4",
     personalSummary:
       "Native French teacher with a strong background in linguistics and years of experience teaching international students.",
     classExpectations:
@@ -529,7 +545,7 @@ export const tutorMockDetail=[
       level:"C1"
     }
   ],
-  introduceVideo: "/assets/video/sampleVideo.mp4",
+  introduceVideo: "/video/sampleVideo.mp4",
   personalSummary:
     "Native Persian instructor with a passion for teaching and over 5 years of experience helping learners speak confidently.",
   classExpectations:
@@ -661,7 +677,7 @@ export const tutorMockDetail=[
       level: "B2"
     }
   ],
-  introduceVideo: "../assets/video/sampleVideo.mp4",
+  introduceVideo: "/video/sampleVideo.mp4",
   personalSummary:
     "Experienced and certified English teacher with a passion for helping students achieve fluency and confidence in everyday conversations and academic settings.",
   classExpectations:

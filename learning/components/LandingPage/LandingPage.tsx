@@ -35,7 +35,9 @@ const LandingPage = () => {
                   />
                 ))}
               </div>
-              <Button label={"start now"} type="button" />
+              <Link href={"/courses"}>
+                <Button label={"start now"} type="button" />
+              </Link>
             </div>
 
             <div className="w-full md:w-1/2 md:mb-0 mb-6">
@@ -71,6 +73,7 @@ const LandingPage = () => {
               countryName={"French"}
               width={32}
               textSize={"18px"}
+              fontWeight={"16px"}
             />
           </Link>
         </div>
@@ -144,7 +147,9 @@ const LandingPage = () => {
               ))}
             </ul>
 
-            <Button type="button" label={"become a tutor"} />
+            <Link href={"/signupTutor"}>
+              <Button type="button" label={"become a tutor"} />
+            </Link>
           </div>
 
           <div className="hidden md:block md:w-1/2">

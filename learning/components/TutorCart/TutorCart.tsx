@@ -8,15 +8,11 @@ const TutorCart = ({ tutorData }) => {
   return (
     <div className="bg-[#F1ECFE] rounded-2xl border-2 border-[#D2D2D2] shadow-md p-4">
       <div>
-        <div className="w-full mb-4">
-          <video
-            src={tutorData.introduceVideo}
-            controls
-            muted
-            playsInline
-            preload="metadata"
-            width="400"
-          />
+        <div className="w-full  mx-auto">
+          <video controls className="w-full rounded-lg shadow-md">
+            <source src={tutorData.introduceVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
         <div className="text-xl text-[#5C5A60] font-bold">
           {tutorData.tutorFirstName} {tutorData.tutorLastName}
@@ -31,6 +27,7 @@ const TutorCart = ({ tutorData }) => {
               countryName={lang.language}
               width={20}
               textSize={"14px"}
+              fontWeight={"bold"}
             />
           ))}
         </div>
@@ -44,7 +41,7 @@ const TutorCart = ({ tutorData }) => {
           </p>
         </div>
 
-        <Link href={`/tutor/detail/${tutorData.id}`}>
+        <Link href={`/tutor/detail/${tutorData.tutorId}`}>
           <Button type="button" label={"try now"} widthBtn="100%" />
         </Link>
       </div>

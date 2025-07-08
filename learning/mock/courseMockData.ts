@@ -62,20 +62,20 @@ export const courseMockDetail=[
                 lessonId:1,
                 lessonTitle:"lesson 1",
                 lessonPart:"vocabulary",
-                lessonDocument:"../assets/doc/sampleDocLesson.pdf",
-                lessonVideo:"../assets/video/sampleVocab.mp4",
+                lessonDocument:"/doc/sampleDocLesson.pdf",
+                lessonVideo:"/video/sampleVocab.mp4",
                 lessonDescription:`Phrasal verbs are combinations of verbs with prepositions or adverbs. They often have a meaning that is different from the individual words. For example, "give up" means "to stop trying" and "look after" means "to take care of." These are commonly used in everyday conversation. Learning phrasal verbs will help you sound more natural and fluent in English. 🔹 Examples: Turn on the lights, please. I ran into an old friend yesterday. Don’t give up so easily! Try to learn 3–5 new phrasal verbs each week and use them in sentences.`,
                 homeworks:[
                     {
                     homeworkId:1,
                     homeworkTitle:"vocab",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
                 },
                 {
                     homeworkId:2,
                     homeworkTitle:"grammar",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 }
@@ -87,21 +87,21 @@ export const courseMockDetail=[
                 lessonId:2,
                 lessonTitle:"lesson 2",
                 lessonPart:"grammar",
-                lessonDocument:"../assets/doc/sampleDocLesson.pdf",
-                lessonVideo:"../assets/video/sampleVocab.mp4",
+                lessonDocument:"/doc/sampleDocLesson.pdf",
+                lessonVideo:"/video/sampleVocab.mp4",
                 lessonDescription:`The present perfect tense is used to describe actions that happened at an unspecified time in the past, or actions that started in the past and continue to the present. 🔸 Structure: have/has + past participle I have visited London. She has finished her homework. Use it when the exact time isn’t important, or when the result matters more than when it happened. ✅ Use with: ever, never, just, already, yet, for, since Have you ever been to Paris? They have lived here for five years. Practice by writing sentences using these time expressions.`,
                 homeworks:[
                     {
                     homeworkId:1,
                     homeworkTitle:"vocab",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 },
                 {
                     homeworkId:2,
                     homeworkTitle:"grammar",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 }
@@ -167,21 +167,21 @@ export const courseMockDetail=[
                 lessonId:1,
                 lessonTitle:"lesson 1",
                 lessonPart:"vocabulary",
-                lessonDocument:"../assets/doc/sampleDocLesson.pdf",
-                lessonVideo:"../assets/video/sampleVocab.mp4",
+                lessonDocument:"/doc/sampleDocLesson.pdf",
+                lessonVideo:"/video/sampleVocab.mp4",
                 lessonDescription:"basic vocabulary ",
                 homeworks:[
                     {
                     homeworkId:1,
                     homeworkTitle:"vocab",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 },
                 {
                     homeworkId:2,
                     homeworkTitle:"grammar",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 }
@@ -193,21 +193,21 @@ export const courseMockDetail=[
                 lessonId:2,
                 lessonTitle:"lesson 2",
                 lessonPart:"vocabulary",
-                lessonDocument:"../assets/doc/sampleDocLesson.pdf",
-                lessonVideo:"../assets/video/sampleVocab.mp4",
+                lessonDocument:"/doc/sampleDocLesson.pdf",
+                lessonVideo:"/video/sampleVocab.mp4",
                 lessonDescription:"basic vocabulary ",
                 homeworks:[
                     {
                     homeworkId:1,
                     homeworkTitle:"vocab",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 },
                 {
                     homeworkId:2,
                     homeworkTitle:"grammar",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 }
@@ -268,21 +268,21 @@ export const courseMockDetail=[
                 lessonId:1,
                 lessonTitle:"lesson 1",
                 lessonPart:"vocabulary",
-                lessonDocument:"../assets/doc/sampleDocLesson.pdf",
-                lessonVideo:"../assets/video/sampleVocab.mp4",
+                lessonDocument:"/doc/sampleDocLesson.pdf",
+                lessonVideo:"/video/sampleVocab.mp4",
                 lessonDescription:"basic vocabulary ",
                 homeworks:[
                     {
                     homeworkId:1,
                     homeworkTitle:"vocab",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 },
                 {
                     homeworkId:2,
                     homeworkTitle:"grammar",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 }
@@ -294,21 +294,21 @@ export const courseMockDetail=[
                 lessonId:2,
                 lessonTitle:"lesson 2",
                 lessonPart:"vocabulary",
-                lessonDocument:"../assets/doc/sampleDocLesson.pdf",
-                lessonVideo:"../assets/video/sampleVocab.mp4",
+                lessonDocument:"/doc/sampleDocLesson.pdf",
+                lessonVideo:"/video/sampleVocab.mp4",
                 lessonDescription:"basic vocabulary ",
                 homeworks:[
                     {
                     homeworkId:1,
                     homeworkTitle:"vocab",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 },
                 {
                     homeworkId:2,
                     homeworkTitle:"grammar",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 }
@@ -374,21 +374,21 @@ export const courseMockDetail=[
                 lessonId:1,
                 lessonTitle:"lesson 1",
                 lessonPart:"vocabulary",
-                lessonDocument:"../assets/doc/sampleDocLesson.pdf",
-                lessonVideo:"../assets/video/sampleVocab.mp4",
+                lessonDocument:"/doc/sampleDocLesson.pdf",
+                lessonVideo:"/video/sampleVocab.mp4",
                 lessonDescription:"basic vocabulary ",
                 homeworks:[
                     {
                     homeworkId:1,
                     homeworkTitle:"vocab",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 },
                 {
                     homeworkId:2,
                     homeworkTitle:"grammar",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 }
@@ -400,21 +400,21 @@ export const courseMockDetail=[
                 lessonId:2,
                 lessonTitle:"lesson 2",
                 lessonPart:"vocabulary",
-                lessonDocument:"../assets/doc/sampleDocLesson.pdf",
-                lessonVideo:"../assets/video/sampleVocab.mp4",
+                lessonDocument:"/doc/sampleDocLesson.pdf",
+                lessonVideo:"/video/sampleVocab.mp4",
                 lessonDescription:"basic vocabulary ",
                 homeworks:[
                     {
                     homeworkId:1,
                     homeworkTitle:"vocab",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 },
                 {
                     homeworkId:2,
                     homeworkTitle:"grammar",
-                    homeworkDocument:"../assets/doc/sampleDocHomework.pdf",
+                    homeworkDocument:"/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
                 }
@@ -479,21 +479,21 @@ export const courseMockDetail=[
       lessonId: 1,
       lessonTitle: "Lesson 1: My Family",
       lessonPart: "Speaking & Listening",
-      lessonDocument: "../assets/doc/sampleDocLesson.pdf",
-      lessonVideo: "../assets/video/sampleVocab.mp4",
+      lessonDocument: "/doc/sampleDocLesson.pdf",
+      lessonVideo: "/video/sampleVocab.mp4",
       lessonDescription: "Learn how to introduce family members and describe simple relationships.",
       homeworks: [
         {
           homeworkId: 1,
           homeworkTitle: "Family Tree",
-          homeworkDocument: "../assets/doc/sampleDocHomework.pdf",
+          homeworkDocument: "/doc/sampleDocHomework.pdf",
           homeworkDueDate:"6/23/2025"
 
         },
         {
           homeworkId: 2,
           homeworkTitle: "Listening Practice",
-          homeworkDocument: "../assets/doc/sampleDocHomework.pdf",
+          homeworkDocument: "/doc/sampleDocHomework.pdf",
           homeworkDueDate:"6/23/2025"
 
         }
@@ -503,21 +503,21 @@ export const courseMockDetail=[
       lessonId: 2,
       lessonTitle: "Lesson 2: At the Market",
       lessonPart: "Vocabulary & Listening",
-      lessonDocument: "../assets/doc/sampleDocLesson.pdf",
-      lessonVideo: "../assets/video/sampleVocab.mp4",
+      lessonDocument: "/doc/sampleDocLesson.pdf",
+      lessonVideo: "/video/sampleVocab.mp4",
       lessonDescription: "Practice shopping vocabulary and polite expressions in a bazaar setting.",
       homeworks: [
         {
           homeworkId: 1,
           homeworkTitle: "New Words",
-          homeworkDocument: "../assets/doc/sampleDocHomework.pdf",
+          homeworkDocument: "/doc/sampleDocHomework.pdf",
           homeworkDueDate:"6/23/2025"
 
         },
         {
           homeworkId: 2,
           homeworkTitle: "Dialogue Writing",
-          homeworkDocument: "../assets/doc/sampleDocHomework.pdf",
+          homeworkDocument: "/doc/sampleDocHomework.pdf",
           homeworkDueDate:"6/23/2025"
 
         }
@@ -582,21 +582,21 @@ export const courseMockDetail=[
       lessonId: 1,
       lessonTitle: "Lesson 1: Introduction & Part 1 Basics",
       lessonPart: "Speaking Practice",
-      lessonDocument: "../assets/doc/sampleDocLesson.pdf",
-      lessonVideo: "../assets/video/sampleVocab.mp4",
+      lessonDocument: "/doc/sampleDocLesson.pdf",
+      lessonVideo: "/video/sampleVocab.mp4",
       lessonDescription: "Learn how to confidently answer familiar questions about yourself and your life.",
       homeworks: [
         {
           homeworkId: 1,
           homeworkTitle: "Part 1 Practice Questions",
-          homeworkDocument: "../assets/doc/sampleDocHomework.pdf",
+          homeworkDocument: "/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
         },
         {
           homeworkId: 2,
           homeworkTitle: "Record a 2-minute speech",
-          homeworkDocument: "../assets/doc/sampleDocHomework.pdf",
+          homeworkDocument: "/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
         }
@@ -606,21 +606,21 @@ export const courseMockDetail=[
       lessonId: 2,
       lessonTitle: "Lesson 2: Developing Part 2 (Cue Card)",
       lessonPart: "Fluency & Organization",
-      lessonDocument: "../assets/doc/sampleDocLesson.pdf",
-      lessonVideo: "../assets/video/sampleVocab.mp4",
+      lessonDocument: "/doc/sampleDocLesson.pdf",
+      lessonVideo: "/video/sampleVocab.mp4",
       lessonDescription: "Understand how to structure your 2-minute response and use linking expressions.",
       homeworks: [
         {
           homeworkId: 1,
           homeworkTitle: "Cue Card – Describe a memorable trip",
-          homeworkDocument: "../assets/doc/sampleDocHomework.pdf",
+          homeworkDocument: "/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
         },
         {
           homeworkId: 2,
           homeworkTitle: "Vocabulary Review Sheet",
-          homeworkDocument: "../assets/doc/sampleDocHomework.pdf",
+          homeworkDocument: "/doc/sampleDocHomework.pdf",
                     homeworkDueDate:"6/23/2025"
 
         }

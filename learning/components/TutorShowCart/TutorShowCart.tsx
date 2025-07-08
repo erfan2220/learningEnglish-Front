@@ -81,7 +81,7 @@ const TutorShowCart = ({ tutorId }) => {
 
       <div className="w-full flex justify-end text-xs text-[#45444A] mt-2">
         <p>
-          <Link href={`/tutor/${tutorId}`}>
+          <Link href={`/tutor/detail/${tutorId}`}>
             <u>view profile</u>
           </Link>
         </p>

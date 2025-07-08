@@ -57,7 +57,7 @@ const DashboardStudentLessons = () => {
                     </>
                   </div>
                   {openLessonId === lesson.lessonId && (
-                    <div className="bg-white mb-8 py-14 mx-2 sm:mx-4 sm:px-14 px-4 flex flex-col justify-center items-center rounded-xl shadow-md hover:shadow-lg mt-2 text-sm text-[#737177] space-y-4">
+                    <div className="bg-white mb-8 py-14  sm:px-14 px-4 flex flex-col justify-center items-center rounded-xl shadow-md hover:shadow-lg mt-2 text-sm text-[#737177] space-y-4">
                       {/* /////video//////////// */}
 
                       <video

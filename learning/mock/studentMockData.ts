@@ -34,12 +34,12 @@ export const studentDetail=[
             {
                 homeworkId:1,
                 homeworkTitle:"",
-                homeWorkSent:"../assets/doc/sampleHomeworkSent.pdf"
+                homeWorkSent:"/doc/sampleHomeworkSent.pdf"
             },
             {
                 homeworkId:2,
                 homeworkTitle:"",
-                homeWorkSent:"../assets/doc/sampleHomeworkSent.pdf"
+                homeWorkSent:"/doc/sampleHomeworkSent.pdf"
             }
         ],
         studentActiveCourses:3,
@@ -124,12 +124,12 @@ export const studentDetail=[
         {
             homeworkId: 1,
             homeworkTitle: "",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         },
         {
             homeworkId: 2,
             homeworkTitle: "",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         }
     ],
     studentActiveCourses: 2,
@@ -200,12 +200,12 @@ export const studentDetail=[
         {
             homeworkId: 1,
             homeworkTitle: "Grammar Practice - Week 1",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         },
         {
             homeworkId: 2,
             homeworkTitle: "Speaking Task - Video Submission",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         }
     ],
     studentActiveCourses: 2,
@@ -280,12 +280,12 @@ export const studentDetail=[
         {
             homeworkId: 1,
             homeworkTitle: "Essay Writing Practice",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         },
         {
             homeworkId: 2,
             homeworkTitle: "Listening Comprehension",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         }
     ],
     studentActiveCourses: 2,
@@ -359,12 +359,12 @@ export const studentDetail=[
         {
             homeworkId: 1,
             homeworkTitle: "Translation Task - Idioms",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         },
         {
             homeworkId: 2,
             homeworkTitle: "Grammar Review Worksheet",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         }
     ],
     studentActiveCourses: 1,
@@ -440,12 +440,12 @@ export const studentDetail=[
         {
             homeworkId: 1,
             homeworkTitle: "Listening Comprehension Exercise",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         },
         {
             homeworkId: 2,
             homeworkTitle: "Cultural Essay on Iran",
-            homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+            homeWorkSent: "/doc/sampleHomeworkSent.pdf"
         }
     ],
     studentActiveCourses: 2,
@@ -503,12 +503,12 @@ export const studentDetail=[
     {
       homeworkId: 1,
       homeworkTitle: "IELTS Speaking Part 2 Practice",
-      homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+      homeWorkSent: "/doc/sampleHomeworkSent.pdf"
     },
     {
       homeworkId: 2,
       homeworkTitle: "Vocabulary Log – Week 1",
-      homeWorkSent: "/assets/sampleHomeworkSent.pdf"
+      homeWorkSent: "/doc/sampleHomeworkSent.pdf"
     }
   ],
   studentActiveCourses: 1,
