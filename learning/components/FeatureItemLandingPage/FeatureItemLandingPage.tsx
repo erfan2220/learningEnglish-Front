@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import noticeIcon from "../../assets/icons/noticeIcon.svg";
 
-const FeatureItemLandingPage = ({ detail }) => {
+const FeatureItemLandingPage = ({ detail }: { detail: string }) => {
   return (
     <div className="flex items-start gap-2 mb-2">
       <Image

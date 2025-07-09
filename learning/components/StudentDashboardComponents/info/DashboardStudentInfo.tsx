@@ -120,7 +120,7 @@ const DashboardStudentInfo = () => {
                   name="selectDegree"
                   className="text-[#5C5A60] mx-2 w-full border-2  border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl px-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                 >
-                  <option disabled selected>{`Degree`}</option>
+                  <option disabled selected value="Degree">{`Degree`}</option>
                   <option value="Pre-Diploma">{`Pre-Diploma`}</option>
                   <option value="Diploma">{`Diploma`}</option>
                   <option value="Bachelor's Degree">{`Bachelor's Degree`}</option>

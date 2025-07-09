@@ -122,6 +122,7 @@ export const tutorMockDetail=[
             }
             ],
             coursesList:["cr1001", "cr1002"],
+            // coursesList:["cr1001", "cr1002","cr1003","cr1004","cr1005"],
             reviews:[
                 {
                     reviewId:1,
@@ -373,7 +374,8 @@ export const tutorMockDetail=[
         degreeId: 2,
         degree: "Master's Degree",
         institutionName: "University of Lyon",
-        location: "Lyon, France",
+        institutionCity: "Lyon",
+        institutionCountry: "France",
         field: "Applied Linguistics",
         startDate: "2019-09-01",
         endDate: "2021-06-30"
@@ -525,7 +527,8 @@ export const tutorMockDetail=[
       degreeId: 2,
       degree: "Master's Degree",
       institutionName: "Allameh Tabataba'i University",
-      location: "Tehran, Iran",
+      institutionCity: "Tehran",
+      institutionCountry: "Iran",
       field: "Language Education",
       startDate: "2017-09-01",
       endDate: "2019-06-30"
@@ -657,7 +660,8 @@ export const tutorMockDetail=[
       degreeId: 2,
       degree: "Master's Degree",
       institutionName: "McGill University",
-      location: "Montreal, Canada",
+      institutionCity: "Montreal",
+      institutionCountry: "Canada",
       field: "Education (TESL)",
       startDate: "2015-09-01",
       endDate: "2017-06-30"

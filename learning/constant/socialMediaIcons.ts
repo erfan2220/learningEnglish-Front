@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import facebookIcon from "../assets/icons/facebook.svg"
 import XIcon from "../assets/icons/social-x.svg"
 import instagramIcon from "../assets/icons/instagram.svg"

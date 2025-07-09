@@ -21,7 +21,7 @@ const Inputs: React.FC<InputsProps> = ({
       {label && <label className="text-xs mx-2 text-[#45444A]">{label}</label>}
       <div className="flex relative items-center ">
         <input
-          className={`border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2   bg-white/80 text-sm h-11 focus:outline-0`}
+          className={`border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0`}
           type={type === "password" && showPassword ? "text" : type}
           placeholder={placeholder}
           value={value}

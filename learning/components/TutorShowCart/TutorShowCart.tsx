@@ -5,7 +5,7 @@ import favoriteIcon from "../../assets/icons/star.svg";
 import heartIcon from "../../assets/icons/heartFillRed.svg";
 import Link from "next/link";
 
-const TutorShowCart = ({ tutorId }) => {
+const TutorShowCart = ({ tutorId }: { tutorId: string }) => {
   const tutor = tutorMockDetail.find((t) => t.tutorId === tutorId);
 
   if (!tutor) return null;

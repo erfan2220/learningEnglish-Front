@@ -92,7 +92,7 @@ const LandingPage = () => {
           <div className="m-4 mt-6 md:mt-[60px] md:ml-[60px] text-3xl md:text-4xl font-bold text-[#5C5A60]">
             How it works:
           </div>
-          <hr className="flex-1 mx-4 md:mx-[60px] h-px my-4 border-0 bg-[#45444A]" />
+          <hr className="flex-1 mx-4 md:mx-[60px] h-px my-4 border-1 border-[#45444A]" />
           <TutorialStep
             stepNumber={stepsData[0].number}
             title={stepsData[0].title}

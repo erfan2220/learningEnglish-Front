@@ -1,7 +1,7 @@
 "use client";
 import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import downloadIcon from "../../../assets/icons/download.svg";
 import uploadIcon from "../../../assets/icons/upload.svg";
@@ -10,14 +10,14 @@ const DashboardStudentHomeworks = () => {
   const { courseId } = useParams();
   const courseIdStr = Array.isArray(courseId) ? courseId[0] : courseId;
 
-  const [uploadAnswer, setUploadAnswer] = useState("");
+  // const [uploadAnswer, setUploadAnswer] = useState("");
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const docURL = URL.createObjectURL(file);
-    setUploadAnswer(docURL);
+    // const docURL = URL.createObjectURL(file);
+    // setUploadAnswer(docURL);
   };
 
   return (

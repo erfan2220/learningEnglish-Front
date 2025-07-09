@@ -116,6 +116,12 @@ const SignIn = () => {
               btnIcon={signInIcon}
             />
 
+            {error && (
+              <div className="text-red-500 text-sm mt-4 text-center">
+                {error}
+              </div>
+            )}
+
             <div className="text-sm text-[#45444A] mt-4 px-10 text-center">
               By clicking Log in or Continue with, you agree to{" "}
               <u>

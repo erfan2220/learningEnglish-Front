@@ -1,6 +1,7 @@
+import { Review } from "@/model/tutorType";
 import React from "react";
 
-const ReviewCart = ({ data }) => {
+const ReviewCart = ({ data }: { data: Review }) => {
   return (
     <div className="bg-[#F8ECFF] py-8 w-full text-sm lg:text-base h-[220px] rounded-2xl shadow-md hover:shadow-lg hover:scale-[1.01] transition-all duration-500">
       <div className="flex justify-center items-center">

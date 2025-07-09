@@ -3,8 +3,13 @@ import React from "react";
 import Country from "../Country/Country";
 import Link from "next/link";
 import Button from "../Button/Button";
+import { Tutor } from "@/model/tutorType";
 
-const TutorCart = ({ tutorData }) => {
+interface TutorCartProps {
+  tutorData: Tutor;
+}
+
+const TutorCart = ({ tutorData }: TutorCartProps) => {
   return (
     <div className="bg-[#F1ECFE] rounded-2xl border-2 border-[#D2D2D2] shadow-md p-4">
       <div>
@@ -21,14 +26,15 @@ const TutorCart = ({ tutorData }) => {
 
         <div className="flex flex-wrap gap-4">
           {tutorData.speaks.map((lang) => (
-            <Country
-              key={lang.languageId}
-              flag={lang.flag}
-              countryName={lang.language}
-              width={20}
-              textSize={"14px"}
-              fontWeight={"bold"}
-            />
+            <div key={lang.languageId}>
+              <Country
+                flag={lang.flag}
+                countryName={lang.language}
+                width={20}
+                textSize={"14px"}
+                fontWeight={"bold"}
+              />
+            </div>
           ))}
         </div>
         <div className="mt-6">

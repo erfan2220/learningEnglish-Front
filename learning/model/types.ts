@@ -43,6 +43,7 @@ export type ButtonProps ={
   colorBtnHover?: string;
   colorBtnActive?: string; 
   btnIcon?: StaticImageData;
+  marginTop?:string;
   onclick?: () => void;
 }
 
@@ -59,4 +60,26 @@ export type InputsProps ={
   icon1?: StaticImageData;
   icon2?: StaticImageData;
   inputIcon?: StaticImageData;
+}
+
+export type CountryComponent={
+  flag:StaticImageData;
+  countryName:string;
+  width:number;
+  textSize:string;
+  fontWeight:string;
+}
+
+export type SocialMediaIconType = { 
+  socialIcon:StaticImageData;
+  address:string
+}
+
+
+export type TutorialStepType ={
+   stepNumber:number;
+   title:string;
+   detail:string;
+   picture:StaticImageData;
+   flexRow:string;
 }

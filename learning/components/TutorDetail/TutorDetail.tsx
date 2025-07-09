@@ -183,12 +183,21 @@ const TutorDetail = ({ tutorId }: Props) => {
                         <td className="hidden sm:table-cell border border-gray-300 text-center px-4 py-2 align-middle">
                           <a
                             href={
+                              typeof cert.certificationPicture === "string"
+                                ? cert.certificationPicture
+                                : cert.certificationPicture.src
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {/* <a
+                            href={
                               cert.certificationPicture.src ||
                               cert.certificationPicture
                             }
                             target="_blank"
                             rel="noopener noreferrer"
-                          >
+                          > */}
                             <Image
                               src={cert.certificationPicture}
                               alt="certification pic"

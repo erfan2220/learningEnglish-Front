@@ -1,7 +1,14 @@
 import React from "react";
 import Image from "next/image";
+import { TutorialStepType } from "@/model/types";
 
-const TutorialStep = ({ stepNumber, title, detail, picture, flexRow }) => {
+const TutorialStep = ({
+  stepNumber,
+  title,
+  detail,
+  picture,
+  flexRow,
+}: TutorialStepType) => {
   return (
     <div
       className={`flex flex-col ${

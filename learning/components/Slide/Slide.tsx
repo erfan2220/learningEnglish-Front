@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import { tutorDetail } from "@/mock/tutorDetail";
 import TutorCart from "../TutorCart/TutorCart";
 import SwiperButton from "../SwiperButton/SwiperButton";
 import { tutorMockDetail } from "@/mock/tutorMockData";

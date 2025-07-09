@@ -1,12 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import replyIcon from "../../../assets/icons/reply.svg";
 import deleteIcon from "../../../assets/icons/delete.svg";
+import { Student } from "@/model/studentType";
+import { Tutor } from "@/model/tutorType";
 
-const DashboardStudentMessagesSent = ({ mainData, secondData }) => {
+type DashboardStudentMessagesSentProps = {
+  mainData: Student[];
+  secondData: Tutor[];
+};
+
+const DashboardStudentMessagesSent = ({
+  mainData,
+  secondData,
+}: DashboardStudentMessagesSentProps) => {
   const personNumber = 0;
-  const [selectedMessageId, setSelectedMessageId] = useState(null);
+  const [selectedMessageId, setSelectedMessageId] = useState<number | null>(
+    null
+  );
 
   return (
     <div className="my-8">

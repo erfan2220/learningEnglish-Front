@@ -5,8 +5,18 @@ import replyIcon from "../../../assets/icons/reply.svg";
 import deleteIcon from "../../../assets/icons/delete.svg";
 import Button from "@/components/Button/Button";
 import sentIcon from "../../../assets/icons/sentWhite.svg";
+import { Student } from "@/model/studentType";
+import { Tutor } from "@/model/tutorType";
 
-const DashboardStudentMessagesInbox = ({ mainData, secondData }) => {
+type DashboardStudentMessagesInboxProps = {
+  mainData: Student[];
+  secondData: Tutor[];
+};
+
+const DashboardStudentMessagesInbox = ({
+  mainData,
+  secondData,
+}: DashboardStudentMessagesInboxProps) => {
   const personNumber = 0;
   const [selectedMessageId, setSelectedMessageId] = useState(null);
   const [isReplyOpen, setIsReplyOpen] = useState(false);

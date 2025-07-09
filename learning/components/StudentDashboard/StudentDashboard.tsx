@@ -8,7 +8,11 @@ import signoutIcon from "../../assets/icons/signout.svg";
 import DashboardMenuItems from "../DashboardMenuItems/DashboardMenuItems";
 import MenuItemMessages from "../StudentDashboardComponents/menuItemMessages/MenuItemMessages";
 
-const StudentDashboard = ({ children }) => {
+interface StudentDashboardProps {
+  children: React.ReactNode;
+}
+
+const StudentDashboard = ({ children }: StudentDashboardProps) => {
   const role = "student";
 
   return (

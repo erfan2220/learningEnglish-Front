@@ -5,7 +5,7 @@ import { socialMediaIcons } from "@/constant/socialMediaIcons";
 
 const Footer = () => {
   return (
-    <div className="bg-white/70 backdrop-blur-md px-[80px] py-8">
+    <div className="bg-white/70 backdrop-blur-md px-8 sm:px-[80px] py-8 pb-[70px]">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-8 text-[#737177] text-sm">
         {/* ///////////////////////////// */}
         <div>
