@@ -1,11 +1,13 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
+import cartIcon from "../../assets/icons/cart.svg";
 
 const Header = () => {
   return (
     <div className="bg-white/70 shadow-lg flex justify-between px-8 z-50 items-center font-bold text-sm text-[#45444A] fixed top-0 right-0 left-0 backdrop-blur-md">
       <Link href={"/"}>
-        <div className="h-[60px] w-11 border-2 border-black my-1.5">logo</div>
+        <div className="h-[60px] w-32 border-2 border-black my-1.5">logo</div>
       </Link>
 
       <div>
@@ -26,10 +28,23 @@ const Header = () => {
           <li>
             <Link href={"/dashboard/student"}>student dashboard</Link>
           </li>
-          <li>
-            <Link href={"/signin"}>Sign In</Link>
-          </li>
         </ul>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <Link href={"/cart"}>
+          <div className="relative ">
+            <Image src={cartIcon} alt="cart icon" width={32} height={32} />
+            <div className="bg-[#5F33E1] rounded-full px-1 absolute top-0 right-0 text-white text-xs font-semibold">
+              2
+            </div>
+          </div>
+        </Link>
+        <Link href={"/signin"}>
+          <div className="px-8 py-3 rounded-3xl bg-gradient-to-br from-[#5F33E1] to-[#5F33E1] via-[#F1ECFF] shadow-md hover:scale-[1.02] transition-all duration-300">
+            Sign In
+          </div>
+        </Link>
       </div>
     </div>
   );

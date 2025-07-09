@@ -6,10 +6,11 @@ interface Props {
     tutorId: string;
   };
 }
-const TutorDetailPage = ({ params }: Props) => {
+const TutorDetailPage = async ({ params }: Props) => {
+  const { tutorId } = await params;
   return (
     <div>
-      <TutorDetail tutorId={params.tutorId} />
+      <TutorDetail tutorId={tutorId} />
     </div>
   );
 };
