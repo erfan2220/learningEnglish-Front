@@ -1,9 +1,14 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { Course } from "@/model/courseType";
 
-const CourseCart = ({ course }) => {
+const CourseCart = ({ course }: { course: Course }) => {
   return (
-    <div className="relative pb-4 px-4 border-2 border-[#D2D2D2] bg-white/70 rounded-2xl shadow-md hover:shadow-2xl hover:scale-105  transition-all duration-300">
+    <Link
+      href={`/courses/detail/${course.courseId}`}
+      className="relative pb-4 px-4 border-2 border-[#D2D2D2] bg-white/70 rounded-2xl shadow-md hover:shadow-2xl hover:scale-[1.02]  transition-all duration-400"
+    >
       <div className="my-4 ">
         <Image
           src={course.coursePicture}
@@ -52,7 +57,7 @@ const CourseCart = ({ course }) => {
       <p className="mt-4 text-lg text-[#45444A] font-bold">
         {course.price[0].currency} {course.price[0].price}
       </p>
-    </div>
+    </Link>
   );
 };
 
