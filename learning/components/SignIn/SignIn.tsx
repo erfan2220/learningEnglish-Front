@@ -17,7 +17,7 @@ import passwordIcon from "../../assets/icons/passwordIconGray.svg";
 
 const SignIn = () => {
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -26,9 +26,9 @@ const SignIn = () => {
     setError("");
 
     try {
-      const url = "http://127.0.0.1:8000/api/token/";
+      const url = "http://127.0.0.1:8000/api/login/";
 
-      const response = await axios.post(url, { username, password });
+      const response = await axios.post(url, { email, password });
       const { access, refresh } = response.data;
 
       localStorage.setItem("access_token", access);
@@ -80,9 +80,9 @@ const SignIn = () => {
           </div>
           <form onSubmit={handleSubmit} className="p-8 pt-0 w-full">
             <Inputs
-              type="text"
-              value={username}
-              onchange={(e) => setUsername(e.target.value)}
+              type="email"
+              value={email}
+              onchange={(e) => setEmail(e.target.value)}
               placeholder="Enter your Email"
               label="Email"
               width="100%"

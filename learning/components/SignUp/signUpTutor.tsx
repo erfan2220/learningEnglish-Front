@@ -13,11 +13,15 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import userIcon from "../../assets/icons/userIconGray.svg";
 import passwordIcon from "../../assets/icons/passwordIconGray.svg";
+import emailIcon from "../../assets/icons/emailGray.svg";
 
 const SignUpTutor = () => {
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const isTeacher = true;
 
   const router = useRouter();
 
@@ -26,9 +30,15 @@ const SignUpTutor = () => {
     setError("");
 
     try {
-      const url = "http://127.0.0.1:8000/api/user/register/";
+      const url = "http://127.0.0.1:8000/api/register/";
+      const response = await axios.post(url, {
+        email,
+        password,
+        firstName,
+        lastName,
+        isTeacher,
+      });
 
-      const response = await axios.post(url, { username, password });
       const { access, refresh } = response.data;
 
       localStorage.setItem("access_token", access);
@@ -77,27 +87,49 @@ const SignUpTutor = () => {
             <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
           </div>
           <form onSubmit={handleSubmit} className="p-8 pt-0 w-full">
-            <Inputs
-              type="text"
-              value={username}
-              onchange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your UserName"
-              label="Username"
-              width="100%"
-              inputIcon={userIcon}
-            />
-            <Inputs
-              type="password"
-              value={password}
-              onchange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your Password"
-              label="Password"
-              width="100%"
-              icon1={eyeIconClose}
-              icon2={eyeIcon}
-              inputIcon={passwordIcon}
-            />
-            <div className=" text-[#45444A] text-sm mx-2">
+            <div className="flex flex-col gap-2">
+              <Inputs
+                type="text"
+                value={firstName}
+                onchange={(e) => setFirstName(e.target.value)}
+                placeholder="Enter your First Name"
+                label="First Name"
+                width="100%"
+                inputIcon={userIcon}
+              />
+
+              <Inputs
+                type="text"
+                value={lastName}
+                onchange={(e) => setLastName(e.target.value)}
+                placeholder="Enter your Last Name"
+                label="Last Name"
+                width="100%"
+                inputIcon={userIcon}
+              />
+              <Inputs
+                type="email"
+                value={email}
+                onchange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your Email"
+                label="Email"
+                width="100%"
+                inputIcon={emailIcon}
+              />
+              <Inputs
+                type="password"
+                value={password}
+                onchange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your Password"
+                label="Password"
+                width="100%"
+                icon1={eyeIconClose}
+                icon2={eyeIcon}
+                inputIcon={passwordIcon}
+              />
+            </div>
+
+            <div className=" text-[#45444A] text-xs mt-1 mx-2">
               <u>
                 <Link href={"/forgotPassword"}>Forgot Your Password?</Link>
               </u>
@@ -107,7 +139,7 @@ const SignUpTutor = () => {
               <p className="text-[#45444A] text-sm">Remember Me</p>
             </div>
 
-            {error && <p>{error}</p>}
+            {error && <p className="text-red-600">{error}</p>}
 
             <Button
               type="submit"

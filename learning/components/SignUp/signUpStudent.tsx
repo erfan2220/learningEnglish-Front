@@ -16,10 +16,12 @@ import passwordIcon from "../../assets/icons/passwordIconGray.svg";
 import emailIcon from "../../assets/icons/emailGray.svg";
 
 const SignUpStudent = () => {
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const isTeacher = false;
 
   const router = useRouter();
 
@@ -28,9 +30,15 @@ const SignUpStudent = () => {
     setError("");
 
     try {
-      const url = "http://127.0.0.1:8000/api/user/register/";
+      const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/register/`;
 
-      const response = await axios.post(url, { username, email, password });
+      const response = await axios.post(url, {
+        email,
+        password,
+        firstName,
+        lastName,
+        isTeacher,
+      });
       const { access, refresh } = response.data;
 
       localStorage.setItem("access_token", access);
@@ -81,10 +89,19 @@ const SignUpStudent = () => {
           <form onSubmit={handleSubmit} className="p-8 pt-0 w-full">
             <Inputs
               type="text"
-              value={username}
-              onchange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your Username"
-              label="UserName"
+              value={firstName}
+              onchange={(e) => setFirstName(e.target.value)}
+              placeholder="Enter your First Name"
+              label="First Name"
+              width="100%"
+              inputIcon={userIcon}
+            />
+            <Inputs
+              type="text"
+              value={lastName}
+              onchange={(e) => setLastName(e.target.value)}
+              placeholder="Enter your Last Name"
+              label="Last Name"
               width="100%"
               inputIcon={userIcon}
             />
