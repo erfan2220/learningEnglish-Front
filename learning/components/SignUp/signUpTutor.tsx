@@ -30,23 +30,41 @@ const SignUpTutor = () => {
     setError("");
 
     try {
-      const url = "http://127.0.0.1:8000/api/register/";
+      const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/register/`;
+
       const response = await axios.post(url, {
         email,
         password,
-        firstName,
-        lastName,
-        isTeacher,
+        first_name: firstName,
+        last_name: lastName,
+        is_teacher: isTeacher,
       });
 
       const { access, refresh } = response.data;
 
       localStorage.setItem("access_token", access);
       localStorage.setItem("refresh_token", refresh);
+
       router.push("/signin");
     } catch (error) {
-      setError("Failed to authenticate");
-      console.error("Error:", error);
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          console.log("Error response data:", error.response.data);
+          const data = error.response.data;
+          if (typeof data === "string") {
+            setError(data);
+          } else if (data?.message) {
+            setError(data.message);
+          } else {
+            setError("Registration failed");
+          }
+        } else {
+          setError("Network error - please check your connection");
+        }
+      } else {
+        setError("An unexpected error occurred");
+      }
+      console.error("Error details:", error);
     }
   };
 

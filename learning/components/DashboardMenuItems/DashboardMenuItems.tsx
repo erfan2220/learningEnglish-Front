@@ -25,10 +25,10 @@ const DashboardMenuItems = ({
             ? "bg-[#9571FF] text-white"
             : "bg-white/80 text-[#45444A] hover:bg-[#f0e9ff]"
         }
-        hover:cursor-pointer hover:scale-105 border-[#D2D2D2]`}
+        hover:cursor-pointer hover:scale-[1.02] border-[#D2D2D2]`}
       style={{ width: `${width}` }}
     >
-      <div className="lg:w-[100px] md:w-[100px] md:ml-1 flex items-center">
+      <div className="lg:w-[49%] md:w-[100px] md:ml-1 flex items-center">
         <div>
           <Image
             src={icon}

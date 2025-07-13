@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
-import welcomeImage from "../../../assets/images/helloDash.svg";
+import messageImage from "../../../../../assets/images/messageImage.svg";
 
-const TutorDashboardPage = () => {
+const page = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-[500px]">
       <div className="max-w-[500px] max-h-[500px]">
         <Image
-          src={welcomeImage}
+          src={messageImage}
           alt="welcome picture"
           width={200}
           height={200}
@@ -18,4 +18,4 @@ const TutorDashboardPage = () => {
   );
 };
 
-export default TutorDashboardPage;
+export default page;

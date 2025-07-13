@@ -26,7 +26,7 @@ const SignIn = () => {
     setError("");
 
     try {
-      const url = "http://127.0.0.1:8000/api/login/";
+      const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/login/`;
 
       const response = await axios.post(url, { email, password });
       const { access, refresh } = response.data;

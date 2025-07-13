@@ -1,19 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import homeIcon from "../../assets/icons/homeIcon.svg";
+import certIcon from "../../assets/icons/certGray.svg";
+import educationIcon from "../../assets/icons/educationGrayD.svg";
+import descriptionIcon from "../../assets/icons/descriptionGray.svg";
+import addIcon from "../../assets/icons/addGray.svg";
 import courseIcon from "../../assets/icons/course.svg";
-import favoriteIcon from "../../assets/icons/heartFill.svg";
-
 import signoutIcon from "../../assets/icons/signout.svg";
 import DashboardMenuItems from "../DashboardMenuItems/DashboardMenuItems";
 import MenuItemMessages from "../menuItemMessages/MenuItemMessages";
 
-interface StudentDashboardProps {
+interface TutorDashboardProps {
   children: React.ReactNode;
 }
 
-const StudentDashboard = ({ children }: StudentDashboardProps) => {
-  const role = "student";
+const TutorDashboard = ({ children }: TutorDashboardProps) => {
+  const role = "tutor";
 
   return (
     <div className="w-full px-1 md:px-6 min-h-[600px] max-w-[1600px] mx-auto flex gap-2 mt-[90px] mb-4">
@@ -36,21 +38,45 @@ const StudentDashboard = ({ children }: StudentDashboardProps) => {
 
           <DashboardMenuItems
             role={role}
+            topic={"certification"}
+            icon={certIcon}
+            title={"Certification"}
+            width={"100%"}
+          />
+
+          <DashboardMenuItems
+            role={role}
+            topic={"education"}
+            icon={educationIcon}
+            title={"Education"}
+            width={"100%"}
+          />
+
+          <DashboardMenuItems
+            role={role}
+            topic={"description"}
+            icon={descriptionIcon}
+            title={"Description"}
+            width={"100%"}
+          />
+
+          <DashboardMenuItems
+            role={role}
+            topic={"addCourse"}
+            icon={addIcon}
+            title={"Add Course"}
+            width={"100%"}
+          />
+
+          <DashboardMenuItems
+            role={role}
             topic={"courses"}
             icon={courseIcon}
             title={"Courses"}
             width={"100%"}
           />
 
-          <DashboardMenuItems
-            role={role}
-            topic={"favoriteTutors"}
-            icon={favoriteIcon}
-            title={"Favorites"}
-            width={"100%"}
-          />
-
-          <MenuItemMessages role="student" />
+          <MenuItemMessages role="tutor" />
 
           <DashboardMenuItems
             role={role}
@@ -70,4 +96,4 @@ const StudentDashboard = ({ children }: StudentDashboardProps) => {
   );
 };
 
-export default StudentDashboard;
+export default TutorDashboard;

@@ -35,10 +35,11 @@ const SignUpStudent = () => {
       const response = await axios.post(url, {
         email,
         password,
-        firstName,
-        lastName,
-        isTeacher,
+        first_name: firstName,
+        last_name: lastName,
+        is_teacher: isTeacher,
       });
+
       const { access, refresh } = response.data;
 
       localStorage.setItem("access_token", access);
