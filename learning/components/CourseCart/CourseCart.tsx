@@ -33,24 +33,24 @@ const CourseCart = ({ course }: { course: CourseTypeTemporary }) => {
           <div>
             <Image
               src={course.tutor.profile_picture}
-              alt={course.tutor.profile_picture}
+              alt={"tutorPic"}
               width={40}
               height={40}
             />
           </div>
           <span className="font-bold text-[#45444A]">
-            {"emma"} {"smith"}
+            {"no"} {"name"}
           </span>
         </div>
 
         <div className="flex text-[#45444A] text-sm font-semibold gap-2 my-2">
           speaks:{" "}
-          {course.tutor.languages_spoken.map((Language, index) => (
+          {/* {course.tutor.languages_spoken.map((Language, index) => (
             <div key={index}>
               <p>{Language.English}</p>
               <p>{Language.Spanish}</p>
             </div>
-          ))}
+          ))} */}
         </div>
 
         <div className="text-[#45444A]  flex">

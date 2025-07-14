@@ -26,9 +26,10 @@ const Courses = () => {
     const fetchCourses = async () => {
       try {
         const res = await axiosInstance.get("/api/courses/");
-        setCourses(res.data); // فرض بر اینه که API لیست دوره‌ها رو می‌ده
+        setCourses(res.data);
+        console.log("courses from backend", res.data);
       } catch (error) {
-        console.error("خطا در دریافت دوره‌ها:", error);
+        console.error("fetching error", error);
       } finally {
         setLoading(false);
       }
