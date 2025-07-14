@@ -13,6 +13,9 @@ import institutionIcon from "../../../assets/icons/institutionGray.svg";
 import passwordIcon from "../../../assets/icons/passwordIconGray.svg";
 import editIcon from "../../../assets/icons/penDash.svg";
 import degreeIcon from "../../../assets/icons/degreeGray.svg";
+import subjectIcon from "../../../assets/icons/educationGray.svg";
+import languageIcon from "../../../assets/icons/languageGray.svg";
+import levelIcon from "../../../assets/icons/levelIconGray.svg";
 
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
@@ -20,6 +23,8 @@ import { countryList } from "@/mock/countryList";
 const DashboardTutorInfo = () => {
   const [imagePreview, setImagePreview] = useState(profilePhoto);
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
+  // const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCountry(e.target.value);
@@ -93,6 +98,14 @@ const DashboardTutorInfo = () => {
               inputIcon={emailIcon}
             />
 
+            <Inputs
+              type="text"
+              placeholder="Phone Number"
+              label="Phone Number"
+              width="80%"
+              inputIcon={phoneIcon}
+            />
+            {/* ////////////////////////////////////////////////// */}
             <div className="flex flex-col w-[80%]">
               <label className="text-xs mx-2 mt-2 text-[#45444A]">
                 Country
@@ -100,8 +113,8 @@ const DashboardTutorInfo = () => {
               <div className="flex relative w-full">
                 <select
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
-                  value={selectedCountry}
-                  onChange={handleChange}
+                  value={selectedSubject}
+                  onChange={(e) => setSelectedSubject(e.target.value)}
                 >
                   <option disabled value={""}>
                     --select--
@@ -122,22 +135,102 @@ const DashboardTutorInfo = () => {
                 />
               </div>
             </div>
+            {/* //////////////////////////////////////////////// */}
+            <div className="flex flex-col w-[80%]">
+              <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                Subject you teach
+              </label>
+              <div className="flex relative w-full">
+                <select
+                  className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+                  value={selectedCountry}
+                  onChange={handleChange}
+                >
+                  <option disabled value={""}>
+                    --select--
+                  </option>
+                  <option value="English">English</option>
+                  <option value="French">French</option>
+                  <option value="Persian">Persian</option>
+                </select>
 
-            <Inputs
-              type="text"
-              placeholder="Country"
-              label="Country"
-              width="80%"
-              inputIcon={countryIcon}
-            />
+                <Image
+                  src={subjectIcon}
+                  alt="subject icon"
+                  width={20}
+                  height={20}
+                  className="absolute top-[12px] left-4 cursor-pointer"
+                />
+              </div>
+            </div>
 
-            <Inputs
-              type="text"
-              placeholder="Phone Number"
-              label="Phone Number"
-              width="80%"
-              inputIcon={phoneIcon}
-            />
+            {/* //////////////////////////////////////////////// */}
+            <div className="flex flex-row w-[80%]">
+              <div>
+                <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                  Language you speak
+                </label>
+                <div className="flex relative w-full">
+                  <select className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0">
+                    <option>languages</option>
+                    <option value="ar">Arabic</option>
+                    <option value="zh">Chinese (中文)</option>
+                    <option value="zh-HK">Chinese Hong Kong - (中文)</option>
+                    <option value="zh-CN">
+                      Chinese Simplified - (中文简体)
+                    </option>
+                    <option value="zh-TW">
+                      Chinese Traditional - (中文繁體)
+                    </option>
+                    <option value="nl">Dutch (Nederlands)</option>
+                    <option value="en">English</option>
+                    <option value="en-IN">English (India)</option>
+                    <option value="en-ZA">English (South Africa)</option>
+                    <option value="en-GB">English (United Kingdom)</option>
+                    <option value="en-US">English (United States)</option>
+                    <option value="fr">French (Français)</option>
+                    <option value="de">German - (Deutsch)</option>
+                    <option value="fa">Persian - (فارسی)</option>
+                    <option value="ru">Russian</option>
+                    <option value="es">Spanish - (Español)</option>
+                  </select>
+
+                  <Image
+                    src={languageIcon}
+                    alt="language icon"
+                    width={20}
+                    height={20}
+                    className="absolute top-[12px] left-4 cursor-pointer"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                  Level
+                </label>
+                <div className="flex relative w-full">
+                  <select className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0">
+                    <option>Level</option>
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+                    <option value="C1">C1</option>
+                    <option value="C2">C2</option>
+                    <option value="native">native</option>
+                  </select>
+
+                  <Image
+                    src={levelIcon}
+                    alt="level icon"
+                    width={20}
+                    height={20}
+                    className="absolute top-[12px] left-4 cursor-pointer"
+                  />
+                </div>
+              </div>
+              <div></div>
+            </div>
           </div>
         </div>
         {/* ////////////////////////////////////// */}
