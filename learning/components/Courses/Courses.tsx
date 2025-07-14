@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import Inputs from "../Input/Input";
 import searchIcon from "../../assets/icons/searchIconGray.svg";
 import SelectLanguage from "./SelectLanguage";
@@ -7,9 +8,9 @@ import SelectTime from "./SelectTime";
 import SelectDate from "./SelectDate";
 import CourseCart from "../CourseCart/CourseCart";
 import SelectPrice from "./SelectPrice";
-import { courseMockDetail } from "@/mock/courseMockData";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import axiosInstance from "@/APIs/axiosInstance";
 
 const Courses = () => {
   const searchParam = useSearchParams();
@@ -17,7 +18,26 @@ const Courses = () => {
   const CurrentPage = parseInt(searchParam.get("page") || "1");
   const firstIndex = (CurrentPage - 1) * ppg;
   const endIndex = firstIndex + 3;
-  const showTutors = courseMockDetail.slice(firstIndex, endIndex);
+
+  const [courses, setCourses] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await axiosInstance.get("/api/courses/");
+        setCourses(res.data); // فرض بر اینه که API لیست دوره‌ها رو می‌ده
+      } catch (error) {
+        console.error("خطا در دریافت دوره‌ها:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  const showCourses = courses.slice(firstIndex, endIndex);
 
   return (
     <div className="px-6 py-[60px] md:p-[60px] max-w-[1320px] mx-auto">
@@ -47,16 +67,21 @@ const Courses = () => {
       <hr className="flex-1  h-px my-4 border-1  border-[#45444A]" />
       <div>
         <h2 className="flex mb-8 text-black text-2xl font-bold">Results</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-14">
-          {showTutors.map((course) => (
-            <div key={course.id}>
-              <CourseCart course={course} />
-            </div>
-          ))}
-        </div>
+
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-14">
+            {showCourses.map((course) => (
+              <div key={course.id}>
+                <CourseCart course={course} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* /////////////////////////////////////////////// */}
+      {/* pagination */}
       <div className="flex justify-center items-center mt-10 text-lg font-semibold text-[#5B5A60]">
         {CurrentPage > 1 && (
           <Link href={`?page=${CurrentPage - 1}`}>
@@ -70,14 +95,11 @@ const Courses = () => {
             {CurrentPage}
           </p>
           <p className="font-medium"> of </p>
-          {Math.ceil(courseMockDetail.length / ppg)}
+          {Math.ceil(courses.length / ppg)}
         </span>
 
-        {CurrentPage < Math.ceil(courseMockDetail.length / ppg) && (
-          <Link
-            href={`?page=${CurrentPage + 1}`}
-            className="flex justify-center items-center"
-          >
+        {CurrentPage < Math.ceil(courses.length / ppg) && (
+          <Link href={`?page=${CurrentPage + 1}`}>
             <div className="bg-[#5F33E1] text-white text-lg font-bold rounded-full px-2 pb-1 mx-3">
               {">"}
             </div>

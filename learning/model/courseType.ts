@@ -57,3 +57,35 @@ export type Course = {
 };
 
 export type CourseList = Course[];
+
+
+//////////////////////////////////////////////////////////////////////////
+
+export type TutorTypeTemporary = {
+  id: number;
+  user: number;
+  profile_picture: string;
+  languages_spoken: languagesSpokenTemporary[]
+};
+
+export type languagesSpokenTemporary= {
+     English:string;
+     Spanish:string;
+  };
+
+
+
+export type CourseTypeTemporary = {
+  id: number;
+  title: string;
+  description: string;
+  price_per_hour: string;
+  language: string;
+  level: string;
+  schedule_day: string;
+  schedule_start: string;
+  schedule_end: string;
+  capacity: number;
+  lessons: any[];
+  tutor: TutorTypeTemporary;
+};
