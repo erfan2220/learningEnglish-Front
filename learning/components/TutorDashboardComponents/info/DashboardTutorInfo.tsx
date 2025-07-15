@@ -8,26 +8,46 @@ import userIcon from "../../../assets/icons/userIconGray.svg";
 import emailIcon from "../../../assets/icons/emailGray.svg";
 import countryIcon from "../../../assets/icons/locationGray.svg";
 import phoneIcon from "../../../assets/icons/phoneGray.svg";
-import studyIcon from "../../../assets/icons/educationGray.svg";
-import institutionIcon from "../../../assets/icons/institutionGray.svg";
 import passwordIcon from "../../../assets/icons/passwordIconGray.svg";
 import editIcon from "../../../assets/icons/penDash.svg";
-import degreeIcon from "../../../assets/icons/degreeGray.svg";
 import subjectIcon from "../../../assets/icons/educationGray.svg";
 import languageIcon from "../../../assets/icons/languageGray.svg";
 import levelIcon from "../../../assets/icons/levelIconGray.svg";
+import binIcon from "../../../assets/icons/binGray.svg";
 
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 
 const DashboardTutorInfo = () => {
   const [imagePreview, setImagePreview] = useState(profilePhoto);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
-  // const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCountry(e.target.value);
+  const [entries, setEntries] = useState([{ language: "", level: "" }]);
+
+  const handleAdd = () => {
+    setEntries([...entries, { language: "", level: "" }]);
+  };
+
+  const handleRemove = (index: number) => {
+    const newEntries = entries.filter((_, i) => i !== index);
+    setEntries(newEntries);
+  };
+
+  const handleChange = (
+    index: number,
+    field: "language" | "level",
+    value: string
+  ) => {
+    const newEntries = [...entries];
+    newEntries[index][field] = value;
+    setEntries(newEntries);
   };
 
   const handleImageChange = (e) => {
@@ -36,6 +56,14 @@ const DashboardTutorInfo = () => {
 
     const imageURL = URL.createObjectURL(file);
     setImagePreview(imageURL);
+  };
+
+  const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const videoURL = URL.createObjectURL(file);
+    setSelectedVideo(videoURL);
   };
 
   const [isDisabled, setIsDisabled] = useState(true);
@@ -80,6 +108,8 @@ const DashboardTutorInfo = () => {
               label="First Name"
               width="80%"
               inputIcon={userIcon}
+              value={firstName}
+              onchange={(e) => setFirstName(e.target.value)}
             />
 
             <Inputs
@@ -88,6 +118,8 @@ const DashboardTutorInfo = () => {
               label="Last Name"
               width="80%"
               inputIcon={userIcon}
+              value={lastName}
+              onchange={(e) => setLastName(e.target.value)}
             />
 
             <Inputs
@@ -96,6 +128,8 @@ const DashboardTutorInfo = () => {
               label="Email"
               width="80%"
               inputIcon={emailIcon}
+              value={email}
+              onchange={(e) => setEmail(e.target.value)}
             />
 
             <Inputs
@@ -104,20 +138,22 @@ const DashboardTutorInfo = () => {
               label="Phone Number"
               width="80%"
               inputIcon={phoneIcon}
+              value={phoneNumber}
+              onchange={(e) => setPhoneNumber(e.target.value)}
             />
-            {/* ////////////////////////////////////////////////// */}
-            <div className="flex flex-col w-[80%]">
+
+            <div className="w-[80%]">
               <label className="text-xs mx-2 mt-2 text-[#45444A]">
                 Country
               </label>
-              <div className="flex relative w-full">
+              <div className="relative">
                 <select
+                  value={selectedCountry}
+                  onChange={(e) => setSelectedCountry(e.target.value)}
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
-                  value={selectedSubject}
-                  onChange={(e) => setSelectedSubject(e.target.value)}
                 >
-                  <option disabled value={""}>
-                    --select--
+                  <option disabled selected value="">
+                    Country
                   </option>
                   {countryList.map((country, index) => (
                     <option key={index} value={country}>
@@ -125,183 +161,202 @@ const DashboardTutorInfo = () => {
                     </option>
                   ))}
                 </select>
-
                 <Image
                   src={countryIcon}
-                  alt="country icon"
+                  alt="language icon"
                   width={20}
                   height={20}
                   className="absolute top-[12px] left-4 cursor-pointer"
                 />
               </div>
             </div>
-            {/* //////////////////////////////////////////////// */}
-            <div className="flex flex-col w-[80%]">
+
+            <div className="w-[80%]">
               <label className="text-xs mx-2 mt-2 text-[#45444A]">
                 Subject you teach
               </label>
-              <div className="flex relative w-full">
+              <div className="relative">
                 <select
+                  value={selectedSubject}
+                  onChange={(e) => setSelectedSubject(e.target.value)}
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
-                  value={selectedCountry}
-                  onChange={handleChange}
                 >
-                  <option disabled value={""}>
-                    --select--
+                  <option disabled selected value="">
+                    subject
                   </option>
+                  <option value="Chinese">Chinese</option>
                   <option value="English">English</option>
                   <option value="French">French</option>
                   <option value="Persian">Persian</option>
                 </select>
-
                 <Image
                   src={subjectIcon}
-                  alt="subject icon"
+                  alt="language icon"
                   width={20}
                   height={20}
                   className="absolute top-[12px] left-4 cursor-pointer"
                 />
               </div>
             </div>
+            {/* ////////////////////////////////////////////////// */}
+            <div className="flex flex-col gap-2">
+              {entries.map((entry, index) => (
+                <div key={index} className="flex w-full items-center gap-2">
+                  {/* Language + Level Group */}
+                  <div className="flex flex-col sm:flex-row w-[90%] sm:w-[80%] gap-2">
+                    {/* Language */}
+                    <div className="w-full sm:w-1/2">
+                      <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                        Language you speak
+                      </label>
+                      <div className="relative">
+                        <select
+                          className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+                          value={entry.language}
+                          onChange={(e) =>
+                            handleChange(index, "language", e.target.value)
+                          }
+                        >
+                          <option disabled value="">
+                            languages
+                          </option>
+                          <option value="Arabic">Arabic</option>
+                          <option value="Chinese">Chinese</option>
+                          <option value="Dutch">Dutch</option>
+                          <option value="English">English</option>
+                          <option value="French">French</option>
+                          <option value="German">German</option>
+                          <option value="Persian">Persian</option>
+                          <option value="Russian">Russian</option>
+                          <option value="Spanish">Spanish</option>
+                        </select>
+                        <Image
+                          src={languageIcon}
+                          alt="language icon"
+                          width={20}
+                          height={20}
+                          className="absolute top-[12px] left-4 cursor-pointer"
+                        />
+                      </div>
+                    </div>
 
-            {/* //////////////////////////////////////////////// */}
-            <div className="flex flex-row w-[80%]">
-              <div>
-                <label className="text-xs mx-2 mt-2 text-[#45444A]">
-                  Language you speak
-                </label>
-                <div className="flex relative w-full">
-                  <select className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0">
-                    <option>languages</option>
-                    <option value="ar">Arabic</option>
-                    <option value="zh">Chinese (中文)</option>
-                    <option value="zh-HK">Chinese Hong Kong - (中文)</option>
-                    <option value="zh-CN">
-                      Chinese Simplified - (中文简体)
-                    </option>
-                    <option value="zh-TW">
-                      Chinese Traditional - (中文繁體)
-                    </option>
-                    <option value="nl">Dutch (Nederlands)</option>
-                    <option value="en">English</option>
-                    <option value="en-IN">English (India)</option>
-                    <option value="en-ZA">English (South Africa)</option>
-                    <option value="en-GB">English (United Kingdom)</option>
-                    <option value="en-US">English (United States)</option>
-                    <option value="fr">French (Français)</option>
-                    <option value="de">German - (Deutsch)</option>
-                    <option value="fa">Persian - (فارسی)</option>
-                    <option value="ru">Russian</option>
-                    <option value="es">Spanish - (Español)</option>
-                  </select>
+                    {/* Level */}
+                    <div className="w-full sm:w-1/2">
+                      <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                        Level
+                      </label>
+                      <div className="relative">
+                        <select
+                          className="border-2 w-full text-sm border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 h-11 focus:outline-0"
+                          value={entry.level}
+                          onChange={(e) =>
+                            handleChange(index, "level", e.target.value)
+                          }
+                        >
+                          <option disabled value="">
+                            Level
+                          </option>
+                          <option value="native">native</option>
+                          <option value="A1">A1</option>
+                          <option value="A2">A2</option>
+                          <option value="B1">B1</option>
+                          <option value="B2">B2</option>
+                          <option value="C1">C1</option>
+                          <option value="C2">C2</option>
+                        </select>
+                        <Image
+                          src={levelIcon}
+                          alt="level icon"
+                          width={20}
+                          height={20}
+                          className="absolute top-[12px] left-4 cursor-pointer"
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-                  <Image
-                    src={languageIcon}
-                    alt="language icon"
-                    width={20}
-                    height={20}
-                    className="absolute top-[12px] left-4 cursor-pointer"
-                  />
+                  {/* Delete icon */}
+                  <div className="mt-5">
+                    <Image
+                      src={binIcon}
+                      alt="bin"
+                      width={24}
+                      height={24}
+                      className="cursor-pointer"
+                      onClick={() => handleRemove(index)}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div>
-                <label className="text-xs mx-2 mt-2 text-[#45444A]">
-                  Level
-                </label>
-                <div className="flex relative w-full">
-                  <select className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0">
-                    <option>Level</option>
-                    <option value="A1">A1</option>
-                    <option value="A2">A2</option>
-                    <option value="B1">B1</option>
-                    <option value="B2">B2</option>
-                    <option value="C1">C1</option>
-                    <option value="C2">C2</option>
-                    <option value="native">native</option>
-                  </select>
+              ))}
 
-                  <Image
-                    src={levelIcon}
-                    alt="level icon"
-                    width={20}
-                    height={20}
-                    className="absolute top-[12px] left-4 cursor-pointer"
-                  />
-                </div>
-              </div>
-              <div></div>
+              {/* Add Button */}
+              <p
+                className="text-[#45444A] font-bold underline hover:cursor-pointer"
+                onClick={handleAdd}
+              >
+                + Add Language
+              </p>
             </div>
           </div>
         </div>
         {/* ////////////////////////////////////// */}
         <div className="flex flex-col md:flex-row text-[#45444A] mt-12">
           <div className="w-full md:w-1/3 ml-4 flex md:items-start md:justify-center font-bold mt-4 md:mt-6 mb-4 md:mb-0">
-            Latest Degree
+            Introduction Video
           </div>
 
-          <div className="w-full flex flex-col gap-1 md:w-2/3">
-            <div className="flex flex-col gap-1">
-              <label className="text-[#5C5A60] mx-2 text-sm ">
-                Latest Degree
-              </label>
-              <div className="relative w-[80%]">
-                <select
-                  name="selectDegree"
-                  className="text-[#5C5A60] mx-2 w-full border-2  border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl px-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
-                >
-                  <option disabled selected value="Degree">{`Degree`}</option>
-                  <option value="Pre-Diploma">{`Pre-Diploma`}</option>
-                  <option value="Diploma">{`Diploma`}</option>
-                  <option value="Bachelor's Degree">{`Bachelor's Degree`}</option>
-                  <option value="Master's Degree">{`Master's Degree`}</option>
-                  <option value="Doctor of Philosophy">{`Doctor of Philosophy`}</option>
-                  <option value="General Medical Doctor">{`General Medical Doctor`}</option>
-                  <option value="Specialist Medical Degree">{`Specialist Medical Degree`}</option>
-                </select>
-
-                <Image
-                  src={degreeIcon}
-                  alt="degree icon"
-                  width={24}
-                  height={24}
-                  className="absolute top-[20px] left-4 -translate-y-1/2"
+          <div className="w-full mt-4 flex flex-col gap-1 md:w-2/3">
+            <div className="w-[80%] ">
+              {selectedVideo && (
+                <video controls className="w-full rounded-lg shadow-md">
+                  <source src={selectedVideo} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+              <label className="cursor-pointer text-blue-600 underline inline-block mt-2">
+                Upload a Video
+                <input
+                  type="file"
+                  accept="video/*"
+                  onChange={handleVideoChange}
+                  className="hidden"
                 />
-              </div>
+              </label>
             </div>
 
-            <Inputs
-              type="text"
-              placeholder="Institution Name"
-              label="Institution Name"
-              width="80%"
-              inputIcon={institutionIcon}
-            />
-
-            <Inputs
-              type="text"
-              placeholder="Location"
-              label="Location"
-              width="80%"
-              inputIcon={countryIcon}
-            />
-
-            <Inputs
-              type="text"
-              placeholder="Field of Study"
-              label="Field of Study"
-              width="80%"
-              inputIcon={studyIcon}
-            />
+            <div className="mt-4 w-[80%]">
+              <p>
+                Record a 1–3 minute video of yourself in landscape mode,
+                introducing who you are, your teaching style, and what students
+                can expect from your lessons.
+              </p>
+              <p className="my-4">
+                Make sure:
+                <ul className="list-disc ml-6">
+                  <li>Your face is clearly visible</li>
+                  <li>Your voice is loud and clear</li>
+                  <li>You record in a quiet and well-lit space</li>
+                  <li>
+                    Speak in the language you plan to teach, so students can
+                    hear your accent and speaking style
+                  </li>
+                </ul>
+              </p>
+              <p>
+                This video helps students get to know you and feel more
+                comfortable booking a lesson!
+              </p>
+            </div>
           </div>
         </div>
         {/* /////////////////////////////////////////////////////////// */}
 
-        <div className="flex flex-col md:flex-row text-[#45444A] mt-12">
+        <div className="flex flex-col md:flex-row text-[#45444A] mt-14">
           <div className="w-full md:w-1/3 ml-4 flex md:items-start md:justify-center font-bold mt-4 md:mt-6 mb-4 md:mb-0">
             Account Settings
           </div>
 
-          <div className="w-full flex flex-col gap-1 md:w-2/3">
+          <div className="w-full flex flex-col gap-2 md:w-2/3">
             <div className="flex flex-col gap-1">
               <label className="mx-2 text-xs text-[#5C5A60] ">Password</label>
               <div className="flex gap-2 items-center">
@@ -310,7 +365,9 @@ const DashboardTutorInfo = () => {
                     type="password"
                     placeholder="*********"
                     disabled={isDisabled}
-                    className="bg-white/80 mx-2 text-[#5C5A60] w-full border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-12 py-2 text-sm h-11 focus:outline-0"
+                    className="bg-white/80 text-[#5C5A60] w-full border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-12 py-2 text-sm h-11 focus:outline-0"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <Image
                     src={passwordIcon}
@@ -325,7 +382,7 @@ const DashboardTutorInfo = () => {
                   alt="edit icon"
                   width={28}
                   height={28}
-                  className="cursor-pointer"
+                  className="cursor-pointer mx-2"
                   onClick={toggleEdit}
                 />
               </div>
