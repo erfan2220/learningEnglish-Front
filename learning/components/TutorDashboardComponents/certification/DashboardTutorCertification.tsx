@@ -71,7 +71,7 @@ const DashboardTutorCertification = () => {
             {certifications.length > 1 && (
               <button
                 onClick={() => handleRemoveCertification(index)}
-                className="absolute top-0 right-0 text-[#E13350] text-sm font-bold underline"
+                className="absolute top-0 right-0 text-[#E13350] text-xs sm:text-sm font-bold underline"
               >
                 Delete Certification
               </button>

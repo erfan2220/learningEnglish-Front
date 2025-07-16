@@ -112,7 +112,7 @@ const DashboardStudentInfo = () => {
 
           <div className="w-full flex flex-col gap-1 md:w-2/3">
             <div className="flex flex-col gap-1">
-              <label className="text-[#5C5A60] mx-2 text-sm ">
+              <label className="text-[#5C5A60] mx-2 text-xs ">
                 Latest Degree
               </label>
               <div className="relative w-[80%]">
