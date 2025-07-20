@@ -16,6 +16,7 @@ import lessonIcon from "../../assets/icons/lessonsBlue.svg";
 import levelIcon from "../../assets/icons/levelIcon.svg";
 import { courseMockDetail } from "@/mock/courseMockData";
 import ReviewCart from "../ReviewCart/ReviewCart";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 type Props = {
   tutorId: string;
@@ -36,18 +37,17 @@ const TutorDetail = ({ tutorId }: Props) => {
   return (
     <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto">
       <div className="mt-[60px]">
-        {/* //////////video/////////////////////// */}
+        {/* ====================video==================== */}
         <div className="flex justify-center items-center">
-          <video controls className=" w-full sm:w-[50%] rounded-lg shadow-md">
-            <source src={detail.introduceVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="w-full sm:w-[50%]">
+            <VideoPlayer src={detail.introduceVideo} />
+          </div>
         </div>
 
-        {/* //////////detail/////////////////////// */}
+        {/* ====================detail==================== */}
         <Layout>
           <div className="p-4 sm:px-12 sm:py-8">
-            {/* //////////name-photo/////////////////////// */}
+            {/* ====================name-photo==================== */}
 
             <div className="flex items-center gap-4">
               <div>
@@ -68,7 +68,7 @@ const TutorDetail = ({ tutorId }: Props) => {
               </div>
             </div>
 
-            {/* //////////location/////////////////////// */}
+            {/* ====================location==================== */}
             <div className="flex gap-2 mt-4">
               <Image
                 src={locationIcon}
@@ -81,7 +81,7 @@ const TutorDetail = ({ tutorId }: Props) => {
                 from {detail.country} {`(UTC )`}
               </p>
             </div>
-            {/* //////////speak/////////////////////// */}
+            {/* ====================speak==================== */}
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 my-6">
               <div className="flex gap-2">
@@ -111,7 +111,7 @@ const TutorDetail = ({ tutorId }: Props) => {
               ))}
             </div>
 
-            {/* //////////teach/////////////////////// */}
+            {/* ====================teach==================== */}
 
             <div className="flex flex-wrap items-center gap-6 mt-2">
               <div className="flex gap-2">
@@ -125,7 +125,7 @@ const TutorDetail = ({ tutorId }: Props) => {
               </div>
               <p className="font-bold text-[#45444A]">{detail.subject}</p>
             </div>
-            {/* //////////about me/////////////////////// */}
+            {/* ====================about me==================== */}
 
             <div className="text-sm sm:text-base my-10">
               <p className="font-bold text-xl text-[#45444A]">About me</p>
@@ -133,7 +133,7 @@ const TutorDetail = ({ tutorId }: Props) => {
               <p className="text-[#737177] ">{detail.personalSummary}</p>
             </div>
 
-            {/* //////////Certificates/////////////////////// */}
+            {/* ====================Certificates==================== */}
 
             <div className="text-xm sm:text-sm my-10 text-[#737177]">
               <p className="font-bold text-xl text-[#45444A]">Certificates</p>
@@ -214,7 +214,7 @@ const TutorDetail = ({ tutorId }: Props) => {
               </div>
             </div>
 
-            {/* //////////education/////////////////////// */}
+            {/* ====================education==================== */}
             <div className="w-full my-10 text-[#5C5A60]">
               <p className="font-bold text-xl text-[#45444A]">Education</p>
               <hr className="flex-1 my-2 border-1 border-[#BBBBBB]" />
@@ -270,7 +270,7 @@ const TutorDetail = ({ tutorId }: Props) => {
               ))}
             </div>
 
-            {/* //////////experience/////////////////////// */}
+            {/* ====================experience==================== */}
 
             <div className="w-full my-10 text-[#5C5A60]">
               <p className="font-bold text-xl text-[#45444A]">
@@ -318,7 +318,7 @@ const TutorDetail = ({ tutorId }: Props) => {
 
         <Layout>
           <div className="flex justify-evenly  items-center py-4">
-            {/* //////// */}
+            {/* ==================== */}
             <div className="flex flex-col items-center justify-center">
               <p className="text-[#8B8A8E] font-bold text-sm sm:text-base">
                 Rating
@@ -334,7 +334,7 @@ const TutorDetail = ({ tutorId }: Props) => {
                 <p className="sm:text-xl font-bold text-[#FFA648]">ff</p>
               </div>
             </div>
-            {/* //////// */}
+            {/* ==================== */}
             <div className="flex flex-col items-center justify-center">
               <p className="text-[#8B8A8E] font-bold text-sm sm:text-base">
                 Students
@@ -357,7 +357,7 @@ const TutorDetail = ({ tutorId }: Props) => {
               </div>
             </div>
 
-            {/* //////// */}
+            {/* ==================== */}
             <div className="flex flex-col items-center justify-center">
               <p className="text-[#8B8A8E] font-bold text-sm sm:text-base">
                 Lessons
@@ -395,7 +395,7 @@ const TutorDetail = ({ tutorId }: Props) => {
                     <p className="text-[#45444A] font-bold text-sm sm:text-base">
                       {course.courseTitle}
                     </p>
-                    {/* ////////teach///////////// */}
+                    {/* ====================teach==================== */}
                     <div className="flex gap-2 text-[#5C5A60]">
                       <Image
                         src={lessonIcon}
@@ -407,7 +407,7 @@ const TutorDetail = ({ tutorId }: Props) => {
                         <b>{course.lesson.length}</b> Lessons taught
                       </p>
                     </div>
-                    {/* ////////level///////////// */}
+                    {/* ====================level==================== */}
 
                     <div className="flex gap-2 text-[#5C5A60]">
                       <Image
@@ -422,7 +422,7 @@ const TutorDetail = ({ tutorId }: Props) => {
                     </div>
                   </div>
 
-                  {/* ////////price///////////// */}
+                  {/* ====================price==================== */}
                   <div className="flex gap-2 h-8 mt-3 sm:mt-0">
                     {course.price.map((price) => (
                       <div
@@ -441,7 +441,7 @@ const TutorDetail = ({ tutorId }: Props) => {
           </Layout>
         </div>
 
-        {/* ///////reviews/////////////////// */}
+        {/* ====================reviews==================== */}
 
         <div className="mt-10 ">
           <h4 className="text-xl text-[#45444A] font-bold">

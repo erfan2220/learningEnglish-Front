@@ -121,8 +121,8 @@ export const tutorMockDetail=[
                 descriptionExperience: "Developed English language curriculum for language institutes, collaborated with teaching staff, and incorporated modern teaching methodologies."
             }
             ],
-            coursesList:["cr1001", "cr1002"],
-            // coursesList:["cr1001", "cr1002","cr1003","cr1004","cr1005"],
+            // coursesList:["cr1001", "cr1002"],
+            coursesList:["cr1001", "cr1002","cr1003","cr1004","cr1005"],
             reviews:[
                 {
                     reviewId:1,

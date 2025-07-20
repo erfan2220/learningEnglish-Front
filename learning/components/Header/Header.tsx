@@ -32,16 +32,16 @@ const Header = () => {
       </div>
 
       <div className="flex items-center gap-3">
-        <Link href={"/cart"}>
+        {/* <Link href={"/cart"}>
           <div className="relative ">
             <Image src={cartIcon} alt="cart icon" width={32} height={32} />
             <div className="bg-[#5F33E1] rounded-full px-1 absolute top-0 right-0 text-white text-xs font-semibold">
               2
             </div>
           </div>
-        </Link>
+        </Link> */}
         <Link href={"/signin"}>
-          <div className="px-8 py-3 rounded-3xl bg-gradient-to-br from-[#5F33E1] to-[#5F33E1] via-[#F1ECFF] shadow-md hover:scale-[1.02] transition-all duration-300">
+          <div className="px-8 py-3 rounded-2xl border-2 border-[#D2D2D2] hover:bg-[#5F33E1] hover:text-white shadow-md hover:scale-[1.02] transition-all duration-200">
             Sign In
           </div>
         </Link>

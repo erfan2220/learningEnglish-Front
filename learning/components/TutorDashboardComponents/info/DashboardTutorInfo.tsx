@@ -330,7 +330,7 @@ const DashboardTutorInfo = () => {
                 introducing who you are, your teaching style, and what students
                 can expect from your lessons.
               </p>
-              <p className="my-4">
+              <div className="my-4">
                 Make sure:
                 <ul className="list-disc ml-6">
                   <li>Your face is clearly visible</li>
@@ -341,7 +341,7 @@ const DashboardTutorInfo = () => {
                     hear your accent and speaking style
                   </li>
                 </ul>
-              </p>
+              </div>
               <p>
                 This video helps students get to know you and feel more
                 comfortable booking a lesson!

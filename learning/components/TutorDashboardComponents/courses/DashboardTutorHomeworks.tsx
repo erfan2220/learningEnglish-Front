@@ -6,7 +6,7 @@ import Image from "next/image";
 import downloadIcon from "../../../assets/icons/download.svg";
 import uploadIcon from "../../../assets/icons/upload.svg";
 
-const DashboardStudentHomeworks = () => {
+const DashboardTutorHomeworks = () => {
   const { courseId } = useParams();
   const courseIdStr = Array.isArray(courseId) ? courseId[0] : courseId;
 
@@ -99,4 +99,4 @@ const DashboardStudentHomeworks = () => {
   );
 };
 
-export default DashboardStudentHomeworks;
+export default DashboardTutorHomeworks;
