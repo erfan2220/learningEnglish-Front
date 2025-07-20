@@ -18,7 +18,7 @@ import Button from "../Button/Button";
 const LandingPage = () => {
   return (
     <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto">
-      {/* ////////////////////////header section////////////////////// */}
+      {/* ====================header section==================== */}
 
       <div className="mt-[60px]">
         <Layout>
@@ -53,7 +53,7 @@ const LandingPage = () => {
         </Layout>
       </div>
 
-      {/* ////////////////////////language section////////////////////// */}
+      {/* ====================language section==================== */}
 
       <Layout>
         <div className="flex items-center justify-evenly p-1">
@@ -79,13 +79,13 @@ const LandingPage = () => {
         </div>
       </Layout>
 
-      {/* ////////////////////////tutor cart section////////////////////// */}
+      {/* ====================tutor cart section==================== */}
 
       <Layout>
         <Slide />
       </Layout>
 
-      {/* ////////////////////////"how it works" section////////////////////// */}
+      {/* ====================how it works" section==================== */}
 
       <div className="mt-10  md:px-0">
         <Layout>
@@ -114,21 +114,10 @@ const LandingPage = () => {
             picture={stepsData[2].image}
             flexRow={"row"}
           />
-
-          {/* {stepsData.map((step) => (
-            <TutorialStep
-              key={step.id}
-              stepNumber={step.number}
-              title={step.title}
-              detail={step.detail}
-              picture={step.image}
-              flexRow={"row"}
-            />
-          ))} */}
         </Layout>
       </div>
 
-      {/* ////////////////////////"become a tutor" section////////////////////// */}
+      {/* ====================become a tutor" section==================== */}
 
       <Layout>
         <div className="flex flex-col md:flex-row w-full px-[10%] py-6 items-center">

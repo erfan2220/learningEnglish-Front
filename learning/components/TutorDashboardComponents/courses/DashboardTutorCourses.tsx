@@ -2,12 +2,12 @@
 import React from "react";
 import arrowIcon from "../../../assets/icons/arrowBlue.svg";
 import { courseMockDetail } from "@/mock/courseMockData";
-import { studentDetail } from "@/mock/studentMockData";
 import Country from "@/components/Country/Country";
 import Image from "next/image";
 import Link from "next/link";
+import { tutorMockDetail } from "@/mock/tutorMockData";
 
-const DashboardStudentCourses = () => {
+const DashboardTutorCourses = () => {
   const personNumber = 0;
 
   return (
@@ -23,16 +23,16 @@ const DashboardStudentCourses = () => {
       </div>
 
       {/* Courses */}
-      {studentDetail[personNumber].coursesList.map((stuCourseId) => {
+      {tutorMockDetail[personNumber].coursesList.map((tutorCourseId) => {
         const course = courseMockDetail.find(
-          (course) => course.courseId === stuCourseId
+          (course) => course.courseId === tutorCourseId
         );
 
         if (!course) return null;
 
         return (
           <Link
-            href={`/dashboard/student/detail/courses/${course.courseId}`}
+            href={`/dashboard/tutor/detail/courses/${course.courseId}`}
             key={course.id}
             className="flex text-[#45444A] px-2 md:px-8 mt-4 text-sm justify-between sm:justify-start items-center w-full h-[60px] bg-white rounded-2xl shadow-md hover:shadow-xl"
           >
@@ -70,4 +70,4 @@ const DashboardStudentCourses = () => {
   );
 };
 
-export default DashboardStudentCourses;
+export default DashboardTutorCourses;

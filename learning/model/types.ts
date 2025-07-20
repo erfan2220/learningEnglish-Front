@@ -42,8 +42,10 @@ export type ButtonProps ={
   colorBtnBorder?: string;
   colorBtnHover?: string;
   colorBtnActive?: string; 
-  btnIcon?: StaticImageData;
+  btnIcon?: StaticImageData|null;
   marginTop?:string;
+  fontWeight?: 'regular' | 'bold' | 'medium'| 'semibold';
+  style?: React.CSSProperties;
   onclick?: () => void;
 }
 

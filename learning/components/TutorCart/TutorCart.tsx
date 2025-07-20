@@ -4,20 +4,21 @@ import Country from "../Country/Country";
 import Link from "next/link";
 import Button from "../Button/Button";
 import { Tutor } from "@/model/tutorType";
+import dynamic from "next/dynamic";
 
 interface TutorCartProps {
   tutorData: Tutor;
 }
 
 const TutorCart = ({ tutorData }: TutorCartProps) => {
+  const VideoPlayer = dynamic(() => import("../VideoPlayer/VideoPlayer"), {
+    ssr: false,
+  });
   return (
     <div className="bg-[#F1ECFE] rounded-2xl border-2 border-[#D2D2D2] shadow-md p-4">
       <div>
         <div className="w-full  mx-auto">
-          <video controls className="w-full rounded-lg shadow-md">
-            <source src={tutorData.introduceVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <VideoPlayer src={tutorData.introduceVideo} />
         </div>
         <div className="text-xl text-[#5C5A60] font-bold">
           {tutorData.tutorFirstName} {tutorData.tutorLastName}
@@ -39,12 +40,12 @@ const TutorCart = ({ tutorData }: TutorCartProps) => {
         </div>
         <div className="mt-6">
           <p className="font-semibold text-[#5C5A60] text-sm">Price</p>
-          <p className="font-bold text-lg text-[#45444A]">
+          <div className="font-bold text-lg text-[#45444A]">
             <p>
               {tutorData.pricePerHour[0].currency}{" "}
               {tutorData.pricePerHour[0].price}
             </p>
-          </p>
+          </div>
         </div>
 
         <Link href={`/tutor/detail/${tutorData.tutorId}`}>

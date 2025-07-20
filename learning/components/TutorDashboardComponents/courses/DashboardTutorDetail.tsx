@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import lessonIcon from "../../../assets/icons/learningD.svg";
 import homeworkIcon from "../../../assets/icons/homeworkD.svg";
-import DashboardStudentLessons from "./DashboardStudentLessons";
-import DashboardStudentHomeworks from "./DashboardStudentHomeworks";
+import DashboardTutorLessons from "./DashboardTutorLessons";
+import DashboardTutorHomeworks from "./DashboardTutorHomeworks";
 
-const DashboardStudentDetail = () => {
+const DashboardTutorDetail = () => {
   const [isActiveLesson, setIsActiveLesson] = useState(true);
   const [isActiveHomework, setIsActiveHomework] = useState(false);
   return (
@@ -65,11 +65,13 @@ const DashboardStudentDetail = () => {
 
       {/* ///////////////////////////////////////////////////////// */}
 
-      {isActiveLesson && <DashboardStudentLessons />}
+      {/* ///////////////////////////////////////////////////////// */}
 
-      {isActiveHomework && <DashboardStudentHomeworks />}
+      {isActiveLesson && <DashboardTutorLessons />}
+
+      {isActiveHomework && <DashboardTutorHomeworks />}
     </div>
   );
 };
 
-export default DashboardStudentDetail;
+export default DashboardTutorDetail;
