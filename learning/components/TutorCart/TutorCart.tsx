@@ -48,7 +48,7 @@ const TutorCart = ({ tutorData }: TutorCartProps) => {
         </div>
 
         <Link href={`/tutor/detail/${tutorData.tutorId}`}>
-          <Button type="button" label={"try now"} widthBtn="100%" />
+          <Button type="button" label={"book now"} widthBtn="100%" />
         </Link>
       </div>
     </div>
