@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import Image from "next/image";
-import cartIcon from "../../assets/icons/cart.svg";
+// import Image from "next/image";
+// import cartIcon from "../../assets/icons/cart.svg";
 
 const Header = () => {
   return (

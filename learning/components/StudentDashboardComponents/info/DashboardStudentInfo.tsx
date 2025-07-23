@@ -19,8 +19,8 @@ import Button from "@/components/Button/Button";
 const DashboardStudentInfo = () => {
   const [imagePreview, setImagePreview] = useState(profilePhoto);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
     if (!file) return;
 
     const imageURL = URL.createObjectURL(file);

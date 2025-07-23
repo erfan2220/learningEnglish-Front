@@ -12,8 +12,8 @@ const DashboardTutorHomeworks = () => {
 
   // const [uploadAnswer, setUploadAnswer] = useState("");
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
     if (!file) return;
 
     // const docURL = URL.createObjectURL(file);

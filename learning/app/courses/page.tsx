@@ -1,10 +1,12 @@
 import Courses from "@/components/Courses/Courses";
-import React from "react";
+import React, { Suspense } from "react";
 
 const CoursesPage = () => {
   return (
     <div>
-      <Courses />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Courses />
+      </Suspense>
     </div>
   );
 };

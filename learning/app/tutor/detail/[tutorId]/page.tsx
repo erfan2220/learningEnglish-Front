@@ -2,9 +2,9 @@ import TutorDetail from "@/components/TutorDetail/TutorDetail";
 import React from "react";
 
 interface Props {
-  params: {
+  params: Promise<{
     tutorId: string;
-  };
+  }>;
 }
 const TutorDetailPage = async ({ params }: Props) => {
   const { tutorId } = await params;

@@ -65,15 +65,9 @@ export type TutorTypeTemporary = {
   id: number;
   user: number;
   profile_picture: string;
-  languages_spoken: languagesSpokenTemporary[]
+  languages_spoken: Record<string, string>;
+
 };
-
-export type languagesSpokenTemporary= {
-     English:string;
-     Spanish:string;
-  };
-
-
 
 export type CourseTypeTemporary = {
   id: number;
@@ -86,6 +80,6 @@ export type CourseTypeTemporary = {
   schedule_start: string;
   schedule_end: string;
   capacity: number;
-  lessons: any[];
+  lessons: string[];
   tutor: TutorTypeTemporary;
 };

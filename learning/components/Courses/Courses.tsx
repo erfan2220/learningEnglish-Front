@@ -11,6 +11,7 @@ import SelectPrice from "./SelectPrice";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import axiosInstance from "@/APIs/axiosInstance";
+import { CourseTypeTemporary } from "@/model/courseType";
 
 const Courses = () => {
   const searchParam = useSearchParams();
@@ -19,7 +20,7 @@ const Courses = () => {
   const firstIndex = (CurrentPage - 1) * ppg;
   const endIndex = firstIndex + 3;
 
-  const [courses, setCourses] = useState<any[]>([]);
+  const [courses, setCourses] = useState<CourseTypeTemporary[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

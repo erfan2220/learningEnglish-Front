@@ -12,13 +12,14 @@ const SelectPrice = () => {
   >("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
-        !(dropdownRef.current as any).contains(event.target)
+        event.target instanceof Node &&
+        !dropdownRef.current.contains(event.target)
       ) {
         setIsOpen(false);
       }

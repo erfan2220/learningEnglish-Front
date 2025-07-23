@@ -11,7 +11,9 @@ const Country = ({
 }: CountryComponent) => {
   return (
     <div className="flex gap-2 items-center">
-      <Image src={flag} alt="french flag" width={width} height={width} />
+      {flag && (
+        <Image src={flag} alt="french flag" width={width} height={width} />
+      )}
       <p
         className="text-[#5C5A60] font-bold "
         style={{ fontSize: `${textSize}`, fontWeight: `${fontWeight}` }}

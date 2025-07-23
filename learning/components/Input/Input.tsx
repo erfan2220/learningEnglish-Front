@@ -31,8 +31,8 @@ const Inputs: React.FC<InputsProps> = ({
           onChange={onchange}
         />
         {inputIcon && (
-          <div className="absolute top-[12px] left-4 cursor-pointer">
-            <Image src={inputIcon} alt="input icon" width={20} height={20} />
+          <div className="absolute top-[12px] left-3 cursor-pointer">
+            <Image src={inputIcon} alt="input icon" width={22} height={22} />
           </div>
         )}
         {icon1 && icon2 && (

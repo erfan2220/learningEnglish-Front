@@ -18,7 +18,9 @@ const DashboardStudentMessagesInbox = ({
   secondData,
 }: DashboardStudentMessagesInboxProps) => {
   const personNumber = 0;
-  const [selectedMessageId, setSelectedMessageId] = useState(null);
+  const [selectedMessageId, setSelectedMessageId] = useState<number | null>(
+    null
+  );
   const [isReplyOpen, setIsReplyOpen] = useState(false);
 
   return (

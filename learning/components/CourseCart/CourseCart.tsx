@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Course, CourseTypeTemporary } from "@/model/courseType";
+import { CourseTypeTemporary } from "@/model/courseType";
 import coursePicture from "../../assets/images/coursePicture.svg";
 
 const CourseCart = ({ course }: { course: CourseTypeTemporary }) => {
