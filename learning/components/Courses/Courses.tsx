@@ -10,8 +10,8 @@ import CourseCart from "../CourseCart/CourseCart";
 import SelectPrice from "./SelectPrice";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import axiosInstance from "@/APIs/axiosInstance";
-import { CourseTypeTemporary } from "@/model/courseType";
+import { TemporaryCourse } from "@/model/courseType";
+import axios from "axios";
 
 const Courses = () => {
   const searchParam = useSearchParams();
@@ -20,17 +20,19 @@ const Courses = () => {
   const firstIndex = (CurrentPage - 1) * ppg;
   const endIndex = firstIndex + 3;
 
-  const [courses, setCourses] = useState<CourseTypeTemporary[]>([]);
+  const [courses, setCourses] = useState<TemporaryCourse[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axiosInstance.get("/api/courses/");
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/courses/`
+        );
         setCourses(res.data);
-        console.log("courses from backend", res.data);
+        console.log("Fetched courses:", res.data);
       } catch (error) {
-        console.error("fetching error", error);
+        console.error("Fetching courses failed:", error);
       } finally {
         setLoading(false);
       }
@@ -102,7 +104,7 @@ const Courses = () => {
 
         {CurrentPage < Math.ceil(courses.length / ppg) && (
           <Link href={`?page=${CurrentPage + 1}`}>
-            <div className="bg-[#5F33E1] text-white text-lg font-bold rounded-full px-2 pb-1 mx-3">
+            <div className="bg-[#5F33E1] text-white text-lg font-bold rounded-xl px-2 pb-1 mx-3">
               {">"}
             </div>
           </Link>

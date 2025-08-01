@@ -9,11 +9,13 @@ import peopleIcon from "../../assets/icons/people.svg";
 import languageIcon from "../../assets/icons/languagePurple.svg";
 import Button from "../Button/Button";
 import axiosInstance from "@/APIs/axiosInstance";
-import { CourseTypeTemporary } from "@/model/courseType";
+import { TemporaryCourse } from "@/model/courseType";
 import profilePhoto from "../../assets/icons/profilePhoto.svg";
+import dayIcon from "../../assets/icons/dayPink.svg";
+import timeIcon from "../../assets/icons/length.svg";
 
 const CourseDetail = ({ courseId }: { courseId: number }) => {
-  const [course, setCourse] = useState<CourseTypeTemporary | null>(null);
+  const [course, setCourse] = useState<TemporaryCourse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -63,19 +65,19 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
   }
 
   // Helper function to get day name from day number
-  const getDayName = (dayNumber: string) => {
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const dayIndex = parseInt(dayNumber) % 7;
-    return days[dayIndex];
-  };
+  // const getDayName = (dayNumber: string) => {
+  //   const days = [
+  //     "Sunday",
+  //     "Monday",
+  //     "Tuesday",
+  //     "Wednesday",
+  //     "Thursday",
+  //     "Friday",
+  //     "Saturday",
+  //   ];
+  //   const dayIndex = parseInt(dayNumber) % 7;
+  //   return days[dayIndex];
+  // };
 
   // Format time to HH:MM format
   const formatTime = (timeString: string) => {
@@ -93,9 +95,10 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
             </h1>
 
             {/* Info */}
-            <div className="flex flex-wrap my-4 gap-3 text-[#45444A] font-bold text-sm">
+            <div className="flex flex-wrap my-4 gap-3 text-[#45444A] font-bold text-xs sm:text-sm">
               <div className="px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
                 <Country
+                  flag={course.language_flag}
                   countryName={course.language}
                   fontWeight={"semibold"}
                   textSize="14px"
@@ -103,8 +106,8 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
                 />
               </div>
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                <Image src={clockIcon} alt="time icon" width={22} height={22} />
-                <p>100 mins</p>
+                <Image src={timeIcon} alt="time icon" width={22} height={22} />
+                <p>{course.length} mins</p>
               </div>
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
                 <Image
@@ -124,9 +127,20 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
                 />
                 <p>{course.capacity} spots / class</p>
               </div>
+
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
+                <Image src={dayIcon} alt="day icon" width={22} height={22} />
+                <p>{course.schedule_day}</p>
+              </div>
+
+              <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
+                <Image
+                  src={clockIcon}
+                  alt="clock icon"
+                  width={22}
+                  height={22}
+                />
                 <p>
-                  {getDayName(course.schedule_day)}{" "}
                   {formatTime(course.schedule_start)}-
                   {formatTime(course.schedule_end)}
                 </p>
@@ -142,13 +156,13 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
             {/* Course Requirements */}
             <div className="my-8 text-[#45444A]">
               <h4 className="font-bold">Course Requirements</h4>
-              <p className="text-[#737177]">No special requirements</p>
+              <p className="text-[#737177]">{course.requirements}</p>
             </div>
 
             {/* Course Materials */}
             <div className="my-8 text-[#45444A]">
               <h4 className="font-bold">Course Materials</h4>
-              <p className="text-[#737177]">All materials will be provided</p>
+              <p className="text-[#737177]">{course.materials}</p>
             </div>
 
             {/* Course Length */}
@@ -191,7 +205,7 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
                 height={22}
               />
               <p className="font-semibold">
-                <b>12</b> Active Students
+                <b>{course.active_students}</b> Active Students
               </p>
             </div>
 
@@ -205,21 +219,14 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
               />
               <div className="font-semibold flex flex-wrap gap-6">
                 Speaks{" "}
-                {Object.entries(course.tutor?.languages_spoken || {}).map(
-                  ([language, level]) => (
-                    <div key={language} className="flex items-center">
-                      <Country
-                        countryName={language}
-                        fontWeight="semibold"
-                        textSize="13px"
-                        width={22}
-                      />
-                      <span className="text-xs text-gray-500 ml-1">
-                        ({level})
-                      </span>
-                    </div>
-                  )
-                )}
+                {course.tutor.languages_spoken.map((Language, index) => (
+                  <div key={index}>
+                    <p>
+                      {Language}
+                      {"  "}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -236,7 +243,7 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
         {/* Fixed Bottom Bar */}
         <div className="fixed left-0 right-0 bottom-0 z-40 flex justify-between border-[#737177] px-3 sm:px-10 md:px-28 items-center h-16 bg-[#CB71FF90] backdrop-blur-sm shadow-[-5px_-3px_15px_rgba(0,0,0,0.2)]">
           <p className="font-bold text-[#45444A]">
-            USD {course.price_per_hour} / hour
+            USD {course.price_per_dollar} / hour
           </p>
           <Button label="Start Course" type="button" marginTop="0" />
         </div>

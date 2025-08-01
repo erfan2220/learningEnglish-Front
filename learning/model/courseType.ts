@@ -60,26 +60,34 @@ export type CourseList = Course[];
 
 
 //////////////////////////////////////////////////////////////////////////
-
-export type TutorTypeTemporary = {
+export interface TemporaryTutor {
   id: number;
   user: number;
-  profile_picture: string;
-  languages_spoken: Record<string, string>;
+  profile_picture: string | null;
+  languages_spoken: string[];
+}
 
-};
-
-export type CourseTypeTemporary = {
+export interface TemporaryCourse {
   id: number;
+  courseId: string;
   title: string;
   description: string;
   price_per_hour: string;
+  price_per_dollar: string;
+  price_per_toman: string;
   language: string;
   level: string;
   schedule_day: string;
   schedule_start: string;
   schedule_end: string;
   capacity: number;
-  lessons: string[];
-  tutor: TutorTypeTemporary;
-};
+  active_students: number;
+  length: number;
+  detail: string;
+  requirements: string;
+  materials: string;
+  lessons: string[]; 
+  tutor: TemporaryTutor;
+  image: string;
+  language_flag: string;
+}

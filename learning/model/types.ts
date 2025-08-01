@@ -65,7 +65,7 @@ export type InputsProps ={
 }
 
 export type CountryComponent={
-  flag?:StaticImageData;
+  flag?:StaticImageData|string;
   countryName:string;
   width:number;
   textSize:string;
