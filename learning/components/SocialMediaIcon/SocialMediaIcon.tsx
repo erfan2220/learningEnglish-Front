@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import Image from "next/image";
 import { SocialMediaIconType } from "@/model/types";
 
 const SocialMediaIcon = ({ socialIcon, address }: SocialMediaIconType) => {
   return (
     <Link href={address}>
-      <Image src={socialIcon} alt="" width={32} height={32} />
+      <img src={socialIcon} alt="" className="w-8 h-8" />
+      {/* <Image src={socialIcon} alt="" width={32} height={32} /> */}
     </Link>
   );
 };

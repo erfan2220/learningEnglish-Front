@@ -3,11 +3,10 @@
 import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
-import Image from "next/image";
-import arrowDown from "../../../assets/icons/arrowDownD.svg";
-import arrowUp from "../../../assets/icons/arrowUpD.svg";
-import deleteIcon from "../../../assets/icons/deleteRed.svg";
-import addIcon from "../../../assets/icons/addWhite.svg";
+// import arrowDown from "./../../../assets/icons/arrowDownD.svg";
+// import arrowUp from "./../../../assets/icons/arrowUpD.svg";
+// import deleteIcon from "./../../../assets/icons/deleteRed.svg";
+// import addIcon from "./../../../assets/icons/addWhite.svg";
 import Button from "@/components/Button/Button";
 import DeletePopup from "./DeletePopup";
 import AddLessonPopUp from "./AddLessonPopUp";
@@ -82,27 +81,43 @@ const DashboardTutorLessons = () => {
                             className="w-full hover:cursor-pointer"
                             onClick={() => handleDeleteLesson(lesson.lessonId)}
                           >
-                            <Image
+                            <img
+                              src={"/icons/deleteRed.svg"}
+                              alt="delete"
+                              className="w-6 h-6"
+                            />
+                            {/* <Image
                               src={deleteIcon}
                               alt="delete"
                               width={24}
                               height={24}
-                            />
+                            /> */}
                           </div>
                           {openLessonId === lesson.lessonId ? (
-                            <Image
-                              src={arrowUp}
-                              alt="arrow"
-                              width={24}
-                              height={24}
+                            <img
+                              src={"/icons/arrowUpD.svg"}
+                              alt="arrowUp"
+                              className="w-6 h-6"
                             />
                           ) : (
-                            <Image
-                              src={arrowDown}
-                              alt="arrow"
-                              width={24}
-                              height={24}
+                            // <Image
+                            //   src={arrowUp}
+                            //   alt="arrow"
+                            //   width={24}
+                            //   height={24}
+                            // />
+                            <img
+                              src={"/icons/arrowDownD.svg"}
+                              alt="arrowDown"
+                              className="w-6 h-6"
                             />
+
+                            // <Image
+                            //   src={arrowDown}
+                            //   alt="arrow"
+                            //   width={24}
+                            //   height={24}
+                            // />
                           )}
                         </div>
                       </div>
@@ -153,7 +168,7 @@ const DashboardTutorLessons = () => {
           label="+ Add Lesson"
           type="button"
           colorBtnBorder="#5F33E1"
-          btnIcon={addIcon}
+          btnIcon={"/icons/addWhite.svg"}
           onclick={handleShowPopUp}
         />
       </div>

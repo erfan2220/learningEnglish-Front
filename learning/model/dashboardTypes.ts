@@ -1,7 +1,7 @@
-import { StaticImageData } from "next/image"
+// import { StaticImageData } from "next/image"
 
 export type DashboardMenuTypes ={
-    icon:StaticImageData;
+    icon:string;
     title:string;
     role:string;
     topic:string;

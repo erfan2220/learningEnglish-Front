@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
-import arrowIcon from "../../../assets/icons/arrowBlue.svg";
+// import arrowIcon from "./../../../assets/icons/arrowBlue.svg";
 import { courseMockDetail } from "@/mock/courseMockData";
 import { studentDetail } from "@/mock/studentMockData";
 import Country from "@/components/Country/Country";
-import Image from "next/image";
 import Link from "next/link";
 
 const DashboardStudentCourses = () => {
@@ -55,12 +54,17 @@ const DashboardStudentCourses = () => {
                 {course.courseDay}
               </p>
               <div>
-                <Image
+                <img
+                  src={"/icons/arrowBlue.svg"}
+                  alt="arrow icon"
+                  className="w-6 h-6"
+                />
+                {/* <Image
                   src={arrowIcon}
                   alt="arrow icon"
                   width={24}
                   height={24}
-                />
+                /> */}
               </div>
             </div>
           </Link>

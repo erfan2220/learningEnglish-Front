@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import levelIcon from "../../assets/icons/levelIconGray.svg";
-import arrowIcon from "../../assets/icons/arrowDown.svg";
+// import levelIcon from "./../../assets/icons/levelIconGray.svg";
+// import arrowIcon from "./../../assets/icons/arrowDown.svg";
 import Inputs from "../Input/Input";
 
 const SelectPrice = () => {
@@ -42,10 +41,22 @@ const SelectPrice = () => {
       </button>
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <Image src={levelIcon} alt="icon" width={24} height={24} />
+        <img
+          src={"/icons/levelIconGray.svg"}
+          alt="level icon"
+          className="w-6 h-6"
+        />
+
+        {/* <Image src={levelIcon} alt="icon" width={24} height={24} /> */}
       </div>
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
+        <img
+          src={"/icons/arrowDown.svg"}
+          alt="arrow icon"
+          className="w-6 h-6"
+        />
+
+        {/* <Image src={arrowIcon} alt="arrow icon" width={24} height={24} /> */}
       </div>
 
       {isOpen && (

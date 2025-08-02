@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Inputs from "../Input/Input";
-import searchIcon from "../../assets/icons/searchIconGray.svg";
+// import searchIcon from "./../../assets/icons/searchIconGray.svg";
 import SelectLanguage from "./SelectLanguage";
 import SelectLevel from "./SelectLevel";
 import SelectTime from "./SelectTime";
@@ -55,7 +55,7 @@ const Courses = () => {
             <Inputs
               type="text"
               placeholder={"search course"}
-              inputIcon={searchIcon}
+              inputIcon={"/icons/searchIconGray.svg"}
               width="100%"
             />
           </div>

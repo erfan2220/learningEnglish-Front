@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import homeIcon from "../../assets/icons/homeIcon.svg";
-import courseIcon from "../../assets/icons/course.svg";
-import favoriteIcon from "../../assets/icons/heartFill.svg";
+// import homeIcon from "./../../assets/icons/homeIcon.svg";
+// import courseIcon from "./../../assets/icons/course.svg";
+// import favoriteIcon from "./../../assets/icons/heartFill.svg";
 
-import signoutIcon from "../../assets/icons/signout.svg";
+// import signoutIcon from "./../../assets/icons/signout.svg";
 import DashboardMenuItems from "../DashboardMenuItems/DashboardMenuItems";
 import MenuItemMessages from "../menuItemMessages/MenuItemMessages";
 
@@ -29,7 +29,7 @@ const StudentDashboard = ({ children }: StudentDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"info"}
-            icon={homeIcon}
+            icon={"/icons/homeIcon.svg"}
             title={"Dashboard"}
             width={"100%"}
           />
@@ -37,7 +37,7 @@ const StudentDashboard = ({ children }: StudentDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"courses"}
-            icon={courseIcon}
+            icon={"/icons/course.svg"}
             title={"Courses"}
             width={"100%"}
           />
@@ -45,7 +45,7 @@ const StudentDashboard = ({ children }: StudentDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"favoriteTutors"}
-            icon={favoriteIcon}
+            icon={"/icons/heartFill.svg"}
             title={"Favorites"}
             width={"100%"}
           />
@@ -55,7 +55,7 @@ const StudentDashboard = ({ children }: StudentDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"signOut"}
-            icon={signoutIcon}
+            icon={"/icons/signout.svg"}
             title={"Sign Out"}
             width={"100%"}
           />

@@ -1,14 +1,15 @@
-import iranFlag from "../assets/icons/irFlag.svg"
-import tutorPhoto from "../assets/icons/tutorPhoto.svg";
-import ukFlag from "../assets/icons/ukFlag.svg"
-import franceFlag from "../assets/icons/frenchFlag.svg"
-import certificationPic from '../assets/images/cert1.png'
+
+// import iranFlag from "./../assets"
+// import tutorPhoto from "./../assets/icons/tutorPhoto.svg";
+// import ukFlag from "./../assets/icons/ukFlag.svg"
+// import franceFlag from "./../assets/icons/frenchFlag.svg"
+// import certificationPic from './../assets/images/cert1.png'
 
 export const tutorMockDetail=[
     {
         id:1,
         tutorId:"pt1001",
-        tutorPhoto:tutorPhoto,
+        tutorPhoto:'/icons/tutorPhoto.svg',
         role:"Professional Teacher",
         tutorFirstName:"Charlotte",
         tutorLastName:"Watson",
@@ -36,14 +37,14 @@ export const tutorMockDetail=[
                 certificationTitle:"TEFL Certified",
                 certificationIssueDate:"2025-01-15",
                 certificationIssuer:"International TEFL Academy",
-                certificationPicture:certificationPic,
+                certificationPicture:'/images/cert1.png',
             },
             {
                 certificationId:2,
                 certificationTitle:"CELTA Certified",
                 certificationIssueDate:"2024-06-20",
                 certificationIssuer:"Cambridge Assessment English",
-                certificationPicture:certificationPic,
+                certificationPicture:'/images/cert1.png',
 
             },
             {
@@ -51,7 +52,7 @@ export const tutorMockDetail=[
                 certificationTitle: "DELF B2 Certified",
                 certificationIssueDate: "2024-11-15",
                 certificationIssuer: "France Education International",
-                certificationPicture:certificationPic,
+                certificationPicture:'/images/cert1.png',
 
 
             }
@@ -83,14 +84,14 @@ export const tutorMockDetail=[
             {
                 languageId:1,
                 language:"English",
-                flag:ukFlag,
+                flag:'/icons/ukFlag.svg',
                 level:"native"
             },
 
             {
                 languageId:2,
                 language:"French",
-                flag:franceFlag,
+                flag:'/icons/frenchFlag.svg',
                 level:"B1"
             },
         ],
@@ -180,7 +181,7 @@ export const tutorMockDetail=[
     {
     id: 2,
     tutorId: "pt1002",
-    tutorPhoto: tutorPhoto,
+    tutorPhoto: '/icons/tutorPhoto.svg',
     role: "Professional Teacher",
     tutorFirstName: "Emily",
     tutorLastName: "Johnson",
@@ -207,7 +208,7 @@ export const tutorMockDetail=[
         certificationTitle: "TEFL Certified",
         certificationIssueDate: "2023-05-10",
         certificationIssuer: "International TEFL Academy",
-        certificationPicture:certificationPic,
+        certificationPicture:'/images/cert1.png',
 
       },
     ],
@@ -237,7 +238,7 @@ export const tutorMockDetail=[
       {
         languageId: 1,
         language: "English",
-        flag: ukFlag,
+        flag: '/icons/ukFlag.svg',
         level:"native"
       },
     ],
@@ -322,7 +323,7 @@ export const tutorMockDetail=[
   {
     id: 3,
     tutorId: "pt1003",
-    tutorPhoto: tutorPhoto,
+    tutorPhoto: '/icons/tutorPhoto.svg',
     role: "Professional Teacher",
     tutorFirstName: "Liam",
     tutorLastName: "Smith",
@@ -349,14 +350,14 @@ export const tutorMockDetail=[
         certificationTitle: "DALF C1 Certified",
         certificationIssueDate: "2023-03-15",
         certificationIssuer: "France Éducation International",
-        certificationPicture:certificationPic,
+        certificationPicture:'/images/cert1.png',
       },
       {
         certificationId: 2,
         certificationTitle: "TESOL",
         certificationIssueDate: "2022-07-20",
         certificationIssuer: "TESOL International Association",
-        certificationPicture:certificationPic,
+        certificationPicture:'/images/cert1.png',
       }
     ],
     education: [
@@ -385,13 +386,13 @@ export const tutorMockDetail=[
       {
         languageId: 1,
         language: "French",
-        flag: franceFlag,
+        flag: '/icons/frenchFlag.svg',
         level:"native"
       },
       {
         languageId: 2,
         language: "English",
-        flag: ukFlag,
+        flag: '/icons/ukFlag.svg',
         level:"B2"
       }
     ],
@@ -482,7 +483,7 @@ export const tutorMockDetail=[
   {
   id: 4,
   tutorId: "pt1004",
-  tutorPhoto: tutorPhoto,
+  tutorPhoto: '/icons/tutorPhoto.svg',
   role: "Professional Teacher",
   tutorFirstName: "Parisa",
   tutorLastName: "Rahnama",
@@ -509,7 +510,7 @@ export const tutorMockDetail=[
       certificationTitle: "Advanced Persian Teaching Certificate",
       certificationIssueDate: "2021-11-20",
       certificationIssuer: "Tehran Language Institute",
-      certificationPicture: certificationPic
+      certificationPicture: '/images/cert1.png'
     }
   ],
   education: [
@@ -538,13 +539,13 @@ export const tutorMockDetail=[
     {
       languageId: 1,
       language: "Persian",
-      flag: iranFlag,
+      flag: '/icons/irFlag.svg',
       level:"native"
     },
     {
       languageId: 2,
       language: "English",
-      flag: ukFlag,
+      flag: '/icons/ukFlag.svg',
       level:"C1"
     }
   ],
@@ -608,7 +609,7 @@ export const tutorMockDetail=[
 {
   id: 5,
   tutorId: "pt1005",
-  tutorPhoto: tutorPhoto,
+  tutorPhoto: '/icons/tutorPhoto.svg',
   role: "Certified English Teacher",
   tutorFirstName: "Michael",
   tutorLastName: "Anderson",
@@ -635,14 +636,14 @@ export const tutorMockDetail=[
       certificationTitle: "CELTA (Certificate in Teaching English to Speakers of Other Languages)",
       certificationIssueDate: "2020-04-15",
       certificationIssuer: "University of Cambridge",
-      certificationPicture: certificationPic
+      certificationPicture: '/images/cert1.png'
     },
     {
       certificationId: 2,
       certificationTitle: "TESOL",
       certificationIssueDate: "2019-08-01",
       certificationIssuer: "TESOL International Association",
-      certificationPicture: certificationPic
+      certificationPicture: '/images/cert1.png'
     }
   ],
   education: [
@@ -671,13 +672,13 @@ export const tutorMockDetail=[
     {
       languageId: 1,
       language: "English",
-      flag: ukFlag,
+      flag: '/icons/ukFlag.svg',
       level: "native"
     },
     {
       languageId: 2,
       language: "French",
-      flag: franceFlag,
+      flag: '/icons/frenchFlag.svg',
       level: "B2"
     }
   ],

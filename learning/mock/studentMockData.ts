@@ -1,4 +1,4 @@
-import studentPhoto from "../assets/icons/tutorPhoto.svg";
+// import studentPhoto from "./../assets/icons/tutorPhoto.svg";
 
 export const studentDetail=[
     {
@@ -7,7 +7,7 @@ export const studentDetail=[
         studentFirstName:"John",
         studentLastName:"Doe",
         studentEmail:"john@gmail.com",
-        studentPhoto:studentPhoto,
+        studentPhoto:'/icons/tutorPhoto.svg',
         studentCountry:"USA",
         studentPhoneNumber:"+1234567890",
         studentLastDegree:"Bachelor's Degree",
@@ -97,7 +97,7 @@ export const studentDetail=[
     studentFirstName: "Emily",
     studentLastName: "Smith",
     studentEmail: "emilysmith@example.com",
-    studentPhoto: studentPhoto,
+    studentPhoto: '/icons/tutorPhoto.svg',
     studentCountry: "UK",
     studentPhoneNumber: "+447912345678",
     studentLastDegree: "Master's Degree",
@@ -173,7 +173,7 @@ export const studentDetail=[
     studentFirstName: "Sofia",
     studentLastName: "Martinez",
     studentEmail: "sofia.martinez@example.com",
-    studentPhoto: studentPhoto,
+    studentPhoto: '/icons/tutorPhoto.svg',
     studentCountry: "Spain",
     studentPhoneNumber: "+34911222333",
     studentLastDegree: "Bachelor's Degree",
@@ -258,7 +258,7 @@ export const studentDetail=[
     studentFirstName: "Noah",
     studentLastName: "Kim",
     studentEmail: "noah.kim@example.com",
-    studentPhoto: studentPhoto,
+    studentPhoto: '/icons/tutorPhoto.svg',
     studentCountry: "South Korea",
     studentPhoneNumber: "+821012345678",
     studentLastDegree: "Bachelor's Degree",
@@ -332,7 +332,7 @@ export const studentDetail=[
     studentFirstName: "Ava",
     studentLastName: "Müller",
     studentEmail: "ava.mueller@example.com",
-    studentPhoto: studentPhoto,
+    studentPhoto: '/icons/tutorPhoto.svg',
     studentCountry: "Germany",
     studentPhoneNumber: "+4915123456789",
     studentLastDegree: "Master's Degree",
@@ -418,7 +418,7 @@ export const studentDetail=[
     studentFirstName: "Yuki",
     studentLastName: "Tanaka",
     studentEmail: "yuki.tanaka@example.jp",
-    studentPhoto: studentPhoto,
+    studentPhoto: '/icons/tutorPhoto.svg',
     studentCountry: "Japan",
     studentPhoneNumber: "+819012345678",
     studentLastDegree: "Bachelor's Degree",
@@ -481,7 +481,7 @@ export const studentDetail=[
   studentFirstName: "Carlos",
   studentLastName: "Ramírez",
   studentEmail: "carlos.ramirez@example.mx",
-  studentPhoto: studentPhoto,
+  studentPhoto: '/icons/tutorPhoto.svg',
   studentCountry: "Mexico",
   studentPhoneNumber: "+525512345678",
   studentLastDegree: "Bachelor's Degree",

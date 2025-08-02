@@ -1,14 +1,14 @@
 import React from "react";
 import Link from "next/link";
-import homeIcon from "../../assets/icons/homeIcon.svg";
-import certIcon from "../../assets/icons/certGray.svg";
-import educationIcon from "../../assets/icons/educationGrayD.svg";
-import descriptionIcon from "../../assets/icons/descriptionGray.svg";
-import addIcon from "../../assets/icons/addGray.svg";
-import courseIcon from "../../assets/icons/course.svg";
-import signoutIcon from "../../assets/icons/signout.svg";
+// import homeIcon from "./../../assets/icons/homeIcon.svg";
+// import certIcon from "./../../assets/icons/certGray.svg";
+// import educationIcon from "./../../assets/icons/educationGrayD.svg";
+// import descriptionIcon from "./../../assets/icons/descriptionGray.svg";
+// import addIcon from "./../../assets/icons/addGray.svg";
+// import courseIcon from "./../../assets/icons/course.svg";
+// import signoutIcon from "./../../assets/icons/signout.svg";
 import DashboardMenuItems from "../DashboardMenuItems/DashboardMenuItems";
-import MenuItemMessages from "../menuItemMessages/MenuItemMessages";
+import MenuItemMessages from "./../menuItemMessages/MenuItemMessages";
 
 interface TutorDashboardProps {
   children: React.ReactNode;
@@ -31,7 +31,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"info"}
-            icon={homeIcon}
+            icon={"/icons/homeIcon.svg"}
             title={"Dashboard"}
             width={"100%"}
           />
@@ -39,7 +39,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"certification"}
-            icon={certIcon}
+            icon={"/icons/certGray.svg"}
             title={"Certification"}
             width={"100%"}
           />
@@ -47,7 +47,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"education"}
-            icon={educationIcon}
+            icon={"/icons/educationGrayD.svg"}
             title={"Education"}
             width={"100%"}
           />
@@ -55,7 +55,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"description"}
-            icon={descriptionIcon}
+            icon={"/icons/descriptionGray.svg"}
             title={"Description"}
             width={"100%"}
           />
@@ -63,7 +63,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"addCourse"}
-            icon={addIcon}
+            icon={"/icons/addGray.svg"}
             title={"Add Course"}
             width={"100%"}
           />
@@ -71,7 +71,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"courses"}
-            icon={courseIcon}
+            icon={"/icons/course.svg"}
             title={"Courses"}
             width={"100%"}
           />
@@ -81,7 +81,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
           <DashboardMenuItems
             role={role}
             topic={"signOut"}
-            icon={signoutIcon}
+            icon={"/icons/signout.svg"}
             title={"Sign Out"}
             width={"100%"}
           />

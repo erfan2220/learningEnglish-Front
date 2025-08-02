@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { TemporaryCourse } from "@/model/courseType";
 
@@ -8,13 +7,18 @@ const CourseCart = ({ course }: { course: TemporaryCourse }) => {
     <Link href={`/courses/detail/${course.id}`}>
       <div className="relative pb-4 px-4 border-2 border-[#D2D2D2] bg-white/70 rounded-2xl shadow-md hover:shadow-2xl hover:scale-[1.02]  transition-all duration-400">
         <div className="my-4 ">
-          <Image
+          <img
+            src={course.image}
+            alt="course pic"
+            style={{ width: "100%", height: "200px" }}
+          />
+          {/* <Image
             src={course.image}
             alt="course pic"
             width={100}
             height={100}
             style={{ width: "100%", height: "200px" }}
-          />
+          /> */}
         </div>
         <div className="bg-[#FFC3CD] rounded-3xl inline px-6 py-1 absolute top-4 left-4">
           {course.level}

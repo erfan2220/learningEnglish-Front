@@ -1,8 +1,8 @@
-import tutorPhoto from "../assets/icons/tutorPhoto.svg";
-import ukFlag from "../assets/icons/ukFlag.svg"
-import franceFlag from "../assets/icons/frenchFlag.svg"
-import coursePicture from "../assets/images/coursePicture.svg";
-import iranFlag from "../assets/icons/irFlag.svg"
+// import tutorPhoto from "./../assets/icons/tutorPhoto.svg";
+// import ukFlag from "./../assets/icons/ukFlag.svg"
+// import franceFlag from "./../assets/icons/frenchFlag.svg"
+// import coursePicture from "./../assets/images/coursePicture.svg";
+// import iranFlag from "./../assets/icons/irFlag.svg"
 
 
 export const courseMockDetail=[
@@ -13,19 +13,19 @@ export const courseMockDetail=[
         tutorId:"pt1001",
         tutorFirstName:"Charlotte",
         tutorLastName:"Watson",
-        tutorPhoto:tutorPhoto,
+        tutorPhoto:'/icons/tutorPhoto.svg',
         activeStudents:2,
         tutorSpeak:[
             {
                 languageId:1,
                 languageName:"English",
-                languageFlag:ukFlag,
+                languageFlag:'/icons/ukFlag.svg',
                 level:"native"
             },
             {
                 languageId:2,
                 languageName:"French",
-                languageFlag:franceFlag,
+                languageFlag:'/icons/frenchFlag.svg',
                 level:"B1"
             }
         ],
@@ -47,9 +47,9 @@ export const courseMockDetail=[
         courseTimeStart:10,
         courseTimeEnd:11,
         courseLanguage:"English",
-        courseLanguageFlag:ukFlag,
+        courseLanguageFlag:'/icons/ukFlag.svg',
         courseLength:180, //lessons
-        coursePicture:coursePicture,
+        coursePicture:'/images/coursePicture.svg',
         courseDescription:"This is a fun and interactive course designed to help you improve your English speaking skills while having a great time. Join us for engaging activities, discussions, and games that will boost your confidence and fluency in English.",
         courseDetail:"In this course, you will participate in various speaking activities, including role-plays, discussions, and games. The focus will be on improving your fluency and confidence in speaking English. You will also have the opportunity to practice your pronunciation and expand your vocabulary through fun and engaging exercises.",
         courseCapacity:20,
@@ -118,19 +118,19 @@ export const courseMockDetail=[
         tutorId:"pt1001",
         tutorFirstName:"Charlotte",
         tutorLastName:"Watson",
-        tutorPhoto:tutorPhoto,
+        tutorPhoto:'/icons/tutorPhoto.svg',
         activeStudents:2,
         tutorSpeak:[
             {
                 languageId:1,
                 languageName:"English",
-                languageFlag:ukFlag,
+                languageFlag:'/icons/ukFlag.svg',
                 level:"native"
             },
             {
                 languageId:2,
                 languageName:"French",
-                languageFlag:franceFlag,
+                languageFlag:'/icons/frenchFlag.svg',
                 level:"B1"
             }
         ],
@@ -152,9 +152,9 @@ export const courseMockDetail=[
         courseTimeStart:10,
         courseTimeEnd:11,
         courseLanguage:"English",
-        courseLanguageFlag:ukFlag,
+        courseLanguageFlag:'/icons/ukFlag.svg',
         courseLength:180, //lessons
-        coursePicture:coursePicture,
+        coursePicture:'/images/coursePicture.svg',
         courseDescription:"This is a fun and interactive course designed to help you improve your English speaking skills while having a great time. Join us for engaging activities, discussions, and games that will boost your confidence and fluency in English.",
         courseDetail:"In this course, you will participate in various speaking activities, including role-plays, discussions, and games. The focus will be on improving your fluency and confidence in speaking English. You will also have the opportunity to practice your pronunciation and expand your vocabulary through fun and engaging exercises.",
         courseCapacity:20,
@@ -225,13 +225,13 @@ export const courseMockDetail=[
         tutorId:"pt1002",
         tutorFirstName:"Emily",
         tutorLastName:"Johnson",
-        tutorPhoto:tutorPhoto,
+        tutorPhoto:'/icons/tutorPhoto.svg',
         activeStudents:2,
         tutorSpeak:[
             {
                 languageId:1,
                 languageName:"English",
-                languageFlag:ukFlag,
+                languageFlag:'/icons/ukFlag.svg',
                 level:"native"
             },
         ],
@@ -253,9 +253,9 @@ export const courseMockDetail=[
         courseTimeStart:15,
         courseTimeEnd:17,
         courseLanguage:"English",
-        courseLanguageFlag:ukFlag,
+        courseLanguageFlag:'/icons/ukFlag.svg',
         courseLength:180, //lessons
-        coursePicture:coursePicture,
+        coursePicture:'/images/coursePicture.svg',
         courseDescription:"This is a fun and interactive course designed to help you improve your English speaking skills while having a great time. Join us for engaging activities, discussions, and games that will boost your confidence and fluency in English.",
         courseDetail:"In this course, you will participate in various speaking activities, including role-plays, discussions, and games. The focus will be on improving your fluency and confidence in speaking English. You will also have the opportunity to practice your pronunciation and expand your vocabulary through fun and engaging exercises.",
         courseCapacity:20,
@@ -325,19 +325,19 @@ export const courseMockDetail=[
         tutorId:"pt1003",
         tutorFirstName:"Liam",
         tutorLastName:"Smith",
-        tutorPhoto:tutorPhoto,
+        tutorPhoto:'/icons/tutorPhoto.svg',
         activeStudents:2,
         tutorSpeak:[
             {
                 languageId:1,
                 languageName:"French",
-                languageFlag:franceFlag,
+                languageFlag:'/icons/frenchFlag.svg',
                 level:"native"
             },
             {
                 languageId:1,
                 languageName:"English",
-                languageFlag:ukFlag,
+                languageFlag:'/icons/ukFlag.svg',
                 level:"B2"
             },
         ],
@@ -359,9 +359,9 @@ export const courseMockDetail=[
         courseTimeStart:12,
         courseTimeEnd:14,
         courseLanguage:"French",
-        courseLanguageFlag:franceFlag,
+        courseLanguageFlag:'/icons/frenchFlag.svg',
         courseLength:30, //lessons
-        coursePicture:coursePicture,
+        coursePicture:'/images/coursePicture.svg',
         courseDescription:"This is a fun and interactive course designed to help you improve your English speaking skills while having a great time. Join us for engaging activities, discussions, and games that will boost your confidence and fluency in English.",
         courseDetail:"In this course, you will participate in various speaking activities, including role-plays, discussions, and games. The focus will be on improving your fluency and confidence in speaking English. You will also have the opportunity to practice your pronunciation and expand your vocabulary through fun and engaging exercises.",
         courseCapacity:20,
@@ -431,19 +431,19 @@ export const courseMockDetail=[
   tutorId: "pt1004",
   tutorFirstName: "Parisa",
   tutorLastName: "Rahnama",
-  tutorPhoto: tutorPhoto,
+  tutorPhoto: '/icons/tutorPhoto.svg',
   activeStudents: 5,
   tutorSpeak: [
     {
       languageId: 1,
       languageName: "Persian",
-      languageFlag: iranFlag,
+      languageFlag: '/icons/irFlag.svg',
       level:"native"
     },
     {
       languageId: 2,
       languageName: "English",
-      languageFlag: ukFlag,
+      languageFlag: '/icons/ukFlag.svg',
       level:"C1"
     }
   ],
@@ -464,9 +464,9 @@ export const courseMockDetail=[
   courseTimeStart: 16,
   courseTimeEnd: 17,
   courseLanguage: "Persian",
-  courseLanguageFlag:iranFlag,
+  courseLanguageFlag:'/icons/irFlag.svg',
   courseLength: 24, // lessons
-  coursePicture: coursePicture,
+  coursePicture: '/images/coursePicture.svg',
   courseDescription: "This course introduces Persian through storytelling and real-life dialogues, helping you improve listening and speaking skills in an enjoyable and natural way.",
   courseDetail: "Each session focuses on a short story or conversation. You’ll learn practical vocabulary, common expressions, and basic grammar while exploring Persian culture. Perfect for beginners with some familiarity with the alphabet.",
   courseCapacity: 15,
@@ -534,19 +534,19 @@ export const courseMockDetail=[
   tutorId: "pt1005",
   tutorFirstName: "Michael",
   tutorLastName: "Anderson",
-  tutorPhoto: tutorPhoto,
+  tutorPhoto: '/icons/tutorPhoto.svg',
   activeStudents: 1,
   tutorSpeak: [
     {
       languageId: 1,
       languageName: "English",
-      languageFlag: ukFlag,
+      languageFlag: '/icons/ukFlag.svg',
       level: "native"
     },
     {
       languageId: 2,
       languageName: "French",
-      languageFlag: franceFlag,
+      languageFlag: '/icons/frenchFlag.svg',
       level: "B2"
     }
   ],
@@ -567,9 +567,9 @@ export const courseMockDetail=[
   courseTimeStart: 18,
   courseTimeEnd: 19,
   courseLanguage: "English",
-  courseLanguageFlag:ukFlag,
+  courseLanguageFlag:'/icons/ukFlag.svg',
   courseLength: 10, // lessons
-  coursePicture: coursePicture,
+  coursePicture: '/images/coursePicture.svg',
   courseDescription: "A fast-track IELTS Speaking course designed to help intermediate and advanced learners improve fluency, accuracy, and confidence for the IELTS speaking test.",
   courseDetail: "This course focuses on the three IELTS Speaking parts through practice questions, examiner-style feedback, and fluency-building strategies. Includes weekly mock tests and vocabulary expansion.",
   courseCapacity: 10,

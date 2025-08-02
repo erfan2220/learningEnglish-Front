@@ -1,4 +1,4 @@
-import { StaticImageData } from "next/image";
+// import { StaticImageData } from "next/image";
 
 export interface Price {
   priceId: number;
@@ -11,7 +11,8 @@ export interface Certification {
   certificationTitle: string;
   certificationIssueDate: string;
   certificationIssuer: string;
-  certificationPicture: StaticImageData;
+  // certificationPicture: StaticImageData;
+  certificationPicture: string;
 }
 
 export interface Education {
@@ -29,7 +30,8 @@ export interface Education {
 export interface Language {
   languageId: number;
   language: string;
-  flag: StaticImageData;
+  // flag: StaticImageData;
+  flag: string;
   level: string;
 }
 

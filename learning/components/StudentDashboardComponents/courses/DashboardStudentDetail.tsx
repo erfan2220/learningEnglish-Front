@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
-import lessonIcon from "../../../assets/icons/learningD.svg";
-import homeworkIcon from "../../../assets/icons/homeworkD.svg";
+// import lessonIcon from "./../../../assets/icons/learningD.svg";
+// import homeworkIcon from "./../../../assets/icons/homeworkD.svg";
 import DashboardStudentLessons from "./DashboardStudentLessons";
 import DashboardStudentHomeworks from "./DashboardStudentHomeworks";
 
@@ -26,13 +25,18 @@ const DashboardStudentDetail = () => {
           }}
         >
           <div>
-            <Image
+            <img
+              src={"/icons/learningD.svg"}
+              alt="lesson icon"
+              style={{ width: "80%", height: "80%" }}
+            />
+            {/* <Image
               src={lessonIcon}
               alt={"lesson-icon"}
               width={24}
               height={24}
               style={{ width: "80%", height: "80%" }}
-            />
+            /> */}
           </div>
           <p>Lessons</p>
         </div>
@@ -51,13 +55,18 @@ const DashboardStudentDetail = () => {
           }}
         >
           <div>
-            <Image
+            <img
+              src={"/icons/homeworkD.svg"}
+              alt="home work icon"
+              style={{ width: "80%", height: "80%" }}
+            />
+            {/* <Image
               src={homeworkIcon}
               alt={"HW-icon"}
               width={24}
               height={24}
               style={{ width: "80%", height: "80%" }}
-            />
+            /> */}
           </div>
           <p>Homeworks</p>
         </div>

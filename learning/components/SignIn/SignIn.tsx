@@ -5,15 +5,14 @@ import Button from "../Button/Button";
 import Layout from "../Layout/Layout";
 import Inputs from "../Input/Input";
 import Link from "next/link";
-import eyeIconClose from "../../assets/icons/eyeCloseIcon.svg";
-import eyeIcon from "../../assets/icons/eyeIcon.svg";
-import signInIcon from "../../assets/icons/loginIcon.svg";
-import Image from "next/image";
-import googleIcon from "../../assets/icons/google.svg";
+// import eyeIconClose from "./../../assets/icons/eyeCloseIcon.svg";
+// import eyeIcon from "./../../assets/icons/eyeIcon.svg";
+// import signInIcon from "./../../assets/icons/loginIcon.svg";
+// import googleIcon from "./../../assets/icons/google.svg";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import userIcon from "../../assets/icons/userIconGray.svg";
-import passwordIcon from "../../assets/icons/passwordIconGray.svg";
+// import userIcon from "./../../assets/icons/userIconGray.svg";
+// import passwordIcon from "./../../assets/icons/passwordIconGray.svg";
 
 const SignIn = () => {
   const [password, setPassword] = useState("");
@@ -61,12 +60,17 @@ const SignIn = () => {
               href={"/signinGoogle"}
               className="flex gap-2 w-full border-2 my-5 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-2"
             >
-              <Image
+              <img
+                src={"/icons/google.svg"}
+                alt="google icon"
+                className="w-6 h-6"
+              />
+              {/* <Image
                 src={googleIcon}
                 alt="google icon"
                 width={24}
                 height={24}
-              />
+              /> */}
               <p className="text-[#727177] text-sm font-semibold">
                 Continue with Google
               </p>
@@ -86,7 +90,7 @@ const SignIn = () => {
               placeholder="Enter your Email"
               label="Email"
               width="100%"
-              inputIcon={userIcon}
+              inputIcon={"/icons/userIconGray.svg"}
             />
             <Inputs
               type="password"
@@ -95,9 +99,9 @@ const SignIn = () => {
               placeholder="Enter your Password"
               label="Password"
               width="100%"
-              icon1={eyeIconClose}
-              icon2={eyeIcon}
-              inputIcon={passwordIcon}
+              icon1={"/icons/eyeCloseIcon.svg"}
+              icon2={"/icons/eyeIcon.svg"}
+              inputIcon={"/icons/passwordIconGray.svg"}
             />
             <div className=" text-[#45444A] text-sm mx-2 my-2">
               <u>
@@ -113,7 +117,7 @@ const SignIn = () => {
               type="submit"
               label={"Sign In"}
               widthBtn="100%"
-              btnIcon={signInIcon}
+              btnIcon={"/icons/loginIcon.svg"}
             />
 
             {error && (

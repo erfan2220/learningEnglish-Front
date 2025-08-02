@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { TutorialStepType } from "@/model/types";
 
 const TutorialStep = ({
@@ -27,14 +26,20 @@ const TutorialStep = ({
 
       <div className="flex-1 flex justify-center items-center">
         {" "}
-        <Image
+        <img
+          src={picture}
+          alt="picture"
+          className="w-[100px] h-[100px] object-contain"
+          style={{ width: "70%", height: "70%" }}
+        />
+        {/* <Image
           src={picture}
           alt="step picture"
           width={100}
           height={100}
           className="object-contain"
           style={{ width: "70%", height: "70%" }}
-        />
+        /> */}
       </div>
     </div>
   );

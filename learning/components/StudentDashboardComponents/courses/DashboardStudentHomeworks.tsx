@@ -2,9 +2,8 @@
 import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
 import React from "react";
-import Image from "next/image";
-import downloadIcon from "../../../assets/icons/download.svg";
-import uploadIcon from "../../../assets/icons/upload.svg";
+// import downloadIcon from "./../../../assets/icons/download.svg";
+// import uploadIcon from "./../../../assets/icons/upload.svg";
 
 const DashboardStudentHomeworks = () => {
   const { courseId } = useParams();
@@ -58,12 +57,17 @@ const DashboardStudentHomeworks = () => {
                           download
                           className="text-blue-600 hover:underline  mt-1 inline-block"
                         >
-                          <Image
+                          <img
+                            src={"/icons/download.svg"}
+                            alt="download icon"
+                            className="w-6 h-6"
+                          />
+                          {/* <Image
                             src={downloadIcon}
                             alt="download"
                             width={24}
                             height={24}
-                          />
+                          /> */}
                         </a>
                       </div>
                       <div className="text-xs sm:flex justify-center hidden  sm:w-1/5">
@@ -79,12 +83,18 @@ const DashboardStudentHomeworks = () => {
                           onChange={handleImageChange}
                           className="hidden"
                         />
-                        <Image
+                        <img
+                          src={"/icons/upload.svg"}
+                          alt="upload icon"
+                          className="w-6 h-6"
+                        />
+
+                        {/* <Image
                           src={uploadIcon}
                           alt="download"
                           width={24}
                           height={24}
-                        />
+                        /> */}
                       </div>
                     </div>
                   ))}

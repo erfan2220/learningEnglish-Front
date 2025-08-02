@@ -1,8 +1,9 @@
-import { StaticImageData } from "next/image";
+// import { StaticImageData } from "next/image";
 
 export type languageSpeak={
     language:string,
-    flag:StaticImageData
+    // flag:StaticImageData
+    flag:string
 }
 
 export type TutorData = {
@@ -11,7 +12,8 @@ export type TutorData = {
   role: string;
   speaks:languageSpeak[] ;
   price: string;
-  introduceVideo: StaticImageData; 
+  // introduceVideo: StaticImageData; 
+  introduceVideo: string; 
 };
 
 
@@ -26,8 +28,10 @@ export type CourseData = {
   courseTime:string;
   courseLanguage:string;
   price: string;
-  tutorPhoto: StaticImageData; 
-  coursePicture: StaticImageData;
+  // tutorPhoto: StaticImageData; 
+  // coursePicture: StaticImageData;
+  tutorPhoto: string; 
+  coursePicture: string;
   courseDescription: string;
 };
 
@@ -42,7 +46,8 @@ export type ButtonProps ={
   colorBtnBorder?: string;
   colorBtnHover?: string;
   colorBtnActive?: string; 
-  btnIcon?: StaticImageData|null;
+  // btnIcon?: StaticImageData|null;
+  btnIcon?: string|null;
   marginTop?:string;
   fontWeight?: 'regular' | 'bold' | 'medium'| 'semibold';
   style?: React.CSSProperties;
@@ -59,21 +64,26 @@ export type InputsProps ={
   borderColor?: string;
   focusBorderColor?: string;
   width?: string;
-  icon1?: StaticImageData;
-  icon2?: StaticImageData;
-  inputIcon?: StaticImageData;
+  // icon1?: StaticImageData;
+  // icon2?: StaticImageData;
+  // inputIcon?: StaticImageData;
+  icon1?: string;
+  icon2?: string;
+  inputIcon?: string;
 }
 
 export type CountryComponent={
-  flag?:StaticImageData|string;
+  flag?:string;
+  // flag?:StaticImageData|string;
   countryName:string;
-  width:number;
+  width:number|string;
   textSize:string;
   fontWeight:string;
 }
 
 export type SocialMediaIconType = { 
-  socialIcon:StaticImageData;
+  // socialIcon:StaticImageData;
+  socialIcon:string;
   address:string
 }
 
@@ -82,6 +92,7 @@ export type TutorialStepType ={
    stepNumber:number;
    title:string;
    detail:string;
-   picture:StaticImageData;
+   picture:string;
+  //  picture:StaticImageData;
    flexRow:string;
 }

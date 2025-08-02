@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
-import buttonIcon from "../../assets/icons/arrowWhite.svg";
+// import buttonIcon from "@/assets/icons/arrowWhite.svg";
+// import buttonIcon from "./../../assets/icons/arrowWhite.svg";
 import { ButtonProps } from "@/model/types";
 
 const Button: React.FC<ButtonProps> = ({
@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   colorBtnBorder = "border-[#D2D2D2]",
   colorBtnHover = "hover:bg-[#35129D]",
   colorBtnActive = "active:bg-[#9571FF]",
-  btnIcon = buttonIcon,
+  btnIcon = "/icons/arrowWhite.svg",
   marginTop = "16px",
   fontWeight = "regular",
   style = {},
@@ -36,7 +36,8 @@ const Button: React.FC<ButtonProps> = ({
       >
         <p>{label}</p>
         {btnIcon && (
-          <Image src={btnIcon} alt="button icon" width={24} height={24} />
+          <img src={btnIcon} alt="button icon" className="w-6 h-6" />
+          // <Image src={btnIcon} alt="button icon" width={24} height={24} />
         )}
       </button>
     </div>

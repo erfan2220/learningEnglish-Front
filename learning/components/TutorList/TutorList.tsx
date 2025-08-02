@@ -11,7 +11,7 @@ import SelectTime from "../Courses/SelectTime";
 import SelectDate from "../Courses/SelectDate";
 import SelectPrice from "../Courses/SelectPrice";
 import Inputs from "../Input/Input";
-import searchIcon from "../../assets/icons/searchIconGray.svg";
+import searchIcon from "./../../assets/icons/searchIconGray.svg";
 
 const TutorList = () => {
   const totalTutor = tutorMockDetail.length;

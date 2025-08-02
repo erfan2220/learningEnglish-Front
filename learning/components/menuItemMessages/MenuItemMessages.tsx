@@ -1,9 +1,9 @@
 "use client";
 import DashboardMenuItems from "@/components/DashboardMenuItems/DashboardMenuItems";
 import React, { useState } from "react";
-import messageIcon from "../../assets/icons/message.svg";
-import inboxIcon from "../../assets/icons/inbox.svg";
-import sentIcon from "../../assets/icons/sent.svg";
+// import messageIcon from "./../../assets/icons/message.svg";
+// import inboxIcon from "./../../assets/icons/inbox.svg";
+// import sentIcon from "./../../assets/icons/sent.svg";
 
 const MenuItemMessages = ({ role }: { role: string }) => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -16,7 +16,7 @@ const MenuItemMessages = ({ role }: { role: string }) => {
         <DashboardMenuItems
           role={role}
           topic={"messages"}
-          icon={messageIcon}
+          icon={"/icons/message.svg"}
           title={"Messages"}
           width={"100%"}
         />
@@ -27,7 +27,7 @@ const MenuItemMessages = ({ role }: { role: string }) => {
           <DashboardMenuItems
             role={role}
             topic={"messages/inbox"}
-            icon={inboxIcon}
+            icon={"/icons/inbox.svg"}
             title={"Inbox"}
             width={"90%"}
           />
@@ -35,7 +35,7 @@ const MenuItemMessages = ({ role }: { role: string }) => {
           <DashboardMenuItems
             role={role}
             topic={"messages/sent"}
-            icon={sentIcon}
+            icon={"/icons/sent.svg"}
             title={"Sent"}
             width={"90%"}
           />

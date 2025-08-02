@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
-import clockIcon from "../../assets/icons/clockGray.svg";
-import arrowIcon from "../../assets/icons/arrowDown.svg";
+// import clockIcon from "./../../assets/icons/clockGray.svg";
+// import arrowIcon from "./../../assets/icons/arrowDown.svg";
 
 const SelectTime = () => {
   const [selectedTime, setSelectedTime] = useState("");
@@ -26,11 +25,23 @@ const SelectTime = () => {
       </select>
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <Image src={clockIcon} alt="language icon" width={24} height={24} />
+        <img
+          src={"/icons/clockGray.svg"}
+          alt="clock icon"
+          className="w-6 h-6"
+        />
+
+        {/* <Image src={clockIcon} alt="clock icon" width={24} height={24} /> */}
       </div>
 
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
+        <img
+          src={"/icons/arrowDown.svg"}
+          alt="arrow icon"
+          className="w-6 h-6"
+        />
+
+        {/* <Image src={arrowIcon} alt="arrow icon" width={24} height={24} /> */}
       </div>
     </div>
   );

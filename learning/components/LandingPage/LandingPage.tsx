@@ -1,10 +1,9 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-import Image from "next/image";
-import startPic from "../../assets/images/pana.svg";
-import tutorPic from "../../assets/images/tutorPic.svg";
-import ukFlag from "../../assets/icons/ukFlag.svg";
-import frenchFlag from "../../assets/icons/frenchFlag.svg";
+// import startPic from "/pana.svg";
+// import tutorPic from "./../../assets/images/tutorPic.svg";
+// import ukFlag from "./../../assets/icons/ukFlag.svg";
+// import frenchFlag from "./../../assets/icons/frenchFlag.svg";
 import Link from "next/link";
 import Country from "../Country/Country";
 import TutorialStep from "../TutorialStep/TutorialStep";
@@ -41,13 +40,18 @@ const LandingPage = () => {
             </div>
 
             <div className="w-full md:w-1/2 md:mb-0 mb-6">
-              <Image
+              <img
+                src={"/images/pana.svg"}
+                alt="start pic"
+                className="w-[500px] h-[500px] mx-auto"
+              />
+              {/* <Image
                 src={startPic}
                 alt="start pic"
                 width={500}
                 height={500}
                 className="mx-auto"
-              />
+              /> */}
             </div>
           </div>
         </Layout>
@@ -59,9 +63,9 @@ const LandingPage = () => {
         <div className="flex items-center justify-evenly p-1">
           <Link href={"/courses/english"}>
             <Country
-              flag={ukFlag}
+              flag={"icons/ukFlag.svg"}
               countryName={"English"}
-              width={32}
+              width={"32px"}
               textSize={"18px"}
               fontWeight={"bold"}
             />
@@ -69,9 +73,9 @@ const LandingPage = () => {
 
           <Link href={"/courses/french"} className="flex gap-2 items-center">
             <Country
-              flag={frenchFlag}
+              flag={"icons/frenchFlag.svg"}
               countryName={"French"}
-              width={32}
+              width={"32px"}
               textSize={"18px"}
               fontWeight={"16px"}
             />
@@ -142,7 +146,13 @@ const LandingPage = () => {
           </div>
 
           <div className="hidden md:block md:w-1/2">
-            <Image
+            <img
+              src={"/images/tutorPic.svg"}
+              alt="become tutor pic"
+              className="object-contain"
+              style={{ width: "90%", height: "90%" }}
+            />
+            {/* <Image
               src={tutorPic}
               alt="become tutor pic"
               width={100}
@@ -150,7 +160,7 @@ const LandingPage = () => {
               className="object-contain"
               style={{ width: "90%", height: "90%" }}
               priority
-            />
+            /> */}
           </div>
         </div>
       </Layout>
