@@ -28,6 +28,9 @@ const Header = () => {
           <li>
             <Link href={"/dashboard/student"}>student dashboard</Link>
           </li>
+          <li>
+            <Link href={"/tutorAuthentication"}>stepper</Link>
+          </li>
         </ul>
       </div>
 

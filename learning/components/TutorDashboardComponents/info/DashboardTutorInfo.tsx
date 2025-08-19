@@ -156,7 +156,7 @@ const DashboardTutorInfo = () => {
                   onChange={(e) => setSelectedCountry(e.target.value)}
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                 >
-                  <option disabled selected value="">
+                  <option disabled defaultValue={'-country-'} value="">
                     Country
                   </option>
                   {countryList.map((country, index) => (
@@ -191,7 +191,7 @@ const DashboardTutorInfo = () => {
                   onChange={(e) => setSelectedSubject(e.target.value)}
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                 >
-                  <option disabled selected value="">
+                  <option disabled defaultValue={'-subject-'} value="">
                     subject
                   </option>
                   <option value="Chinese">Chinese</option>
