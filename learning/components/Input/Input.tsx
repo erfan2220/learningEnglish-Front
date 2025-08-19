@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { InputsProps } from "@/model/types";
+import Image from "next/image";
 
 const Inputs: React.FC<InputsProps> = ({
   type,
@@ -31,12 +32,12 @@ const Inputs: React.FC<InputsProps> = ({
         />
         {inputIcon && (
           <div className="absolute top-[12px] left-3 cursor-pointer">
-            <img
+            {/* <img
               src={inputIcon}
               alt="input icon"
               className="w-[22px] h-[22px]"
-            />
-            {/* <Image src={inputIcon} alt="input icon" width={22} height={22} /> */}
+            /> */}
+            <Image src={inputIcon} alt="input icon" width={22} height={22} />
           </div>
         )}
         {icon1 && icon2 && (
@@ -47,12 +48,12 @@ const Inputs: React.FC<InputsProps> = ({
             }}
           >
             {showPassword ? (
-              <img src={icon2} alt="icon icon" className="w-6 h-6" />
+              // <img src={icon2} alt="icon icon" className="w-6 h-6" />
+              <Image src={icon2} alt="icon pic" width={24} height={24} />
             ) : (
-              // <Image src={icon2} alt="icon pic" width={24} height={24} />
-              <img src={icon1} alt="icon icon" className="w-6 h-6" />
+              // <img src={icon1} alt="icon icon" className="w-6 h-6" />
 
-              // <Image src={icon1} alt="icon pic" width={24} height={24} />
+              <Image src={icon1} alt="icon pic" width={24} height={24} />
             )}
           </div>
         )}

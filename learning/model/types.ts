@@ -52,6 +52,8 @@ export type ButtonProps ={
   fontWeight?: 'regular' | 'bold' | 'medium'| 'semibold';
   style?: React.CSSProperties;
   onclick?: () => void;
+  disabled?: boolean;
+  className?:string
 }
 
 

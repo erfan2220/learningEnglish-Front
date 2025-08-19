@@ -33,7 +33,7 @@ const AuthenticationTutorStepper = () => {
             label="Start" 
             type="button"
             widthBtn="200px" 
-            onclick={() =>router.push('tutorAuthentication/page1') } 
+            onclick={() =>router.push('tutorAuthentication/step1') } 
           />
           </div>
         </Layout>
