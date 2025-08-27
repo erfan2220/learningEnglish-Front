@@ -1,21 +1,22 @@
 import { tutorMockDetail } from "@/mock/tutorMockData";
 import React from "react";
 import Layout from "../Layout/Layout";
-// import locationIcon from "./../../assets/icons/locationPink.svg";
-// import languageIcon from "./../../assets/icons/languagePurple.svg";
-// import tickIcon from "./../../assets/icons/tickGreen.svg";
-// import learningIcon from "../../assets/icons/learningOrange.svg";
+import locationIcon from "./../../assets/icons/locationPink.svg";
+import languageIcon from "./../../assets/icons/languagePurple.svg";
+import tickIcon from "./../../assets/icons/tickGreen.svg";
+import learningIcon from "../../assets/icons/learningOrange.svg";
 import Country from "../Country/Country";
-// import locationIconBlue from "./../../assets/icons/locationBlue.svg";
-// import fieldIcon from "./../../assets/icons/institutionGreen.svg";
-// import degreeIcon from "./../../assets/icons/educationPink.svg";
-// import starIcon from "./../../assets/icons/star.svg";
-// import studentIcon from "./../../assets/icons/studentPink.svg";
-// import lessonIcon from "./../../assets/icons/lessonsBlue.svg";
-// import levelIcon from "./../../assets/icons/levelIcon.svg";
+import locationIconBlue from "./../../assets/icons/locationBlue.svg";
+import fieldIcon from "./../../assets/icons/institutionGreen.svg";
+import degreeIcon from "./../../assets/icons/educationPink.svg";
+import starIcon from "./../../assets/icons/star.svg";
+import studentIcon from "./../../assets/icons/studentPink.svg";
+import lessonIcon from "./../../assets/icons/lessonsBlue.svg";
+import levelIcon from "./../../assets/icons/levelIcon.svg";
 import { courseMockDetail } from "@/mock/courseMockData";
 import ReviewCart from "../ReviewCart/ReviewCart";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import Image from "next/image";
 
 type Props = {
   tutorId: string;
@@ -50,17 +51,17 @@ const TutorDetail = ({ tutorId }: Props) => {
 
             <div className="flex items-center gap-4">
               <div>
-                <img
+                {/* <img
                   src={detail.tutorPhoto}
                   alt={detail.tutorFirstName}
                   className="w-[100px] h-[100px]"
-                />
-                {/* <Image
+                /> */}
+                <Image
                   src={detail.tutorPhoto}
                   alt={detail.tutorFirstName}
                   width={100}
                   height={100}
-                /> */}
+                />
               </div>
               <div className="flex flex-col">
                 <h2 className="font-bold text-2xl text-[#45444A]">
@@ -74,17 +75,17 @@ const TutorDetail = ({ tutorId }: Props) => {
 
             {/* ====================location==================== */}
             <div className="flex gap-2 mt-4">
-              <img
+              {/* <img
                 src={"/icons/locationPink.svg"}
                 alt="locationIcon"
                 className="w-6 h-6"
-              />
-              {/* <Image
+              /> */}
+              <Image
                 src={locationIcon}
                 alt="location icon"
                 width={24}
                 height={24}
-              /> */}
+              />
 
               <p className="text-[#5C5A60] font-semibold">
                 from {detail.country} {`(UTC )`}
@@ -94,18 +95,18 @@ const TutorDetail = ({ tutorId }: Props) => {
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 my-6">
               <div className="flex gap-2">
-                <img
+                {/* <img
                   src={"/icons/languagePurple.svg"}
                   alt="languageIcon"
                   className="w-6 h-6"
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={languageIcon}
                   alt="location icon"
                   width={24}
                   height={24}
-                /> */}
+                />
                 <p className="text-[#5C5A60]">Speak:</p>
               </div>
               {detail.speaks.map((language) => (
@@ -130,18 +131,18 @@ const TutorDetail = ({ tutorId }: Props) => {
 
             <div className="flex flex-wrap items-center gap-6 mt-2">
               <div className="flex gap-2">
-                <img
+                {/* <img
                   src={"/icons/learningOrange.svg"}
                   alt="learningIcon"
                   className="w-6 h-6"
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={learningIcon}
                   alt="location icon"
                   width={24}
                   height={24}
-                /> */}
+                />
                 <p className="text-[#5C5A60]">Teaches:</p>
               </div>
               <p className="font-bold text-[#45444A]">{detail.subject}</p>
@@ -162,18 +163,18 @@ const TutorDetail = ({ tutorId }: Props) => {
 
               {detail.certification.length > 0 && (
                 <div className="flex mt-2 items-center gap-2 text-xs font-semibold">
-                  <img
+                  {/* <img
                     src={"/icons/tickGreen.svg"}
                     alt="tickIcon"
                     className="w-6 h-6"
-                  />
+                  /> */}
 
-                  {/* <Image
+                  <Image
                     src={tickIcon}
                     alt="tick icon"
                     width={24}
                     height={24}
-                  /> */}
+                  />
                   <p className="text-[#7A9E0D]">Certificate verified</p>
                 </div>
               )}
@@ -226,19 +227,19 @@ const TutorDetail = ({ tutorId }: Props) => {
                             target="_blank"
                             rel="noopener noreferrer"
                           > */}
-                            <img
+                            {/* <img
                               src={cert.certificationPicture}
                               alt="certification"
                               className="w-[80px] h-[80px] rounded-lg mx-auto cursor-pointer"
-                            />
+                            /> */}
 
-                            {/* <Image
+                            <Image
                               src={cert.certificationPicture}
                               alt="certification pic"
                               width={80}
                               height={40}
                               className="rounded-lg mx-auto cursor-pointer"
-                            /> */}
+                            />
                           </a>
                         </td>
                       </tr>
@@ -266,48 +267,48 @@ const TutorDetail = ({ tutorId }: Props) => {
                   </div>
                   <div className="w-full sm:w-2/3 sm:text-sm">
                     <div className="flex gap-2">
-                      <img
+                      {/* <img
                         src={"/icons/educationPink.svg"}
                         alt="degreeIcon"
                         className="w-4 h-4"
-                      />
-                      {/* <Image
+                      /> */}
+                      <Image
                         src={degreeIcon}
                         alt="degree"
                         width={16}
                         height={16}
-                      /> */}
+                      />
                       <p className="font-semibold">{education.degree}</p>
                     </div>
                     <div className="flex gap-2">
-                      <img
+                      {/* <img
                         src={"/icons/institutionGreen.svg"}
                         alt="fieldIcon"
                         className="w-4 h-4"
-                      />
+                      /> */}
 
-                      {/* <Image
+                      <Image
                         src={fieldIcon}
                         alt="field"
                         width={16}
                         height={16}
-                      /> */}
+                      />
                       <p>{education.field}</p>
                     </div>
 
                     <div className="flex gap-2">
-                      <img
+                      {/* <img
                         src={"/icons/locationBlue.svg"}
                         alt="locationIconBlue"
                         className="w-4 h-4"
-                      />
+                      /> */}
 
-                      {/* <Image
+                      <Image
                         src={locationIconBlue}
                         alt="location"
                         width={16}
                         height={16}
-                      /> */}
+                      />
                       <p>
                         {education.institutionName}
                         {" - "}
@@ -344,18 +345,18 @@ const TutorDetail = ({ tutorId }: Props) => {
                     <p className="font-bold">{experience.experienceTitle}</p>
 
                     <div className="flex gap-2">
-                      <img
+                      {/* <img
                         src={"/icons/locationBlue.svg"}
                         alt="locationIconBlue"
                         className="w-4 h-4"
-                      />
+                      /> */}
 
-                      {/* <Image
+                      <Image
                         src={locationIconBlue}
                         alt="location"
                         width={16}
                         height={16}
-                      /> */}
+                      />
                       <p className="font-semibold text-[#737177]">
                         {experience.experienceCountry}
                         {" - "}
@@ -381,19 +382,19 @@ const TutorDetail = ({ tutorId }: Props) => {
                 Rating
               </p>
               <div className="flex items-center gap-2">
-                <img
+                {/* <img
                   src={"/icons/star.svg"}
                   alt="starIcon"
                   className="w-5 sm:w-8 h-8 "
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={starIcon}
                   alt="star icon"
                   width={32}
                   height={32}
                   className="w-5 sm:w-8"
-                /> */}
+                />
                 <p className="sm:text-xl font-bold text-[#FFA648]">ff</p>
               </div>
             </div>
@@ -403,19 +404,19 @@ const TutorDetail = ({ tutorId }: Props) => {
                 Students
               </p>
               <div className="flex items-center gap-2">
-                <img
+                {/* <img
                   src={"/icons/studentPink.svg"}
                   alt="studentIcon"
                   className="w-5 sm:w-8 h-8 "
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={studentIcon}
                   alt="student icon"
                   width={32}
                   height={32}
                   className="w-5 sm:w-8"
-                /> */}
+                />
                 {detail.studentLists.length > 0 ? (
                   <p className="sm:text-xl font-bold text-[#5C5A60]">
                     {detail.studentLists.length}
@@ -432,19 +433,19 @@ const TutorDetail = ({ tutorId }: Props) => {
                 Lessons
               </p>
               <div className="flex items-center gap-2">
-                <img
+                {/* <img
                   src={"/icons/lessonsBlue.svg"}
                   alt="lessonIcon"
                   className="w-5 sm:w-8 h-8 "
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={lessonIcon}
                   alt="lesson icon"
                   width={32}
                   height={32}
                   className="w-5 sm:w-8"
-                /> */}
+                />
                 {detail.coursesList.length > 0 ? (
                   <p className="sm:text-xl font-bold text-[#5C5A60]">
                     {detail.coursesList.length}
@@ -472,18 +473,18 @@ const TutorDetail = ({ tutorId }: Props) => {
                     </p>
                     {/* ====================teach==================== */}
                     <div className="flex gap-2 text-[#5C5A60]">
-                      <img
+                      {/* <img
                         src={"/icons/lessonsBlue.svg"}
                         alt="lessonIcon"
                         className="w-6 h-6"
-                      />
+                      /> */}
 
-                      {/* <Image
+                      <Image
                         src={lessonIcon}
                         alt="lesson"
                         width={24}
                         height={24}
-                      /> */}
+                      />
                       <p>
                         <b>{course.lesson.length}</b> Lessons taught
                       </p>
@@ -491,18 +492,18 @@ const TutorDetail = ({ tutorId }: Props) => {
                     {/* ====================level==================== */}
 
                     <div className="flex gap-2 text-[#5C5A60]">
-                      <img
+                      {/* <img
                         src={"/icons/levelIcon.svg"}
                         alt="levelIcon"
                         className="w-6 h-6"
-                      />
+                      /> */}
 
-                      {/* <Image
+                      <Image
                         src={levelIcon}
                         alt="level"
                         width={24}
                         height={24}
-                      /> */}
+                      />
                       <p>
                         Level: <b>{course.courseLevel}</b>
                       </p>

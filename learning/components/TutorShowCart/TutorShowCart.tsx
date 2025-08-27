@@ -1,7 +1,8 @@
 import { tutorMockDetail } from "@/mock/tutorMockData";
 import React from "react";
-// import favoriteIcon from "./../../assets/icons/star.svg";
-// import heartIcon from "./../../assets/icons/heartFillRed.svg";
+import favoriteIcon from "./../../assets/icons/star.svg";
+import Image from "next/image";
+import heartIcon from "./../../assets/icons/heartFillRed.svg";
 import Link from "next/link";
 
 const TutorShowCart = ({ tutorId }: { tutorId: string }) => {
@@ -20,17 +21,17 @@ const TutorShowCart = ({ tutorId }: { tutorId: string }) => {
     <div className="flex pb-4 px-4 flex-wrap items-center justify-center w-full h-[360px] sm:mx-2 [@media(min-width:400px)]:w-[320px] sm:w-[320px] rounded-lg border border-gray-300 bg-white shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
       <div className="flex flex-wrap w-full items-center justify-center gap-4 sm:p-2 sm:pb-0  p-1">
         <div>
-          <img
+          {/* <img
             src={tutor.tutorPhoto}
             alt="tutorPhoto"
             className="w-[80px] h-[80px]"
-          />
-          {/* <Image
+          /> */}
+          <Image
             src={tutor.tutorPhoto}
             alt="tutor photo"
             width={80}
             height={80}
-          /> */}
+          />
         </div>
 
         <div className="flex flex-col items-center">
@@ -39,17 +40,17 @@ const TutorShowCart = ({ tutorId }: { tutorId: string }) => {
           </p>
           <p className="text-xs text-[#8B8A8E]">{tutor.role}</p>
           <div className="flex items-center gap-1">
-            <img
+            {/* <img
               src={"/icons/star.svg"}
               alt="favoriteIcon"
               className="w-[18px] h-[18px]"
-            />
-            {/* <Image
+            /> */}
+            <Image
               src={favoriteIcon}
               alt="favorite icon"
               width={18}
               height={18}
-            /> */}
+            />
             <div className="text-sm text-[#8B8A8E]">
               {averageRating.toFixed(1)}
             </div>
@@ -109,12 +110,12 @@ const TutorShowCart = ({ tutorId }: { tutorId: string }) => {
         </div>
 
         <div className="hover:cursor-pointer">
-          <img
+          {/* <img
             src={"/icons/heartFillRed.svg"}
             alt="heartIcon"
             className="w-[28px] h-[28px]"
-          />
-          {/* <Image src={heartIcon} alt="heart fill" width={28} height={28} /> */}
+          /> */}
+          <Image src={heartIcon} alt="heart fill" width={28} height={28} />
         </div>
       </div>
     </div>

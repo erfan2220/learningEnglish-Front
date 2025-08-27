@@ -4,15 +4,16 @@ import Button from "../Button/Button";
 import Layout from "../Layout/Layout";
 import Inputs from "../Input/Input";
 import Link from "next/link";
-// import eyeIconClose from "./../../assets/icons/eyeCloseIcon.svg";
-// import eyeIcon from "./../../assets/icons/eyeIcon.svg";
-// import signUpIcon from "../../assets/icons/signupIconWhite.svg";
-// import googleIcon from "./../../assets/icons/google.svg";
+import eyeIconClose from "./../../assets/icons/eyeCloseIcon.svg";
+import eyeIcon from "./../../assets/icons/eyeIcon.svg";
+import signUpIcon from "../../assets/icons/signupIconWhite.svg";
+import googleIcon from "./../../assets/icons/google.svg";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-// import userIcon from "./../../assets/icons/userIconGray.svg";
-// import passwordIcon from "./../../assets/icons/passwordIconGray.svg";
-// import emailIcon from "./../../assets/icons/emailGray.svg";
+import userIcon from "./../../assets/icons/userIconGray.svg";
+import passwordIcon from "./../../assets/icons/passwordIconGray.svg";
+import emailIcon from "./../../assets/icons/emailGray.svg";
+import Image from "next/image";
 
 const SignUpTutor = () => {
   const [firstName, setFirstName] = useState("");
@@ -86,17 +87,17 @@ const SignUpTutor = () => {
               href={"/signinGoogle"}
               className="flex gap-2 w-full border-2 my-5 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-2"
             >
-              <img
+              {/* <img
                 src={"/icons/google.svg"}
                 alt="google icon"
                 className="w-6 h-6"
-              />
-              {/* <Image
+              /> */}
+              <Image
                 src={googleIcon}
                 alt="google icon"
                 width={24}
                 height={24}
-              /> */}
+              />
               <p className="text-[#727177] text-sm font-semibold">
                 Continue with Google
               </p>
@@ -117,7 +118,7 @@ const SignUpTutor = () => {
                 placeholder="Enter your First Name"
                 label="First Name"
                 width="100%"
-                inputIcon={"/icons/userIconGray.svg"}
+                inputIcon={userIcon}
               />
 
               <Inputs
@@ -127,7 +128,7 @@ const SignUpTutor = () => {
                 placeholder="Enter your Last Name"
                 label="Last Name"
                 width="100%"
-                inputIcon={"/icons/userIconGray.svg"}
+                inputIcon={userIcon}
               />
               <Inputs
                 type="email"
@@ -136,7 +137,7 @@ const SignUpTutor = () => {
                 placeholder="Enter your Email"
                 label="Email"
                 width="100%"
-                inputIcon={"/icons/emailGray.svg"}
+                inputIcon={emailIcon}
               />
               <Inputs
                 type="password"
@@ -145,9 +146,9 @@ const SignUpTutor = () => {
                 placeholder="Enter your Password"
                 label="Password"
                 width="100%"
-                icon1={"/icons/eyeCloseIcon.svg"}
-                icon2={"/icons/eyeIcon.svg"}
-                inputIcon={"/icons/passwordIconGray.svg"}
+                icon1={eyeIconClose}
+                icon2={eyeIcon}
+                inputIcon={passwordIcon}
               />
             </div>
 
@@ -167,7 +168,7 @@ const SignUpTutor = () => {
               type="submit"
               label={"Sign Up"}
               widthBtn="100%"
-              btnIcon={"/icons/signupIconWhite.svg"}
+              btnIcon={signUpIcon}
             />
 
             <div className="text-sm text-[#45444A] mt-4 px-10 text-center">

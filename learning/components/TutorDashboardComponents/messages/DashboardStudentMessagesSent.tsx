@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
-// import deleteIcon from "./../../../assets/icons/delete.svg";
+import deleteIcon from "./../../../assets/icons/delete.svg";
 import { Student } from "@/model/studentType";
 import { Tutor } from "@/model/tutorType";
+import Image from "next/image";
 
 type DashboardStudentMessagesSentProps = {
   mainData: Student[];
@@ -51,18 +52,18 @@ const DashboardStudentMessagesSent = ({
                   {message.messageText.slice(0, 100)}...
                 </p>
                 <div className="flex gap-2">
-                  <img
+                  {/* <img
                     src={"/icons/delete.svg"}
                     alt="deleteIcon"
                     className="w-6 h-6 hover:cursor-pointer"
-                  />
-                  {/* <Image
+                  /> */}
+                  <Image
                     src={deleteIcon}
                     alt="delete icon"
                     width={24}
                     height={24}
                     className="hover:cursor-pointer"
-                  /> */}
+                  />
                 </div>
               </div>
 

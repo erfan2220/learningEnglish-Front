@@ -3,8 +3,9 @@
 import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
-// import arrowDown from "./../../../assets/icons/arrowDownD.svg";
-// import arrowUp from "./../../../assets/icons/arrowUpD.svg";
+import arrowDown from "./../../../assets/icons/arrowDownD.svg";
+import arrowUp from "./../../../assets/icons/arrowUpD.svg";
+import Image from "next/image";
 
 const DashboardStudentLessons = () => {
   const { courseId } = useParams();
@@ -38,29 +39,29 @@ const DashboardStudentLessons = () => {
                       <div className="flex justify-between w-1/2 font-semibold">
                         <p>{lesson.lessonPart}</p>
                         {openLessonId === lesson.lessonId ? (
-                          <img
-                            src={"/icons/arrowUpD.svg"}
-                            alt="arrow up icon"
-                            className="w-6 h-6"
+                          // <img
+                          //   src={"/icons/arrowUpD.svg"}
+                          //   alt="arrow up icon"
+                          //   className="w-6 h-6"
+                          // />
+                          <Image
+                            src={arrowUp}
+                            alt="arrow"
+                            width={24}
+                            height={24}
                           />
                         ) : (
-                          // <Image
-                          //   src={arrowUp}
-                          //   alt="arrow"
-                          //   width={24}
-                          //   height={24}
+                          // <img
+                          //   src={"/icons/arrowDownD.svg"}
+                          //   alt="arrow down icon"
+                          //   className="w-6 h-6"
                           // />
-                          <img
-                            src={"/icons/arrowDownD.svg"}
-                            alt="arrow down icon"
-                            className="w-6 h-6"
+                          <Image
+                            src={arrowDown}
+                            alt="arrow"
+                            width={24}
+                            height={24}
                           />
-                          // <Image
-                          //   src={arrowDown}
-                          //   alt="arrow"
-                          //   width={24}
-                          //   height={24}
-                          // />
                         )}
                       </div>
                     </>

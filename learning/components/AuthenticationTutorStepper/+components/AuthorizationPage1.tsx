@@ -20,6 +20,7 @@ import userIcon from "../../../assets/icons/userIconGray.svg";
 
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
+import { useRouter } from "next/navigation";
 
 const AuthorizationPage1 = () => {
   const [firstName, setFirstName] = useState("");
@@ -28,6 +29,7 @@ const AuthorizationPage1 = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
   const [entries, setEntries] = useState([{ language: "", level: "" }]);
+  const router = useRouter();
 
   const btnTrigger =
     firstName !== "" &&
@@ -172,7 +174,7 @@ const AuthorizationPage1 = () => {
           </div>
         </div>
         {/* ======================================================================== */}
-        <div className="flex flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
+        <div className="flex flex-col justify-start text-sm sm:text-base text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
           <h1 className="text-[#45444A] font-bold text-xl">About</h1>
           <p>
             Tell learners about yourself and start building your public tutor
@@ -286,7 +288,7 @@ const AuthorizationPage1 = () => {
                   {entries.map((entry, index) => (
                     <div key={index} className="flex w-full items-center gap-2">
                       {/* Language + Level Group */}
-                      <div className="flex flex-col sm:flex-row w-[95%] sm:w-[95%] gap-2">
+                      <div className="flex flex-row w-[95%] sm:w-[95%] gap-2">
                         {/* Language */}
                         <div className="w-full sm:w-1/2">
                           <label className="text-xs mx-2 mt-2 text-[#45444A]">
@@ -313,11 +315,7 @@ const AuthorizationPage1 = () => {
                               <option value="Russian">Russian</option>
                               <option value="Spanish">Spanish</option>
                             </select>
-                            {/* <img
-                          src={"/icons/languageGray.svg"}
-                          alt="languageIcon"
-                          className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                        /> */}
+                          
 
                             <Image
                               src={languageIcon}
@@ -372,12 +370,7 @@ const AuthorizationPage1 = () => {
 
                       {/* Delete icon */}
                       <div className="mt-5">
-                        {/* <img
-                      src={"/icons/binGray.svg"}
-                      alt="binIcon"
-                      className="w-6 h-6 cursor-pointer"
-                      onClick={() => handleRemove(index)}
-                    /> */}
+                       
 
                         <Image
                           src={binIcon}
@@ -401,19 +394,16 @@ const AuthorizationPage1 = () => {
                 </div>
               </div>
             </div>
-
-
           </form>
-            {/* /////////////////////////////////////////////////////////// */}
-            <div className="flex items-center justify-end w-full mt-8">
-              <Link href={"/tutorAuthentication/step2"}>
-                <Button
-                  type="submit"
-                  label={"Next Step"}
-                  disabled={!btnTrigger}
-                />
-              </Link>
-            </div>
+          {/* /////////////////////////////////////////////////////////// */}
+          <div className="flex items-center justify-end w-full mt-8">
+            <Button
+              type="submit"
+              label={"Next Step"}
+              disabled={!btnTrigger}
+              onclick={() => router.push("/tutorAuthentication/step2")}
+            />
+          </div>
         </div>
       </div>
     </div>

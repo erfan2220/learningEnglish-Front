@@ -1,24 +1,25 @@
 "use client";
 
 import React, { useState } from "react";
-// import profilePhoto from "./../../../assets/icons/profilePhoto.svg";
+import profilePhoto from "./../../../assets/icons/profilePhoto.svg";
 import Inputs from "@/components/Input/Input";
-// import userIcon from "./../../../assets/icons/userIconGray.svg";
-// import emailIcon from ".././../../assets/icons/emailGray.svg";
-// import countryIcon from "./../../../assets/icons/locationGray.svg";
-// import phoneIcon from "./../../../assets/icons/phoneGray.svg";
-// import passwordIcon from "./../../../assets/icons/passwordIconGray.svg";
-// import editIcon from "./../../../assets/icons/penDash.svg";
-// import subjectIcon from "./../../../assets/icons/educationGray.svg";
-// import languageIcon from "./../../../assets/icons/languageGray.svg";
-// import levelIcon from "./../../../assets/icons/levelIconGray.svg";
-// import binIcon from "./../../../assets/icons/binGray.svg";
+import userIcon from "./../../../assets/icons/userIconGray.svg";
+import emailIcon from ".././../../assets/icons/emailGray.svg";
+import countryIcon from "./../../../assets/icons/locationGray.svg";
+import phoneIcon from "./../../../assets/icons/phoneGray.svg";
+import passwordIcon from "./../../../assets/icons/passwordIconGray.svg";
+import editIcon from "./../../../assets/icons/penDash.svg";
+import subjectIcon from "./../../../assets/icons/educationGray.svg";
+import languageIcon from "./../../../assets/icons/languageGray.svg";
+import levelIcon from "./../../../assets/icons/levelIconGray.svg";
+import binIcon from "./../../../assets/icons/binGray.svg";
+import Image from "next/image";
 
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 
 const DashboardTutorInfo = () => {
-  const [imagePreview, setImagePreview] = useState("/icons/profilePhoto.svg");
+  const [imagePreview, setImagePreview] = useState(profilePhoto);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -75,18 +76,18 @@ const DashboardTutorInfo = () => {
     <div className="my-8 px-1 md:px-2 lg:px-4">
       <div className="flex flex-col justify-center items-center">
         <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-gray-300">
-          <img
+          {/* <img
             src={imagePreview}
             alt="imagePreview"
             className="w-[120px] h-[120px] object-cover"
-          />
-          {/* <Image
+          /> */}
+          <Image
             src={imagePreview}
             alt="profile photo"
             width={120}
             height={120}
             className="object-cover"
-          /> */}
+          />
         </div>
 
         <label className="cursor-pointer text-blue-600 underline">
@@ -111,7 +112,7 @@ const DashboardTutorInfo = () => {
               placeholder="First Name"
               label="First Name"
               width="80%"
-              inputIcon={"/icons/userIconGray.svg"}
+              inputIcon={userIcon}
               value={firstName}
               onchange={(e) => setFirstName(e.target.value)}
             />
@@ -121,7 +122,7 @@ const DashboardTutorInfo = () => {
               placeholder="Last Name"
               label="Last Name"
               width="80%"
-              inputIcon={"/icons/userIconGray.svg"}
+              inputIcon={userIcon}
               value={lastName}
               onchange={(e) => setLastName(e.target.value)}
             />
@@ -131,7 +132,7 @@ const DashboardTutorInfo = () => {
               placeholder="Email"
               label="Email"
               width="80%"
-              inputIcon={"/icons/emailGray.svg"}
+              inputIcon={emailIcon}
               value={email}
               onchange={(e) => setEmail(e.target.value)}
             />
@@ -141,7 +142,7 @@ const DashboardTutorInfo = () => {
               placeholder="Phone Number"
               label="Phone Number"
               width="80%"
-              inputIcon={"/icons/phoneGray.svg"}
+              inputIcon={phoneIcon}
               value={phoneNumber}
               onchange={(e) => setPhoneNumber(e.target.value)}
             />
@@ -156,7 +157,7 @@ const DashboardTutorInfo = () => {
                   onChange={(e) => setSelectedCountry(e.target.value)}
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                 >
-                  <option disabled defaultValue={'-country-'} value="">
+                  <option disabled defaultValue={"-country-"} value="">
                     Country
                   </option>
                   {countryList.map((country, index) => (
@@ -165,19 +166,19 @@ const DashboardTutorInfo = () => {
                     </option>
                   ))}
                 </select>
-                <img
+                {/* <img
                   src={"/icons/locationGray.svg"}
                   alt="countryIcon"
                   className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={countryIcon}
                   alt="language icon"
                   width={20}
                   height={20}
                   className="absolute top-[12px] left-4 cursor-pointer"
-                /> */}
+                />
               </div>
             </div>
 
@@ -191,7 +192,7 @@ const DashboardTutorInfo = () => {
                   onChange={(e) => setSelectedSubject(e.target.value)}
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                 >
-                  <option disabled defaultValue={'-subject-'} value="">
+                  <option disabled defaultValue={"-subject-"} value="">
                     subject
                   </option>
                   <option value="Chinese">Chinese</option>
@@ -199,19 +200,19 @@ const DashboardTutorInfo = () => {
                   <option value="French">French</option>
                   <option value="Persian">Persian</option>
                 </select>
-                <img
+                {/* <img
                   src={"/icons/educationGray.svg"}
                   alt="subjectIcon"
                   className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={subjectIcon}
                   alt="language icon"
                   width={20}
                   height={20}
                   className="absolute top-[12px] left-4 cursor-pointer"
-                /> */}
+                />
               </div>
             </div>
             {/* ////////////////////////////////////////////////// */}
@@ -246,19 +247,19 @@ const DashboardTutorInfo = () => {
                           <option value="Russian">Russian</option>
                           <option value="Spanish">Spanish</option>
                         </select>
-                        <img
+                        {/* <img
                           src={"/icons/languageGray.svg"}
                           alt="languageIcon"
                           className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                        />
+                        /> */}
 
-                        {/* <Image
+                        <Image
                           src={languageIcon}
                           alt="language icon"
                           width={20}
                           height={20}
                           className="absolute top-[12px] left-4 cursor-pointer"
-                        /> */}
+                        />
                       </div>
                     </div>
 
@@ -286,40 +287,40 @@ const DashboardTutorInfo = () => {
                           <option value="C1">C1</option>
                           <option value="C2">C2</option>
                         </select>
-                        <img
+                        {/* <img
                           src={"/icons/levelIconGray.svg"}
                           alt="levelIcon"
                           className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                        />
+                        /> */}
 
-                        {/* <Image
+                        <Image
                           src={levelIcon}
                           alt="level icon"
                           width={20}
                           height={20}
                           className="absolute top-[12px] left-4 cursor-pointer"
-                        /> */}
+                        />
                       </div>
                     </div>
                   </div>
 
                   {/* Delete icon */}
                   <div className="mt-5">
-                    <img
+                    {/* <img
                       src={"/icons/binGray.svg"}
                       alt="binIcon"
                       className="w-6 h-6 cursor-pointer"
                       onClick={() => handleRemove(index)}
-                    />
+                    /> */}
 
-                    {/* <Image
+                    <Image
                       src={binIcon}
                       alt="bin"
                       width={24}
                       height={24}
                       className="cursor-pointer"
                       onClick={() => handleRemove(index)}
-                    /> */}
+                    />
                   </div>
                 </div>
               ))}
@@ -404,35 +405,35 @@ const DashboardTutorInfo = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <img
+                  {/* <img
                     src={"/icons/passwordIconGray.svg"}
                     alt="passwordIcon"
                     className="w-6 h-6 absolute top-[20px] left-5 -translate-y-1/2"
-                  />
+                  /> */}
 
-                  {/* <Image
+                  <Image
                     src={passwordIcon}
                     alt="pass icon"
                     width={24}
                     height={24}
                     className="absolute top-[20px] left-5 -translate-y-1/2"
-                  /> */}
+                  />
                 </div>
-                <img
+                {/* <img
                   src={"/icons/penDash.svg"}
                   alt="editIcon"
                   className="w-7 h-7 cursor-pointer mx-2"
                   onClick={toggleEdit}
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={editIcon}
                   alt="edit icon"
                   width={28}
                   height={28}
                   className="cursor-pointer mx-2"
                   onClick={toggleEdit}
-                /> */}
+                />
               </div>
             </div>
           </div>

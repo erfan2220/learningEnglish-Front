@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { DashboardMenuTypes } from "@/model/dashboardTypes";
+import Image from "next/image";
 
 const DashboardMenuItems = ({
   icon,
@@ -29,18 +30,18 @@ const DashboardMenuItems = ({
     >
       <div className="lg:w-[49%] md:w-[100px] md:ml-1 flex items-center">
         <div>
-          <img
+          {/* <img
             src={icon}
             alt="menu-icon"
             style={{ width: "80%", height: "80%" }}
-          />
-          {/* <Image
+          /> */}
+          <Image
             src={icon}
             alt={"menu-icon"}
             width={24}
             height={24}
             style={{ width: "80%", height: "80%" }}
-          /> */}
+          />
         </div>
         <p className="hidden md:block">{title}</p>
       </div>

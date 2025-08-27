@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
-// import dayIcon from "./../../assets/icons/dayIcon.svg";
-// import arrowIcon from "./../../assets/icons/arrowDown.svg";
+import dayIcon from "./../../assets/icons/dayIcon.svg";
+import arrowIcon from "./../../assets/icons/arrowDown.svg";
+import Image from "next/image";
 
 const SelectDate = () => {
   const [selectedDate, setSelectedDate] = useState("");
   return (
-    <div className="relative w-[180px] my-1 ">
+    <div className="relative min-w-[160px] ">
       <select
         name="selectDate"
         value={selectedDate}
@@ -26,18 +27,18 @@ const SelectDate = () => {
       </select>
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <img src={"/icons/dayIcon.svg"} alt="day icon" className="w-6 h-6" />
-        {/* <Image src={dayIcon} alt="language icon" width={24} height={24} /> */}
+        {/* <img src={"/icons/dayIcon.svg"} alt="day icon" className="w-6 h-6" /> */}
+        <Image src={dayIcon} alt="language icon" width={24} height={24} />
       </div>
 
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <img
+        {/* <img
           src={"/icons/arrowDown.svg"}
           alt="arrow icon"
           className="w-6 h-6"
-        />
+        /> */}
 
-        {/* <Image src={arrowIcon} alt="arrow icon" width={24} height={24} /> */}
+        <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
       </div>
     </div>
   );

@@ -15,12 +15,14 @@ import Link from "next/link";
 import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
+import { useRouter } from "next/navigation";
 
 const AuthorizationPage5 = () => {
   const [bio, setBio] = useState("");
   const [teachingStyle, setTeachingStyle] = useState("");
   const [goalsTeach, setGoalsTeach] = useState("");
   const [expect, setExpect] = useState("");
+  const router = useRouter();
 
   const [experience, setExperience] = useState([
     {
@@ -218,7 +220,7 @@ const AuthorizationPage5 = () => {
           </div>
         </div>
         {/* ======================================================================== */}
-        <div className=" flex flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
+        <div className=" flex flex-col justify-start text-sm sm:text-base text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
           <h1 className="text-[#45444A] font-bold text-xl">Description</h1>
           <p>
             Please write 3–5 short paragraphs to describe yourself, your
@@ -430,16 +432,19 @@ const AuthorizationPage5 = () => {
           {/* ========================================= */}
 
           <div className="flex items-center justify-between mt-6 w-full">
-            <Link href={"/tutorAuthentication/step4"}>
-              <Button type="submit" label={"Back"} btnIcon={null} />
-            </Link>
-            <Link href={"/tutorAuthentication/step6"}>
-              <Button
-                type="submit"
-                label={"Next Step"}
-                disabled={!btnTrigger}
-              />
-            </Link>
+            <Button
+              type="submit"
+              label={"Back"}
+              btnIcon={null}
+              onclick={() => router.push("/tutorAuthentication/step4")}
+            />
+
+            <Button
+              type="submit"
+              label={"Next Step"}
+              disabled={!btnTrigger}
+              onclick={() => router.push("/tutorAuthentication/step6")}
+            />
           </div>
         </div>
       </div>

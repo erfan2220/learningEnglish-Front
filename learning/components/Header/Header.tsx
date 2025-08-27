@@ -1,53 +1,69 @@
+"use client";
 import Link from "next/link";
-import React from "react";
-// import Image from "next/image";
-// import cartIcon from "../../assets/icons/cart.svg";
+import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import logoIcon from "../../assets/images/logo.png";
+import NavList from "./NavList";
+import { List } from "lucide-react";
+import { X } from "lucide-react";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [typeof window !== "undefined" ? window.location.pathname : ""]);
+
   return (
     <div className="bg-white/70 shadow-lg flex justify-between px-8 z-50 items-center font-bold text-sm text-[#45444A] fixed top-0 right-0 left-0 backdrop-blur-md">
       <Link href={"/"}>
-        <div className="h-[60px] w-32 border-2 border-black my-1.5">logo</div>
+        <div className="h-[60px] w-32 flex items-center justify-center">
+          <Image
+            src={logoIcon}
+            alt="logo"
+            width={100}
+            height={25}
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
       </Link>
 
-      <div>
-        <ul className="flex gap-6">
-          <li>Language</li>
-          <li>
-            <Link href={"/"}>Home Page</Link>
-          </li>
-          <li>
-            <Link href={"/courses"}>Courses</Link>
-          </li>
-          <li>
-            <Link href={"/tutor"}>Find Tutor</Link>
-          </li>
-          <li>
-            <Link href={"/dashboard/tutor"}>tutor dashboard</Link>
-          </li>
-          <li>
-            <Link href={"/dashboard/student"}>student dashboard</Link>
-          </li>
-          <li>
-            <Link href={"/tutorAuthentication"}>stepper</Link>
-          </li>
-        </ul>
+      <div className="hidden lg:block">
+        <NavList flexDir="row" />
       </div>
 
-      <div className="flex items-center gap-3">
-        {/* <Link href={"/cart"}>
-          <div className="relative ">
-            <Image src={cartIcon} alt="cart icon" width={32} height={32} />
-            <div className="bg-[#5F33E1] rounded-full px-1 absolute top-0 right-0 text-white text-xs font-semibold">
-              2
-            </div>
+      {/* Mobile nav */}
+      <div className="lg:hidden" ref={menuRef}>
+        <div
+          className="space-y-2 cursor-pointer p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={32} /> : <List size={32} />}
+        </div>
+
+        <div
+          className={`absolute top-full right-0 w-1/2 bg-white/90 shadow-lg z-50 font-bold text-sm text-[#45444A] rounded-xl backdrop-blur-md overflow-hidden transition-all duration-500 ease-in-out ${
+            isMenuOpen ? "max-h-96 opacity-100 mt-1" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="p-4">
+            <NavList flexDir="column" />
           </div>
-        </Link> */}
-        <Link href={"/signin"}>
-          <div className="px-8 py-3 rounded-2xl border-2 border-[#D2D2D2] hover:bg-[#5F33E1] hover:text-white shadow-md hover:scale-[1.02] transition-all duration-200">
-            Sign In
-          </div>
-        </Link>
+        </div>
       </div>
     </div>
   );

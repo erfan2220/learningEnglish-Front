@@ -2,10 +2,11 @@
 import Inputs from "@/components/Input/Input";
 import React, { useState } from "react";
 import { countryList } from "@/mock/countryList";
-// import experienceIcon from "./../../../assets/icons/experienceGray.svg";
-// import locationIcon from "./../../../assets/icons/locationGray.svg";
-// import dateIcon from "./../../../assets/icons/dayIcon.svg";
+import experienceIcon from "./../../../assets/icons/experienceGray.svg";
+import locationIcon from "./../../../assets/icons/locationGray.svg";
+import dateIcon from "./../../../assets/icons/dayIcon.svg";
 import Button from "@/components/Button/Button";
+import Image from "next/image";
 
 const DashboardTutorDescription = () => {
   const [bio, setBio] = useState("");
@@ -157,7 +158,7 @@ const DashboardTutorDescription = () => {
               <Inputs
                 placeholder="Experience Title"
                 type="text"
-                inputIcon={"/icons/experienceGray.svg"}
+                inputIcon={experienceIcon}
                 label="Experience Title"
                 value={exp.experience}
                 onchange={(e) =>
@@ -189,18 +190,18 @@ const DashboardTutorDescription = () => {
                     </option>
                   ))}
                 </select>
-                <img
+                {/* <img
                   src={"/icons/locationGray.svg"}
                   alt="locationIcon"
                   className="w-6 h-6 absolute top-[20px] left-4 -translate-y-1/2"
-                />
-                {/* <Image
+                /> */}
+                <Image
                   src={locationIcon}
                   alt="country icon"
                   width={24}
                   height={24}
                   className="absolute top-[20px] left-4 -translate-y-1/2"
-                /> */}
+                />
               </div>
             </div>
 
@@ -208,7 +209,7 @@ const DashboardTutorDescription = () => {
               <Inputs
                 placeholder="City"
                 type="text"
-                inputIcon={"/icons/locationGray.svg"}
+                inputIcon={locationIcon}
                 label="City"
                 value={exp.city}
                 onchange={(e) => handleChange(index, "city", e.target.value)}
@@ -220,7 +221,7 @@ const DashboardTutorDescription = () => {
               <Inputs
                 placeholder="Start Date"
                 type="date"
-                inputIcon={"/icons/dayIcon.svg"}
+                inputIcon={dateIcon}
                 label="Start Date"
                 value={exp.startDate}
                 onchange={(e) =>
@@ -234,7 +235,7 @@ const DashboardTutorDescription = () => {
               <Inputs
                 placeholder="End Date"
                 type="date"
-                inputIcon={"/icons/dayIcon.svg"}
+                inputIcon={dateIcon}
                 label="End Date"
                 value={exp.endDate}
                 onchange={(e) => handleChange(index, "endDate", e.target.value)}

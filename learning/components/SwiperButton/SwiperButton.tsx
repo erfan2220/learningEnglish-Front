@@ -2,8 +2,9 @@
 
 import React from "react";
 import { useSwiper } from "swiper/react";
-// import arrowForward from "./../../assets/icons/arrowForwardBtnPink.svg";
-// import arrowBack from "./../../assets/icons/arrowBackBtnPink.svg";
+import arrowForward from "./../../assets/icons/arrowForwardBtnPink.svg";
+import arrowBack from "./../../assets/icons/arrowBackBtnPink.svg";
+import Image from "next/image";
 
 const SwiperButton = () => {
   const swiper = useSwiper();
@@ -15,12 +16,12 @@ const SwiperButton = () => {
         aria-label="arrow back"
         className="hover:scale-105 transition-all duration-200 flex items-center justify-center"
       >
-        <img
+        {/* <img
           src={"/icons/arrowBackBtnPink.svg"}
           alt="arrow back"
           className="w-8 h-8"
-        />
-        {/* <Image src={arrowBack} alt="arrow back" width={32} height={32} /> */}
+        /> */}
+        <Image src={arrowBack} alt="arrow back" width={32} height={32} />
       </button>
 
       <button
@@ -28,13 +29,13 @@ const SwiperButton = () => {
         aria-label="arrow forward"
         className="hover:scale-105 transition-all duration-200 flex items-center justify-center"
       >
-        <img
+        {/* <img
           src={"/icons/arrowForwardBtnPink.svg"}
           alt="arrow forward"
           className="w-8 h-8"
-        />
+        /> */}
 
-        {/* <Image src={arrowForward} alt="arrow forward" width={32} height={32} /> */}
+        <Image src={arrowForward} alt="arrow forward" width={32} height={32} />
       </button>
     </div>
   );

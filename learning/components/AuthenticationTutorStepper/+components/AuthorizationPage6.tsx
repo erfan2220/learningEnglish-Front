@@ -10,10 +10,12 @@ import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
+import { useRouter } from "next/navigation";
 
 const AuthorizationPage6 = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const btnTrigger = selectedVideo !== null;
+  const router = useRouter();
 
   const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -154,7 +156,7 @@ const AuthorizationPage6 = () => {
           </div>
         </div>
         {/* ======================================================================== */}
-        <div className=" flex flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
+        <div className=" flex flex-col justify-start text-sm sm:text-base text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
           <h1 className="text-[#45444A] font-bold text-xl">
             Introduce Yourself with a Short Video
           </h1>
@@ -204,16 +206,19 @@ const AuthorizationPage6 = () => {
           {/* ========================================= */}
 
           <div className="flex items-center justify-between mt-6 w-full">
-            <Link href={"/tutorAuthentication/step5"}>
-              <Button type="submit" label={"Back"} btnIcon={null} />
-            </Link>
-            <Link href={"/tutorAuthentication/step7"}>
-              <Button
-                type="submit"
-                label={"Next Step"}
-                disabled={!btnTrigger}
-              />
-            </Link>
+            <Button
+              type="submit"
+              label={"Back"}
+              btnIcon={null}
+              onclick={() => router.push("/tutorAuthentication/step5")}
+            />
+
+            <Button
+              type="submit"
+              label={"Next Step"}
+              disabled={!btnTrigger}
+              onclick={() => router.push("/tutorAuthentication/step7")}
+            />
           </div>
         </div>
       </div>

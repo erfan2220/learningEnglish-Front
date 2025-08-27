@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
-// import replyIcon from "./../../../assets/icons/reply.svg";
-// import deleteIcon from "./../../../assets/icons/delete.svg";
+import replyIcon from "./../../../assets/icons/reply.svg";
+import deleteIcon from "./../../../assets/icons/delete.svg";
 import Button from "@/components/Button/Button";
-// import sentIcon from "./../../../assets/icons/sentWhite.svg";
+import sentIcon from "./../../../assets/icons/sentWhite.svg";
 import { Student } from "@/model/studentType";
 import { Tutor } from "@/model/tutorType";
+import Image from "next/image";
 
 type DashboardStudentMessagesInboxProps = {
   mainData: Student[];
@@ -55,7 +56,7 @@ const DashboardStudentMessagesInbox = ({
                   {message.messageText.slice(0, 100)}...
                 </p>
                 <div className="flex gap-2">
-                  <img
+                  {/* <img
                     src={"/icons/reply.svg"}
                     alt="replyIcon"
                     className="w-6 h-6 hover:cursor-pointer"
@@ -64,9 +65,9 @@ const DashboardStudentMessagesInbox = ({
 
                       setIsReplyOpen(true);
                     }}
-                  />
+                  /> */}
 
-                  {/* <Image
+                  <Image
                     src={replyIcon}
                     alt="reply icon"
                     width={24}
@@ -77,19 +78,19 @@ const DashboardStudentMessagesInbox = ({
 
                       setIsReplyOpen(true);
                     }}
-                  /> */}
-                  <img
+                  />
+                  {/* <img
                     src={"/icons/delete.svg"}
                     alt="deleteIcon"
                     className="w-6 h-6 hover:cursor-pointer"
-                  />
-                  {/* <Image
+                  /> */}
+                  <Image
                     src={deleteIcon}
                     alt="delete icon"
                     width={24}
                     height={24}
                     className="hover:cursor-pointer"
-                  /> */}
+                  />
                 </div>
               </div>
 
@@ -123,7 +124,7 @@ const DashboardStudentMessagesInbox = ({
               <Button
                 label="send"
                 type="submit"
-                btnIcon={"/icons/sentWhite.svg"}
+                btnIcon={sentIcon}
                 colorBtn="#97C01C"
                 colorBtnActive="5D7C02"
                 onclick={() => setIsReplyOpen(false)}

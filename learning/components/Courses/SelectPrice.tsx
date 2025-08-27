@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-// import levelIcon from "./../../assets/icons/levelIconGray.svg";
-// import arrowIcon from "./../../assets/icons/arrowDown.svg";
+import levelIcon from "./../../assets/icons/levelIconGray.svg";
+import arrowIcon from "./../../assets/icons/arrowDown.svg";
 import Inputs from "../Input/Input";
+import Image from "next/image";
 
 const SelectPrice = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ const SelectPrice = () => {
   }, []);
 
   return (
-    <div className="relative my-1 w-[200px]" ref={dropdownRef}>
+    <div className="relative min-w-[160px]" ref={dropdownRef}>
       <button
         className="w-full text-left text-[#5C5A60] border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-10 py-2 bg-white/80 text-sm h-11"
         onClick={() => setIsOpen(!isOpen)}
@@ -41,22 +42,22 @@ const SelectPrice = () => {
       </button>
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <img
+        {/* <img
           src={"/icons/levelIconGray.svg"}
           alt="level icon"
           className="w-6 h-6"
-        />
+        /> */}
 
-        {/* <Image src={levelIcon} alt="icon" width={24} height={24} /> */}
+        <Image src={levelIcon} alt="icon" width={24} height={24} />
       </div>
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <img
+        {/* <img
           src={"/icons/arrowDown.svg"}
           alt="arrow icon"
           className="w-6 h-6"
-        />
+        /> */}
 
-        {/* <Image src={arrowIcon} alt="arrow icon" width={24} height={24} /> */}
+        <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
       </div>
 
       {isOpen && (

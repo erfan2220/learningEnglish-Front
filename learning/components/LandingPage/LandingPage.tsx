@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-// import startPic from "/pana.svg";
-// import tutorPic from "./../../assets/images/tutorPic.svg";
+import startPic from "../../assets/images/pana.svg";
+import tutorPic from "./../../assets/images/tutorPic.svg";
 // import ukFlag from "./../../assets/icons/ukFlag.svg";
 // import frenchFlag from "./../../assets/icons/frenchFlag.svg";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import { featuresData } from "@/constant/features";
 import { becomeTutorData, becomeTutorListData } from "@/constant/becomeTutor";
 import Slide from "../Slide/Slide";
 import Button from "../Button/Button";
+import Image from "next/image";
 
 const LandingPage = () => {
   return (
@@ -40,18 +41,18 @@ const LandingPage = () => {
             </div>
 
             <div className="w-full md:w-1/2 md:mb-0 mb-6">
-              <img
+              {/* <img
                 src={"/images/pana.svg"}
                 alt="start pic"
                 className="w-[500px] h-[500px] mx-auto"
-              />
-              {/* <Image
+              /> */}
+              <Image
                 src={startPic}
                 alt="start pic"
                 width={500}
                 height={500}
                 className="mx-auto"
-              /> */}
+              />
             </div>
           </div>
         </Layout>
@@ -146,13 +147,13 @@ const LandingPage = () => {
           </div>
 
           <div className="hidden md:block md:w-1/2">
-            <img
+            {/* <img
               src={"/images/tutorPic.svg"}
               alt="become tutor pic"
               className="object-contain"
               style={{ width: "90%", height: "90%" }}
-            />
-            {/* <Image
+            /> */}
+            <Image
               src={tutorPic}
               alt="become tutor pic"
               width={100}
@@ -160,7 +161,7 @@ const LandingPage = () => {
               className="object-contain"
               style={{ width: "90%", height: "90%" }}
               priority
-            /> */}
+            />
           </div>
         </div>
       </Layout>

@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
-// import lessonIcon from "./../../../assets/icons/learningD.svg";
-// import homeworkIcon from "./../../../assets/icons/homeworkD.svg";
+import lessonIcon from "./../../../assets/icons/learningD.svg";
+import homeworkIcon from "./../../../assets/icons/homeworkD.svg";
 import DashboardTutorLessons from "./DashboardTutorLessons";
 import DashboardTutorHomeworks from "./DashboardTutorHomeworks";
+import Image from "next/image";
 
 const DashboardTutorDetail = () => {
   const [isActiveLesson, setIsActiveLesson] = useState(true);
@@ -25,19 +26,19 @@ const DashboardTutorDetail = () => {
           }}
         >
           <div>
-            <img
+            {/* <img
               src={"/icons/learningD.svg"}
               alt="lessonIcon"
               className="w-6 h-6"
               style={{ width: "80%", height: "80%" }}
-            />
-            {/* <Image
+            /> */}
+            <Image
               src={lessonIcon}
               alt={"lesson-icon"}
               width={24}
               height={24}
               style={{ width: "80%", height: "80%" }}
-            /> */}
+            />
           </div>
           <p>Lessons</p>
         </div>
@@ -56,20 +57,20 @@ const DashboardTutorDetail = () => {
           }}
         >
           <div>
-            <img
+            {/* <img
               src={"/icons/homeworkD.svg"}
               alt="homeworkIcon"
               className="w-6 h-6"
               style={{ width: "80%", height: "80%" }}
-            />
+            /> */}
 
-            {/* <Image
+            <Image
               src={homeworkIcon}
               alt={"HW-icon"}
               width={24}
               height={24}
               style={{ width: "80%", height: "80%" }}
-            /> */}
+            />
           </div>
           <p>Homeworks</p>
         </div>

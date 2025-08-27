@@ -2,11 +2,12 @@
 import Button from "@/components/Button/Button";
 import Inputs from "@/components/Input/Input";
 import React, { useState } from "react";
-// import partIcon from "./../../../assets/icons/lessonPartGray.svg";
-// import lessonIcon from "./../../../assets/icons/lessonGray.svg";
-// import addIcon from "./../../../assets/icons/addWhite.svg";
-// import binIcon from "./../../../assets/icons/binGray.svg";
+import partIcon from "./../../../assets/icons/lessonPartGray.svg";
+import lessonIcon from "./../../../assets/icons/lessonGray.svg";
+import addIcon from "./../../../assets/icons/addWhite.svg";
+import binIcon from "./../../../assets/icons/binGray.svg";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
+import Image from "next/image";
 
 interface AddLessonProps {
   handleClosePopup: () => void;
@@ -69,7 +70,7 @@ const AddLessonPopUp: React.FC<AddLessonProps> = ({
                   placeholder="Lesson Title"
                   label="Lesson Title"
                   type="text"
-                  inputIcon={"/icons/lessonGray.svg"}
+                  inputIcon={lessonIcon}
                   width="100%"
                   value={title}
                   onchange={(e) => setTitle(e.target.value)}
@@ -80,7 +81,7 @@ const AddLessonPopUp: React.FC<AddLessonProps> = ({
                   placeholder="Part of Lesson"
                   label="Part of Lesson"
                   type="text"
-                  inputIcon={"/icons/lessonPartGray.svg"}
+                  inputIcon={partIcon}
                   width="100%"
                   value={part}
                   onchange={(e) => setPart(e.target.value)}
@@ -131,20 +132,20 @@ const AddLessonPopUp: React.FC<AddLessonProps> = ({
 
                     {doc.docFile && (
                       <div className=" absolute right-0 top-2">
-                        <img
+                        {/* <img
                           src={"/icons/binGray.svg"}
                           alt="bin"
                           className="w-[18px] h-[18px] cursor-pointer"
                           onClick={() => handleRemove(index)}
-                        />
-                        {/* <Image
+                        /> */}
+                        <Image
                           src={binIcon}
                           alt="bin"
                           width={18}
                           height={18}
                           className="cursor-pointer"
                           onClick={() => handleRemove(index)}
-                        /> */}
+                        />
                       </div>
                     )}
                   </div>
@@ -176,7 +177,7 @@ const AddLessonPopUp: React.FC<AddLessonProps> = ({
               type="submit"
               onclick={handleAddLesson}
               colorBtn="#97C01C"
-              btnIcon={"/icons/addWhite.svg"}
+              btnIcon={addIcon}
             />
           </form>
         </div>

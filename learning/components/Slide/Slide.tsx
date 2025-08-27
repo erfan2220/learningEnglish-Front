@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import React from "react";
-// import arrowIcon from "./../../assets/icons/arrowPink.svg";
+import arrowIcon from "./../../assets/icons/arrowPink.svg";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -22,12 +23,12 @@ const Slide = () => {
         >
           <div>more</div>
           <div>
-            <img
+            {/* <img
               src={"/icons/arrowPink.svg"}
               alt="arrow icon"
               className="w-5 h-5"
-            />
-            {/* <Image src={arrowIcon} alt="arrow icon" width={20} height={20} /> */}
+            /> */}
+            <Image src={arrowIcon} alt="arrow icon" width={20} height={20} />
           </div>
         </Link>
       </div>

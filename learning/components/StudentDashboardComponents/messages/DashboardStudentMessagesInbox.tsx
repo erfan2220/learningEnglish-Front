@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
-// import replyIcon from "./../../../assets/icons/reply.svg";
-// import deleteIcon from "./../../../assets/icons/delete.svg";
+import React, { useEffect, useState } from "react";
+import replyIcon from "./../../../assets/icons/reply.svg";
+import deleteIcon from "./../../../assets/icons/delete.svg";
 import Button from "@/components/Button/Button";
-// import sentIcon from "./../../../assets/icons/sentWhite.svg";
+import sentIcon from "./../../../assets/icons/sentWhite.svg";
 import { Student } from "@/model/studentType";
 import { Tutor } from "@/model/tutorType";
+import Image from "next/image";
 
 type DashboardStudentMessagesInboxProps = {
   mainData: Student[];
@@ -21,6 +22,12 @@ const DashboardStudentMessagesInbox = ({
     null
   );
   const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    setIsDisabled(text.trim() === "");
+  }, [text]);
 
   return (
     <div className="my-8 relative">
@@ -55,17 +62,7 @@ const DashboardStudentMessagesInbox = ({
                   {message.messageText.slice(0, 100)}...
                 </p>
                 <div className="flex gap-2">
-                  <img
-                    src={"/icons/reply.svg"}
-                    alt="reply icon"
-                    className="w-6 h-6 hover:cursor-pointer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-
-                      setIsReplyOpen(true);
-                    }}
-                  />
-                  {/* <Image
+                  <Image
                     src={replyIcon}
                     alt="reply icon"
                     width={24}
@@ -73,22 +70,16 @@ const DashboardStudentMessagesInbox = ({
                     className="hover:cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
-
                       setIsReplyOpen(true);
                     }}
-                  /> */}
-                  <img
-                    src={"/icons/delete.svg"}
-                    alt="delete icon"
-                    className="w-6 h-6 hover:cursor-pointer"
                   />
-                  {/* <Image
+                  <Image
                     src={deleteIcon}
                     alt="delete icon"
                     width={24}
                     height={24}
                     className="hover:cursor-pointer"
-                  /> */}
+                  />
                 </div>
               </div>
 
@@ -101,17 +92,19 @@ const DashboardStudentMessagesInbox = ({
           </div>
         );
       })}
-      {/* /////////////////////////////////////////////// */}
+
       {isReplyOpen && (
-        <div className="fixed  inset-0 bg-black/50 z-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center">
           <div className="bg-white relative rounded-2xl shadow-xl p-6 w-[90%] sm:w-[600px]">
             <p className="text-[#45444A] text-sm mb-2">Write your text here:</p>
             <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
               rows={6}
               className="w-full text-sm p-2 border-2 border-[#D2D2D2] bg-[#F1ECFF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#97C01C]"
               placeholder="Write your reply here..."
             ></textarea>
-            <div className="flex justify-end ">
+            <div className="flex justify-end mt-4">
               <button
                 className="px-3 py-1 top-2 hover:cursor-pointer right-2 absolute bg-[#5F33E1] text-white rounded-full"
                 onClick={() => setIsReplyOpen(false)}
@@ -120,12 +113,20 @@ const DashboardStudentMessagesInbox = ({
               </button>
 
               <Button
-                label="send"
-                type="submit"
-                btnIcon={"/icons/sentWhite.svg"}
-                colorBtn="#97C01C"
-                colorBtnActive="5D7C02"
-                onclick={() => setIsReplyOpen(false)}
+                label="Send"
+                type="button"
+                disabled={isDisabled}
+                btnIcon={sentIcon}
+                colorBtn={isDisabled ? "bg-[#BBBBBB]" : "bg-[#97C01C]"}
+                colorBtnHover={isDisabled ? "" : "hover:bg-[#7DA216]"}
+                colorBtnActive={isDisabled ? "" : "active:bg-[#5D7C02]"}
+                onclick={() => {
+                  if (!isDisabled) {
+                    console.log("Sending message:", text);
+                    setIsReplyOpen(false);
+                    setText("");
+                  }
+                }}
               />
             </div>
           </div>

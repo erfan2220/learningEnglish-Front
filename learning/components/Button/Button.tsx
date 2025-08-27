@@ -32,11 +32,14 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       disabled={disabled}
       style={{
-        width: widthBtn,
-        marginTop: marginTop,
-        fontWeight: fontWeight,
-        ...style,
-      }}
+          width: widthBtn,
+          backgroundColor: colorBtn,
+          color: colorBtnText,
+          borderColor: colorBtnBorder,
+          marginTop: marginTop,
+          fontWeight: fontWeight,
+          ...style,
+        }}
       onClick={onclick}
     >
       <p>{label}</p>
@@ -75,15 +78,15 @@ export default Button;
 //         className={`rounded-2xl flex gap-4 items-center justify-center border-2 px-6 py-2 shadow-lg shadow-black/30 hover:cursor-pointer font-medium ${colorBtn} ${colorBtnBorder} ${colorBtnText} ${colorBtnHover} ${colorBtnActive}`}
 //         type={type}
 //         disabled={disabled}
-//         style={{
-//           width: widthBtn,
-//           backgroundColor: "#BBBBBB",
-//           color: colorBtnText,
-//           borderColor: colorBtnBorder,
-//           marginTop: marginTop,
-//           fontWeight: fontWeight,
-//           ...style,
-//         }}
+        // style={{
+        //   width: widthBtn,
+        //   backgroundColor: "#BBBBBB",
+        //   color: colorBtnText,
+        //   borderColor: colorBtnBorder,
+        //   marginTop: marginTop,
+        //   fontWeight: fontWeight,
+        //   ...style,
+        // }}
 //         onClick={onclick}
 //       >
 //         <p>{label}</p>

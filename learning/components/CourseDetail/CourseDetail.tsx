@@ -2,16 +2,17 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
 import Country from "../Country/Country";
-// import clockIcon from "./../../assets/icons/clockPurple.svg";
-// import levelIcon from "./../../assets/icons/levelIcon.svg";
-// import peopleIcon from "./../../assets/icons/people.svg";
-// import languageIcon from "./../../assets/icons/languagePurple.svg";
+import clockIcon from "./../../assets/icons/clockPurple.svg";
+import levelIcon from "./../../assets/icons/levelIcon.svg";
+import peopleIcon from "./../../assets/icons/people.svg";
+import languageIcon from "./../../assets/icons/languagePurple.svg";
 import Button from "../Button/Button";
 import axiosInstance from "@/APIs/axiosInstance";
 import { TemporaryCourse } from "@/model/courseType";
-// import profilePhoto from "./../../assets/icons/profilePhoto.svg";
-// import dayIcon from "./../../assets/icons/dayPink.svg";
-// import timeIcon from "./../../assets/icons/length.svg";
+import profilePhoto from "./../../assets/icons/profilePhoto.svg";
+import dayIcon from "./../../assets/icons/dayPink.svg";
+import timeIcon from "./../../assets/icons/length.svg";
+import Image from "next/image";
 
 const CourseDetail = ({ courseId }: { courseId: number }) => {
   const [course, setCourse] = useState<TemporaryCourse | null>(null);
@@ -110,65 +111,65 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
                   Sorry, your browser does not support inline SVG.
                 </svg> */}
 
-                <img
+                {/* <img
                   src={"/icons/length.svg"}
                   alt="time icon"
                   className="w-[22px] h-[22px]"
-                />
-                {/* <Image src={timeIcon} alt="time icon" width={22} height={22} /> */}
+                /> */}
+                <Image src={timeIcon} alt="time icon" width={22} height={22} />
                 <p>{course.length} mins</p>
               </div>
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                <img
+                {/* <img
                   src={"/icons/levelIcon.svg"}
                   alt="level icon"
                   className="w-[22px] h-[22px]"
-                />
-                {/* <Image
+                /> */}
+                <Image
                   src={levelIcon}
                   alt="level icon"
                   width={22}
                   height={22}
-                /> */}
+                />
                 <p>{course.level}</p>
               </div>
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                <img
+                {/* <img
                   src={"/icons/people.svg"}
                   alt="people icon"
                   className="w-[22px] h-[22px]"
-                />
-                {/* <Image
+                /> */}
+                <Image
                   src={peopleIcon}
                   alt="people icon"
                   width={22}
                   height={22}
-                /> */}
+                />
                 <p>{course.capacity} spots / class</p>
               </div>
 
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                <img
+                {/* <img
                   src={"/icons/dayPink.svg"}
                   alt="day icon"
                   className="w-[22px] h-[22px]"
-                />
-                {/* <Image src={dayIcon} alt="day icon" width={22} height={22} /> */}
+                /> */}
+                <Image src={dayIcon} alt="day icon" width={22} height={22} />
                 <p>{course.schedule_day}</p>
               </div>
 
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                <img
+                {/* <img
                   src={"/icons/clockPurple.svg"}
                   alt="clock icon"
                   className="w-[22px] h-[22px]"
-                />
-                {/* <Image
+                /> */}
+                <Image
                   src={clockIcon}
                   alt="clock icon"
                   width={22}
                   height={22}
-                /> */}
+                />
                 <p>
                   {formatTime(course.schedule_start)}-
                   {formatTime(course.schedule_end)}
@@ -212,18 +213,18 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
 
             {/* Tutor Info */}
             <div className="flex gap-4 items-center my-5">
-              <img
+              {/* <img
                 src={course.tutor?.profile_picture || "/icons/profilePhoto.svg"}
                 alt="tutor photo"
                 className="w-[70px] h-[70px] rounded-full object-cover"
-              />
-              {/* <Image
+              /> */}
+              <Image
                 src={course.tutor?.profile_picture || profilePhoto}
                 alt="tutor photo"
                 width={70}
                 height={70}
                 className="rounded-full object-cover"
-              /> */}
+              />
               <div className="text-[#45444A]">
                 <p className="font-bold">Sam Smith</p>
                 <p className="text-[#737177] text-sm">Teacher</p>
@@ -232,17 +233,17 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
 
             {/* Active Students */}
             <div className="flex gap-2 px-3 py-1 text-[#5C5A60]">
-              <img
+              {/* <img
                 src={"/icons/people.svg"}
                 alt="students icon"
                 className="w-[22px] h-[22px]"
-              />
-              {/* <Image
+              /> */}
+              <Image
                 src={peopleIcon}
                 alt="students icon"
                 width={22}
                 height={22}
-              /> */}
+              />
               <p className="font-semibold">
                 <b>{course.active_students}</b> Active Students
               </p>
@@ -250,17 +251,17 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
 
             {/* Languages Spoken */}
             <div className="flex items-center gap-2 px-3 py-1 text-[#5C5A60]">
-              <img
+              {/* <img
                 src={"/icons/languagePurple.svg"}
                 alt="language icon"
                 className="w-[22px] h-[22px]"
-              />
-              {/* <Image
+              /> */}
+              <Image
                 src={languageIcon}
                 alt="language icon"
                 width={22}
                 height={22}
-              /> */}
+              />
               <div className="font-semibold flex flex-wrap gap-6">
                 Speaks{" "}
                 {course.tutor.languages_spoken.map((Language, index) => (

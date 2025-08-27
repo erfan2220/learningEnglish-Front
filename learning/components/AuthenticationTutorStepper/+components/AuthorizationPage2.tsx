@@ -11,12 +11,13 @@ import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
+import { useRouter } from "next/navigation";
 
 const AuthorizationPage2 = () => {
   const [imagePreview, setImagePreview] = useState(profilePhoto);
+  const router = useRouter();
 
-  const btnTrigger =
-    imagePreview !== profilePhoto && imagePreview !== "";
+  const btnTrigger = imagePreview !== profilePhoto && imagePreview !== "";
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -145,7 +146,7 @@ const AuthorizationPage2 = () => {
           </div>
         </div>
         {/* ======================================================================== */}
-        <div className="flex flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
+        <div className="flex text-sm sm:text-base flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
           <h1 className="text-[#45444A] font-bold text-xl">About</h1>
           <p>
             To help students recognize and connect with you, upload a clear and
@@ -195,12 +196,19 @@ const AuthorizationPage2 = () => {
           {/* ========================================= */}
 
           <div className="flex items-center justify-between mt-6 w-full">
-            <Link href={"/tutorAuthentication/step1"}>
-              <Button type="submit" label={"Back"} btnIcon={null}/>
-            </Link>
-            <Link href={"/tutorAuthentication/step3"}>
-              <Button type="submit" label={"Next Step"} disabled={!btnTrigger}/>
-            </Link>
+            <Button
+              type="submit"
+              label={"Back"}
+              btnIcon={null}
+              onclick={() => router.push("/tutorAuthentication/step1")}
+            />
+
+            <Button
+              type="submit"
+              label={"Next Step"}
+              disabled={!btnTrigger}
+              onclick={() => router.push("/tutorAuthentication/step3")}
+            />
           </div>
         </div>
       </div>

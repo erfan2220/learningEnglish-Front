@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
-// import languageIcon from "./../../assets/icons/languageGray.svg";
-// import arrowIcon from "./../../assets/icons/arrowDown.svg";
+import languageIcon from "./../../assets/icons/languageGray.svg";
+import arrowIcon from "./../../assets/icons/arrowDown.svg";
+import Image from "next/image";
 
 const SelectLanguage = () => {
   const [selectLanguage, setSelectLanguage] = useState("");
   return (
-    <div className="relative my-1 w-[180px]">
+    <div className="relative min-w-[160px]">
       <select
         name="selectLanguage"
         value={selectLanguage}
@@ -21,21 +22,21 @@ const SelectLanguage = () => {
       </select>
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <img
+        {/* <img
           src={"/icons/languageGray.svg"}
           alt="language icon"
           className="w-6 h-6"
-        />
-        {/* <Image src={languageIcon} alt="language icon" width={24} height={24} /> */}
+        /> */}
+        <Image src={languageIcon} alt="language icon" width={24} height={24} />
       </div>
 
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <img
+        {/* <img
           src={"/icons/arrowDown.svg"}
           alt="arrow icon"
           className="w-6 h-6"
-        />
-        {/* <Image src={arrowIcon} alt="arrow icon" width={24} height={24} /> */}
+        /> */}
+        <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
       </div>
     </div>
   );

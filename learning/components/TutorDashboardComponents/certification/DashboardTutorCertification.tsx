@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
-// import certFile from "./../../../assets/icons/certFile.svg";
-// import certIcon from "./../../../assets/icons/certificateGray.svg";
-// import issueByIcon from "./../../../assets/icons/issueBy.svg";
-// import dateIcon from "./../../../assets/icons/dayIcon.svg";
+import certFile from "./../../../assets/icons/certFile.svg";
+import certIcon from "./../../../assets/icons/certificateGray.svg";
+import issueByIcon from "./../../../assets/icons/issueBy.svg";
+import dateIcon from "./../../../assets/icons/dayIcon.svg";
 import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
+import Image from "next/image";
 
 const DashboardTutorCertification = () => {
   const [certifications, setCertifications] = useState([
@@ -13,7 +14,7 @@ const DashboardTutorCertification = () => {
       certTitle: "",
       issueBy: "",
       issueDate: "",
-      imagePreview: "/icons/certFile.svg",
+      imagePreview: certFile,
     },
   ]);
 
@@ -24,7 +25,7 @@ const DashboardTutorCertification = () => {
         certTitle: "",
         issueBy: "",
         issueDate: "",
-        imagePreview: "/icons/certFile.svg",
+        imagePreview: certFile,
       },
     ]);
   };
@@ -80,7 +81,7 @@ const DashboardTutorCertification = () => {
               <Inputs
                 placeholder="Certification Title"
                 type="text"
-                inputIcon={"/icons/certificateGray.svg"}
+                inputIcon={certIcon}
                 label="Certification Title"
                 value={cert.certTitle}
                 onchange={(e) =>
@@ -93,7 +94,7 @@ const DashboardTutorCertification = () => {
               <Inputs
                 placeholder="Issue By"
                 type="text"
-                inputIcon={"/icons/issueBy.svg"}
+                inputIcon={issueByIcon}
                 label="Issue By"
                 value={cert.issueBy}
                 onchange={(e) => handleChange(index, "issueBy", e.target.value)}
@@ -104,7 +105,7 @@ const DashboardTutorCertification = () => {
               <Inputs
                 placeholder="Issue Date"
                 type="date"
-                inputIcon={"/icons/dayIcon.svg"}
+                inputIcon={dateIcon}
                 label="Issue Date"
                 value={cert.issueDate}
                 onchange={(e) =>
@@ -116,18 +117,18 @@ const DashboardTutorCertification = () => {
 
             <div className="flex flex-col justify-center items-center my-4">
               <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-gray-300">
-                <img
+                {/* <img
                   src={cert.imagePreview}
                   alt="cert"
                   className="object-cover w-[120px] h-[120px]"
-                />
-                {/* <Image
+                /> */}
+                <Image
                   src={cert.imagePreview}
                   alt="cert"
                   width={120}
                   height={120}
                   className="object-cover"
-                /> */}
+                />
               </div>
               <label className="cursor-pointer text-blue-600 underline mt-2">
                 Upload photo

@@ -2,8 +2,9 @@
 import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
 import React from "react";
-// import downloadIcon from "./../../../assets/icons/download.svg";
-// import uploadIcon from "./../../../assets/icons/upload.svg";
+import downloadIcon from "./../../../assets/icons/download.svg";
+import uploadIcon from "./../../../assets/icons/upload.svg";
+import Image from "next/image";
 
 const DashboardTutorHomeworks = () => {
   const { courseId } = useParams();
@@ -57,17 +58,17 @@ const DashboardTutorHomeworks = () => {
                           download
                           className="text-blue-600 hover:underline  mt-1 inline-block"
                         >
-                          <img
+                          {/* <img
                             src={"/icons/download.svg"}
                             alt="download"
                             className="w-6 h-6"
-                          />
-                          {/* <Image
+                          /> */}
+                          <Image
                             src={downloadIcon}
                             alt="download"
                             width={24}
                             height={24}
-                          /> */}
+                          />
                         </a>
                       </div>
                       <div className="text-xs sm:flex justify-center hidden  sm:w-1/5">
@@ -83,18 +84,18 @@ const DashboardTutorHomeworks = () => {
                           onChange={handleImageChange}
                           className="hidden"
                         />
-                        <img
+                        {/* <img
                           src={"/icons/upload.svg"}
                           alt="uploadIcon"
                           className="w-6 h-6"
-                        />
+                        /> */}
 
-                        {/* <Image
+                        <Image
                           src={uploadIcon}
                           alt="download"
                           width={24}
                           height={24}
-                        /> */}
+                        />
                       </div>
                     </div>
                   ))}

@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
-// import clockIcon from "./../../assets/icons/clockGray.svg";
-// import arrowIcon from "./../../assets/icons/arrowDown.svg";
+import clockIcon from "./../../assets/icons/clockGray.svg";
+import arrowIcon from "./../../assets/icons/arrowDown.svg";
+import Image from "next/image";
 
 const SelectTime = () => {
   const [selectedTime, setSelectedTime] = useState("");
   return (
-    <div className="relative my-1 w-[180px]">
+    <div className="relative min-w-[160px]">
       <select
         name="selectTime"
         value={selectedTime}
@@ -16,32 +17,32 @@ const SelectTime = () => {
         <option value="" disabled hidden>
           Time
         </option>
-        <option value="0-4">12 am - 4 am</option>
-        <option value="4-8">4 am - 8 am</option>
-        <option value="8-12">8 am - 12 pm</option>
-        <option value="12-16">12 pm - 4 pm</option>
-        <option value="16-20">4 pm - 8 pm</option>
-        <option value="20-24">8 pm - 12 am</option>
+        <option value="0-4">00:00 - 0:00</option>
+        <option value="4-8">04:00 - 08:00</option>
+        <option value="8-12">08:00 - 12:00</option>
+        <option value="12-16">12:00 - 16:00</option>
+        <option value="16-20">16:00 - 20:00</option>
+        <option value="20-24">20:00 - 24:00</option>
       </select>
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <img
+        {/* <img
           src={"/icons/clockGray.svg"}
           alt="clock icon"
           className="w-6 h-6"
-        />
+        /> */}
 
-        {/* <Image src={clockIcon} alt="clock icon" width={24} height={24} /> */}
+        <Image src={clockIcon} alt="clock icon" width={24} height={24} />
       </div>
 
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        <img
+        {/* <img
           src={"/icons/arrowDown.svg"}
           alt="arrow icon"
           className="w-6 h-6"
-        />
+        /> */}
 
-        {/* <Image src={arrowIcon} alt="arrow icon" width={24} height={24} /> */}
+        <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
       </div>
     </div>
   );

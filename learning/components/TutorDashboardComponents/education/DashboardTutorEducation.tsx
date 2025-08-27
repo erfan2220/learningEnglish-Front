@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
-// import instituteIcon from "./../../../assets/icons/institutionGray.svg";
-// import locationIcon from "./../../../assets/icons/locationGray.svg";
-// import dateIcon from "./../../../assets/icons/dayIcon.svg";
-// import degreeIcon from "./../../../assets/icons/degreeGray.svg";
-// import fieldIcon from "./../../../assets/icons/educationGray.svg";
+import instituteIcon from "./../../../assets/icons/institutionGray.svg";
+import locationIcon from "./../../../assets/icons/locationGray.svg";
+import dateIcon from "./../../../assets/icons/dayIcon.svg";
+import degreeIcon from "./../../../assets/icons/degreeGray.svg";
+import fieldIcon from "./../../../assets/icons/educationGray.svg";
 import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
+import Image from "next/image";
 
 const DashboardTutorEducation = () => {
   const [educations, setEducations] = useState([
@@ -114,18 +115,18 @@ const DashboardTutorEducation = () => {
                     Specialist Degree
                   </option>
                 </select>
-                <img
+                {/* <img
                   src={"/icons/degreeGray.svg"}
                   alt="degreeIcon"
                   className="w-6 h-6 absolute top-[20px] left-4 -translate-y-1/2"
-                />
-                {/* <Image
+                /> */}
+                <Image
                   src={degreeIcon}
                   alt="degree icon"
                   width={24}
                   height={24}
                   className="absolute top-[20px] left-4 -translate-y-1/2"
-                /> */}
+                />
               </div>
             </div>
 
@@ -133,7 +134,7 @@ const DashboardTutorEducation = () => {
               <Inputs
                 placeholder="Institution Name"
                 type="text"
-                inputIcon={"/icons/institutionGray.svg"}
+                inputIcon={instituteIcon}
                 label="Institution Name"
                 value={edu.institution}
                 onchange={(e) =>
@@ -165,19 +166,19 @@ const DashboardTutorEducation = () => {
                     </option>
                   ))}
                 </select>
-                <img
+                {/* <img
                   src={"/icons/locationGray.svg"}
                   alt="locationIcon"
                   className="w-6 h-6 absolute top-[20px] left-4 -translate-y-1/2"
-                />
+                /> */}
 
-                {/* <Image
+                <Image
                   src={locationIcon}
                   alt="country icon"
                   width={24}
                   height={24}
                   className="absolute top-[20px] left-4 -translate-y-1/2"
-                /> */}
+                />
               </div>
             </div>
 
@@ -185,7 +186,7 @@ const DashboardTutorEducation = () => {
               <Inputs
                 placeholder="Institution City"
                 type="text"
-                inputIcon={"/icons/locationGray.svg"}
+                inputIcon={locationIcon}
                 label="Institution City"
                 value={edu.city}
                 onchange={(e) => handleChange(index, "city", e.target.value)}
@@ -197,7 +198,7 @@ const DashboardTutorEducation = () => {
               <Inputs
                 placeholder="Field of Study"
                 type="text"
-                inputIcon={"/icons/educationGray.svg"}
+                inputIcon={fieldIcon}
                 label="Field of Study"
                 value={edu.field}
                 onchange={(e) => handleChange(index, "field", e.target.value)}
@@ -209,7 +210,7 @@ const DashboardTutorEducation = () => {
               <Inputs
                 placeholder="Start Date"
                 type="date"
-                inputIcon={"/icons/dayIcon.svg"}
+                inputIcon={dateIcon}
                 label="Start Date"
                 value={edu.startDate}
                 onchange={(e) =>
@@ -223,7 +224,7 @@ const DashboardTutorEducation = () => {
               <Inputs
                 placeholder="End Date"
                 type="date"
-                inputIcon={"/icons/dayIcon.svg"}
+                inputIcon={dateIcon}
                 label="End Date"
                 value={edu.endDate}
                 onchange={(e) => handleChange(index, "endDate", e.target.value)}

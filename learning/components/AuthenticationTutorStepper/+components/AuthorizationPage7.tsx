@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
 import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
 import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
@@ -7,12 +7,72 @@ import educationWhite from "../../../assets/icons/educationWhite.svg";
 import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
 import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
 import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
+import languageIcon from "./../../../assets/icons/languageGray.svg";
+import courseTitleIcon from "../../../assets/icons/courseTitle.svg";
+import durationTime from "../../../assets/icons/durationTime.svg";
+import priceIcon from "../../../assets/icons/priceGray.svg";
+import lesson from "../../../assets/icons/lessonPartGray.svg";
+import timeSlot from "../../../assets/icons/clockGray.svg";
+import calender from "../../../assets/icons/dayIcon.svg";
+
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
+import { useRouter } from "next/navigation";
+import Inputs from "@/components/Input/Input";
+import CheckBox from "@/components/CheckBox.tsx/CheckBox";
 
 const AuthorizationPage7 = () => {
-  const btnTrigger = false;
+  const router = useRouter();
+
+  const [course, setCourse] = useState([
+    {
+      courseTitle: "",
+      duration: "",
+      price: "",
+      lessonPackage: "",
+      languagePart: "",
+      daysAvailable: [] as string[],
+      timeSlotPart: "",
+      startDate: "",
+      description: "",
+    },
+  ]);
+
+  const btnTrigger = course.every(
+    (c) =>
+      c.courseTitle !== "" &&
+      c.duration !== "" &&
+      c.price !== "" &&
+      c.lessonPackage !== "" &&
+      c.languagePart !== "" &&
+      c.daysAvailable.length > 0 &&
+      c.timeSlotPart !== "" &&
+      c.startDate !== "" &&
+      c.description !== ""
+  );
+
+  const handleAddCourse = () => {
+    setCourse([
+      ...course,
+      {
+        courseTitle: "",
+        duration: "",
+        price: "",
+        lessonPackage: "",
+        languagePart: "",
+        daysAvailable: [] as string[],
+        timeSlotPart: "",
+        startDate: "",
+        description: "",
+      },
+    ]);
+  };
+
+  const handleRemoveCourse = (index: number) => {
+    const updated = course.filter((_, i) => i !== index);
+    setCourse(updated);
+  };
 
   return (
     <div className="py-2 pt-6 md:py-12">
@@ -148,24 +208,252 @@ const AuthorizationPage7 = () => {
           </div>
         </div>
         {/* ======================================================================== */}
-        <div className=" flex flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
+        <div className="w-full flex flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
           <h1 className="text-[#45444A] font-bold text-xl">Pricing</h1>
-          <p>
+          <p className="text-sm sm:text-base">
             Add your available lesson types, durations, and prices. You can also
             offer trial lessons and discounts for lesson packages. This helps
             students choose the best option for their goals and budget.
           </p>
 
           {/* ================================= */}
+          {course.map((courseItem, index) => (
+            <div
+              key={index}
+              className="relative w-full border-b-3 border-[#D2D2D2] pb-4 flex flex-col gap-2"
+            >
+              {course.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => handleRemoveCourse(index)}
+                  className="absolute -top-1 right-0 text-[#E13350] text-xs sm:text-sm font-bold underline"
+                >
+                  Delete Course
+                </button>
+              )}
+              <Inputs
+                placeholder="Course Title"
+                type="text"
+                label="Course Title"
+                inputIcon={courseTitleIcon}
+                width="100%"
+                value={courseItem.courseTitle}
+                onchange={(e) => {
+                  const updated = [...course];
+                  updated[index].courseTitle = e.target.value;
+                  setCourse(updated);
+                }}
+              />
+              <Inputs
+                placeholder="Duration in Minute"
+                type="text"
+                label="Duration in Minute"
+                inputIcon={durationTime}
+                width="100%"
+                value={courseItem.duration}
+                onchange={(e) => {
+                  const updated = [...course];
+                  updated[index].duration = e.target.value;
+                  setCourse(updated);
+                }}
+              />
+              <Inputs
+                placeholder="Price per Hour"
+                type="text"
+                label="Price per Hour"
+                inputIcon={priceIcon}
+                width="100%"
+                value={courseItem.price}
+                onchange={(e) => {
+                  const updated = [...course];
+                  updated[index].price = e.target.value;
+                  setCourse(updated);
+                }}
+              />
+              <Inputs
+                placeholder="Lesson package"
+                type="text"
+                label="Lesson package"
+                inputIcon={lesson}
+                width="100%"
+                value={courseItem.lessonPackage}
+                onchange={(e) => {
+                  const updated = [...course];
+                  updated[index].lessonPackage = e.target.value;
+                  setCourse(updated);
+                }}
+              />
+              {/* =============== */}
+              <div className="w-full">
+                <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                  Language
+                </label>
+                <div className="relative">
+                  <select
+                    value={courseItem.languagePart}
+                    onChange={(e) => {
+                      const updated = [...course];
+                      updated[index].languagePart = e.target.value;
+                      setCourse(updated);
+                    }}
+                    className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+                  >
+                    <option disabled value="">
+                      languages
+                    </option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="English">English</option>
+                    <option value="French">French</option>
+                    <option value="German">German</option>
+                    <option value="Persian">Persian</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Spanish">Spanish</option>
+                  </select>
 
+                  <Image
+                    src={languageIcon}
+                    alt="language icon"
+                    width={20}
+                    height={20}
+                    className="absolute top-[12px] left-4 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              {/* ====================== */}
+              <div className="w-full mt-3">
+                <label>Days Available</label>
+                <div className="w-full flex flex-wrap gap-x-4 gap-y-0 ">
+                  {[
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                  ].map((day) => (
+                    <CheckBox
+                      key={day}
+                      label={day}
+                      checked={courseItem.daysAvailable.includes(day)}
+                      onChange={(e) => {
+                        const updated = [...course];
+                        if (e.target.checked) {
+                          updated[index].daysAvailable = [
+                            ...updated[index].daysAvailable,
+                            day,
+                          ];
+                        } else {
+                          updated[index].daysAvailable = updated[
+                            index
+                          ].daysAvailable.filter((d) => d !== day);
+                        }
+                        setCourse(updated);
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+              {/* ============== */}
+
+              <div className="w-full">
+                <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                  Time Slots
+                </label>
+                <div className="relative">
+                  <select
+                    value={courseItem.timeSlotPart}
+                    onChange={(e) => {
+                      const updated = [...course];
+                      updated[index].timeSlotPart = e.target.value;
+                      setCourse(updated);
+                    }}
+                    className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+                  >
+                    <option disabled value="">
+                      Time Slot
+                    </option>
+                    <option value="slot1">00:00 - 02:00</option>
+                    <option value="slot2">02:00 - 04:00</option>
+                    <option value="slot3">04:00 - 06:00</option>
+                    <option value="slot4">06:00 - 08:00</option>
+                    <option value="slot5">08:00 - 10:00</option>
+                    <option value="slot6">10:00 - 12:00</option>
+                    <option value="slot7">12:00 - 14:00</option>
+                    <option value="slot8">14:00 - 16:00</option>
+                    <option value="slot9">16:00 - 18:00</option>
+                    <option value="slot10">18:00 - 20:00</option>
+                    <option value="slot11">20:00 - 22:00</option>
+                    <option value="slot12">22:00 - 24:00</option>
+                  </select>
+
+                  <Image
+                    src={timeSlot}
+                    alt="language icon"
+                    width={20}
+                    height={20}
+                    className="absolute top-[12px] left-4 cursor-pointer"
+                  />
+                </div>
+              </div>
+              {/* ============== */}
+              <Inputs
+                placeholder="Start Date"
+                type="Date"
+                label="Start Date"
+                inputIcon={calender}
+                width="100%"
+                value={courseItem.startDate}
+                onchange={(e) => {
+                  const updated = [...course];
+                  updated[index].startDate = e.target.value;
+                  setCourse(updated);
+                }}
+              />
+
+              <div className=" mt-1 w-full ">
+                <label className="pl-2 text-xs">Description</label>
+                <textarea
+                  value={courseItem.description}
+                  onChange={(e) => {
+                    const updated = [...course];
+                    updated[index].description = e.target.value;
+                    setCourse(updated);
+                  }}
+                  rows={5}
+                  placeholder="Description"
+                  className="w-full text-sm border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl p-2 focus:outline-0 bg-white/80"
+                ></textarea>
+              </div>
+            </div>
+          ))}
+
+          <p onClick={handleAddCourse}>+ Add Course</p>
           {/* ========================================= */}
 
           <div className="flex items-center justify-between mt-6 w-full">
-            <Link href={"/tutorAuthentication/step6"}>
-              <Button type="submit" label={"Back"} btnIcon={null} />
-            </Link>
+            <Button
+              type="button"
+              label={"Back"}
+              btnIcon={null}
+              onclick={() => {
+                router.push("/tutorAuthentication/step6");
+              }}
+            />
 
-            <Button type="submit" label={"Next Step"} disabled={!btnTrigger} />
+            <Button
+              type="button"
+              label={"Submit"}
+              disabled={!btnTrigger}
+              onclick={() => {
+                alert(
+                  "Thank you for your submission! We will review your information and get back to you shortly."
+                );
+              }}
+            />
           </div>
         </div>
       </div>
