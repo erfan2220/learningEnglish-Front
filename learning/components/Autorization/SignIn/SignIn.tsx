@@ -31,12 +31,12 @@ const SignIn = () => {
     setError("");
 
     try {
-      await api.post("/api/login/", { email, password }); // sets HttpOnly cookies
-      await refresh();                                    // fetch /api/me and store in context
-      router.push("/");
-    } catch (error) {
+      await api.post("/api/login/", { email, password }); // cookies set by server
+      await refresh();                                     // call /api/me, set user
+      router.push("/");                                    // header will flip to Profile
+    } catch (err) {
       setError("Failed to authenticate");
-      console.error("Error:", error);
+      console.error(err);
     }
   };
 
