@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import GlobalLoader from "@/components/ui/GlobalLoader";
+import {AuthProvider} from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,10 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
+      <AuthProvider>
         <Header />
         {children}
         <GlobalLoader />
         <Footer />
+      </AuthProvider>
       </body>
     </html>
   );

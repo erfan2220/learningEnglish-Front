@@ -7,7 +7,7 @@ import levelIcon from "./../../assets/icons/levelIcon.svg";
 import peopleIcon from "./../../assets/icons/people.svg";
 import languageIcon from "./../../assets/icons/languagePurple.svg";
 import Button from "../Button/Button";
-import axiosInstance from "@/APIs/axiosInstance";
+import axiosInstance from "@/lib/APIs/axiosInstance";
 import { TemporaryCourse } from "@/model/courseType";
 import profilePhoto from "./../../assets/icons/profilePhoto.svg";
 import dayIcon from "./../../assets/icons/dayPink.svg";

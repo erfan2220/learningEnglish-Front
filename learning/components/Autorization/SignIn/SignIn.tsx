@@ -1,4 +1,6 @@
 "use client";
+import { api } from "@/lib/APIs/axiosInstance";
+import { useAuth } from "@/context/AuthContext";
 
 import React, { useState } from "react";
 import Button from "../../Button/Button";
@@ -21,19 +23,16 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const router = useRouter();
 
+
+  const { refresh } = useAuth();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
     try {
-      const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/login/`;
-
-      const response = await axios.post(url, { email, password });
-      const { access, refresh } = response.data;
-
-      localStorage.setItem("access_token", access);
-      localStorage.setItem("refresh_token", refresh);
-
+      await api.post("/api/login/", { email, password }); // sets HttpOnly cookies
+      await refresh();                                    // fetch /api/me and store in context
       router.push("/");
     } catch (error) {
       setError("Failed to authenticate");

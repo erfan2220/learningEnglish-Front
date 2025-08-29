@@ -11,7 +11,9 @@ const items = [
   { name: "Find Tutor", link: "/tutor" },
 ];
 
-const NavList: React.FC = () => {
+const NavList: React.FC = () =>
+{
+
   const pathName = usePathname();
 
   return (
