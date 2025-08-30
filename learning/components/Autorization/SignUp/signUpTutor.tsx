@@ -1,19 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import Button from "../Button/Button";
-import Layout from "../Layout/Layout";
-import Inputs from "../Input/Input";
 import Link from "next/link";
-import eyeIconClose from "./../../assets/icons/eyeCloseIcon.svg";
-import eyeIcon from "./../../assets/icons/eyeIcon.svg";
-import signUpIcon from "../../assets/icons/signupIconWhite.svg";
-import googleIcon from "./../../assets/icons/google.svg";
+import eyeIconClose from "./../../../assets/icons/eyeCloseIcon.svg";
+import eyeIcon from "./../../../assets/icons/eyeIcon.svg";
+import signUpIcon from "./../../../assets/icons/signupIconWhite.svg";
+import googleIcon from "./../../../assets/icons/google.svg";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import userIcon from "./../../assets/icons/userIconGray.svg";
-import passwordIcon from "./../../assets/icons/passwordIconGray.svg";
-import emailIcon from "./../../assets/icons/emailGray.svg";
+import userIcon from "./../../../assets/icons/userIconGray.svg";
+import passwordIcon from "./../../../assets/icons/passwordIconGray.svg";
+import emailIcon from "./../../../assets/icons/emailGray.svg";
 import Image from "next/image";
+import Layout from "@/components/Layout/Layout";
+import Inputs from "@/components/Input/Input";
+import Button from "@/components/Button/Button";
 
 const SignUpTutor = () => {
   const [firstName, setFirstName] = useState("");
@@ -28,6 +28,16 @@ const SignUpTutor = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
+
+    if (!firstName || !lastName || !email || !password) {
+      setError("please fill in all fields");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
 
     try {
       const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/register/`;

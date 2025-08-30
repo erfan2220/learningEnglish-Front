@@ -1,4 +1,4 @@
-import SignUpTutor from "@/components/SignUp/signUpTutor";
+import SignUpTutor from "@/components/Autorization/SignUp/signUpTutor";
 import React from "react";
 
 const signupTutor = () => {

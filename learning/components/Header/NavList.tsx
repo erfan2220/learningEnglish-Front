@@ -2,8 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
-import logoIcon from "@/assets/images/logo.png";
+// import Image from "next/image";
+// import logoIcon from "@/assets/images/logo.png";
 
 const items = [
   { name: "Home Page", link: "/" },

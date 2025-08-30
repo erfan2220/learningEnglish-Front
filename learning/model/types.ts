@@ -1,63 +1,59 @@
 // import { StaticImageData } from "next/image";
 
-export type languageSpeak={
-    language:string,
-    // flag:StaticImageData
-    flag:string
-}
+export type languageSpeak = {
+  language: string;
+  // flag:StaticImageData
+  flag: string;
+};
 
 export type TutorData = {
   id: number;
   name: string;
   role: string;
-  speaks:languageSpeak[] ;
+  speaks: languageSpeak[];
   price: string;
-  // introduceVideo: StaticImageData; 
-  introduceVideo: string; 
+  // introduceVideo: StaticImageData;
+  introduceVideo: string;
 };
-
 
 export type CourseData = {
   id: number;
   title: string;
   tutor: string;
-  speaks:languageSpeak[] ;
-  activeStudents:number;
-  courseLevel:string;
-  courseDay:string;
-  courseTime:string;
-  courseLanguage:string;
+  speaks: languageSpeak[];
+  activeStudents: number;
+  courseLevel: string;
+  courseDay: string;
+  courseTime: string;
+  courseLanguage: string;
   price: string;
-  // tutorPhoto: StaticImageData; 
+  // tutorPhoto: StaticImageData;
   // coursePicture: StaticImageData;
-  tutorPhoto: string; 
+  tutorPhoto: string;
   coursePicture: string;
   courseDescription: string;
 };
 
-
-
-export type ButtonProps ={
+export type ButtonProps = {
   type: "button" | "submit" | "reset";
   label: string;
   widthBtn?: string;
   colorBtn?: string;
-  colorBtnText?: string; 
+  colorBtnText?: string;
   colorBtnBorder?: string;
   colorBtnHover?: string;
-  colorBtnActive?: string; 
+  colorBtnActive?: string;
   // btnIcon?: StaticImageData|null;
-  btnIcon?: string|null;
-  marginTop?:string;
-  fontWeight?: 'regular' | 'bold' | 'medium'| 'semibold';
+  btnIcon?: string | null;
+  marginTop?: string;
+  fontWeight?: "regular" | "bold" | "medium" | "semibold";
   style?: React.CSSProperties;
   onclick?: () => void;
   disabled?: boolean;
-  className?:string
-}
+  className?: string;
+};
 
-
-export type InputsProps ={
+export type InputsProps = {
   type: string;
   label?: string;
   value?: string | number;
@@ -72,29 +68,29 @@ export type InputsProps ={
   icon1?: string;
   icon2?: string;
   inputIcon?: string;
-}
+  disabled?: boolean;
+};
 
-export type CountryComponent={
-  flag?:string;
+export type CountryComponent = {
+  flag?: string;
   // flag?:StaticImageData|string;
-  countryName:string;
-  width:number|string;
-  textSize:string;
-  fontWeight:string;
-}
+  countryName: string;
+  width: number | string;
+  textSize: string;
+  fontWeight: string;
+};
 
-export type SocialMediaIconType = { 
+export type SocialMediaIconType = {
   // socialIcon:StaticImageData;
-  socialIcon:string;
-  address:string
-}
+  socialIcon: string;
+  address: string;
+};
 
-
-export type TutorialStepType ={
-   stepNumber:number;
-   title:string;
-   detail:string;
-   picture:string;
+export type TutorialStepType = {
+  stepNumber: number;
+  title: string;
+  detail: string;
+  picture: string;
   //  picture:StaticImageData;
-   flexRow:string;
-}
+  flexRow: string;
+};

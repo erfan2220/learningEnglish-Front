@@ -3,18 +3,18 @@ import React from "react";
 
 interface Props {
   params: Promise<{
-    id: string;
+    courseId: string;
   }>;
 }
 
 const CourseDetailPage = async ({ params }: Props) => {
-  const { id } = await params;
+  const { courseId } = await params;
 
-  if (isNaN(parseInt(id))) {
+  if (isNaN(parseInt(courseId))) {
     return <p className="mt-30">Invalid course ID</p>;
   }
 
-  return <CourseDetail courseId={parseInt(id)} />;
+  return <CourseDetail courseId={courseId} />;
 };
 
 export default CourseDetailPage;

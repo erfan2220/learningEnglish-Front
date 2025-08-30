@@ -7,14 +7,14 @@ import levelIcon from "./../../assets/icons/levelIcon.svg";
 import peopleIcon from "./../../assets/icons/people.svg";
 import languageIcon from "./../../assets/icons/languagePurple.svg";
 import Button from "../Button/Button";
-import axiosInstance from "@/lib/APIs/axiosInstance";
+import axiosInstance from "../../lib/APIs/axiosInstance";
 import { TemporaryCourse } from "@/model/courseType";
 import profilePhoto from "./../../assets/icons/profilePhoto.svg";
 import dayIcon from "./../../assets/icons/dayPink.svg";
 import timeIcon from "./../../assets/icons/length.svg";
 import Image from "next/image";
 
-const CourseDetail = ({ courseId }: { courseId: number }) => {
+const CourseDetail = ({ courseId }: { courseId: string }) => {
   const [course, setCourse] = useState<TemporaryCourse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,7 +32,7 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
       }
     };
 
-    if (!isNaN(courseId)) {
+    if ((courseId)) {
       fetchCourse();
     } else {
       setError("Invalid course ID");
