@@ -3,12 +3,52 @@ import React, { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { TemporaryCourse } from "@/model/courseType";
-import defaultPhoto from "../../assets/images/profilePhoto.svg";
+import defaultPhoto from "../../assets/icons/profilePhotoDefault.svg";
 import { Star } from "lucide-react";
 import Inputs from "../Input/Input";
 import tickBlue from "../../assets/icons/tickBlue.svg";
 import copunIcon from "../../assets/icons/copunGray.svg";
 import tickWhite from "../../assets/icons/tickWhite.svg";
+import studentIcon from "../../assets/icons/educationPink.svg";
+import timeIcon from "../../assets/icons/clockPurple.svg";
+import dateIcon from "../../assets/icons/dateGreen.svg";
+import meliBank from "../../assets/icons/meliBank.png";
+import keshavarziBank from "../../assets/icons/KeshavarziBank.png";
+import refahBank from "../../assets/icons/refahBank.png";
+import sepahBank from "../../assets/icons/sepahBank.png";
+import pasargadBank from "../../assets/icons/PasargadBank.png";
+import paymentIcon from "../../assets/icons/paymentWhite.svg";
+import cancelIcon from "../../assets/icons/cancel.svg";
+import Button from "../Button/Button";
+import { Toaster, toast } from "react-hot-toast";
+
+const bankList = [
+  {
+    id: 1,
+    bankName: "Meli Bank",
+    icon: meliBank,
+  },
+  {
+    id: 2,
+    bankName: "Refah Bank",
+    icon: refahBank,
+  },
+  {
+    id: 3,
+    bankName: "Keshavarzi Bank",
+    icon: keshavarziBank,
+  },
+  {
+    id: 4,
+    bankName: "Pasargad Bank",
+    icon: pasargadBank,
+  },
+  {
+    id: 5,
+    bankName: "Sepah Bank",
+    icon: sepahBank,
+  },
+];
 
 const CartComponent = () => {
   const [courses, setCourses] = useState<TemporaryCourse[]>([]);
@@ -19,6 +59,8 @@ const CartComponent = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [discountApplied, setDiscountApplied] = useState(false);
+  const [selectedBank, setSelectedBank] = useState(0);
+  const [btnTrigger, setBtnTrigger] = useState(true);
 
   useEffect(() => {
     setCourseSelectedId(localStorage.getItem("selectedCourseId"));
@@ -57,12 +99,10 @@ const CartComponent = () => {
     }
 
     const selectedCourse = filteredCourses[0];
-    const fee = ((Number(selectedCourse.price_per_dollar) * 9) / 100).toFixed(
-      2
-    );
+    const fee = ((Number(selectedCourse.price_per_toman) * 9) / 100).toFixed(3);
     const basePrice = (
-      Number(selectedCourse.price_per_dollar) + Number(fee)
-    ).toFixed(2);
+      Number(selectedCourse.price_per_toman) + Number(fee)
+    ).toFixed(3);
 
     return { fee: Number(fee), basePrice: Number(basePrice) };
   }, [courses, courseSelectedId]);
@@ -78,16 +118,17 @@ const CartComponent = () => {
     if (coupon && !discountApplied) {
       if (coupon === "OFF40") {
         const discountedPrice = basePrice - (basePrice * 40) / 100;
-        setTotalPrice(Number(discountedPrice.toFixed(2)));
+        setTotalPrice(Number(discountedPrice.toFixed(3)));
         setDiscountApplied(true);
+        toast.success("Coupon has been applied");
       } else {
-        alert("Invalid Coupon");
+        toast.error("Invalid Coupon");
       }
     }
   };
 
   if (loading) {
-    return <div className="p-12 max-w-[1320px] mx-auto">Loading...</div>;
+    return <div className="p-12 max-w-[1320px] mx-auto mt-12">Loading...</div>;
   }
 
   if (error) {
@@ -101,22 +142,70 @@ const CartComponent = () => {
   );
 
   if (filteredCourses.length === 0) {
-    return <div className="p-12 max-w-[1320px] mx-auto">No course found.</div>;
+    return (
+      <div className="p-12 max-w-[1320px] mx-auto mt-12">No course found.</div>
+    );
   }
 
   const selectedCourse = filteredCourses[0];
 
   return (
     <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto">
-      <div className="mt-[60px]">
+      <div className="mt-[20px]">
         <div className="p-4 sm:p-12">
           <p className="font-bold text-2xl text-[#45444A]">
             Choose a payment method
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-10 mt-10">
-            <div className="bg-white/80 w-full sm:w-1/2 rounded-2xl shadow-md hover:shadow-lg">
-              Payment methods will be implemented here
+          <div className="flex flex-col sm:flex-row gap-10 mt-6">
+            <div className="bg-white/80 w-full sm:w-1/2 rounded-2xl shadow-md hover:shadow-lg p-8">
+              <p className="text-[#45444A] font-semibold text-base">
+                Please choose your payment method.
+              </p>
+              <div className="flex flex-wrap items-center justify-start gap-2 my-14 mb-16">
+                {bankList.map((bank) => (
+                  <div
+                    key={bank.id}
+                    onClick={() => {
+                      setSelectedBank(bank.id);
+                      localStorage.setItem("bankName", bank.bankName);
+                      setBtnTrigger(false);
+                    }}
+                    className={`border-2 border-dashed cursor-pointer border-[#A3A3A4] p-2 rounded-lg h-28 flex items-center justify-center
+                      ${selectedBank === bank.id ? "bg-[#e8e2fa]" : ""}
+                      `}
+                  >
+                    <Image
+                      src={bank.icon}
+                      alt={bank.bankName}
+                      width={70}
+                      height={70}
+                    />
+                  </div>
+                ))}
+              </div>
+              {/* ===================== */}
+              <Button
+                label="Complete Payment"
+                btnIcon={paymentIcon}
+                type="button"
+                widthBtn="100%"
+                disabled={btnTrigger}
+              />
+              <Button
+                label="Cancel"
+                btnIcon={cancelIcon}
+                type="button"
+                widthBtn="100%"
+                colorBtn="red"
+                onclick={() => {
+                  localStorage.removeItem("selectedCourseId");
+                  toast.success("Course Deleted Successfully.");
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1000);
+                }}
+              />
             </div>
 
             <div className="bg-white/80 w-full sm:w-1/2 rounded-2xl shadow-md hover:shadow-lg">
@@ -142,18 +231,49 @@ const CartComponent = () => {
                   </div>
                 </div>
               </div>
+              {/* =============== */}
+              <div className="text-xs sm:text-sm text-[#737177] flex items-center justify-around">
+                <div className="flex flex-col items-center justify-center border-2 border-dashed border-[#5C5A60] rounded-xl p-1 w-1/4 h-24 ">
+                  <Image
+                    src={studentIcon}
+                    alt="student"
+                    width={35}
+                    height={35}
+                  />
+                  <p>
+                    <b>{selectedCourse.active_students}</b>
+                    {` active student`}
+                  </p>
+                </div>
+
+                <div className="flex flex-col items-center justify-center border-2 border-dashed border-[#5C5A60] rounded-xl p-1 w-1/4 h-24">
+                  <Image src={timeIcon} alt="student" width={35} height={35} />
+                  <p>
+                    <b>{selectedCourse.length}</b>
+                    {` minutes`}
+                  </p>
+                </div>
+
+                <div className="flex flex-col items-center justify-center border-2 border-dashed border-[#5C5A60] rounded-xl p-1 w-1/4 h-24">
+                  <Image src={dateIcon} alt="student" width={35} height={35} />
+                  <div className="flex flex-col items-center justify-center">
+                    <p>{selectedCourse.schedule_day}</p>
+                    <p>{`${selectedCourse.schedule_start} - ${selectedCourse.schedule_end}`}</p>
+                  </div>
+                </div>
+              </div>
               {/* ============ */}
               <div className="w-full text-center flex flex-col  mt-10 ">
                 <div className="flex px-6 items-center justify-between">
-                  <p className="text-base text-[#45444A] font-bold">{`${selectedCourse.title} (${selectedCourse.length} minutes)`}</p>
-                  <p className="text-base text-[#5C5A60]">{`$ ${selectedCourse.price_per_dollar}`}</p>
+                  <p className="text-base text-[#45444A] font-bold">{`${selectedCourse.title}`}</p>
+                  <p className="text-base text-[#5C5A60]">{`Toman ${selectedCourse.price_per_toman}`}</p>
                 </div>
                 <div className="flex px-6 items-center justify-between mt-4">
                   <p className="text-base text-[#45444A] font-bold">
                     Service fee
                   </p>
-                  <p className="text-base text-[#5C5A60]">{`$ ${fee.toFixed(
-                    2
+                  <p className="text-base text-[#5C5A60]">{`Toman ${fee.toFixed(
+                    3
                   )}`}</p>
                 </div>
               </div>
@@ -213,11 +333,12 @@ const CartComponent = () => {
               <hr className="border-[1.5px] border-[#8B8A8E] mx-4 my-4" />
               <div className="flex px-6 items-center justify-between mb-4">
                 <p className="text-base text-[#45444A] font-bold">Total</p>
-                <p className="text-base font-bold text-[#5C5A60]">{`$ ${totalPrice.toFixed(
-                  2
+                <p className="text-base font-bold text-[#5C5A60]">{`Toman ${totalPrice.toFixed(
+                  3
                 )}`}</p>
               </div>
               {/* ============ */}
+              <Toaster position="top-right" reverseOrder={false} />
             </div>
           </div>
         </div>

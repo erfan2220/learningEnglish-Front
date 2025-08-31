@@ -90,4 +90,5 @@ export interface TemporaryCourse {
   tutor: TemporaryTutor;
   image: string;
   language_flag: string;
+  course_duration:string
 }

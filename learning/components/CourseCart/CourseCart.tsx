@@ -11,7 +11,7 @@ const CourseCart = ({ course }: { course: TemporaryCourse }) => {
   return (
     <div className="w-full">
       <div className="relative w-full pb-4 px-4 border-2 border-[#D2D2D2] bg-white/70 rounded-2xl shadow-md hover:shadow-2xl hover:scale-[1.02]  transition-all duration-400">
-        <Link href={`/courses/detail/${course.courseId}`} className="w-full">
+        <Link href={`/courses/detail/${course.id}`} className="w-full">
           <div className="my-4 ">
             <Image
               src={course.image ?? notFoundPic}

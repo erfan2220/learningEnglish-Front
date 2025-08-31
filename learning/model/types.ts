@@ -43,6 +43,7 @@ export type ButtonProps = {
   colorBtnBorder?: string;
   colorBtnHover?: string;
   colorBtnActive?: string;
+  colorBtnTextHover?:string;
   // btnIcon?: StaticImageData|null;
   btnIcon?: string | null;
   marginTop?: string;

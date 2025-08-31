@@ -1,5 +1,6 @@
+"use client";
 import { tutorMockDetail } from "@/mock/tutorMockData";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
 import locationIcon from "./../../assets/icons/locationPink.svg";
 import languageIcon from "./../../assets/icons/languagePurple.svg";
@@ -16,7 +17,11 @@ import levelIcon from "./../../assets/icons/levelIcon.svg";
 import { courseMockDetail } from "@/mock/courseMockData";
 import ReviewCart from "../ReviewCart/ReviewCart";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import closeIcon from "../../assets/icons/closeBlue.svg";
+import sendIcon from "../../assets/icons/sentWhite.svg";
 import Image from "next/image";
+import Button from "../Button/Button";
+import { datePicker, timePicker } from "@/mock/DayTime";
 
 type Props = {
   tutorId: string;
@@ -24,13 +29,20 @@ type Props = {
 
 const TutorDetail = ({ tutorId }: Props) => {
   const detail = tutorMockDetail.find((detail) => detail.tutorId === tutorId);
-  //   const courses = detail?.coursesList;
-  //   console.log(courses);
+  const [isSelectDateTimeOpen, setIsSelectDateTimeOpen] = useState(false);
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (text !== "") {
+      setIsDisabled(false);
+    }
+  }, [text]);
 
   const matchedCourses = courseMockDetail.filter((course) =>
     detail?.coursesList?.includes(course.courseId)
   );
-  //   console.log(matchedCourses);
 
   if (!detail) return <div className="text-red-500">Tutor not found</div>;
 
@@ -51,11 +63,6 @@ const TutorDetail = ({ tutorId }: Props) => {
 
             <div className="flex items-center gap-4">
               <div>
-                {/* <img
-                  src={detail.tutorPhoto}
-                  alt={detail.tutorFirstName}
-                  className="w-[100px] h-[100px]"
-                /> */}
                 <Image
                   src={detail.tutorPhoto}
                   alt={detail.tutorFirstName}
@@ -75,11 +82,6 @@ const TutorDetail = ({ tutorId }: Props) => {
 
             {/* ====================location==================== */}
             <div className="flex gap-2 mt-4">
-              {/* <img
-                src={"/icons/locationPink.svg"}
-                alt="locationIcon"
-                className="w-6 h-6"
-              /> */}
               <Image
                 src={locationIcon}
                 alt="location icon"
@@ -95,12 +97,6 @@ const TutorDetail = ({ tutorId }: Props) => {
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 my-6">
               <div className="flex gap-2">
-                {/* <img
-                  src={"/icons/languagePurple.svg"}
-                  alt="languageIcon"
-                  className="w-6 h-6"
-                /> */}
-
                 <Image
                   src={languageIcon}
                   alt="location icon"
@@ -131,12 +127,6 @@ const TutorDetail = ({ tutorId }: Props) => {
 
             <div className="flex flex-wrap items-center gap-6 mt-2">
               <div className="flex gap-2">
-                {/* <img
-                  src={"/icons/learningOrange.svg"}
-                  alt="learningIcon"
-                  className="w-6 h-6"
-                /> */}
-
                 <Image
                   src={learningIcon}
                   alt="location icon"
@@ -163,12 +153,6 @@ const TutorDetail = ({ tutorId }: Props) => {
 
               {detail.certification.length > 0 && (
                 <div className="flex mt-2 items-center gap-2 text-xs font-semibold">
-                  {/* <img
-                    src={"/icons/tickGreen.svg"}
-                    alt="tickIcon"
-                    className="w-6 h-6"
-                  /> */}
-
                   <Image
                     src={tickIcon}
                     alt="tick icon"
@@ -267,11 +251,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                   </div>
                   <div className="w-full sm:w-2/3 sm:text-sm">
                     <div className="flex gap-2">
-                      {/* <img
-                        src={"/icons/educationPink.svg"}
-                        alt="degreeIcon"
-                        className="w-4 h-4"
-                      /> */}
                       <Image
                         src={degreeIcon}
                         alt="degree"
@@ -281,12 +260,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                       <p className="font-semibold">{education.degree}</p>
                     </div>
                     <div className="flex gap-2">
-                      {/* <img
-                        src={"/icons/institutionGreen.svg"}
-                        alt="fieldIcon"
-                        className="w-4 h-4"
-                      /> */}
-
                       <Image
                         src={fieldIcon}
                         alt="field"
@@ -297,12 +270,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                     </div>
 
                     <div className="flex gap-2">
-                      {/* <img
-                        src={"/icons/locationBlue.svg"}
-                        alt="locationIconBlue"
-                        className="w-4 h-4"
-                      /> */}
-
                       <Image
                         src={locationIconBlue}
                         alt="location"
@@ -345,12 +312,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                     <p className="font-bold">{experience.experienceTitle}</p>
 
                     <div className="flex gap-2">
-                      {/* <img
-                        src={"/icons/locationBlue.svg"}
-                        alt="locationIconBlue"
-                        className="w-4 h-4"
-                      /> */}
-
                       <Image
                         src={locationIconBlue}
                         alt="location"
@@ -382,12 +343,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                 Rating
               </p>
               <div className="flex items-center gap-2">
-                {/* <img
-                  src={"/icons/star.svg"}
-                  alt="starIcon"
-                  className="w-5 sm:w-8 h-8 "
-                /> */}
-
                 <Image
                   src={starIcon}
                   alt="star icon"
@@ -404,12 +359,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                 Students
               </p>
               <div className="flex items-center gap-2">
-                {/* <img
-                  src={"/icons/studentPink.svg"}
-                  alt="studentIcon"
-                  className="w-5 sm:w-8 h-8 "
-                /> */}
-
                 <Image
                   src={studentIcon}
                   alt="student icon"
@@ -433,12 +382,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                 Lessons
               </p>
               <div className="flex items-center gap-2">
-                {/* <img
-                  src={"/icons/lessonsBlue.svg"}
-                  alt="lessonIcon"
-                  className="w-5 sm:w-8 h-8 "
-                /> */}
-
                 <Image
                   src={lessonIcon}
                   alt="lesson icon"
@@ -473,12 +416,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                     </p>
                     {/* ====================teach==================== */}
                     <div className="flex gap-2 text-[#5C5A60]">
-                      {/* <img
-                        src={"/icons/lessonsBlue.svg"}
-                        alt="lessonIcon"
-                        className="w-6 h-6"
-                      /> */}
-
                       <Image
                         src={lessonIcon}
                         alt="lesson"
@@ -492,12 +429,6 @@ const TutorDetail = ({ tutorId }: Props) => {
                     {/* ====================level==================== */}
 
                     <div className="flex gap-2 text-[#5C5A60]">
-                      {/* <img
-                        src={"/icons/levelIcon.svg"}
-                        alt="levelIcon"
-                        className="w-6 h-6"
-                      /> */}
-
                       <Image
                         src={levelIcon}
                         alt="level"
@@ -536,7 +467,7 @@ const TutorDetail = ({ tutorId }: Props) => {
             {detail.reviews.length} Reviews
           </h4>
           <Layout marginTop="mt-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  px-12 py-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-12 py-8">
               {detail.reviews.map((review) => (
                 <div key={review.reviewId} className="mx-4 my-4">
                   <ReviewCart data={review} />
@@ -545,7 +476,113 @@ const TutorDetail = ({ tutorId }: Props) => {
             </div>
           </Layout>
         </div>
+        {/* Fixed Bottom Bar */}
+        <div className="fixed left-0 right-0 bottom-0 z-40 flex justify-between border-[#737177] px-3 sm:px-10 md:px-28 items-center h-16 bg-[#CB71FF90] backdrop-blur-sm shadow-[-5px_-3px_15px_rgba(0,0,0,0.2)]">
+          <Button
+            label="Send Message"
+            type="button"
+            marginTop="0"
+            btnIcon={sendIcon}
+            colorBtn="#97C01C"
+            colorBtnHover="#445A00"
+            colorBtnTextHover="white"
+            colorBtnActive="#D1FF46"
+            onclick={() => setIsReplyOpen(true)}
+          />
+          <Button
+            label="Book Now"
+            type="button"
+            marginTop="0"
+            onclick={() => setIsSelectDateTimeOpen(true)}
+          />
+        </div>
       </div>
+      {isSelectDateTimeOpen && (
+        <div className="fixed z-[200] inset-0 bg-black/20 flex justify-center items-center">
+          <div className="relative bg-white w-full max-w-4xl max-h-[600px] rounded-2xl p-4 overflow-y-auto m-4">
+            <div
+              onClick={() => setIsSelectDateTimeOpen(false)}
+              className="absolute cursor-pointer rounded-full px-3.5 py-1 top-2 right-2"
+            >
+              <Image src={closeIcon} alt="close icon" width={32} height={32} />
+            </div>
+
+            <div className="flex flex-wrap justify-center text-center gap-3 mt-8 w-full">
+              <p className="text-xs sm:text-sm text-center">
+                Based on your timezone (UTC+03:30)
+              </p>
+            </div>
+            <div className="w-full flex flex-col items-center justify-center">
+              <div className="flex flex-wrap justify-center gap-3 mt-8 w-full">
+                {datePicker.map((day) => (
+                  <div
+                    key={day.id}
+                    className="bg-[#FFC3CD] rounded-2xl text-xs sm:text-sm font-semibold cursor-pointer p-2 w-20 h-10 flex items-center justify-center"
+                  >
+                    {day.day}
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* ============= */}
+            <hr className="border-1 border-[#737177] mx-4 sm:mx-12 my-5" />
+            {/* ============= */}
+
+            <div className="w-full flex flex-col items-center justify-center mb-8">
+              <div className="flex flex-wrap justify-center gap-3  w-full">
+                {timePicker.map((time) => (
+                  <div
+                    key={time.id}
+                    className="bg-[#FFC3CD] rounded-2xl text-xs sm:text-sm font-semibold cursor-pointer p-2 w-28 h-10 flex items-center justify-center"
+                  >
+                    {time.time}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isReplyOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center">
+          <div className="bg-white relative rounded-2xl shadow-xl p-6 w-[90%] sm:w-[600px]">
+            <p className="text-[#45444A] text-sm mb-2">Write your text here:</p>
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              rows={6}
+              className="w-full text-sm p-2 border-2 border-[#D2D2D2] bg-[#F1ECFF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#97C01C]"
+              placeholder="Write your reply here..."
+            ></textarea>
+            <div className="flex justify-end mt-4">
+              <button
+                className="px-3 py-1 top-2 hover:cursor-pointer right-2 absolute bg-[#5F33E1] text-white rounded-full"
+                onClick={() => setIsReplyOpen(false)}
+              >
+                X
+              </button>
+
+              <Button
+                label="Send"
+                type="button"
+                disabled={isDisabled}
+                btnIcon={sendIcon}
+                colorBtn="#97C01C"
+                colorBtnHover="#7DA216"
+                colorBtnActive="#5D7C02"
+                onclick={() => {
+                  if (!isDisabled) {
+                    console.log("Sending message:", text);
+                    setIsReplyOpen(false);
+                    setText("");
+                  }
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

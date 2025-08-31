@@ -8,7 +8,7 @@ import NavList from "./NavList";
 // import { List, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import {  ShoppingCart } from "lucide-react";
+import cartIcon from "../../assets/icons/cart.svg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +16,20 @@ const Header = () => {
   const pathname = usePathname();
   const { user, loading, logout } = useAuth();
   const pathName = usePathname();
-  const router=useRouter()
+  const router = useRouter();
+  const [isCartFull, setIsCartFull] = useState(false);
+
+  useEffect(() => {
+    const checkCart = () => {
+      const cart = localStorage.getItem("selectedCourseId");
+      setIsCartFull(!!cart);
+    };
+    checkCart();
+    window.addEventListener("storage", checkCart);
+    return () => {
+      window.removeEventListener("storage", checkCart);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,7 +69,7 @@ const Header = () => {
           <div className="w-9 h-9 rounded-full bg-gray-200 animate-pulse" />
         ) : user ? (
           <>
-            <ShoppingCart />
+            <Image src={cartIcon} alt="cart" width={32} height={32} />
             <button
               onClick={() => setIsMenuOpen((s) => !s)}
               className="flex items-center gap-2 px-3 py-1 rounded-lg border hover:bg-gray-50"
@@ -110,7 +123,20 @@ const Header = () => {
           </>
         ) : (
           <div className="flex items-center gap-4">
-            <ShoppingCart onClick={()=>router.push('/cart')} className="cursor-pointer"/>
+            <div className="relative flex items-center">
+              <Image
+                src={cartIcon}
+                alt="cart"
+                width={28}
+                height={28}
+                onClick={() => router.push("/cart")}
+                className="cursor-pointer"
+              />
+              {isCartFull && (
+                <div className="w-[13px] h-[13px] absolute -top-1.5 -right-2 bg-[#5F33E1] text-center rounded-full" />
+              )}
+            </div>
+
             <Link
               href="/signin"
               className={`hover:bg-gray-100 block py-2 rounded-md transition-colors duration-200 ${
