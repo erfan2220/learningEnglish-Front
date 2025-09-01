@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import arrowIcon from "./../../assets/icons/arrowPink.svg";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,9 +10,56 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import TutorCart from "../TutorCart/TutorCart";
 import SwiperButton from "../SwiperButton/SwiperButton";
-import { tutorMockDetail } from "@/mock/tutorMockData";
+import { api } from "@/lib/APIs/axiosInstance";
+import { Tutor } from "@/model/tutorType";
 
 const Slide = () => {
+  const [tutor, setTutor] = useState<Tutor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  // const router = useRouter();
+
+  useEffect(() => {
+    const fetchTutor = async () => {
+      try {
+        const res = await api.get(`/api/tutors`);
+        setTutor(res.data);
+      } catch (error) {
+        console.error("Fetching error", error);
+        setError("Failed to load course details. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTutor();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[60px]">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[60px]">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  if (!tutor) {
+    return (
+      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[60px]">
+        <p>Tutor not found</p>
+      </div>
+    );
+  }
+  console.log(tutor);
+
   return (
     <div className="">
       <div className="flex justify-between m-4 md:mt-[60px] md:mx-[60px] mb-2">
@@ -46,7 +93,7 @@ const Slide = () => {
         >
           <SwiperButton />
 
-          {tutorMockDetail.map((tutor) => (
+          {tutor.map((tutor: Tutor) => (
             <SwiperSlide key={tutor.id}>
               <TutorCart tutorData={tutor} />
             </SwiperSlide>

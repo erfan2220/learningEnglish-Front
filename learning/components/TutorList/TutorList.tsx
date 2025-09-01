@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
-import { tutorMockDetail } from "@/mock/tutorMockData";
 import TutorShowCart from "../TutorShowCart/TutorShowCart";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -12,16 +11,38 @@ import SelectDate from "../Courses/SelectDate";
 import SelectPrice from "../Courses/SelectPrice";
 import Inputs from "../Input/Input";
 import searchIcon from "./../../assets/icons/searchIconGray.svg";
+import { Tutor } from "@/model/tutorType";
+import axios from "axios";
 
 const TutorList = () => {
-  const totalTutor = tutorMockDetail.length;
+  const [tutors, setTutors] = useState<Tutor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const totalTutor = tutors.length;
   const searchParam = useSearchParams();
   const ppg = 3;
   const CurrentPage = parseInt(searchParam.get("page") || "1");
   const firstIndex = (CurrentPage - 1) * ppg;
   //   const lengthData = tutorMockDetail.length;
   const endIndex = firstIndex + 3;
-  const showTutors = tutorMockDetail.slice(firstIndex, endIndex);
+  const showTutors = tutors.slice(firstIndex, endIndex);
+
+  useEffect(() => {
+    const fetchTutors = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/tutors/`
+        );
+        setTutors(res.data);
+        console.log("Fetched courses:", res.data);
+      } catch (error) {
+        console.error("Fetching courses failed:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTutors();
+  }, []);
 
   return (
     <div className=" py-[60px] sm:py-20 sm:p-[60px] max-w-[1320px] mx-auto">
@@ -67,13 +88,25 @@ const TutorList = () => {
         </p>
       </div>
       {/* ////////////////////////////////////// */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-16">
-        {showTutors.map((data) => (
-          <div key={data.tutorId}>
-            <TutorShowCart tutorId={data.tutorId} />
-          </div>
-        ))}
-      </div>
+
+      {loading ? (
+        <div className="flex justify-center items-center h-64">
+          <p className="text-center text-lg">Loading courses...</p>
+        </div>
+      ) : showTutors.length === 0 ? (
+        <div className="flex justify-center items-center h-64">
+          <p className="text-center text-lg">No courses found</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-16">
+          {showTutors.map((data) => (
+            <div key={data.id}>
+              <TutorShowCart tutorId={data.id} />
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* /////////////////////////////////////////////// */}
       <div className="flex justify-center items-center mt-10 text-lg font-semibold text-[#5B5A60]">
         {CurrentPage > 1 && (
@@ -88,10 +121,10 @@ const TutorList = () => {
             {CurrentPage}
           </p>
           <p className="font-medium"> of </p>
-          {Math.ceil(tutorMockDetail.length / ppg)}
+          {Math.ceil(tutors.length / ppg)}
         </span>
 
-        {CurrentPage < Math.ceil(tutorMockDetail.length / ppg) && (
+        {CurrentPage < Math.ceil(tutors.length / ppg) && (
           <Link
             href={`?page=${CurrentPage + 1}`}
             className="flex justify-center items-center"

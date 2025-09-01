@@ -197,7 +197,9 @@ const CartComponent = () => {
                 btnIcon={cancelIcon}
                 type="button"
                 widthBtn="100%"
-                colorBtn="red"
+                colorBtn="#FF3164"
+                colorBtnHover="#a50034"
+                colorBtnActive="#ff6f61"
                 onclick={() => {
                   localStorage.removeItem("selectedCourseId");
                   toast.success("Course Deleted Successfully.");

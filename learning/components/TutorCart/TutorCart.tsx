@@ -15,22 +15,21 @@ const TutorCart = ({ tutorData }: TutorCartProps) => {
     ssr: false,
   });
   return (
-    <div className="bg-[#F1ECFE] rounded-2xl border-2 border-[#D2D2D2] shadow-md p-4">
-      <div>
+    <div className="bg-[#F1ECFE] rounded-2xl border-2 border-[#D2D2D2] shadow-md p-4 h-[420px]">
+      <div className="relative">
         <div className="w-full  mx-auto">
-          <VideoPlayer src={tutorData.introduceVideo} />
+          <VideoPlayer src={tutorData.intro_video_file} />
         </div>
         <div className="text-xl text-[#5C5A60] font-bold">
-          {tutorData.tutorFirstName} {tutorData.tutorLastName}
+          {tutorData.user.first_name} {tutorData.user.last_name}
         </div>
-        <div className="text-sm text-[#8B8A8E] mb-4">{tutorData.role}</div>
+        <div className="text-sm text-[#8B8A8E] mb-4">Professional Tutor</div>
 
         <div className="flex flex-wrap gap-4">
-          {tutorData.speaks.map((lang) => (
-            <div key={lang.languageId}>
+          {tutorData.languages_spoken.map((lang, index) => (
+            <div key={index}>
               <Country
-                flag={lang.flag}
-                countryName={lang.language}
+                countryName={lang}
                 width={20}
                 textSize={"14px"}
                 fontWeight={"bold"}
@@ -42,16 +41,16 @@ const TutorCart = ({ tutorData }: TutorCartProps) => {
           <p className="font-semibold text-[#5C5A60] text-sm">Price</p>
           <div className="font-bold text-lg text-[#45444A]">
             <p>
-              {tutorData.pricePerHour[0].currency}{" "}
-              {tutorData.pricePerHour[0].price}
+              {"Toman"} {"0000"}
             </p>
           </div>
         </div>
 
-        <Link href={`/tutor/detail/${tutorData.tutorId}`}>
+        
+      </div>
+      <Link href={`/tutor/detail/${tutorData.id}`} className="absolute bottom-6 left-2 right-2">
           <Button type="button" label={"book now"} widthBtn="100%" />
         </Link>
-      </div>
     </div>
   );
 };
