@@ -132,6 +132,7 @@ const TutorDetail = ({ id }: { id: number }) => {
                   alt={tutor.user.first_name}
                   width={100}
                   height={100}
+                  className="rounded-full"
                 />
               </div>
               <div className="flex flex-col">

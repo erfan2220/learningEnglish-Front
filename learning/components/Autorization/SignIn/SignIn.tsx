@@ -11,7 +11,6 @@ import eyeIconClose from "./../../../assets/icons/eyeCloseIcon.svg";
 import eyeIcon from "./../../../assets/icons/eyeIcon.svg";
 import signInIcon from "./../../../assets/icons/loginIcon.svg";
 import googleIcon from "./../../../assets/icons/google.svg";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import userIcon from "./../../../assets/icons/userIconGray.svg";
 import passwordIcon from "./../../../assets/icons/passwordIconGray.svg";
