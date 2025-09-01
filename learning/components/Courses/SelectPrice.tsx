@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import levelIcon from "./../../assets/icons/levelIconGray.svg";
-import arrowIcon from "./../../assets/icons/arrowDown.svg";
+// import levelIcon = "/icons/levelIconGray.svg";
+// import arrowIcon = "/icons/arrowDown.svg";
 import Inputs from "../Input/Input";
 import Image from "next/image";
 
@@ -48,7 +48,7 @@ const SelectPrice = () => {
           className="w-6 h-6"
         /> */}
 
-        <Image src={levelIcon} alt="icon" width={24} height={24} />
+        <Image src="/icons/levelIconGray.svg" alt="icon" width={24} height={24} />
       </div>
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
         {/* <img
@@ -57,7 +57,7 @@ const SelectPrice = () => {
           className="w-6 h-6"
         /> */}
 
-        <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
+        <Image src="/icons/arrowDown.svg" alt="arrow icon" width={24} height={24} />
       </div>
 
       {isOpen && (

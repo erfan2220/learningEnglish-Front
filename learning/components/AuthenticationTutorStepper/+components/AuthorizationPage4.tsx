@@ -1,23 +1,30 @@
 "use client";
 import React, { useState } from "react";
-import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
-import educationWhite from "../../../assets/icons/educationWhite.svg";
-import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
-import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
+
 import Image from "next/image";
 import Link from "next/link";
-import instituteIcon from "./../../../assets/icons/institutionGray.svg";
-import locationIcon from "./../../../assets/icons/locationGray.svg";
-import dateIcon from "./../../../assets/icons/dayIcon.svg";
-import degreeIcon from "./../../../assets/icons/degreeGray.svg";
-import fieldIcon from "./../../../assets/icons/educationGray.svg";
+
 import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import { useRouter } from "next/navigation";
+
+
+// ✅ icons served from /public/icons
+const aboutIconWhite = "/icons/aboutIconWhite.svg";
+const photoIconWhite = "/icons/photoIconWhite.svg";
+const certificateIconWhite = "/icons/certificateIconWhite.svg";
+const educationWhite = "/icons/educationWhite.svg";
+const descriptionIconWhite = "/icons/descriptionIconWhite.svg";
+const videoIconWhite = "/icons/videoIconWhite.svg";
+const instituteIcon = "/icons/institutionGray.svg";
+const locationIcon = "/icons/locationGray.svg";
+const priceIconWhite = "/icons/priceIconWhite.svg";
+const dateIcon = "/icons/dayIcon.svg";
+const degreeIcon = "/icons/degreeGray.svg";
+const fieldIcon = "/icons/educationGray.svg";
+
+
 
 const AuthorizationPage4 = () => {
   const router = useRouter();

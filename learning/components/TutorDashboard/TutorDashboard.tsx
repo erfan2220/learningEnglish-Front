@@ -1,16 +1,20 @@
 import React from "react";
 import Link from "next/link";
-import homeIcon from "./../../assets/icons/homeIcon.svg";
-import certIcon from "./../../assets/icons/certGray.svg";
-import educationIcon from "./../../assets/icons/educationGrayD.svg";
-import descriptionIcon from "./../../assets/icons/descriptionGray.svg";
-import addIcon from "./../../assets/icons/addGray.svg";
-import courseIcon from "./../../assets/icons/course.svg";
-import signoutIcon from "./../../assets/icons/signout.svg";
+
 import DashboardMenuItems from "../DashboardMenuItems/DashboardMenuItems";
 import MenuItemMessages from "./../menuItemMessages/MenuItemMessages";
-import logoIcon from "../../assets/images/logoIcon.png";
+
 import Image from "next/image";
+
+const homeIcon = "/icons/homeIcon.svg";
+const certIcon = "/icons/certGray.svg";
+const educationIcon = "/icons/educationGrayD.svg";
+const descriptionIcon = "/icons/descriptionGray.svg";
+const addIcon = "/icons/addGray.svg";
+const courseIcon = "/icons/course.svg";
+const signoutIcon = "/icons/signout.svg";
+const logoIcon = "/icons/logoIcon.png";
+
 
 interface TutorDashboardProps {
   children: React.ReactNode;
@@ -26,6 +30,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
         <div className="px-1 md:px-2 lg:px-4 flex flex-col gap-3 items-center  pt-4 pb-8">
           <Link href={"/"} className="mb-2">
             <div className=" w-full my-1.5">
+              {/*<img src={logoIcon} alt="" width={50}/>*/}
               <Image
                 src={logoIcon}
                 alt="logo icon"

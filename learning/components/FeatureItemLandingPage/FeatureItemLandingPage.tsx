@@ -1,5 +1,5 @@
 import React from "react";
-import noticeIcon from "./../../assets/icons/noticeIcon.svg";
+// import noticeIcon from "/icons/noticeIcon.svg";
 import Image from "next/image";
 
 const FeatureItemLandingPage = ({ detail }: { detail: string }) => {
@@ -11,7 +11,7 @@ const FeatureItemLandingPage = ({ detail }: { detail: string }) => {
         className="w-6 h-6 mt-2"
       /> */}
       <Image
-        src={noticeIcon}
+        src="/icons/noticeIcon.svg"
         alt="start pic"
         width={24}
         height={24}

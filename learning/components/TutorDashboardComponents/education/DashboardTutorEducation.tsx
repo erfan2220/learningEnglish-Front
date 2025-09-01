@@ -1,14 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import instituteIcon from "./../../../assets/icons/institutionGray.svg";
-import locationIcon from "./../../../assets/icons/locationGray.svg";
-import dateIcon from "./../../../assets/icons/dayIcon.svg";
-import degreeIcon from "./../../../assets/icons/degreeGray.svg";
-import fieldIcon from "./../../../assets/icons/educationGray.svg";
+
 import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import Image from "next/image";
+
+const instituteIcon = "/icons/institutionGray.svg";
+const locationIcon = "/icons/locationGray.svg";
+const dateIcon = "/icons/dayIcon.svg";
+const degreeIcon = "/icons/degreeGray.svg";
+const fieldIcon = "/icons/educationGray.svg";
 
 const DashboardTutorEducation = () => {
   const [educations, setEducations] = useState([

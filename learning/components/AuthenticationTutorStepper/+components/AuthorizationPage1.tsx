@@ -1,22 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
-import educationWhite from "../../../assets/icons/educationWhite.svg";
-import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
-import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
+// import aboutIconWhite from "./icons/aboutIconWhite.svg";
+// import photoIconWhite from "./icons/photoIconWhite.svg";
+// import certificateIconWhite from "./icons/certificateIconWhite.svg";
+// import educationWhite from "./icons/educationWhite.svg";
+// import descriptionIconWhite from "./icons/descriptionIconWhite.svg";
+// import videoIconWhite from "./icons/videoIconWhite.svg";
+// import priceIconWhite from "./icons/priceIconWhite.svg";
 import Image from "next/image";
 import Link from "next/link";
 import Inputs from "@/components/Input/Input";
-import countryIcon from "./../../../assets/icons/locationGray.svg";
-import phoneIcon from "./../../../assets/icons/phoneGray.svg";
-import subjectIcon from "./../../../assets/icons/educationGray.svg";
-import languageIcon from "./../../../assets/icons/languageGray.svg";
-import levelIcon from "./../../../assets/icons/levelIconGray.svg";
-import binIcon from "./../../../assets/icons/binGray.svg";
-import userIcon from "../../../assets/icons/userIconGray.svg";
+// import countryIcon = "/icons/locationGray.svg";
+// import phoneIcon from "./../";
+// import subjectIcon = "/icons/educationGray.svg";
+// import languageIcon = "/icons/languageGray.svg";
+// import levelIcon = "/icons/levelIconGray.svg";
+// import binIcon = "/icons/binGray.svg";
+// import userIcon from "./icons/userIconGray.svg";
 
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
@@ -72,7 +72,7 @@ const AuthorizationPage1 = () => {
             >
               <div className="bg-gradient-to-b flex items-center justify-center from-[#B49AFF] to-[#FF9AAB] h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={aboutIconWhite}
+                  src=""
                   alt="about icon"
                   width={28}
                   height={28}
@@ -89,7 +89,7 @@ const AuthorizationPage1 = () => {
             <div className="flex flex-col justify-center items-center gap-2">
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={photoIconWhite}
+                  src="/icons/photoIconWhite.svg"
                   alt="photo icon"
                   width={28}
                   height={28}
@@ -106,7 +106,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={certificateIconWhite}
+                  src="/icons/certificateIconWhite.svg"
                   alt="certificate icon"
                   width={28}
                   height={28}
@@ -120,7 +120,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={educationWhite}
+                  src="/icons/educationWhite.svg"
                   alt="education icon"
                   width={28}
                   height={28}
@@ -134,7 +134,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={descriptionIconWhite}
+                  src="/icons/descriptionIconWhite.svg"
                   alt="description icon"
                   width={28}
                   height={28}
@@ -148,7 +148,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={videoIconWhite}
+                  src="/icons/videoIconWhite.svg"
                   alt="video icon"
                   width={28}
                   height={28}
@@ -162,7 +162,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={priceIconWhite}
+                  src="/icons/priceIconWhite.svg"
                   alt="price icon"
                   width={28}
                   height={28}
@@ -190,7 +190,7 @@ const AuthorizationPage1 = () => {
                   placeholder="First Name"
                   label="First Name"
                   width="100%"
-                  inputIcon={userIcon}
+                  inputIcon="/icons/userIconGray.svg"
                   value={firstName}
                   onchange={(e) => setFirstName(e.target.value)}
                 />
@@ -200,7 +200,7 @@ const AuthorizationPage1 = () => {
                   placeholder="Last Name"
                   label="Last Name"
                   width="100%"
-                  inputIcon={userIcon}
+                  inputIcon="/icons/userIconGray.svg"
                   value={lastName}
                   onchange={(e) => setLastName(e.target.value)}
                 />
@@ -210,7 +210,7 @@ const AuthorizationPage1 = () => {
                   placeholder="Phone Number"
                   label="Phone Number"
                   width="100%"
-                  inputIcon={phoneIcon}
+                  inputIcon="/icons/phoneGray.svg"
                   value={phoneNumber}
                   onchange={(e) => setPhoneNumber(e.target.value)}
                 />
@@ -241,7 +241,7 @@ const AuthorizationPage1 = () => {
                 /> */}
 
                     <Image
-                      src={countryIcon}
+                      src="/icons/locationGray.svg"
                       alt="language icon"
                       width={20}
                       height={20}
@@ -275,7 +275,7 @@ const AuthorizationPage1 = () => {
                 /> */}
 
                     <Image
-                      src={subjectIcon}
+                      src=""
                       alt="language icon"
                       width={20}
                       height={20}
@@ -318,7 +318,7 @@ const AuthorizationPage1 = () => {
                           
 
                             <Image
-                              src={languageIcon}
+                              src="/icons/languageGray.svg"
                               alt="language icon"
                               width={20}
                               height={20}
@@ -358,7 +358,7 @@ const AuthorizationPage1 = () => {
                         /> */}
 
                             <Image
-                              src={levelIcon}
+                              src="/icons/levelIconGray.svg"
                               alt="level icon"
                               width={20}
                               height={20}
@@ -373,7 +373,7 @@ const AuthorizationPage1 = () => {
                        
 
                         <Image
-                          src={binIcon}
+                          src="/icons/binGray.svg"
                           alt="bin"
                           width={24}
                           height={24}

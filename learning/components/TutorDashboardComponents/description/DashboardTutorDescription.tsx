@@ -2,11 +2,13 @@
 import Inputs from "@/components/Input/Input";
 import React, { useState } from "react";
 import { countryList } from "@/mock/countryList";
-import experienceIcon from "./../../../assets/icons/experienceGray.svg";
-import locationIcon from "./../../../assets/icons/locationGray.svg";
-import dateIcon from "./../../../assets/icons/dayIcon.svg";
+
 import Button from "@/components/Button/Button";
 import Image from "next/image";
+
+const experienceIcon = "/icons/experienceGray.svg";
+const locationIcon = "/icons/locationGray.svg";
+const dateIcon = "/icons/dayIcon.svg";
 
 const DashboardTutorDescription = () => {
   const [bio, setBio] = useState("");

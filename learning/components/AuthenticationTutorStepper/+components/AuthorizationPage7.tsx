@@ -1,19 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
-import educationWhite from "../../../assets/icons/educationWhite.svg";
-import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
-import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
-import languageIcon from "./../../../assets/icons/languageGray.svg";
-import courseTitleIcon from "../../../assets/icons/courseTitle.svg";
-import durationTime from "../../../assets/icons/durationTime.svg";
-import priceIcon from "../../../assets/icons/priceGray.svg";
-import lesson from "../../../assets/icons/lessonPartGray.svg";
-import timeSlot from "../../../assets/icons/clockGray.svg";
-import calender from "../../../assets/icons/dayIcon.svg";
+
+
 
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +9,23 @@ import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
 import Inputs from "@/components/Input/Input";
 import CheckBox from "@/components/CheckBox.tsx/CheckBox";
+
+
+// ✅ icons from /public/icons
+const aboutIconWhite = "/icons/aboutIconWhite.svg";
+const photoIconWhite = "/icons/photoIconWhite.svg";
+const certificateIconWhite = "/icons/certificateIconWhite.svg";
+const educationWhite = "/icons/educationWhite.svg";
+const descriptionIconWhite = "/icons/descriptionIconWhite.svg";
+const videoIconWhite = "/icons/videoIconWhite.svg";
+const priceIconWhite = "/icons/priceIconWhite.svg";
+const languageIcon = "/icons/languageGray.svg";
+const courseTitleIcon = "/icons/courseTitle.svg";
+const durationTime = "/icons/durationTime.svg";
+const priceIcon = "/icons/priceGray.svg";
+const lesson = "/icons/lessonPartGray.svg";
+const timeSlot = "/icons/clockGray.svg";
+const calender = "/icons/dayIcon.svg";
 
 const AuthorizationPage7 = () => {
   const router = useRouter();

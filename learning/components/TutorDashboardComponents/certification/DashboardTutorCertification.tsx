@@ -1,12 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import certFile from "./../../../assets/icons/certFile.svg";
-import certIcon from "./../../../assets/icons/certificateGray.svg";
-import issueByIcon from "./../../../assets/icons/issueBy.svg";
-import dateIcon from "./../../../assets/icons/dayIcon.svg";
+
 import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import Image from "next/image";
+
+const certFile = "/icons/certFile.svg";
+const certIcon = "/icons/certificateGray.svg";
+const issueByIcon = "/icons/issueBy.svg";
+const dateIcon = "/icons/dayIcon.svg";
+
 
 const DashboardTutorCertification = () => {
   const [certifications, setCertifications] = useState([

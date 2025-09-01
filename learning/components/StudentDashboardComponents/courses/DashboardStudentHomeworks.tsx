@@ -2,9 +2,12 @@
 import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
 import React from "react";
-import downloadIcon from "./../../../assets/icons/download.svg";
-import uploadIcon from "./../../../assets/icons/upload.svg";
+
 import Image from "next/image";
+
+
+const downloadIcon = "/icons/download.svg";
+const uploadIcon = "/icons/upload.svg";
 
 const DashboardStudentHomeworks = () => {
   const { courseId } = useParams();

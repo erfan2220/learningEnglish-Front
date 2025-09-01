@@ -1,8 +1,8 @@
 import { tutorMockDetail } from "@/mock/tutorMockData";
 import React from "react";
-import favoriteIcon from "./../../assets/icons/star.svg";
+// import favoriteIcon from "/icons/star.svg";
 import Image from "next/image";
-import heartIcon from "./../../assets/icons/heartFillRed.svg";
+// import heartIcon from "/icons/heartFillRed.svg";
 import Link from "next/link";
 
 const TutorShowCart = ({ tutorId }: { tutorId: string }) => {
@@ -46,7 +46,7 @@ const TutorShowCart = ({ tutorId }: { tutorId: string }) => {
               className="w-[18px] h-[18px]"
             /> */}
             <Image
-              src={favoriteIcon}
+              src="/icons/star.svg"
               alt="favorite icon"
               width={18}
               height={18}
@@ -115,7 +115,7 @@ const TutorShowCart = ({ tutorId }: { tutorId: string }) => {
             alt="heartIcon"
             className="w-[28px] h-[28px]"
           /> */}
-          <Image src={heartIcon} alt="heart fill" width={28} height={28} />
+          <Image src="/icons/heartFillRed.svg" alt="heart fill" width={28} height={28} />
         </div>
       </div>
     </div>

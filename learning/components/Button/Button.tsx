@@ -1,6 +1,6 @@
 import React from "react";
 // import buttonIcon from "@/assets/icons/arrowWhite.svg";
-// import buttonIcon from "./../../assets/icons/arrowWhite.svg";
+// import buttonIcon from "/icons/arrowWhite.svg";
 import { ButtonProps } from "@/model/types";
 import Image from "next/image";
 

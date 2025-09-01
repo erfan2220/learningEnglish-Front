@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import lessonIcon from "./../../../assets/icons/learningD.svg";
-import homeworkIcon from "./../../../assets/icons/homeworkD.svg";
+
 import DashboardTutorLessons from "./DashboardTutorLessons";
 import DashboardTutorHomeworks from "./DashboardTutorHomeworks";
 import Image from "next/image";
+
+const lessonIcon = "/icons/learningD.svg";
+const homeworkIcon = "/icons/homeworkD.svg";
 
 const DashboardTutorDetail = () => {
   const [isActiveLesson, setIsActiveLesson] = useState(true);

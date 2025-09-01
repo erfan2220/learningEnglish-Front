@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import welcomeImage from "../../../assets/images/helloDash.svg";
+const welcomeImage = "/images/helloDash.svg";
 
 const TutorDashboardPage = () => {
   return (

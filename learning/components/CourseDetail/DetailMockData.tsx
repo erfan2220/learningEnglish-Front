@@ -4,10 +4,10 @@
 // import Image from "next/image";
 // import { courseMockDetail } from "@/mock/courseMockData";
 // import Country from "../Country/Country";
-// import clockIcon from "../../assets/icons/clockPurple.svg";
-// import levelIcon from "../../assets/icons/levelIcon.svg";
-// import peopleIcon from "../../assets/icons/people.svg";
-// import languageIcon from "../../assets/icons/languagePurple.svg";
+// import clockIcon = "/icons/clockPurple.svg";
+// import levelIcon = "/icons/levelIcon.svg";
+// import peopleIcon = "/icons/people.svg";
+// import languageIcon = "/icons/languagePurple.svg";
 // // import { tutorMockDetail } from "@/mock/tutorMockData";
 // import Link from "next/link";
 // import CourseCart from "../CourseCart/CourseCart";

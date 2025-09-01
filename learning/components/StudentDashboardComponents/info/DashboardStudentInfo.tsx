@@ -1,18 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import profilePhoto from "./../../../assets/icons/profilePhoto.svg";
 import Image from "next/image";
 import Inputs from "@/components/Input/Input";
-import userIcon from "./../../../assets/icons/userIconGray.svg";
-import emailIcon from "./../../../assets/icons/emailGray.svg";
-import countryIcon from "./../../../assets/icons/locationGray.svg";
-import phoneIcon from "./../../../assets/icons/phoneGray.svg";
-import studyIcon from "./../../../assets/icons/educationGray.svg";
-import institutionIcon from "./../../../assets/icons/institutionGray.svg";
-import passwordIcon from "./../../../assets/icons/passwordIconGray.svg";
-import editIcon from "./../../../assets/icons/penDash.svg";
-import degreeIcon from "./../../../assets/icons/degreeGray.svg";
+
+
+const profilePhoto = "/icons/profilePhoto.svg";
+const userIcon = "/icons/userIconGray.svg";
+const emailIcon = "/icons/emailGray.svg";
+const countryIcon = "/icons/locationGray.svg";
+const phoneIcon = "/icons/phoneGray.svg";
+const studyIcon = "/icons/educationGray.svg";
+const institutionIcon = "/icons/institutionGray.svg";
+const passwordIcon = "/icons/passwordIconGray.svg";
+const editIcon = "/icons/penDash.svg";
+const degreeIcon = "/icons/degreeGray.svg";
 
 import Button from "@/components/Button/Button";
 

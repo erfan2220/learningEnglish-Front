@@ -1,9 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import replyIcon from "./../../../assets/icons/reply.svg";
-import deleteIcon from "./../../../assets/icons/delete.svg";
+
 import Button from "@/components/Button/Button";
-import sentIcon from "./../../../assets/icons/sentWhite.svg";
+
 import { Student } from "@/model/studentType";
 import { Tutor } from "@/model/tutorType";
 import Image from "next/image";
@@ -12,6 +11,11 @@ type DashboardStudentMessagesInboxProps = {
   mainData: Student[];
   secondData: Tutor[];
 };
+
+const replyIcon = "/icons/reply.svg";
+const deleteIcon = "/icons/delete.svg";
+const sentIcon = "/icons/sentWhite.svg";
+
 
 const DashboardStudentMessagesInbox = ({
   mainData,

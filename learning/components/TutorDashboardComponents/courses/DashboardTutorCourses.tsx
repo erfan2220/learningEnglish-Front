@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
-import arrowIcon from "./../../../assets/icons/arrowBlue.svg";
+
 import { courseMockDetail } from "@/mock/courseMockData";
 import Country from "@/components/Country/Country";
 import Link from "next/link";
 import { tutorMockDetail } from "@/mock/tutorMockData";
 import Image from "next/image";
+
+const arrowIcon = "/icons/arrowBlue.svg";
 
 const DashboardTutorCourses = () => {
   const personNumber = 0;

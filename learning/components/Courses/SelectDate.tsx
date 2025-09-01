@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import dayIcon from "./../../assets/icons/dayIcon.svg";
-import arrowIcon from "./../../assets/icons/arrowDown.svg";
+// import dayIcon = "/icons/dayIcon.svg";
+// import arrowIcon = "/icons/arrowDown.svg";
 import Image from "next/image";
 
 const SelectDate = () => {
@@ -28,7 +28,7 @@ const SelectDate = () => {
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
         {/* <img src={"/icons/dayIcon.svg"} alt="day icon" className="w-6 h-6" /> */}
-        <Image src={dayIcon} alt="language icon" width={24} height={24} />
+        <Image src="/icons/dayIcon.svg" alt="language icon" width={24} height={24} />
       </div>
 
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -38,7 +38,7 @@ const SelectDate = () => {
           className="w-6 h-6"
         /> */}
 
-        <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
+        <Image src="/icons/arrowDown.svg" alt="arrow icon" width={24} height={24} />
       </div>
     </div>
   );

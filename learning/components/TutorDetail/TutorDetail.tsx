@@ -1,22 +1,26 @@
 import { tutorMockDetail } from "@/mock/tutorMockData";
 import React from "react";
 import Layout from "../Layout/Layout";
-import locationIcon from "./../../assets/icons/locationPink.svg";
-import languageIcon from "./../../assets/icons/languagePurple.svg";
-import tickIcon from "./../../assets/icons/tickGreen.svg";
-import learningIcon from "../../assets/icons/learningOrange.svg";
+
 import Country from "../Country/Country";
-import locationIconBlue from "./../../assets/icons/locationBlue.svg";
-import fieldIcon from "./../../assets/icons/institutionGreen.svg";
-import degreeIcon from "./../../assets/icons/educationPink.svg";
-import starIcon from "./../../assets/icons/star.svg";
-import studentIcon from "./../../assets/icons/studentPink.svg";
-import lessonIcon from "./../../assets/icons/lessonsBlue.svg";
-import levelIcon from "./../../assets/icons/levelIcon.svg";
+
 import { courseMockDetail } from "@/mock/courseMockData";
 import ReviewCart from "../ReviewCart/ReviewCart";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import Image from "next/image";
+
+
+const locationIcon = "/icons/locationPink.svg";
+const languageIcon = "/icons/languagePurple.svg";
+const tickIcon = "/icons/tickGreen.svg";
+const learningIcon = "/icons/learningOrange.svg";
+const locationIconBlue = "/icons/locationBlue.svg";
+const fieldIcon = "/icons/institutionGreen.svg";
+const degreeIcon = "/icons/educationPink.svg";
+const starIcon = "/icons/star.svg";
+const studentIcon = "/icons/studentPink.svg";
+const lessonIcon = "/icons/lessonsBlue.svg";
+const levelIcon = "/icons/levelIcon.svg";
 
 type Props = {
   tutorId: string;

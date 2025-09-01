@@ -1,23 +1,23 @@
 "use client";
 import React, { useState } from "react";
-import profilePhoto from "./../../../assets/icons/profilePhoto.svg";
-import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
-import educationWhite from "../../../assets/icons/educationWhite.svg";
-import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
-import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
+// import profilePhoto = "/icons/profilePhoto.svg";
+// import aboutIconWhite from "./icons/aboutIconWhite.svg";
+// import photoIconWhite from "./icons/photoIconWhite.svg";
+// import certificateIconWhite from "./icons/certificateIconWhite.svg";
+// import educationWhite from "./icons/educationWhite.svg";
+// import descriptionIconWhite from "./icons/descriptionIconWhite.svg";
+// import videoIconWhite from "./icons/videoIconWhite.svg";
+// import priceIconWhite from "./icons/priceIconWhite.svg";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
 
 const AuthorizationPage2 = () => {
-  const [imagePreview, setImagePreview] = useState(profilePhoto);
+  const [imagePreview, setImagePreview] = useState("/icons/profilePhoto.svg");
   const router = useRouter();
 
-  const btnTrigger = imagePreview !== profilePhoto && imagePreview !== "";
+  const btnTrigger = imagePreview !== "/icons/profilePhoto.svg" && imagePreview !== "";
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -41,7 +41,7 @@ const AuthorizationPage2 = () => {
             >
               <div className="bg-gradient-to-b flex items-center justify-center from-[#B49AFF] to-[#FF9AAB] h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={aboutIconWhite}
+                  src="/icons/aboutIconWhite.svg"
                   alt="about icon"
                   width={28}
                   height={28}
@@ -61,7 +61,7 @@ const AuthorizationPage2 = () => {
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={photoIconWhite}
+                  src="/icons/photoIconWhite.svg"
                   alt="photo icon"
                   width={28}
                   height={28}
@@ -78,7 +78,7 @@ const AuthorizationPage2 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={certificateIconWhite}
+                  src="/icons/certificateIconWhite.svg"
                   alt="certificate icon"
                   width={28}
                   height={28}
@@ -92,7 +92,7 @@ const AuthorizationPage2 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={educationWhite}
+                  src="/icons/educationWhite.svg"
                   alt="education icon"
                   width={28}
                   height={28}
@@ -106,7 +106,7 @@ const AuthorizationPage2 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={descriptionIconWhite}
+                  src="/icons/descriptionIconWhite.svg"
                   alt="description icon"
                   width={28}
                   height={28}
@@ -120,7 +120,7 @@ const AuthorizationPage2 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={videoIconWhite}
+                  src="/icons/videoIconWhite.svg"
                   alt="video icon"
                   width={28}
                   height={28}
@@ -134,7 +134,7 @@ const AuthorizationPage2 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src={priceIconWhite}
+                  src="/icons/priceIconWhite.svg"
                   alt="price icon"
                   width={28}
                   height={28}

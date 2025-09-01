@@ -1,9 +1,9 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-import startPic from "../../assets/images/pana.svg";
-import tutorPic from "./../../assets/images/tutorPic.svg";
-// import ukFlag from "./../../assets/icons/ukFlag.svg";
-// import frenchFlag from "./../../assets/icons/frenchFlag.svg";
+// import startPic from "/images/pana.svg";
+// import tutorPic from ".//images/tutorPic.svg";
+// import ukFlag from "/icons/ukFlag.svg";
+// import frenchFlag from "/icons/frenchFlag.svg";
 import Link from "next/link";
 import Country from "../Country/Country";
 import TutorialStep from "../TutorialStep/TutorialStep";
@@ -47,7 +47,7 @@ const LandingPage = () => {
                 className="w-[500px] h-[500px] mx-auto"
               /> */}
               <Image
-                src={startPic}
+                src="/images/pana.svg"
                 alt="start pic"
                 width={500}
                 height={500}
@@ -154,7 +154,7 @@ const LandingPage = () => {
               style={{ width: "90%", height: "90%" }}
             /> */}
             <Image
-              src={tutorPic}
+              src="/images/tutorPic.svg"
               alt="become tutor pic"
               width={100}
               height={100}

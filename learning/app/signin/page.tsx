@@ -1,7 +1,7 @@
 import SignIn from "@/components/Autorization/SignIn/SignIn";
 import React from "react";
 
-const SignInPage = () => {
+const SignInPage:React.FC = () => {
   return (
     <div>
       <SignIn />

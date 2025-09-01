@@ -3,10 +3,11 @@
 import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
-import arrowDown from "./../../../assets/icons/arrowDownD.svg";
-import arrowUp from "./../../../assets/icons/arrowUpD.svg";
+
 import Image from "next/image";
 
+const arrowDown= "/icons/arrowDownD.svg"
+const arrowUp= "/icons/arrowUpD.svg"
 const DashboardStudentLessons = () => {
   const { courseId } = useParams();
   const courseIdStr = Array.isArray(courseId) ? courseId[0] : courseId;

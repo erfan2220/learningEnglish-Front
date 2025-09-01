@@ -1,17 +1,18 @@
 import React from "react";
 import Link from "next/link";
-import homeIcon from "./../../assets/icons/homeIcon.svg";
-import courseIcon from "./../../assets/icons/course.svg";
-import favoriteIcon from "./../../assets/icons/heartFill.svg";
-import signoutIcon from "./../../assets/icons/signout.svg";
 import DashboardMenuItems from "../DashboardMenuItems/DashboardMenuItems";
 import MenuItemMessages from "../menuItemMessages/MenuItemMessages";
-import logoIcon from "../../assets/images/logoIcon.png"
 import Image from "next/image";
 
 interface StudentDashboardProps {
   children: React.ReactNode;
 }
+const homeIcon = "/icons/homeIcon.svg";
+const courseIcon = "/icons/course.svg";
+const favoriteIcon = "/icons/heartFill.svg";
+const signoutIcon = "/icons/signout.svg";
+
+const logoIcon = "/icons/logoIcon.png"
 
 const StudentDashboard = ({ children }: StudentDashboardProps) => {
   const role = "student";

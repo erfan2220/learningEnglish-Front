@@ -1,14 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import deleteIcon from "./../../../assets/icons/delete.svg";
+
 import { Student } from "@/model/studentType";
 import { Tutor } from "@/model/tutorType";
 import Image from "next/image";
+
+
+
 
 type DashboardStudentMessagesSentProps = {
   mainData: Student[];
   secondData: Tutor[];
 };
+
+const  deleteIcon = "/icons/delete.svg";
 
 const DashboardStudentMessagesSent = ({
   mainData,

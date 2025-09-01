@@ -1,147 +1,196 @@
 "use client";
-import { api } from "@/lib/APIs/axiosInstance";
-import { useAuth } from "@/context/AuthContext";
 
-import React, { useState } from "react";
-import Button from "../../Button/Button";
-import Layout from "../../Layout/Layout";
-import Inputs from "../../Input/Input";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import eyeIconClose from "./../../../assets/icons/eyeCloseIcon.svg";
-import eyeIcon from "./../../../assets/icons/eyeIcon.svg";
-import signInIcon from "./../../../assets/icons/loginIcon.svg";
-import googleIcon from "./../../../assets/icons/google.svg";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import userIcon from "./../../../assets/icons/userIconGray.svg";
-import passwordIcon from "./../../../assets/icons/passwordIconGray.svg";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { isAxiosError } from "axios";
 
-const SignIn = () => {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
+const LS_EMAIL_KEY = "le_remember_email";
+const LS_REMEMBER_KEY = "le_remember_me";
+
+export default function SignIn() {
   const router = useRouter();
+  const { login } = useAuth();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
 
-  const { refresh } = useAuth();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string>("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const canSubmit = useMemo(
+      () => email.trim().length > 0 && password.length >= 6 && !busy,
+      [email, password, busy]
+  );
+
+  // Load saved email preference
+  useEffect(() => {
+    try {
+      const savedRemember = localStorage.getItem(LS_REMEMBER_KEY);
+      const savedEmail = localStorage.getItem(LS_EMAIL_KEY);
+      if (savedRemember === "1") {
+        setRemember(true);
+        if (savedEmail) setEmail(savedEmail);
+      }
+    } catch {
+      // ignore storage errors (Safari private mode, etc.)
+    }
+  }, []);
+
+  // Persist email when remember is on
+  useEffect(() => {
+    try {
+      if (remember) {
+        localStorage.setItem(LS_REMEMBER_KEY, "1");
+        localStorage.setItem(LS_EMAIL_KEY, email);
+      } else {
+        localStorage.removeItem(LS_REMEMBER_KEY);
+        localStorage.removeItem(LS_EMAIL_KEY);
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, [remember, email]);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
+    if (!canSubmit) return;
 
+    setBusy(true);
     try {
-      await api.post("/api/login/", { email, password }); // cookies set by server
-      await refresh();                                     // call /api/me, set user
-      router.push("/");                                    // header will flip to Profile
-    } catch (err) {
-      setError("Failed to authenticate");
-      console.error(err);
+      await login(email.trim(), password); // server sets cookies; context loads /api/me
+      router.push("/");
+    } catch (err: unknown) {
+      let msg = "Failed to authenticate";
+      if (isAxiosError(err)) {
+        const data = err.response?.data as { detail?: string; message?: string } | undefined;
+        msg = data?.detail ?? data?.message ?? msg;
+      } else if (err instanceof Error) {
+        msg = err.message || msg;
+      }
+      setError(msg);
+    } finally {
+      setBusy(false);
     }
-  };
+  }
 
   return (
-    <div className="p-6 md:p-12 max-w-2xl mx-auto ">
-      <div className="mt-[60px]">
-        <Layout>
-          <div className="flex flex-col gap-3 items-center justify-center px-8  pt-10 w-full">
-            <h1 className="font-bold text-3xl text-[#45444A] ">Sign In</h1>
-            <p className="text-[#45444A] text-sm ">
-              <u className="font-semibold">
-                <Link href={"/signupStudent"}>Sign up as a student</Link>
-              </u>{" "}
+      <main className="min-h-[100dvh] bg-gradient-to-b from-white to-indigo-50">
+        <div className="max-w-md mx-auto px-6 pt-28 pb-16">
+          <div className="bg-white/90 backdrop-blur rounded-2xl shadow-xl border p-6 md:p-8">
+            <h1 className="text-3xl font-bold text-gray-800 text-center">Sign In</h1>
+            <p className="text-sm text-gray-600 text-center mt-2">
+            <span className="font-medium underline">
+              <Link href="/signupStudent">Sign up as a student</Link>
+            </span>{" "}
               or{" "}
-              <u className="font-semibold">
-                <Link href={"/signupTutor"}>Sign up as a tutor</Link>
-              </u>
+              <span className="font-medium underline">
+              <Link href="/signupTutor">Sign up as a tutor</Link>
+            </span>
             </p>
 
+            {/* Social auth */}
             <Link
-              href={"/signinGoogle"}
-              className="flex gap-2 w-full border-2 my-5 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-2"
+                href="/signinGoogle"
+                className="mt-6 flex items-center justify-center gap-2 w-full border rounded-xl py-2.5 hover:bg-gray-50 transition"
             >
-              {/* <img
-                src={"/icons/google.svg"}
-                alt="google icon"
-                className="w-6 h-6"
-              /> */}
-              <Image
-                src={googleIcon}
-                alt="google icon"
-                width={24}
-                height={24}
-              />
-              <p className="text-[#727177] text-sm font-semibold">
-                Continue with Google
-              </p>
+              {/* Use asset from /public to avoid build-time image processing */}
+              <Image src="/icons/google.svg" alt="google icon" width={20} height={20} />
+              <span className="text-sm font-semibold text-gray-700">Continue with Google</span>
             </Link>
-          </div>
 
-          <div className="flex items-center justify-center gap-2 mb-4 mx-8">
-            <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
-            <p className="text-[#45444A]">or</p>
-            <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
-          </div>
-          <form onSubmit={handleSubmit} className="p-8 pt-0 w-full">
-            <Inputs
-              type="email"
-              value={email}
-              onchange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your Email"
-              label="Email"
-              width="100%"
-              inputIcon={userIcon}
-            />
-            <Inputs
-              type="password"
-              value={password}
-              onchange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your Password"
-              label="Password"
-              width="100%"
-              icon1={eyeIconClose}
-              icon2={eyeIcon}
-              inputIcon={passwordIcon}
-            />
-            <div className=" text-[#45444A] text-sm mx-2 my-2">
-              <u>
-                <Link href={"/forgotPassword"}>Forgot Your Password?</Link>
-              </u>
-            </div>
-            <div className="flex gap-2 mx-2 mt-6 mb-8">
-              <input type="checkbox" className="w-5 h-5 rounded-2xl" />
-              <p className="text-[#45444A] text-sm">Remember Me</p>
+            <div className="flex items-center gap-3 my-6">
+              <div className="h-px bg-gray-200 flex-1" />
+              <span className="text-xs text-gray-500">or</span>
+              <div className="h-px bg-gray-200 flex-1" />
             </div>
 
-            <Button
-              type="submit"
-              label={"Sign In"}
-              widthBtn="100%"
-              btnIcon={signInIcon}
-            />
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Email */}
+              <label className="block text-sm font-medium text-gray-700">
+                Email
+                <input
+                    type="email"
+                    className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-200"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                    required
+                />
+              </label>
 
-            {error && (
-              <div className="text-red-500 text-sm mt-4 text-center">
-                {error}
+              {/* Password with show/hide */}
+              <label className="block text-sm font-medium text-gray-700">
+                Password
+                <div className="mt-1 relative">
+                  <input
+                      type={showPassword ? "text" : "password"}
+                      className="w-full rounded-lg border px-3 py-2 pr-10 outline-none focus:ring-2 focus:ring-indigo-200"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="current-password"
+                      required
+                  />
+                  <button
+                      type="button"
+                      onClick={() => setShowPassword((s) => !s)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? "🙈" : "👁️"}
+                  </button>
+                </div>
+              </label>
+
+              {/* Remember + Forgot */}
+              <div className="flex items-center justify-between">
+                <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+                  <input
+                      type="checkbox"
+                      className="w-4 h-4 rounded border-gray-300"
+                      checked={remember}
+                      onChange={(e) => setRemember(e.target.checked)}
+                  />
+                  Remember me
+                </label>
+                <Link href="/forgotPassword" className="text-sm text-indigo-700 hover:underline">
+                  Forgot password?
+                </Link>
               </div>
-            )}
 
-            <div className="text-sm text-[#45444A] mt-4 px-10 text-center">
-              By clicking Log in or Continue with, you agree to{" "}
-              <u>
-                <Link href={"/terms"}>Our Terms</Link>
-              </u>{" "}
-              of Use and{" "}
-              <u>
-                <Link href={"/privacy"}>Privacy Policy</Link>
-              </u>
-              .
-            </div>
-          </form>
-        </Layout>
-      </div>
-    </div>
+              {/* Error */}
+              {error && (
+                  <div className="rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm px-3 py-2">
+                    {error}
+                  </div>
+              )}
+
+              {/* Submit */}
+              <button
+                  type="submit"
+                  disabled={!canSubmit}
+                  className="w-full rounded-xl bg-[#5F33E1] text-white py-2.5 font-semibold
+                         hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed
+                         transition"
+              >
+                {busy ? "Signing in..." : "Sign In"}
+              </button>
+
+              <p className="text-xs text-center text-gray-500 mt-3">
+                By signing in you agree to our <Link href="/terms" className="underline">Terms</Link> and{" "}
+                <Link href="/privacy" className="underline">Privacy Policy</Link>.
+              </p>
+            </form>
+          </div>
+        </div>
+      </main>
   );
-};
-
-export default SignIn;
+}

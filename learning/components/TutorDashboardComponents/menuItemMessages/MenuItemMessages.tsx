@@ -1,9 +1,9 @@
 "use client";
 import DashboardMenuItems from "@/components/DashboardMenuItems/DashboardMenuItems";
 import React, { useState } from "react";
-import messageIcon from "./../../../assets/icons/message.svg";
-import inboxIcon from "./../../../assets/icons/inbox.svg";
-import sentIcon from "./../../../assets/icons/sent.svg";
+const messageIcon = "/icons/message.svg";
+const inboxIcon = "/icons/inbox.svg";
+const sentIcon = "/icons/sent.svg";
 
 const MenuItemMessages = () => {
   const role = "student";

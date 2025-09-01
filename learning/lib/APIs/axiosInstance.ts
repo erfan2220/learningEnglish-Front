@@ -1,33 +1,43 @@
-import axios from "axios";
-import type { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
+
 let refreshing = false;
 let queue: Array<() => void> = [];
 
+const base = process.env.NEXT_PUBLIC_BASE_API_URL?.trim() || ""; // same-origin by default
+
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL, // e.g. http://103.75.196.105
-  withCredentials: true,                         // send/receive cookies
-  headers: { "Content-Type": "application/json" }
+     baseURL: base,           // '' means use window origin
+    // baseURL: "base",           // '' means use window origin
+    withCredentials: true,   // send/receive cookies
+    headers: { "Content-Type": "application/json" },
 });
 
 api.interceptors.response.use(
-    r => r,
+    (r) => r,
     async (error: AxiosError) => {
-      if (error.response?.status === 401 && !refreshing) {
-        try {
-          refreshing = true;
-          await api.post("/api/token/refresh/"); // server reads refresh cookie
-          queue.forEach(fn => fn());
-          queue = [];
-          return api.request(error.config!);
-        } finally {
-          refreshing = false;
+        const status = error.response?.status;
+        const cfg = error.config!;
+        if (status === 401) {
+            if (!refreshing) {
+                try {
+                    refreshing = true;
+                    await api.post("/api/token/refresh/"); // server reads refresh cookie
+                    queue.forEach((fn) => fn());
+                    queue = [];
+                    return api.request(cfg);
+                } catch (e) {
+                    // refresh failed -> clear queue (reject) and bubble up
+                    queue = [];
+                    throw e;
+                } finally {
+                    refreshing = false;
+                }
+            }
+            // if a refresh is in-flight, enqueue this request
+            return new Promise((resolve) => {
+                queue.push(() => resolve(api.request(cfg)));
+            });
         }
-      }
-      if (error.response?.status === 401 && refreshing) {
-        return new Promise((resolve) => {
-          queue.push(() => resolve(api.request(error.config!)));
-        });
-      }
-      throw error;
+        throw error;
     }
 );

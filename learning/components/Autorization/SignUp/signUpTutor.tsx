@@ -1,19 +1,24 @@
 "use client";
 import React, { useState } from "react";
-import Button from "../Button/Button";
-import Layout from "../Layout/Layout";
-import Inputs from "../Input/Input";
+import Button from "../../Button/Button";
+import Layout from "../../Layout/Layout";
+import Inputs from "../../Input/Input";
 import Link from "next/link";
-import eyeIconClose from "./../../assets/icons/eyeCloseIcon.svg";
-import eyeIcon from "./../../assets/icons/eyeIcon.svg";
-import signUpIcon from "../../assets/icons/signupIconWhite.svg";
-import googleIcon from "./../../assets/icons/google.svg";
+
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import userIcon from "./../../assets/icons/userIconGray.svg";
-import passwordIcon from "./../../assets/icons/passwordIconGray.svg";
-import emailIcon from "./../../assets/icons/emailGray.svg";
+
 import Image from "next/image";
+
+
+// ✅ icons served from /public/icons (no import statements)
+const eyeIconClose = "/icons/eyeCloseIcon.svg";
+const eyeIcon = "/icons/eyeIcon.svg";
+const signUpIcon = "/icons/signupIconWhite.svg";
+const googleIcon = "/icons/google.svg";
+const userIcon = "/icons/userIconGray.svg";
+const passwordIcon = "/icons/passwordIconGray.svg";
+const emailIcon = "/icons/emailGray.svg";
 
 const SignUpTutor = () => {
   const [firstName, setFirstName] = useState("");

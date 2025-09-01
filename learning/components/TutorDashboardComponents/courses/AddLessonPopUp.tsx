@@ -2,12 +2,14 @@
 import Button from "@/components/Button/Button";
 import Inputs from "@/components/Input/Input";
 import React, { useState } from "react";
-import partIcon from "./../../../assets/icons/lessonPartGray.svg";
-import lessonIcon from "./../../../assets/icons/lessonGray.svg";
-import addIcon from "./../../../assets/icons/addWhite.svg";
-import binIcon from "./../../../assets/icons/binGray.svg";
+
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import Image from "next/image";
+
+const partIcon = "/icons/lessonPartGray.svg";
+const lessonIcon = "/icons/lessonGray.svg";
+const addIcon = "/icons/addWhite.svg";
+const binIcon = "/icons/binGray.svg";
 
 interface AddLessonProps {
   handleClosePopup: () => void;

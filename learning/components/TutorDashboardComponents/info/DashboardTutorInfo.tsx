@@ -1,22 +1,27 @@
 "use client";
 
 import React, { useState } from "react";
-import profilePhoto from "./../../../assets/icons/profilePhoto.svg";
+
 import Inputs from "@/components/Input/Input";
-import userIcon from "./../../../assets/icons/userIconGray.svg";
-import emailIcon from ".././../../assets/icons/emailGray.svg";
-import countryIcon from "./../../../assets/icons/locationGray.svg";
-import phoneIcon from "./../../../assets/icons/phoneGray.svg";
-import passwordIcon from "./../../../assets/icons/passwordIconGray.svg";
-import editIcon from "./../../../assets/icons/penDash.svg";
-import subjectIcon from "./../../../assets/icons/educationGray.svg";
-import languageIcon from "./../../../assets/icons/languageGray.svg";
-import levelIcon from "./../../../assets/icons/levelIconGray.svg";
-import binIcon from "./../../../assets/icons/binGray.svg";
+
 import Image from "next/image";
 
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
+
+
+const userIcon = "/icons/userIconGray.svg";
+const emailIcon = "/icons/emailGray.svg";
+const countryIcon = "/icons/locationGray.svg";
+const phoneIcon = "/icons/phoneGray.svg";
+const passwordIcon = "/icons/passwordIconGray.svg";
+const editIcon = "/icons/penDash.svg";
+const subjectIcon = "/icons/educationGray.svg";
+const languageIcon = "/icons/languageGray.svg";
+const levelIcon = "/icons/levelIconGray.svg";
+const binIcon = "/icons/binGray.svg";
+const profilePhoto = "/icons/profilePhoto.svg";
+
 
 const DashboardTutorInfo = () => {
   const [imagePreview, setImagePreview] = useState(profilePhoto);

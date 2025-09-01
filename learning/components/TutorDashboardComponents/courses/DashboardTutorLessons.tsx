@@ -3,14 +3,16 @@
 import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
-import arrowDown from "./../../../assets/icons/arrowDownD.svg";
-import arrowUp from "./../../../assets/icons/arrowUpD.svg";
-import deleteIcon from "./../../../assets/icons/deleteRed.svg";
-import addIcon from "./../../../assets/icons/addWhite.svg";
+
 import Button from "@/components/Button/Button";
 import DeletePopup from "./DeletePopup";
 import AddLessonPopUp from "./AddLessonPopUp";
 import Image from "next/image";
+
+const arrowDown = "/icons/arrowDownD.svg";
+const arrowUp = "/icons/arrowUpD.svg";
+const deleteIcon = "/icons/deleteRed.svg";
+const addIcon = "/icons/addWhite.svg";
 
 const DashboardTutorLessons = () => {
   const { courseId } = useParams();

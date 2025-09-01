@@ -1,9 +1,12 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import priceIcon from "../../assets/icons/priceGray.svg";
-import arrowIcon from "../../assets/icons/arrowDown.svg";
+
 import PriceSlider from "../PriceSlider/PriceSlider";
+
+
+const priceIcon = "/icons/priceGray.svg";
+const arrowIcon = "/icons/arrowDown.svg";
 
 const SelectPrice = () => {
   const [isOpen, setIsOpen] = useState(false);

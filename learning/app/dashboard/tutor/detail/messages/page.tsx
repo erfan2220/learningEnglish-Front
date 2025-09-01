@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import messageImage from "../../../../../assets/images/messageImage.svg";
+const messageImage = "/images/messageImage.svg";
 
 const page = () => {
   return (

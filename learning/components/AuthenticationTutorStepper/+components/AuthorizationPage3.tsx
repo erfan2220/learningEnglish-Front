@@ -1,21 +1,26 @@
 "use client";
 import React, { useState } from "react";
-import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
-import educationWhite from "../../../assets/icons/educationWhite.svg";
-import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
-import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
-import certFile from "./../../../assets/icons/certFile.svg";
-import certIcon from "./../../../assets/icons/certificateGray.svg";
-import issueByIcon from "./../../../assets/icons/issueBy.svg";
-import dateIcon from "./../../../assets/icons/dayIcon.svg";
+
+
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import Inputs from "@/components/Input/Input";
 import { useRouter } from "next/navigation";
+
+
+// ✅ icons served from /public/icons
+const aboutIconWhite = "/icons/aboutIconWhite.svg";
+const photoIconWhite = "/icons/photoIconWhite.svg";
+const certificateIconWhite = "/icons/certificateIconWhite.svg";
+const educationWhite = "/icons/educationWhite.svg";
+const descriptionIconWhite = "/icons/descriptionIconWhite.svg";
+const videoIconWhite = "/icons/videoIconWhite.svg";
+const priceIconWhite = "/icons/priceIconWhite.svg";
+const certFile = "/icons/certFile.svg";
+const certIcon = "/icons/certificateGray.svg";
+const issueByIcon = "/icons/issueBy.svg";
+const dateIcon = "/icons/dayIcon.svg";
 
 const AuthorizationPage3 = () => {
   const router = useRouter();
