@@ -18,10 +18,11 @@ export default function RootLayout({
   return (
       <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+      {/*<GlobalLoader />*/}
       <AuthProvider>
           <Header />
           {children}
-          <GlobalLoader />
+
           <Footer />
       </AuthProvider>
       </body>
