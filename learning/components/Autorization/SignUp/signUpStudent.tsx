@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Button from "../../Button/Button";
 import Layout from "../../Layout/Layout";
 import Inputs from "../../Input/Input";
 import Link from "next/link";
@@ -14,6 +13,7 @@ import axios from "axios";
 // import passwordIcon = "/icons/passwordIconGray.svg";
 // import emailIcon = "/icons/emailGray.svg";
 import Image from "next/image";
+import Button from "@/components/Button/Button";
 
 const SignUpStudent = () => {
   const [firstName, setFirstName] = useState("");
@@ -28,6 +28,16 @@ const SignUpStudent = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
+
+    if (!firstName || !lastName || !email || !password) {
+      setError("please fill in all fields");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
 
     try {
       const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/register/`;
@@ -44,12 +54,55 @@ const SignUpStudent = () => {
 
       localStorage.setItem("access_token", access);
       localStorage.setItem("refresh_token", refresh);
+
       router.push("/signin");
     } catch (error) {
-      setError("Failed to authenticate");
-      console.error("Error:", error);
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          console.log("Error response data:", error.response.data);
+          const data = error.response.data;
+          if (typeof data === "string") {
+            setError(data);
+          } else if (data?.message) {
+            setError(data.message);
+          } else {
+            setError("Registration failed");
+          }
+        } else {
+          setError("Network error - please check your connection");
+        }
+      } else {
+        setError("An unexpected error occurred");
+      }
+      console.error("Error details:", error);
     }
   };
+
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setError("");
+
+  //   try {
+  //     const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/register/`;
+
+  //     const response = await axios.post(url, {
+  //       email,
+  //       password,
+  //       first_name: firstName,
+  //       last_name: lastName,
+  //       is_teacher: isTeacher,
+  //     });
+
+  //     const { access, refresh } = response.data;
+
+  //     localStorage.setItem("access_token", access);
+  //     localStorage.setItem("refresh_token", refresh);
+  //     router.push("/signin");
+  //   } catch (error) {
+  //     setError("Failed to authenticate");
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   return (
     <div className="p-6 md:p-12 max-w-2xl mx-auto ">

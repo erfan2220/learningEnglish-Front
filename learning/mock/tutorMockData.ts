@@ -8,6 +8,10 @@
 export const tutorMockDetail=[
     {
         id:1,
+        user:{
+            firstName:"ali",
+            last_name:"hashemi"
+        },
         tutorId:"pt1001",
         tutorPhoto:'/icons/tutorPhoto.svg',
         role:"Professional Teacher",
@@ -181,6 +185,10 @@ export const tutorMockDetail=[
     {
     id: 2,
     tutorId: "pt1002",
+    user:{
+            firstName:"ali",
+            last_name:"hashemi"
+    },
     tutorPhoto: '/icons/tutorPhoto.svg',
     role: "Professional Teacher",
     tutorFirstName: "Emily",
@@ -323,6 +331,10 @@ export const tutorMockDetail=[
   {
     id: 3,
     tutorId: "pt1003",
+      user:{
+          firstName:"ali",
+          last_name:"hashemi"
+      },
     tutorPhoto: '/icons/tutorPhoto.svg',
     role: "Professional Teacher",
     tutorFirstName: "Liam",
@@ -483,6 +495,10 @@ export const tutorMockDetail=[
   {
   id: 4,
   tutorId: "pt1004",
+      user:{
+          firstName:"ali",
+          last_name:"hashemi"
+      },
   tutorPhoto: '/icons/tutorPhoto.svg',
   role: "Professional Teacher",
   tutorFirstName: "Parisa",
@@ -605,10 +621,13 @@ export const tutorMockDetail=[
   studentLists: ["st1006"]
 },
 
-
 {
   id: 5,
   tutorId: "pt1005",
+    user:{
+        firstName:"ali",
+        last_name:"hashemi"
+    },
   tutorPhoto: '/icons/tutorPhoto.svg',
   role: "Certified English Teacher",
   tutorFirstName: "Michael",
@@ -733,12 +752,5 @@ export const tutorMockDetail=[
   ],
   studentLists: ["st1007"]
 }
-
-
-
-
-
-
-
 
 ]

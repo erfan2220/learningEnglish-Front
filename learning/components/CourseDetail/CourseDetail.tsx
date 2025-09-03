@@ -2,33 +2,29 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
 import Country from "../Country/Country";
-
+import clockIcon from "./../../assets/icons/clockPurple.svg";
+import levelIcon from "./../../assets/icons/levelIcon.svg";
+import peopleIcon from "./../../assets/icons/people.svg";
+import languageIcon from "./../../assets/icons/languagePurple.svg";
 import Button from "../Button/Button";
-import {api} from "@/lib/APIs/axiosInstance";
+import { api } from "../../lib/APIs/axiosInstance";
 import { TemporaryCourse } from "@/model/courseType";
-
+import profilePhoto from "./../../assets/icons/profilePhotoDefault.svg";
+import dayIcon from "./../../assets/icons/dayPink.svg";
+import timeIcon from "./../../assets/icons/length.svg";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-
-// ✅ icons serve/icons/ublic/icons (no import statements)
-
-const clockIcon = "/icons/clockPurple.svg";
-const levelIcon = "/icons/levelIcon.svg";
-const peopleIcon = "/icons/people.svg";
-const languageIcon = "/icons/languagePurple.svg";
-const profilePhoto = "/icons/profilePhoto.svg";
-const dayIcon = "/icons/dayPink.svg";
-const timeIcon = "/icons/length.svg";
-
-const CourseDetail = ({ courseId }: { courseId: number }) => {
+const CourseDetail = ({ id }: { id: number }) => {
   const [course, setCourse] = useState<TemporaryCourse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const res = await api.get(`/api/courses/${courseId}`);
+        const res = await api.get(`/api/courses/${id}`);
         setCourse(res.data);
       } catch (error) {
         console.error("Fetching error", error);
@@ -38,13 +34,13 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
       }
     };
 
-    if (!isNaN(courseId)) {
+    if (id) {
       fetchCourse();
     } else {
       setError("Invalid course ID");
       setLoading(false);
     }
-  }, [courseId]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -69,21 +65,6 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
       </div>
     );
   }
-
-  // Helper function to get day name from day number
-  // const getDayName = (dayNumber: string) => {
-  //   const days = [
-  //     "Sunday",
-  //     "Monday",
-  //     "Tuesday",
-  //     "Wednesday",
-  //     "Thursday",
-  //     "Friday",
-  //     "Saturday",
-  //   ];
-  //   const dayIndex = parseInt(dayNumber) % 7;
-  //   return days[dayIndex];
-  // };
 
   // Format time to HH:MM format
   const formatTime = (timeString: string) => {
@@ -112,25 +93,10 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
                 />
               </div>
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                {/* <svg height="200" width="300">
-                  <image width="300" height="200" href={timeIcon} />
-                  Sorry, your browser does not support inline SVG.
-                </svg> */}
-
-                {/* <img
-                  src={"/icons/length.svg"}
-                  alt="time icon"
-                  className="w-[22px] h-[22px]"
-                /> */}
                 <Image src={timeIcon} alt="time icon" width={22} height={22} />
                 <p>{course.length} mins</p>
               </div>
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                {/* <img
-                  src={"/icons/levelIcon.svg"}
-                  alt="level icon"
-                  className="w-[22px] h-[22px]"
-                /> */}
                 <Image
                   src={levelIcon}
                   alt="level icon"
@@ -140,11 +106,6 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
                 <p>{course.level}</p>
               </div>
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                {/* <img
-                  src={"/icons/people.svg"}
-                  alt="people icon"
-                  className="w-[22px] h-[22px]"
-                /> */}
                 <Image
                   src={peopleIcon}
                   alt="people icon"
@@ -155,21 +116,11 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
               </div>
 
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                {/* <img
-                  src={"/icons/dayPink.svg"}
-                  alt="day icon"
-                  className="w-[22px] h-[22px]"
-                /> */}
                 <Image src={dayIcon} alt="day icon" width={22} height={22} />
                 <p>{course.schedule_day}</p>
               </div>
 
               <div className="flex gap-1 px-3 py-1 bg-[#D2C3FF] rounded-3xl shadow">
-                {/* <img
-                  src={"/icons/clockPurple.svg"}
-                  alt="clock icon"
-                  className="w-[22px] h-[22px]"
-                /> */}
                 <Image
                   src={clockIcon}
                   alt="clock icon"
@@ -205,7 +156,7 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
             <div className="my-8 text-[#45444A]">
               <h4 className="font-bold">Course Length</h4>
               <p className="text-[#737177]">
-                <b>{course.lessons.length}</b> Lessons
+                <b>{course.course_duration}</b> Lessons
               </p>
             </div>
           </div>
@@ -219,11 +170,6 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
 
             {/* Tutor Info */}
             <div className="flex gap-4 items-center my-5">
-              {/* <img
-                src={course.tutor?.profile_picture || "/icons/profilePhoto.svg"}
-                alt="tutor photo"
-                className="w-[70px] h-[70px] rounded-full object-cover"
-              /> */}
               <Image
                 src={course.tutor?.profile_picture || profilePhoto}
                 alt="tutor photo"
@@ -233,17 +179,12 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
               />
               <div className="text-[#45444A]">
                 <p className="font-bold">Sam Smith</p>
-                <p className="text-[#737177] text-sm">Teacher</p>
+                <p className="text-[#737177] text-sm">Professional Tutor</p>
               </div>
             </div>
 
             {/* Active Students */}
             <div className="flex gap-2 px-3 py-1 text-[#5C5A60]">
-              {/* <img
-                src={"/icons/people.svg"}
-                alt="students icon"
-                className="w-[22px] h-[22px]"
-              /> */}
               <Image
                 src={peopleIcon}
                 alt="students icon"
@@ -257,11 +198,6 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
 
             {/* Languages Spoken */}
             <div className="flex items-center gap-2 px-3 py-1 text-[#5C5A60]">
-              {/* <img
-                src={"/icons/languagePurple.svg"}
-                alt="language icon"
-                className="w-[22px] h-[22px]"
-              /> */}
               <Image
                 src={languageIcon}
                 alt="language icon"
@@ -275,6 +211,7 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
                     <p>
                       {Language}
                       {"  "}
+                      {/* {level} */}
                     </p>
                   </div>
                 ))}
@@ -294,9 +231,17 @@ const CourseDetail = ({ courseId }: { courseId: number }) => {
         {/* Fixed Bottom Bar */}
         <div className="fixed left-0 right-0 bottom-0 z-40 flex justify-between border-[#737177] px-3 sm:px-10 md:px-28 items-center h-16 bg-[#CB71FF90] backdrop-blur-sm shadow-[-5px_-3px_15px_rgba(0,0,0,0.2)]">
           <p className="font-bold text-[#45444A]">
-            USD {course.price_per_dollar} / hour
+            Toman {course.price_per_toman} / hour
           </p>
-          <Button label="Start Course" type="button" marginTop="0" />
+          <Button
+            label="Start Course"
+            type="button"
+            marginTop="0"
+            onclick={() => {
+              router.push("/cart");
+              localStorage.setItem("selectedCourseId", course.courseId);
+            }}
+          />
         </div>
       </div>
     </div>

@@ -1,18 +1,18 @@
 import TutorDetail from "@/components/TutorDetail/TutorDetail";
-import React from "react";
+
 
 interface Props {
   params: Promise<{
-    tutorId: string;
+    id: number;
   }>;
 }
 const TutorDetailPage = async ({ params }: Props) => {
-  const { tutorId } = await params;
-  return (
-    <div>
-      <TutorDetail tutorId={tutorId} />
-    </div>
-  );
+  const { id } = await params;
+  // const id = Number(params.id);
+  return <TutorDetail id={id} />;
 };
 
 export default TutorDetailPage;
+
+
+

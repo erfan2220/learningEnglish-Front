@@ -17,7 +17,7 @@ const Country = ({
         //   alt="flag"
         //   style={{ width: `${width}`, height: `${width}` }}
         // />
-        <Image src={flag} alt="french flag" width={25} height={25} style={{ width: `${width}`, height: `${width}` }} />
+        <Image src={flag} alt="french flag" width={25} height={25} style={{ width: `${width}`, height: `${width}` }} className="rounded-full" />
       )}
       <p
         className="text-[#5C5A60] font-bold "
