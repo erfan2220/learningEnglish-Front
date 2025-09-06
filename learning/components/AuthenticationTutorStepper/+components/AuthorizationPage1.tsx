@@ -1,34 +1,61 @@
 "use client";
-import React, { useState } from "react";
-// import aboutIconWhite from "./icons/aboutIconWhite.svg";
-// import photoIconWhite from "./icons/photoIconWhite.svg";
-// import certificateIconWhite from "./icons/certificateIconWhite.svg";
-// import educationWhite from "./icons/educationWhite.svg";
-// import descriptionIconWhite from "./icons/descriptionIconWhite.svg";
-// import videoIconWhite from "./icons/videoIconWhite.svg";
-// import priceIconWhite from "./icons/priceIconWhite.svg";
+import React, { useEffect, useState } from "react";
+import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
+import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
+import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
+import educationWhite from "../../../assets/icons/educationWhite.svg";
+import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
+import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
+import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
 import Image from "next/image";
 import Link from "next/link";
 import Inputs from "@/components/Input/Input";
-// import countryIcon = "/icons/locationGray.svg";
-// import phoneIcon from "./../";
-// import subjectIcon = "/icons/educationGray.svg";
-// import languageIcon = "/icons/languageGray.svg";
-// import levelIcon = "/icons/levelIconGray.svg";
-// import binIcon = "/icons/binGray.svg";
-// import userIcon from "./icons/userIconGray.svg";
+import countryIcon from "./../../../assets/icons/locationGray.svg";
+import phoneIcon from "./../../../assets/icons/phoneGray.svg";
+import subjectIcon from "./../../../assets/icons/educationGray.svg";
+import languageIcon from "./../../../assets/icons/languageGray.svg";
+import levelIcon from "./../../../assets/icons/levelIconGray.svg";
+import binIcon from "./../../../assets/icons/binGray.svg";
+import userIcon from "../../../assets/icons/userIconGray.svg";
 
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import { useRouter } from "next/navigation";
 
+// تعریف type برای entries
+interface LanguageEntry {
+  language: string;
+  level: string;
+}
+
 const AuthorizationPage1 = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedSubject, setSelectedSubject] = useState("");
-  const [entries, setEntries] = useState([{ language: "", level: "" }]);
+  const [firstName, setFirstName] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("firstName") || "" : ""
+  );
+  const [lastName, setLastName] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("lastName") || "" : ""
+  );
+  const [phoneNumber, setPhoneNumber] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("phoneNumber") || "" : ""
+  );
+  const [selectedCountry, setSelectedCountry] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("country") || "" : ""
+  );
+  const [selectedSubject, setSelectedSubject] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("subjectTeach") || "" : ""
+  );
+
+  const [entries, setEntries] = useState<LanguageEntry[]>(() => {
+    // بارگذاری اولیه از localStorage با بررسی وجود window
+    if (typeof window !== "undefined") {
+      const savedEntries = localStorage.getItem("languageEntries");
+      return savedEntries
+        ? JSON.parse(savedEntries)
+        : [{ language: "", level: "" }];
+    }
+    return [{ language: "", level: "" }];
+  });
+  
   const router = useRouter();
 
   const btnTrigger =
@@ -58,6 +85,24 @@ const AuthorizationPage1 = () => {
     setEntries(newEntries);
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("firstName", firstName);
+      localStorage.setItem("lastName", lastName);
+      localStorage.setItem("phoneNumber", phoneNumber);
+      localStorage.setItem("country", selectedCountry);
+      localStorage.setItem("subjectTeach", selectedSubject);
+      localStorage.setItem("languageEntries", JSON.stringify(entries));
+    }
+  }, [
+    firstName,
+    lastName,
+    phoneNumber,
+    selectedCountry,
+    selectedSubject,
+    entries,
+  ]);
+
   return (
     <div className="py-2 pt-6 md:py-12">
       {/* ====================header section==================== */}
@@ -72,16 +117,13 @@ const AuthorizationPage1 = () => {
             >
               <div className="bg-gradient-to-b flex items-center justify-center from-[#B49AFF] to-[#FF9AAB] h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src=""
+                  src={aboutIconWhite}
                   alt="about icon"
                   width={28}
                   height={28}
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                About
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -89,16 +131,13 @@ const AuthorizationPage1 = () => {
             <div className="flex flex-col justify-center items-center gap-2">
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src="/icons/photoIconWhite.svg"
+                  src={photoIconWhite}
                   alt="photo icon"
                   width={28}
                   height={28}
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                Photo
-              </p> */}
             </div>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -106,7 +145,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src="/icons/certificateIconWhite.svg"
+                  src={certificateIconWhite}
                   alt="certificate icon"
                   width={28}
                   height={28}
@@ -120,7 +159,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src="/icons/educationWhite.svg"
+                  src={educationWhite}
                   alt="education icon"
                   width={28}
                   height={28}
@@ -134,7 +173,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src="/icons/descriptionIconWhite.svg"
+                  src={descriptionIconWhite}
                   alt="description icon"
                   width={28}
                   height={28}
@@ -148,7 +187,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src="/icons/videoIconWhite.svg"
+                  src={videoIconWhite}
                   alt="video icon"
                   width={28}
                   height={28}
@@ -162,7 +201,7 @@ const AuthorizationPage1 = () => {
             <div>
               <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
                 <Image
-                  src="/icons/priceIconWhite.svg"
+                  src={priceIconWhite}
                   alt="price icon"
                   width={28}
                   height={28}
@@ -190,7 +229,7 @@ const AuthorizationPage1 = () => {
                   placeholder="First Name"
                   label="First Name"
                   width="100%"
-                  inputIcon="/icons/userIconGray.svg"
+                  inputIcon={userIcon}
                   value={firstName}
                   onchange={(e) => setFirstName(e.target.value)}
                 />
@@ -200,7 +239,7 @@ const AuthorizationPage1 = () => {
                   placeholder="Last Name"
                   label="Last Name"
                   width="100%"
-                  inputIcon="/icons/userIconGray.svg"
+                  inputIcon={userIcon}
                   value={lastName}
                   onchange={(e) => setLastName(e.target.value)}
                 />
@@ -210,7 +249,7 @@ const AuthorizationPage1 = () => {
                   placeholder="Phone Number"
                   label="Phone Number"
                   width="100%"
-                  inputIcon="/icons/phoneGray.svg"
+                  inputIcon={phoneIcon}
                   value={phoneNumber}
                   onchange={(e) => setPhoneNumber(e.target.value)}
                 />
@@ -234,15 +273,9 @@ const AuthorizationPage1 = () => {
                         </option>
                       ))}
                     </select>
-                    {/* <img
-                  src={"/icons/locationGray.svg"}
-                  alt="countryIcon"
-                  className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                /> */}
-
                     <Image
-                      src="/icons/locationGray.svg"
-                      alt="language icon"
+                      src={countryIcon}
+                      alt="country icon"
                       width={20}
                       height={20}
                       className="absolute top-[12px] left-4 cursor-pointer"
@@ -268,15 +301,9 @@ const AuthorizationPage1 = () => {
                       <option value="French">French</option>
                       <option value="Persian">Persian</option>
                     </select>
-                    {/* <img
-                  src={"/icons/educationGray.svg"}
-                  alt="subjectIcon"
-                  className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                /> */}
-
                     <Image
-                      src=""
-                      alt="language icon"
+                      src={subjectIcon}
+                      alt="subject icon"
                       width={20}
                       height={20}
                       className="absolute top-[12px] left-4 cursor-pointer"
@@ -285,7 +312,7 @@ const AuthorizationPage1 = () => {
                 </div>
                 {/* ////////////////////////////////////////////////// */}
                 <div className="flex flex-col gap-2">
-                  {entries.map((entry, index) => (
+                  {entries.map((entry: LanguageEntry, index: number) => (
                     <div key={index} className="flex w-full items-center gap-2">
                       {/* Language + Level Group */}
                       <div className="flex flex-row w-[95%] sm:w-[95%] gap-2">
@@ -315,10 +342,8 @@ const AuthorizationPage1 = () => {
                               <option value="Russian">Russian</option>
                               <option value="Spanish">Spanish</option>
                             </select>
-                          
-
                             <Image
-                              src="/icons/languageGray.svg"
+                              src={languageIcon}
                               alt="language icon"
                               width={20}
                               height={20}
@@ -351,14 +376,8 @@ const AuthorizationPage1 = () => {
                               <option value="C1">C1</option>
                               <option value="C2">C2</option>
                             </select>
-                            {/* <img
-                          src={"/icons/levelIconGray.svg"}
-                          alt="levelIcon"
-                          className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                        /> */}
-
                             <Image
-                              src="/icons/levelIconGray.svg"
+                              src={levelIcon}
                               alt="level icon"
                               width={20}
                               height={20}
@@ -370,10 +389,8 @@ const AuthorizationPage1 = () => {
 
                       {/* Delete icon */}
                       <div className="mt-5">
-                       
-
                         <Image
-                          src="/icons/binGray.svg"
+                          src={binIcon}
                           alt="bin"
                           width={24}
                           height={24}

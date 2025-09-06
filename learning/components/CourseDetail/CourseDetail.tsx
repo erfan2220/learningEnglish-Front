@@ -140,6 +140,12 @@ const CourseDetail = ({ id }: { id: number }) => {
               <p className="text-[#737177]">{course.description}</p>
             </div>
 
+             <div className="my-8 mt-10 text-[#45444A]">
+              <h4 className="font-bold">Link for Online Class</h4>
+              <a href="https://demo.bigbluebutton.org/rooms/6h6-fnk-cyh-kgj/join" target="_blank"><u>Go to Class</u></a>
+            
+            </div>
+
             {/* Course Requirements */}
             <div className="my-8 text-[#45444A]">
               <h4 className="font-bold">Course Requirements</h4>

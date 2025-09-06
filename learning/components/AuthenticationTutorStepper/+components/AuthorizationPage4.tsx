@@ -1,14 +1,11 @@
 "use client";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import { useRouter } from "next/navigation";
-
 
 // ✅ icons served from /public/icons
 const aboutIconWhite = "/icons/aboutIconWhite.svg";
@@ -24,11 +21,20 @@ const dateIcon = "/icons/dayIcon.svg";
 const degreeIcon = "/icons/degreeGray.svg";
 const fieldIcon = "/icons/educationGray.svg";
 
-
+interface Education {
+  degree: string;
+  institution: string;
+  country: string;
+  city: string;
+  field: string;
+  startDate: string;
+  endDate: string;
+}
 
 const AuthorizationPage4 = () => {
   const router = useRouter();
-  const [educations, setEducations] = useState([
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [educations, setEducations] = useState<Education[]>([
     {
       degree: "",
       institution: "",
@@ -39,6 +45,31 @@ const AuthorizationPage4 = () => {
       endDate: "",
     },
   ]);
+
+  // بارگذاری داده‌ها از localStorage پس از mount
+  useEffect(() => {
+    const loadFromLocalStorage = () => {
+      const savedEducations = localStorage.getItem("educations");
+      if (savedEducations) {
+        try {
+          const parsedEducations = JSON.parse(savedEducations);
+          setEducations(parsedEducations);
+        } catch (error) {
+          console.error("Error parsing educations from localStorage:", error);
+        }
+      }
+      setIsLoaded(true);
+    };
+
+    loadFromLocalStorage();
+  }, []);
+
+  // ذخیره داده‌ها در localStorage
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem("educations", JSON.stringify(educations));
+    }
+  }, [educations, isLoaded]);
 
   const btnTrigger = educations.every(
     (education) =>
@@ -93,6 +124,16 @@ const AuthorizationPage4 = () => {
     // console.log("Final Education Data:", educations);
     //api
   };
+
+  // اگر هنوز داده‌ها لود نشده، loading نمایش دهید
+  if (!isLoaded) {
+    return (
+      <div className="py-2 pt-6 md:py-12 flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="py-2 pt-6 md:py-12">
       {/* ====================header section==================== */}
@@ -114,9 +155,6 @@ const AuthorizationPage4 = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                About
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -134,9 +172,6 @@ const AuthorizationPage4 = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                Photo
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -275,11 +310,6 @@ const AuthorizationPage4 = () => {
                         Specialist Degree
                       </option>
                     </select>
-                    {/* <img
-                      src={"/icons/degreeGray.svg"}
-                      alt="degreeIcon"
-                      className="w-6 h-6 absolute top-[20px] left-4 -translate-y-1/2"
-                    /> */}
                     <Image
                       src={degreeIcon}
                       alt="degree icon"
@@ -311,7 +341,7 @@ const AuthorizationPage4 = () => {
                   <div className="relative w-full">
                     <select
                       name="selectCountry"
-                      value={edu.degree}
+                      value={edu.country}
                       onChange={(e) =>
                         handleChange(index, "country", e.target.value)
                       }
@@ -407,14 +437,14 @@ const AuthorizationPage4 = () => {
 
           <div className="flex items-center justify-between mt-6 w-full">
             <Button
-              type="submit"
+              type="button"
               label={"Back"}
               btnIcon={null}
               onclick={() => router.push("/tutorAuthentication/step3")}
             />
 
             <Button
-              type="submit"
+              type="button"
               label={"Next Step"}
               disabled={!btnTrigger}
               onclick={() => router.push("/tutorAuthentication/step5")}

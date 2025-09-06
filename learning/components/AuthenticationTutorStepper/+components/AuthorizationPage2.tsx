@@ -1,21 +1,33 @@
 "use client";
-import React, { useState } from "react";
-// import profilePhoto = "/icons/profilePhoto.svg";
-// import aboutIconWhite from "./icons/aboutIconWhite.svg";
-// import photoIconWhite from "./icons/photoIconWhite.svg";
-// import certificateIconWhite from "./icons/certificateIconWhite.svg";
-// import educationWhite from "./icons/educationWhite.svg";
-// import descriptionIconWhite from "./icons/descriptionIconWhite.svg";
-// import videoIconWhite from "./icons/videoIconWhite.svg";
-// import priceIconWhite from "./icons/priceIconWhite.svg";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
 
 const AuthorizationPage2 = () => {
-  const [imagePreview, setImagePreview] = useState("/icons/profilePhoto.svg");
   const router = useRouter();
+  
+  // کلید localStorage
+  const STORAGE_KEY = "tutorProfilePhoto";
+
+  // تابع برای دریافت داده اولیه از localStorage
+  const getInitialImagePreview = () => {
+    if (typeof window !== "undefined") {
+      const storedImage = localStorage.getItem(STORAGE_KEY);
+      return storedImage || "/icons/profilePhoto.svg";
+    }
+    return "/icons/profilePhoto.svg";
+  };
+
+  const [imagePreview, setImagePreview] = useState(getInitialImagePreview);
+
+  // همگام‌سازی state با localStorage هر زمان که imagePreview تغییر کند
+  useEffect(() => {
+    if (typeof window !== "undefined" && imagePreview !== "/icons/profilePhoto.svg") {
+      localStorage.setItem(STORAGE_KEY, imagePreview);
+    }
+  }, [imagePreview]);
 
   const btnTrigger = imagePreview !== "/icons/profilePhoto.svg" && imagePreview !== "";
 
@@ -23,8 +35,39 @@ const AuthorizationPage2 = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const imageURL = URL.createObjectURL(file);
-    setImagePreview(imageURL);
+    // بررسی نوع فایل
+    if (!file.type.startsWith('image/')) {
+      alert("لطفاً یک فایل تصویری انتخاب کنید");
+      return;
+    }
+
+    // بررسی حجم فایل (حداکثر 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      alert("حجم فایل باید کمتر از 2MB باشد");
+      return;
+    }
+
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      // تبدیل تصویر به Base64 و ذخیره در state
+      const base64String = reader.result as string;
+      setImagePreview(base64String);
+    };
+    
+    reader.onerror = () => {
+      alert("خطا در خواندن فایل");
+    };
+    
+    reader.readAsDataURL(file);
+  };
+
+  // تابع برای حذف عکس
+  const handleRemovePhoto = () => {
+    setImagePreview("/icons/profilePhoto.svg");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(STORAGE_KEY);
+    }
   };
 
   return (
@@ -48,9 +91,6 @@ const AuthorizationPage2 = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                About
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -68,9 +108,6 @@ const AuthorizationPage2 = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                Photo
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -168,30 +205,35 @@ const AuthorizationPage2 = () => {
           {/* ================================= */}
           <div className="flex flex-col justify-center items-center text-center w-full">
             <div className="w-[180px] h-[180px] rounded-full overflow-hidden border-2 border-gray-300">
-              {/* <img
-                src={imagePreview}
-                alt="imagePreview"
-                className="w-[120px] h-[120px] object-cover"
-              /> */}
-
               <Image
                 src={imagePreview}
                 alt="profile photo"
                 width={180}
                 height={180}
-                className="object-cover"
+                className="object-cover w-full h-full"
               />
             </div>
 
-            <label className="cursor-pointer text-blue-600 underline">
-              Upload photo
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </label>
+            <div className="flex flex-col items-center mt-4">
+              <label className="cursor-pointer text-blue-600 underline mb-2">
+                Upload photo
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+              </label>
+              
+              {imagePreview !== "/icons/profilePhoto.svg" && (
+                <button 
+                  onClick={handleRemovePhoto}
+                  className="text-red-600 text-sm underline"
+                >
+                  Remove photo
+                </button>
+              )}
+            </div>
           </div>
           {/* ========================================= */}
 

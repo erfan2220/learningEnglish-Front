@@ -1,13 +1,10 @@
 "use client";
-import React, { useState } from "react";
-
-
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import Inputs from "@/components/Input/Input";
 import { useRouter } from "next/navigation";
-
 
 // ✅ icons served from /public/icons
 const aboutIconWhite = "/icons/aboutIconWhite.svg";
@@ -22,9 +19,17 @@ const certIcon = "/icons/certificateGray.svg";
 const issueByIcon = "/icons/issueBy.svg";
 const dateIcon = "/icons/dayIcon.svg";
 
+interface Certification {
+  certTitle: string;
+  issueBy: string;
+  issueDate: string;
+  imagePreview: string;
+}
+
 const AuthorizationPage3 = () => {
   const router = useRouter();
-  const [certifications, setCertifications] = useState([
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [certifications, setCertifications] = useState<Certification[]>([
     {
       certTitle: "",
       issueBy: "",
@@ -32,6 +37,39 @@ const AuthorizationPage3 = () => {
       imagePreview: certFile,
     },
   ]);
+
+  // بارگذاری داده‌ها از localStorage پس از mount
+  useEffect(() => {
+    const loadFromLocalStorage = () => {
+      const savedCertifications = localStorage.getItem("certifications");
+      if (savedCertifications) {
+        try {
+          const parsedCertifications = JSON.parse(savedCertifications);
+          // اطمینان از اینکه imagePreviewهای null یا undefined به certFile تبدیل شوند
+          const certificationsWithDefaults = parsedCertifications.map(
+            (cert: Certification) => ({
+              ...cert,
+              imagePreview: cert.imagePreview || certFile,
+            })
+          );
+          setCertifications(certificationsWithDefaults);
+        } catch (error) {
+          console.error("Error parsing certifications from localStorage:", error);
+        }
+      }
+      setIsLoaded(true);
+    };
+
+    loadFromLocalStorage();
+  }, []);
+
+  // ذخیره داده‌ها در localStorage
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem("certifications", JSON.stringify(certifications));
+    }
+  }, [certifications, isLoaded]);
+
   const btnTrigger = certifications.every(
     (certification) =>
       certification.certTitle !== "" &&
@@ -73,11 +111,27 @@ const AuthorizationPage3 = () => {
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const imageURL = URL.createObjectURL(file);
-    const updatedCerts = [...certifications];
-    updatedCerts[index].imagePreview = imageURL;
-    setCertifications(updatedCerts);
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        const imageURL = event.target.result as string;
+        const updatedCerts = [...certifications];
+        updatedCerts[index].imagePreview = imageURL;
+        setCertifications(updatedCerts);
+      }
+    };
+    reader.readAsDataURL(file);
   };
+
+  // اگر هنوز داده‌ها لود نشده، loading نمایش دهید
+  if (!isLoaded) {
+    return (
+      <div className="py-2 pt-6 md:py-12 flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="py-2 pt-6 md:py-12">
@@ -100,9 +154,6 @@ const AuthorizationPage3 = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                About
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -120,9 +171,6 @@ const AuthorizationPage3 = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                Photo
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -221,6 +269,7 @@ const AuthorizationPage3 = () => {
                     {/* delete certification  */}
                     {certifications.length > 1 && (
                       <button
+                        type="button"
                         onClick={() => handleRemoveCertification(index)}
                         className="absolute top-0 right-0 text-[#E13350] text-xs sm:text-sm font-bold underline"
                       >
@@ -304,14 +353,14 @@ const AuthorizationPage3 = () => {
 
           <div className="flex items-center justify-between mt-6 w-full">
             <Button
-              type="submit"
+              type="button"
               label={"Back"}
               btnIcon={null}
               onclick={() => router.push("/tutorAuthentication/step2")}
             />
 
             <Button
-              type="submit"
+              type="button"
               label={"Next Step"}
               disabled={!btnTrigger}
               onclick={() => router.push("/tutorAuthentication/step4")}

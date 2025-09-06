@@ -1,13 +1,11 @@
 "use client";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import { useRouter } from "next/navigation";
-
 
 const aboutIconWhite = "/icons/aboutIconWhite.svg";
 const photoIconWhite = "/icons/photoIconWhite.svg";
@@ -20,23 +18,75 @@ const locationIcon = "/icons/locationGray.svg";
 const experienceIcon = "/icons/experienceGray.svg";
 const dateIcon = "/icons/dayIcon.svg";
 
+// تعریف نوع داده‌ها برای TypeScript (اختیاری)
+const defaultExperience = {
+  experience: "",
+  country: "",
+  city: "",
+  startDate: "",
+  endDate: "",
+  describe: "",
+};
+
 const AuthorizationPage5 = () => {
   const [bio, setBio] = useState("");
   const [teachingStyle, setTeachingStyle] = useState("");
   const [goalsTeach, setGoalsTeach] = useState("");
   const [expect, setExpect] = useState("");
+  const [experience, setExperience] = useState([{ ...defaultExperience }]);
+  const [isLoaded, setIsLoaded] = useState(false); // برای جلوگیری از رندر مضاعف
   const router = useRouter();
 
-  const [experience, setExperience] = useState([
-    {
-      experience: "",
-      country: "",
-      city: "",
-      startDate: "",
-      endDate: "",
-      describe: "",
-    },
-  ]);
+  // بارگذاری داده‌ها از localStorage هنگام لود کامپوننت
+  useEffect(() => {
+    // بررسی وجود localStorage (برای محیط‌هایی مثل SSR که localStorage وجود ندارد)
+    if (typeof window === 'undefined') return;
+    
+    try {
+      const savedData = localStorage.getItem("tutorAuthStep5");
+      if (savedData) {
+        const parsedData = JSON.parse(savedData);
+        setBio(parsedData.bio || "");
+        setTeachingStyle(parsedData.teachingStyle || "");
+        setGoalsTeach(parsedData.goalsTeach || "");
+        setExpect(parsedData.expect || "");
+        setExperience(
+          parsedData.experience && parsedData.experience.length > 0
+            ? parsedData.experience
+            : [{ ...defaultExperience }]
+        );
+      }
+    } catch (error) {
+      console.error("Error loading data from localStorage:", error);
+      // در صورت خطا، داده‌های پیش‌فرض تنظیم می‌شوند
+      setBio("");
+      setTeachingStyle("");
+      setGoalsTeach("");
+      setExpect("");
+      setExperience([{ ...defaultExperience }]);
+    } finally {
+      setIsLoaded(true);
+    }
+  }, []);
+
+  // ذخیره‌سازی داده‌ها در localStorage هنگام تغییر
+  useEffect(() => {
+    // فقط پس از بارگذاری اولیه و در مرورگر ذخیره کند
+    if (!isLoaded || typeof window === 'undefined') return;
+    
+    try {
+      const dataToSave = {
+        bio,
+        teachingStyle,
+        goalsTeach,
+        expect,
+        experience,
+      };
+      localStorage.setItem("tutorAuthStep5", JSON.stringify(dataToSave));
+    } catch (error) {
+      console.error("Error saving data to localStorage:", error);
+    }
+  }, [bio, teachingStyle, goalsTeach, expect, experience, isLoaded]);
 
   const btnTrigger =
     bio !== "" &&
@@ -56,18 +106,12 @@ const AuthorizationPage5 = () => {
   const handleAddExperience = () => {
     setExperience([
       ...experience,
-      {
-        experience: "",
-        country: "",
-        city: "",
-        startDate: "",
-        endDate: "",
-        describe: "",
-      },
+      { ...defaultExperience },
     ]);
   };
 
   const handleRemoveExperience = (index: number) => {
+    if (experience.length <= 1) return; // حداقل یک تجربه باید باقی بماند
     const updated = experience.filter((_, i) => i !== index);
     setExperience(updated);
   };
@@ -81,7 +125,6 @@ const AuthorizationPage5 = () => {
       | "startDate"
       | "endDate"
       | "describe",
-
     value: string
   ) => {
     const updated = [...experience];
@@ -91,9 +134,27 @@ const AuthorizationPage5 = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log("Final Education Data:", educations);
+    // console.log("Final Experience Data:", experience);
     //api
   };
+
+  const handleNextStep = () => {
+    // ذخیره نهایی قبل از رفتن به مرحله بعد
+    const finalData = {
+      bio,
+      teachingStyle,
+      goalsTeach,
+      expect,
+      experience,
+    };
+    localStorage.setItem("tutorAuthStep5", JSON.stringify(finalData));
+    router.push("/tutorAuthentication/step6");
+  };
+
+  // اگر داده‌ها هنوز بارگذاری نشده، می‌توانید یک loading نشان دهید
+  if (!isLoaded) {
+    return <div className="py-2 pt-6 md:py-12 flex justify-center items-center">Loading...</div>;
+  }
 
   return (
     <div className="py-2 pt-6 md:py-12">
@@ -116,9 +177,6 @@ const AuthorizationPage5 = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                About
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -136,9 +194,6 @@ const AuthorizationPage5 = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
                 />
               </div>
-              {/* <p className="hidden sm:block text-[#45444A] text-sm font-semibold ">
-                Photo
-              </p> */}
             </Link>
             {/* ============= */}
             <hr className="border-2 border-[#737177] w-full" />
@@ -307,7 +362,7 @@ const AuthorizationPage5 = () => {
               >
                 <hr className="border-2 border-[#BBBBBB] mx-2 sm:mx-0 w-full" />
                 {/* delete experience  */}
-                {experience.length > 0 && (
+                {experience.length > 1 && (
                   <button
                     type="button"
                     onClick={() => handleRemoveExperience(index)}
@@ -344,7 +399,7 @@ const AuthorizationPage5 = () => {
                       }
                       className="text-[#5C5A60] w-full border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                     >
-                      <option selected disabled value="">
+                      <option value="" disabled>
                         --select country--
                       </option>
                       {countryList.map((country, index) => (
@@ -436,17 +491,17 @@ const AuthorizationPage5 = () => {
 
           <div className="flex items-center justify-between mt-6 w-full">
             <Button
-              type="submit"
+              type="button"
               label={"Back"}
               btnIcon={null}
               onclick={() => router.push("/tutorAuthentication/step4")}
             />
 
             <Button
-              type="submit"
+              type="button"
               label={"Next Step"}
               disabled={!btnTrigger}
-              onclick={() => router.push("/tutorAuthentication/step6")}
+              onclick={handleNextStep}
             />
           </div>
         </div>

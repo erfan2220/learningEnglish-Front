@@ -1,11 +1,10 @@
 "use client";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
-
+import { useTutorAuthStore } from "@/model/useTutorAuthStore";
 
 // ✅ icons from /public/icons
 const aboutIconWhite = "/icons/aboutIconWhite.svg";
@@ -18,15 +17,52 @@ const priceIconWhite = "/icons/priceIconWhite.svg";
 
 const AuthorizationPage6 = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
   const btnTrigger = selectedVideo !== null;
   const router = useRouter();
+
+  // استفاده از Zustand store
+  const { step6, setStep6Data, clearStep6Data } = useTutorAuthStore();
+
+  // بارگذاری داده‌ها از Zustand store هنگام لود کامپوننت
+  useEffect(() => {
+    if (step6.videoData) {
+      setSelectedVideo(step6.videoData);
+      setVideoFile(step6.videoFile);
+    }
+  }, [step6]);
 
   const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const videoURL = URL.createObjectURL(file);
-    setSelectedVideo(videoURL);
+    if (!file.type.startsWith("video/")) {
+      alert("Please upload a valid video file");
+      return;
+    }
+
+    if (file.size > 20 * 1024 * 1024) {
+      alert("Maximum file size is 20MB");
+      return;
+    }
+
+    setVideoFile(file);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const videoData = event.target?.result as string;
+      setSelectedVideo(videoData);
+      // ذخیره در Zustand store
+      setStep6Data(videoData, file);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveVideo = () => {
+    setSelectedVideo(null);
+    setVideoFile(null);
+    // حذف از Zustand store
+    clearStep6Data();
   };
 
   return (
@@ -188,13 +224,21 @@ const AuthorizationPage6 = () => {
           <div className="w-full flex flex-col gap-1">
             <div className="w-full ">
               {selectedVideo && (
-                <video controls className="w-full rounded-lg shadow-md">
-                  <source src={selectedVideo} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div className="relative">
+                  <video controls className="w-full rounded-lg shadow-md">
+                    <source src={selectedVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <button
+                    onClick={handleRemoveVideo}
+                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                  >
+                    ×
+                  </button>
+                </div>
               )}
               <label className="cursor-pointer text-blue-600 underline inline-block mt-2">
-                Upload a Video
+                {selectedVideo ? "Change Video" : "Upload a Video"}
                 <input
                   type="file"
                   accept="video/*"
@@ -202,23 +246,25 @@ const AuthorizationPage6 = () => {
                   className="hidden"
                 />
               </label>
+              {videoFile && (
+                <p className="text-sm text-gray-600 mt-1">
+                  Selected file: {videoFile.name} (
+                  {Math.round(videoFile.size / 1024 / 1024)} MB)
+                </p>
+              )}
             </div>
           </div>
 
-          {/* ================================= */}
-
-          {/* ========================================= */}
-
           <div className="flex items-center justify-between mt-6 w-full">
             <Button
-              type="submit"
+              type="button"
               label={"Back"}
               btnIcon={null}
               onclick={() => router.push("/tutorAuthentication/step5")}
             />
 
             <Button
-              type="submit"
+              type="button"
               label={"Next Step"}
               disabled={!btnTrigger}
               onclick={() => router.push("/tutorAuthentication/step7")}
