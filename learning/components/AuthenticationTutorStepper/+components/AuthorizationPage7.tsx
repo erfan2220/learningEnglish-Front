@@ -21,12 +21,13 @@ const courseTitleIcon = "/icons/courseTitle.svg";
 const durationTime = "/icons/durationTime.svg";
 const priceIcon = "/icons/priceGray.svg";
 const lesson = "/icons/lessonPartGray.svg";
+const courseTypeIcon = "/icons/lessonGray.svg";
 const timeSlot = "/icons/clockGray.svg";
 const calender = "/icons/dayIcon.svg";
 
 const AuthorizationPage7 = () => {
   const router = useRouter();
-  const [isOpen,setIsOpen]=useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   // مقدار اولیه course
   const initialCourse = {
@@ -34,6 +35,7 @@ const AuthorizationPage7 = () => {
     duration: "",
     price: "",
     lessonPackage: "",
+    courseType: "",
     languagePart: "",
     description: "",
     timeSlots: [
@@ -66,6 +68,7 @@ const AuthorizationPage7 = () => {
     course.price !== "" &&
     course.lessonPackage !== "" &&
     course.languagePart !== "" &&
+    course.courseType !== "" &&
     course.description !== "" &&
     course.timeSlots.every(
       (slot) =>
@@ -95,7 +98,6 @@ const AuthorizationPage7 = () => {
       timeSlots: updatedTimeSlots,
     });
   };
-
 
   return (
     <div className="py-2 pt-6 md:py-12">
@@ -291,6 +293,40 @@ const AuthorizationPage7 = () => {
                 });
               }}
             />
+
+            {/* =============== */}
+            <div className="w-full">
+              <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                Course Type
+              </label>
+              <div className="relative">
+                <select
+                  value={course.courseType}
+                  onChange={(e) => {
+                    setCourse({
+                      ...course,
+                      courseType: e.target.value,
+                    });
+                  }}
+                  className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+                >
+                  <option disabled value="">
+                    Course Type
+                  </option>
+                  <option value="Offline">Offline</option>
+                  <option value="Online">Online</option>
+                </select>
+
+                <Image
+                  src={courseTypeIcon}
+                  alt="courseType icon"
+                  width={20}
+                  height={20}
+                  className="absolute top-[12px] left-4 cursor-pointer"
+                />
+              </div>
+            </div>
+
             {/* =============== */}
             <div className="w-full">
               <label className="text-xs mx-2 mt-2 text-[#45444A]">
@@ -350,10 +386,15 @@ const AuthorizationPage7 = () => {
 
           {/* زمان‌بندی‌های دوره */}
           <div className="w-full mt-4">
-            <h2 className="text-[#45444A] font-bold text-lg mb-2">Time Slots</h2>
-            
+            <h2 className="text-[#45444A] font-bold text-lg mb-2">
+              Time Slots
+            </h2>
+
             {course.timeSlots.map((timeSlotItem, index) => (
-              <div key={index} className="relative border border-[#D2D2D2] p-4 rounded-2xl mb-4">
+              <div
+                key={index}
+                className="relative border border-[#D2D2D2] p-4 rounded-2xl mb-4"
+              >
                 {course.timeSlots.length > 1 && (
                   <button
                     type="button"
@@ -363,7 +404,7 @@ const AuthorizationPage7 = () => {
                     Delete Time Slot
                   </button>
                 )}
-                
+
                 {/* ====================== */}
                 <div className="w-full mt-3">
                   <label>Days Available</label>
@@ -389,9 +430,10 @@ const AuthorizationPage7 = () => {
                               day,
                             ];
                           } else {
-                            updatedTimeSlots[index].daysAvailable = updatedTimeSlots[
-                              index
-                            ].daysAvailable.filter((d) => d !== day);
+                            updatedTimeSlots[index].daysAvailable =
+                              updatedTimeSlots[index].daysAvailable.filter(
+                                (d) => d !== day
+                              );
                           }
                           setCourse({
                             ...course,
@@ -424,18 +466,18 @@ const AuthorizationPage7 = () => {
                       <option disabled value="">
                         Time Slot
                       </option>
-                      <option value="slot1">00:00 - 02:00</option>
-                      <option value="slot2">02:00 - 04:00</option>
-                      <option value="slot3">04:00 - 06:00</option>
-                      <option value="slot4">06:00 - 08:00</option>
-                      <option value="slot5">08:00 - 10:00</option>
-                      <option value="slot6">10:00 - 12:00</option>
-                      <option value="slot7">12:00 - 14:00</option>
-                      <option value="slot8">14:00 - 16:00</option>
-                      <option value="slot9">16:00 - 18:00</option>
-                      <option value="slot10">18:00 - 20:00</option>
-                      <option value="slot11">20:00 - 22:00</option>
-                      <option value="slot12">22:00 - 24:00</option>
+                      <option value="00:00 - 02:00">00:00 - 02:00</option>
+                      <option value="02:00 - 04:00">02:00 - 04:00</option>
+                      <option value="04:00 - 06:00">04:00 - 06:00</option>
+                      <option value="06:00 - 08:00">06:00 - 08:00</option>
+                      <option value="08:00 - 10:00">08:00 - 10:00</option>
+                      <option value="10:00 - 12:00">10:00 - 12:00</option>
+                      <option value="12:00 - 14:00">12:00 - 14:00</option>
+                      <option value="14:00 - 16:00">14:00 - 16:00</option>
+                      <option value="16:00 - 18:00">16:00 - 18:00</option>
+                      <option value="18:00 - 20:00">18:00 - 20:00</option>
+                      <option value="20:00 - 22:00">20:00 - 22:00</option>
+                      <option value="22:00 - 24:00">22:00 - 24:00</option>
                     </select>
 
                     <Image
@@ -467,8 +509,8 @@ const AuthorizationPage7 = () => {
               </div>
             ))}
 
-            <p 
-              onClick={handleAddTimeSlot} 
+            <p
+              onClick={handleAddTimeSlot}
               className="text-[#5F33E1] cursor-pointer font-medium mt-2"
             >
               + Add Time Slot
@@ -500,7 +542,7 @@ const AuthorizationPage7 = () => {
           </div>
         </div>
       </div>
-      {isOpen && <SubmitForm onclick={()=>setIsOpen(false)}/>}
+      {isOpen && <SubmitForm onclick={() => setIsOpen(false)} />}
     </div>
   );
 };

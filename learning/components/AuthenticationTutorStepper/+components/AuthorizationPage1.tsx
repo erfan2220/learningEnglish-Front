@@ -22,12 +22,6 @@ import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import { useRouter } from "next/navigation";
 
-// تعریف type برای entries
-interface LanguageEntry {
-  language: string;
-  level: string;
-}
-
 const AuthorizationPage1 = () => {
   const [firstName, setFirstName] = useState(
     typeof window !== "undefined" ? localStorage.getItem("firstName") || "" : ""
@@ -36,26 +30,28 @@ const AuthorizationPage1 = () => {
     typeof window !== "undefined" ? localStorage.getItem("lastName") || "" : ""
   );
   const [phoneNumber, setPhoneNumber] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("phoneNumber") || "" : ""
+    typeof window !== "undefined"
+      ? localStorage.getItem("phoneNumber") || ""
+      : ""
   );
   const [selectedCountry, setSelectedCountry] = useState(
     typeof window !== "undefined" ? localStorage.getItem("country") || "" : ""
   );
   const [selectedSubject, setSelectedSubject] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("subjectTeach") || "" : ""
+    typeof window !== "undefined"
+      ? localStorage.getItem("subjectTeach") || ""
+      : ""
   );
 
-  const [entries, setEntries] = useState<LanguageEntry[]>(() => {
-    // بارگذاری اولیه از localStorage با بررسی وجود window
+  // تغییر: فقط زبان‌ها را ذخیره می‌کنیم نه سطح‌ها
+  const [languages, setLanguages] = useState<string[]>(() => {
     if (typeof window !== "undefined") {
-      const savedEntries = localStorage.getItem("languageEntries");
-      return savedEntries
-        ? JSON.parse(savedEntries)
-        : [{ language: "", level: "" }];
+      const savedLanguages = localStorage.getItem("languages");
+      return savedLanguages ? JSON.parse(savedLanguages) : [""];
     }
-    return [{ language: "", level: "" }];
+    return [""];
   });
-  
+
   const router = useRouter();
 
   const btnTrigger =
@@ -64,25 +60,21 @@ const AuthorizationPage1 = () => {
     phoneNumber !== "" &&
     selectedCountry !== "" &&
     selectedSubject !== "" &&
-    entries.every((entry) => entry.language !== "" && entry.level !== "");
+    languages.every((lang) => lang !== "");
 
-  const handleAdd = () => {
-    setEntries([...entries, { language: "", level: "" }]);
+  const handleAddLanguage = () => {
+    setLanguages([...languages, ""]);
   };
 
-  const handleRemove = (index: number) => {
-    const newEntries = entries.filter((_, i) => i !== index);
-    setEntries(newEntries);
+  const handleRemoveLanguage = (index: number) => {
+    const newLanguages = languages.filter((_, i) => i !== index);
+    setLanguages(newLanguages);
   };
 
-  const handleChange = (
-    index: number,
-    field: "language" | "level",
-    value: string
-  ) => {
-    const newEntries = [...entries];
-    newEntries[index][field] = value;
-    setEntries(newEntries);
+  const handleLanguageChange = (index: number, value: string) => {
+    const newLanguages = [...languages];
+    newLanguages[index] = value;
+    setLanguages(newLanguages);
   };
 
   useEffect(() => {
@@ -92,7 +84,7 @@ const AuthorizationPage1 = () => {
       localStorage.setItem("phoneNumber", phoneNumber);
       localStorage.setItem("country", selectedCountry);
       localStorage.setItem("subjectTeach", selectedSubject);
-      localStorage.setItem("languageEntries", JSON.stringify(entries));
+      localStorage.setItem("languages", JSON.stringify(languages));
     }
   }, [
     firstName,
@@ -100,7 +92,7 @@ const AuthorizationPage1 = () => {
     phoneNumber,
     selectedCountry,
     selectedSubject,
-    entries,
+    languages,
   ]);
 
   return (
@@ -312,21 +304,20 @@ const AuthorizationPage1 = () => {
                 </div>
                 {/* ////////////////////////////////////////////////// */}
                 <div className="flex flex-col gap-2">
-                  {entries.map((entry: LanguageEntry, index: number) => (
+                  {languages.map((language, index) => (
                     <div key={index} className="flex w-full items-center gap-2">
-                      {/* Language + Level Group */}
+                      {/* Language Input */}
                       <div className="flex flex-row w-[95%] sm:w-[95%] gap-2">
-                        {/* Language */}
-                        <div className="w-full sm:w-1/2">
+                        <div className="w-full">
                           <label className="text-xs mx-2 mt-2 text-[#45444A]">
                             Language you speak
                           </label>
                           <div className="relative">
                             <select
                               className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
-                              value={entry.language}
+                              value={language}
                               onChange={(e) =>
-                                handleChange(index, "language", e.target.value)
+                                handleLanguageChange(index, e.target.value)
                               }
                             >
                               <option disabled value="">
@@ -351,60 +342,61 @@ const AuthorizationPage1 = () => {
                             />
                           </div>
                         </div>
+                      </div>
 
-                        {/* Level */}
-                        <div className="w-full sm:w-1/2">
-                          <label className="text-xs mx-2 mt-2 text-[#45444A]">
-                            Level
-                          </label>
-                          <div className="relative">
-                            <select
-                              className="border-2 w-full text-sm border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 h-11 focus:outline-0"
-                              value={entry.level}
-                              onChange={(e) =>
-                                handleChange(index, "level", e.target.value)
-                              }
-                            >
-                              <option disabled value="">
-                                Level
-                              </option>
-                              <option value="native">native</option>
-                              <option value="A1">A1</option>
-                              <option value="A2">A2</option>
-                              <option value="B1">B1</option>
-                              <option value="B2">B2</option>
-                              <option value="C1">C1</option>
-                              <option value="C2">C2</option>
-                            </select>
-                            <Image
-                              src={levelIcon}
-                              alt="level icon"
-                              width={20}
-                              height={20}
-                              className="absolute top-[12px] left-4 cursor-pointer"
-                            />
-                          </div>
+                      {/* Level */}
+                      <div className="w-full sm:w-1/2">
+                        <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                          Level
+                        </label>
+                        <div className="relative">
+                          <select
+                            className="border-2 w-full text-sm border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 h-11 focus:outline-0"
+                            // value={entry.level}
+                            // onChange={(e) =>
+                            //   handleChange(index, "level", e.target.value)
+                            // }
+                          >
+                            <option disabled value="">
+                              Level
+                            </option>
+                            <option value="native">native</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="C1">C1</option>
+                            <option value="C2">C2</option>
+                          </select>
+                          <Image
+                            src={levelIcon}
+                            alt="level icon"
+                            width={20}
+                            height={20}
+                            className="absolute top-[12px] left-4 cursor-pointer"
+                          />
                         </div>
                       </div>
 
-                      {/* Delete icon */}
-                      <div className="mt-5">
-                        <Image
-                          src={binIcon}
-                          alt="bin"
-                          width={24}
-                          height={24}
-                          className="cursor-pointer"
-                          onClick={() => handleRemove(index)}
-                        />
-                      </div>
+                      {languages.length > 1 && (
+                        <div className="mt-5">
+                          <Image
+                            src={binIcon}
+                            alt="bin"
+                            width={32}
+                            height={32}
+                            className="cursor-pointer"
+                            onClick={() => handleRemoveLanguage(index)}
+                          />
+                        </div>
+                      )}
                     </div>
                   ))}
 
                   {/* Add Button */}
                   <p
                     className="text-[#45444A] font-bold underline hover:cursor-pointer"
-                    onClick={handleAdd}
+                    onClick={handleAddLanguage}
                   >
                     + Add Language
                   </p>
