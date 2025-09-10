@@ -12,10 +12,10 @@ const Footer = () => {
           <ul>
             <li className="font-bold mb-2 text-[#45444A]">Languages</li>
             <li>
-              <Link href={"/corses/english"}>Learn English</Link>
+              <Link href={"/corses"}>Learn English</Link>
             </li>
             <li>
-              <Link href={"/corses/french"}>Learn French</Link>
+              <Link href={"/corses"}>Learn French</Link>
             </li>
           </ul>
         </div>
@@ -26,10 +26,10 @@ const Footer = () => {
           <ul>
             <li className="font-bold mb-3 text-[#45444A]">Teacher & Tutor</li>
             <li>
-              <Link href={"/corses/english"}>English Tutor</Link>
+              <Link href={"/tutor"}>English Tutor</Link>
             </li>
             <li>
-              <Link href={"/corses/french"}>French Tutor</Link>
+              <Link href={"/tutor"}>French Tutor</Link>
             </li>
             <li>
               <Link href={"/signupTutor"}>Become a Tutor</Link>
@@ -44,10 +44,10 @@ const Footer = () => {
               Learning Resources
             </li>
             <li>
-              <Link href={"/"}>Podcast</Link>
+              <Link href={"/"}>Articles</Link>
             </li>
             <li>
-              <Link href={"/"}>Community</Link>
+              <Link href={"/"}>Language Test</Link>
             </li>
             <li>
               <Link href={"/"}>Language Challenge</Link>
@@ -62,10 +62,10 @@ const Footer = () => {
             <ul>
               <li className="font-bold mb-3 text-[#45444A]">More</li>
               <li>
-                <Link href={"/"}>FAQ</Link>
+                <Link href={"/FAQ"}>FAQ</Link>
               </li>
               <li>
-                <Link href={"/"}>Privacy & Policy</Link>
+                <Link href={"/policy"}>Policies & Regulations</Link>
               </li>
               <li>
                 <Link href={"/"}>Contact Us</Link>
