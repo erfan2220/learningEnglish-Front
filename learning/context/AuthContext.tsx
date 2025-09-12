@@ -25,15 +25,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const loadMe = useCallback(async () => {
         try {
+            const access = localStorage.getItem("access_token");
+            const refresh = localStorage.getItem("refresh_token");
+
+            // If we have nothing, don't spam the API
+            if (!access && !refresh) {
+                setUser(null);
+                return;
+            }
+
+            // Try with current access token
             const { data } = await api.get("/api/me/");
             setUser(data);
         } catch {
-            // try silent refresh once
-            try {
-                await api.post("/api/token/refresh/");
-                const { data } = await api.get("/api/me/");
-                setUser(data);
-            } catch {
+            // Try refresh only if we actually have a refresh token
+            const refresh = localStorage.getItem("refresh_token");
+            if (refresh) {
+                try {
+                    const { data } = await api.post("/api/token/refresh/", { refresh });
+                    localStorage.setItem("access_token", data.access);
+                    api.defaults.headers.common["Authorization"] = `Bearer ${data.access}`;
+                    const me = await api.get("/api/me/");
+                    setUser(me.data);
+                } catch {
+                    setUser(null);
+                }
+            } else {
                 setUser(null);
             }
         } finally {
@@ -45,15 +62,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const refresh = useCallback(async () => { await loadMe(); }, [loadMe]);
 
-    const logout = useCallback(async () => {
-        try { await api.post("/api/logout/"); } catch {}
-        setUser(null);
-    }, []);
+
 
     const login = useCallback(async (email: string, password: string) => {
-        await api.post("/api/login/", { email, password });
+        const { data } = await api.post("/api/login/", { email, password });
+        // persist tokens for the interceptor
+        localStorage.setItem("access_token", data.access);
+        localStorage.setItem("refresh_token", data.refresh);
+        // make sure subsequent requests in this tick carry the new token
+        api.defaults.headers.common["Authorization"] = `Bearer ${data.access}`;
         await loadMe();
     }, [loadMe]);
+
+    const logout = useCallback(async () => {
+        try { await api.post("/api/logout/"); } catch {}
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        delete api.defaults.headers.common["Authorization"];
+        setUser(null);
+    }, []);
 
     const register = useCallback(async (payload: { email: string; password: string; first_name: string; last_name: string; is_teacher: boolean }) => {
         await api.post("/api/register/", payload);

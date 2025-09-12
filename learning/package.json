@@ -20,9 +20,11 @@
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "formik-mui": "^5.0.0-alpha.1",
+    "http-proxy-middleware": "^3.0.5",
     "jose": "^6.1.0",
     "lucide-react": "^0.542.0",
     "next": "15.3.4",
+    "next-http-proxy-middleware": "^1.2.7",
     "rc-slider": "^11.1.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -44,5 +46,6 @@
     "eslint-config-next": "15.3.4",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "proxy": "http://103.75.196.105"
 }

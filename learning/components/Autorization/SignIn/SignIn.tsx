@@ -6,7 +6,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { isAxiosError } from "axios";
-
+import axios from "axios";
+import {api} from "@/lib/APIs/axiosInstance";
 const LS_EMAIL_KEY = "le_remember_email";
 const LS_REMEMBER_KEY = "le_remember_me";
 
@@ -57,24 +58,29 @@ export default function SignIn() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setError("");
     if (!canSubmit) return;
 
     setBusy(true);
     try {
-      await login(email.trim(), password); // server sets cookies; context loads /api/me
-      router.push("/");
-    } catch (err: unknown) {
-      let msg = "Failed to authenticate";
-      if (isAxiosError(err)) {
-        const data = err.response?.data as { detail?: string; message?: string } | undefined;
-        msg = data?.detail ?? data?.message ?? msg;
-      } else if (err instanceof Error) {
-        msg = err.message || msg;
-      }
-      setError(msg);
+      // Send the login request
+      // const response = await api.post('/api/login/', {
+      //   email,
+      //   password
+      // });
+
+      // Store the tokens
+      // localStorage.setItem('access_token', response.data.access);
+      // localStorage.setItem('refresh_token', response.data.refresh);
+      await login(email, password);   // <-- use AuthProvider
+
+      // Redirect to home after login
+      router.push('/');
+    } catch (err) {
+      // Handle any errors
+      setError('Failed to authenticate');
     } finally {
       setBusy(false);
     }
