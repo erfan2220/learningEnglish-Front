@@ -14,6 +14,7 @@ import dayIcon from "./../../assets/icons/dayPink.svg";
 import timeIcon from "./../../assets/icons/length.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const CourseDetail = ({ id }: { id: number }) => {
   const [course, setCourse] = useState<TemporaryCourse | null>(null);
@@ -140,10 +141,14 @@ const CourseDetail = ({ id }: { id: number }) => {
               <p className="text-[#737177]">{course.description}</p>
             </div>
 
-             <div className="my-8 mt-10 text-[#45444A]">
+            <div className="my-8 mt-10 text-[#45444A]">
               <h4 className="font-bold">Link for Online Class</h4>
-              <a href="https://demo.bigbluebutton.org/rooms/6h6-fnk-cyh-kgj/join" target="_blank"><u>Go to Class</u></a>
-            
+              <a
+                href="https://demo.bigbluebutton.org/rooms/6h6-fnk-cyh-kgj/join"
+                target="_blank"
+              >
+                <u>Go to Class</u>
+              </a>
             </div>
 
             {/* Course Requirements */}
@@ -244,7 +249,7 @@ const CourseDetail = ({ id }: { id: number }) => {
             type="button"
             marginTop="0"
             onclick={() => {
-              router.push("/cart");
+              router.push(`${FluentDoorRoutes.cart}`);
               localStorage.setItem("selectedCourseId", course.courseId);
             }}
           />

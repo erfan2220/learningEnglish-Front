@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { TemporaryCourse } from "@/model/courseType";
 import axios from "axios";
+import { BeatLoader  } from "react-spinners";
 
 const Courses = () => {
   const searchParam = useSearchParams();
@@ -77,7 +78,7 @@ const Courses = () => {
 
         {loading ? (
           <div className="flex justify-center items-center h-64">
-            <p className="text-center text-lg">Loading courses...</p>
+            <p className="text-center text-lg"><BeatLoader /></p>
           </div>
         ) : showCourses.length === 0 ? (
           <div className="flex justify-center items-center h-64">

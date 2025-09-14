@@ -6,6 +6,7 @@ import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import { useRouter } from "next/navigation";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const aboutIconWhite = "/icons/aboutIconWhite.svg";
 const photoIconWhite = "/icons/photoIconWhite.svg";
@@ -40,8 +41,8 @@ const AuthorizationPage5 = () => {
   // بارگذاری داده‌ها از localStorage هنگام لود کامپوننت
   useEffect(() => {
     // بررسی وجود localStorage (برای محیط‌هایی مثل SSR که localStorage وجود ندارد)
-    if (typeof window === 'undefined') return;
-    
+    if (typeof window === "undefined") return;
+
     try {
       const savedData = localStorage.getItem("tutorAuthStep5");
       if (savedData) {
@@ -72,8 +73,8 @@ const AuthorizationPage5 = () => {
   // ذخیره‌سازی داده‌ها در localStorage هنگام تغییر
   useEffect(() => {
     // فقط پس از بارگذاری اولیه و در مرورگر ذخیره کند
-    if (!isLoaded || typeof window === 'undefined') return;
-    
+    if (!isLoaded || typeof window === "undefined") return;
+
     try {
       const dataToSave = {
         bio,
@@ -104,10 +105,7 @@ const AuthorizationPage5 = () => {
     );
 
   const handleAddExperience = () => {
-    setExperience([
-      ...experience,
-      { ...defaultExperience },
-    ]);
+    setExperience([...experience, { ...defaultExperience }]);
   };
 
   const handleRemoveExperience = (index: number) => {
@@ -148,12 +146,16 @@ const AuthorizationPage5 = () => {
       experience,
     };
     localStorage.setItem("tutorAuthStep5", JSON.stringify(finalData));
-    router.push("/tutorAuthentication/step6");
+    router.push(FluentDoorRoutes.tutorAuthenticationStep6);
   };
 
   // اگر داده‌ها هنوز بارگذاری نشده، می‌توانید یک loading نشان دهید
   if (!isLoaded) {
-    return <div className="py-2 pt-6 md:py-12 flex justify-center items-center">Loading...</div>;
+    return (
+      <div className="py-2 pt-6 md:py-12 flex justify-center items-center">
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -165,7 +167,7 @@ const AuthorizationPage5 = () => {
           <div className="flex gap-0.5 sm:gap-1 px-2 sm:px-4 justify-center items-center max-w-[1320px] mx-auto w-full">
             {/* ===step1==== */}
             <Link
-              href={"/tutorAuthentication/step1"}
+              href={FluentDoorRoutes.tutorAuthenticationStep1}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b flex items-center justify-center from-[#B49AFF] to-[#FF9AAB] h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -182,7 +184,7 @@ const AuthorizationPage5 = () => {
             <hr className="border-2 border-[#737177] w-full" />
             {/* ===step2==== */}
             <Link
-              href={"/tutorAuthentication/step2"}
+              href={FluentDoorRoutes.tutorAuthenticationStep2}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -199,7 +201,7 @@ const AuthorizationPage5 = () => {
             <hr className="border-2 border-[#737177] w-full" />
             {/* ===step3==== */}
             <Link
-              href={"/tutorAuthentication/step3"}
+              href={FluentDoorRoutes.tutorAuthenticationStep3}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -216,7 +218,7 @@ const AuthorizationPage5 = () => {
             <hr className="border-2 border-[#737177] w-full" />
             {/* ===step4==== */}
             <Link
-              href={"/tutorAuthentication/step4"}
+              href={FluentDoorRoutes.tutorAuthenticationStep4}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -233,7 +235,7 @@ const AuthorizationPage5 = () => {
             <hr className="border-2 border-[#737177] w-full" />
             {/* ===step5==== */}
             <Link
-              href={"/tutorAuthentication/step5"}
+              href={FluentDoorRoutes.tutorAuthenticationStep5}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -494,7 +496,9 @@ const AuthorizationPage5 = () => {
               type="button"
               label={"Back"}
               btnIcon={null}
-              onclick={() => router.push("/tutorAuthentication/step4")}
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep4)
+              }
             />
 
             <Button

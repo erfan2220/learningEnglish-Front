@@ -1,0 +1,30 @@
+export const FluentDoorRoutes = {
+  homePage: "/",
+  courses: "/courses",
+  coursesDetail: "/courses/detail",
+  tutor: "/tutor",
+  tutorDetail: "/tutor/detail",
+  signIn: "/signin",
+  signUpStudent: "/signupStudent",
+  signUpTutor: "/signupTutor",
+  FAQ: "/FAQ",
+  policy: "/policy",
+  terms: "/terms",
+  contactUs: "/contactUs",
+  tutorDashboard: "/dashboard/tutor",
+  Articles: "/Articles",
+  ArticlesDetail: "/Articles/detail",
+  cart: "/cart",
+  tutorAuthentication: "/tutorAuthentication",
+  tutorAuthenticationStep1: "/tutorAuthentication/step1",
+  tutorAuthenticationStep2: "/tutorAuthentication/step2",
+  tutorAuthenticationStep3: "/tutorAuthentication/step3",
+  tutorAuthenticationStep4: "/tutorAuthentication/step4",
+  tutorAuthenticationStep5: "/tutorAuthentication/step5",
+  tutorAuthenticationStep6: "/tutorAuthentication/step6",
+  tutorAuthenticationStep7: "/tutorAuthentication/step7",
+  //   =============================
+  studentDashboard: "/dashboard/student",
+  studentDashboardCourses:"/dashboard/student/detail/courses"
+
+};

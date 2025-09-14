@@ -5,13 +5,17 @@ import Image from "next/image";
 import notFoundPic from "../../assets/images/notFound.png";
 import Button from "../Button/Button";
 import { useRouter } from "next/navigation";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const CourseCart = ({ course }: { course: TemporaryCourse }) => {
   const router = useRouter();
   return (
     <div className="w-full">
       <div className="relative w-full pb-4 px-4 border-2 border-[#D2D2D2] bg-white/70 rounded-2xl shadow-md hover:shadow-2xl hover:scale-[1.02]  transition-all duration-400">
-        <Link href={`/courses/detail/${course.id}`} className="w-full">
+        <Link
+          href={`${FluentDoorRoutes.coursesDetail}/${course.id}`}
+          className="w-full"
+        >
           <div className="my-4 ">
             <Image
               src={course.image ?? notFoundPic}
@@ -66,9 +70,8 @@ const CourseCart = ({ course }: { course: TemporaryCourse }) => {
             type="button"
             widthBtn="100%"
             onclick={() => {
-              router.push("/cart");
+              router.push(`${FluentDoorRoutes.cart}`);
               localStorage.setItem("selectedCourseId", course.courseId);
-              
             }}
           />
         </div>

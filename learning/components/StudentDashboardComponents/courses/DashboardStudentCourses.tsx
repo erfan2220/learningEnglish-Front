@@ -5,10 +5,9 @@ import { courseMockDetail } from "@/mock/courseMockData";
 import { studentDetail } from "@/mock/studentMockData";
 import Country from "@/components/Country/Country";
 import Link from "next/link";
-
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const arrowIcon = "/icons/arrowBlue.svg";
-
 
 const DashboardStudentCourses = () => {
   const personNumber = 0;
@@ -35,7 +34,7 @@ const DashboardStudentCourses = () => {
 
         return (
           <Link
-            href={`/dashboard/student/detail/courses/${course.courseId}`}
+            href={`${FluentDoorRoutes.studentDashboardCourses}/${course.courseId}`}
             key={course.id}
             className="flex text-[#45444A] px-2 md:px-8 mt-4 text-sm justify-between sm:justify-start items-center w-full h-[60px] bg-white rounded-2xl shadow-md hover:shadow-xl"
           >

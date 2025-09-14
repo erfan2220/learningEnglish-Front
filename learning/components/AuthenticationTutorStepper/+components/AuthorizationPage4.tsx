@@ -6,6 +6,7 @@ import Inputs from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import { useRouter } from "next/navigation";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 // ✅ icons served from /public/icons
 const aboutIconWhite = "/icons/aboutIconWhite.svg";
@@ -143,7 +144,7 @@ const AuthorizationPage4 = () => {
           <div className="flex gap-0.5 sm:gap-1 px-2 sm:px-4 justify-center items-center max-w-[1320px] mx-auto w-full">
             {/* ===step1==== */}
             <Link
-              href={"/tutorAuthentication/step1"}
+              href={FluentDoorRoutes.tutorAuthenticationStep1}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b flex items-center justify-center from-[#B49AFF] to-[#FF9AAB] h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -160,7 +161,7 @@ const AuthorizationPage4 = () => {
             <hr className="border-2 border-[#737177] w-full" />
             {/* ===step2==== */}
             <Link
-              href={"/tutorAuthentication/step2"}
+              href={FluentDoorRoutes.tutorAuthenticationStep2}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -177,7 +178,7 @@ const AuthorizationPage4 = () => {
             <hr className="border-2 border-[#737177] w-full" />
             {/* ===step3==== */}
             <Link
-              href={"/tutorAuthentication/step3"}
+              href={FluentDoorRoutes.tutorAuthenticationStep3}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -194,7 +195,7 @@ const AuthorizationPage4 = () => {
             <hr className="border-2 border-[#737177] w-full" />
             {/* ===step4==== */}
             <Link
-              href={"/tutorAuthentication/step4"}
+              href={FluentDoorRoutes.tutorAuthenticationStep4}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -440,14 +441,18 @@ const AuthorizationPage4 = () => {
               type="button"
               label={"Back"}
               btnIcon={null}
-              onclick={() => router.push("/tutorAuthentication/step3")}
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep3)
+              }
             />
 
             <Button
               type="button"
               label={"Next Step"}
               disabled={!btnTrigger}
-              onclick={() => router.push("/tutorAuthentication/step5")}
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep5)
+              }
             />
           </div>
         </div>

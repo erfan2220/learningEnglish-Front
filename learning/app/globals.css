@@ -29,3 +29,12 @@ body {
   background-size: cover;
   color: var(--foreground);
 }
+
+.swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #5f33e1 !important;
+}

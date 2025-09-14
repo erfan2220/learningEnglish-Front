@@ -24,7 +24,8 @@ import { datePicker, timePicker } from "@/mock/DayTime";
 import { Tutor } from "@/model/tutorType";
 import { api } from "@/lib/APIs/axiosInstance";
 import { TemporaryCourse } from "@/model/courseType";
-import axios from "axios";
+import { BeatLoader } from "react-spinners";
+// import axios from "axios";
 
 const TutorDetail = ({ id }: { id: number }) => {
   const [tutor, setTutor] = useState<Tutor | null>(null);
@@ -61,18 +62,15 @@ const TutorDetail = ({ id }: { id: number }) => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/courses/`
-        );
+        const res = await api.get(`/api/courses`);
         setCourses(res.data);
-        console.log("Fetched courses:", res.data);
       } catch (error) {
-        console.error("Fetching courses failed:", error);
+        console.error("Fetching error", error);
+        setError("Failed to load courses details. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
-
     fetchCourses();
   }, []);
 
@@ -84,8 +82,9 @@ const TutorDetail = ({ id }: { id: number }) => {
 
   if (loading) {
     return (
-      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[60px]">
-        <p>Loading...</p>
+      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[100px] flex items-center justify-center">
+        <BeatLoader color="#5F33E1" />
+        {/* <p>Loading...</p> */}
       </div>
     );
   }

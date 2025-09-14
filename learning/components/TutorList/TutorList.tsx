@@ -12,11 +12,13 @@ import SelectPrice from "../Courses/SelectPrice";
 import Inputs from "../Input/Input";
 import searchIcon from "./../../assets/icons/searchIconGray.svg";
 import { Tutor } from "@/model/tutorType";
-import axios from "axios";
+import { api } from "@/lib/APIs/axiosInstance";
+import { BeatLoader } from "react-spinners";
 
 const TutorList = () => {
   const [tutors, setTutors] = useState<Tutor[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const totalTutor = tutors.length;
   const searchParam = useSearchParams();
   const ppg = 3;
@@ -29,21 +31,33 @@ const TutorList = () => {
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/tutors/`
-        );
+        const res = await api.get(`/api/tutors`);
         setTutors(res.data);
-        console.log("Fetched courses:", res.data);
       } catch (error) {
-        console.error("Fetching courses failed:", error);
+        console.error("Fetching error", error);
+        setError("Failed to load courses details. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
-
     fetchTutors();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[100px] flex items-center justify-center">
+        <BeatLoader color="#5F33E1" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[60px]">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
   return (
     <div className=" py-[60px] sm:py-20 sm:p-[60px] max-w-[1320px] mx-auto">
       <Layout>
@@ -89,11 +103,7 @@ const TutorList = () => {
       </div>
       {/* ////////////////////////////////////// */}
 
-      {loading ? (
-        <div className="flex justify-center items-center h-64">
-          <p className="text-center text-lg">Loading courses...</p>
-        </div>
-      ) : showTutors.length === 0 ? (
+      {showTutors.length === 0 ? (
         <div className="flex justify-center items-center h-64">
           <p className="text-center text-lg">No courses found</p>
         </div>

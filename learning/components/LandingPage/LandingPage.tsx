@@ -14,6 +14,7 @@ import { becomeTutorData, becomeTutorListData } from "@/constant/becomeTutor";
 import Slide from "../Slide/Slide";
 import Button from "../Button/Button";
 import Image from "next/image";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const LandingPage = () => {
   return (
@@ -35,7 +36,7 @@ const LandingPage = () => {
                   />
                 ))}
               </div>
-              <Link href={"/courses"}>
+              <Link href={`${FluentDoorRoutes.courses}`}>
                 <Button label={"start now"} type="button" />
               </Link>
             </div>
@@ -62,7 +63,7 @@ const LandingPage = () => {
 
       <Layout>
         <div className="flex items-center justify-evenly p-1">
-          <Link href={"/courses/english"}>
+          <Link href={`${FluentDoorRoutes.courses}`}>
             <Country
               flag={"icons/ukFlag.svg"}
               countryName={"English"}
@@ -72,7 +73,10 @@ const LandingPage = () => {
             />
           </Link>
 
-          <Link href={"/courses/french"} className="flex gap-2 items-center">
+          <Link
+            href={`${FluentDoorRoutes.courses}`}
+            className="flex gap-2 items-center"
+          >
             <Country
               flag={"icons/frenchFlag.svg"}
               countryName={"French"}
@@ -141,7 +145,7 @@ const LandingPage = () => {
               ))}
             </ul>
 
-            <Link href={"/signupTutor"}>
+            <Link href={`${FluentDoorRoutes.signUpTutor}`}>
               <Button type="button" label={"become a tutor"} />
             </Link>
           </div>

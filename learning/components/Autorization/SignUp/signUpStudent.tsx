@@ -206,7 +206,7 @@ const SignUpStudent = () => {
               </u>{" "}
               of Use and{" "}
               <u>
-                <Link href={"/privacy"}>Privacy Policy</Link>
+                <Link href={"/policy"}>Privacy Policy</Link>
               </u>
               .
             </div>

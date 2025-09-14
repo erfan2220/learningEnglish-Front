@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import SocialMediaIcon from "../SocialMediaIcon/SocialMediaIcon";
 import { socialMediaIcons } from "@/constant/socialMediaIcons";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const Footer = () => {
   return (
@@ -12,10 +13,10 @@ const Footer = () => {
           <ul>
             <li className="font-bold mb-2 text-[#45444A]">Languages</li>
             <li>
-              <Link href={"/corses"}>Learn English</Link>
+              <Link href={`${FluentDoorRoutes.courses}`}>Learn English</Link>
             </li>
             <li>
-              <Link href={"/corses"}>Learn French</Link>
+              <Link href={`${FluentDoorRoutes.courses}`}>Learn French</Link>
             </li>
           </ul>
         </div>
@@ -26,13 +27,15 @@ const Footer = () => {
           <ul>
             <li className="font-bold mb-3 text-[#45444A]">Teacher & Tutor</li>
             <li>
-              <Link href={"/tutor"}>English Tutor</Link>
+              <Link href={`${FluentDoorRoutes.tutor}`}>English Tutor</Link>
             </li>
             <li>
-              <Link href={"/tutor"}>French Tutor</Link>
+              <Link href={`${FluentDoorRoutes.tutor}`}>French Tutor</Link>
             </li>
             <li>
-              <Link href={"/signupTutor"}>Become a Tutor</Link>
+              <Link href={`${FluentDoorRoutes.signUpTutor}`}>
+                Become a Tutor
+              </Link>
             </li>
           </ul>
         </div>
@@ -44,7 +47,7 @@ const Footer = () => {
               Learning Resources
             </li>
             <li>
-              <Link href={"/Articles"}>Articles</Link>
+              <Link href={`${FluentDoorRoutes.Articles}`}>Articles</Link>
             </li>
             <li>
               <Link href={"/"}>Language Test</Link>
@@ -62,13 +65,13 @@ const Footer = () => {
             <ul>
               <li className="font-bold mb-3 text-[#45444A]">More</li>
               <li>
-                <Link href={"/FAQ"}>FAQ</Link>
+                <Link href={`${FluentDoorRoutes.FAQ}`}>FAQ</Link>
               </li>
               <li>
-                <Link href={"/policy"}>Policies & Regulations</Link>
+                <Link href={`${FluentDoorRoutes.policy}`}>Policies & Regulations</Link>
               </li>
               <li>
-                <Link href={"/"}>Contact Us</Link>
+                <Link href={`${FluentDoorRoutes.contactUs}`}>Contact Us</Link>
               </li>
             </ul>
           </div>

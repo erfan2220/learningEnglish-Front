@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const AuthorizationPage2 = () => {
   const router = useRouter();
-  
+
   // کلید localStorage
   const STORAGE_KEY = "tutorProfilePhoto";
 
@@ -24,19 +25,23 @@ const AuthorizationPage2 = () => {
 
   // همگام‌سازی state با localStorage هر زمان که imagePreview تغییر کند
   useEffect(() => {
-    if (typeof window !== "undefined" && imagePreview !== "/icons/profilePhoto.svg") {
+    if (
+      typeof window !== "undefined" &&
+      imagePreview !== "/icons/profilePhoto.svg"
+    ) {
       localStorage.setItem(STORAGE_KEY, imagePreview);
     }
   }, [imagePreview]);
 
-  const btnTrigger = imagePreview !== "/icons/profilePhoto.svg" && imagePreview !== "";
+  const btnTrigger =
+    imagePreview !== "/icons/profilePhoto.svg" && imagePreview !== "";
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     // بررسی نوع فایل
-    if (!file.type.startsWith('image/')) {
+    if (!file.type.startsWith("image/")) {
       alert("لطفاً یک فایل تصویری انتخاب کنید");
       return;
     }
@@ -48,17 +53,17 @@ const AuthorizationPage2 = () => {
     }
 
     const reader = new FileReader();
-    
+
     reader.onloadend = () => {
       // تبدیل تصویر به Base64 و ذخیره در state
       const base64String = reader.result as string;
       setImagePreview(base64String);
     };
-    
+
     reader.onerror = () => {
       alert("خطا در خواندن فایل");
     };
-    
+
     reader.readAsDataURL(file);
   };
 
@@ -79,7 +84,7 @@ const AuthorizationPage2 = () => {
           <div className="flex gap-0.5 sm:gap-1 px-2 sm:px-4 justify-center items-center max-w-[1320px] mx-auto w-full">
             {/* ===step1==== */}
             <Link
-              href={"/tutorAuthentication/step1"}
+              href={FluentDoorRoutes.tutorAuthenticationStep1}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b flex items-center justify-center from-[#B49AFF] to-[#FF9AAB] h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -96,7 +101,7 @@ const AuthorizationPage2 = () => {
             <hr className="border-2 border-[#737177] w-full" />
             {/* ===step2==== */}
             <Link
-              href={"/tutorAuthentication/step2"}
+              href={FluentDoorRoutes.tutorAuthenticationStep2}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b from-[#B49AFF] to-[#FF9AAB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -224,9 +229,9 @@ const AuthorizationPage2 = () => {
                   className="hidden"
                 />
               </label>
-              
+
               {imagePreview !== "/icons/profilePhoto.svg" && (
-                <button 
+                <button
                   onClick={handleRemovePhoto}
                   className="text-red-600 text-sm underline"
                 >
@@ -242,14 +247,18 @@ const AuthorizationPage2 = () => {
               type="submit"
               label={"Back"}
               btnIcon={null}
-              onclick={() => router.push("/tutorAuthentication/step1")}
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep1)
+              }
             />
 
             <Button
               type="submit"
               label={"Next Step"}
               disabled={!btnTrigger}
-              onclick={() => router.push("/tutorAuthentication/step3")}
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep3)
+              }
             />
           </div>
         </div>

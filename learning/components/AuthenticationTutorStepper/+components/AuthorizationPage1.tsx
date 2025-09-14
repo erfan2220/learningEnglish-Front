@@ -21,6 +21,7 @@ import userIcon from "../../../assets/icons/userIconGray.svg";
 import Button from "@/components/Button/Button";
 import { countryList } from "@/mock/countryList";
 import { useRouter } from "next/navigation";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const AuthorizationPage1 = () => {
   const [firstName, setFirstName] = useState(
@@ -104,7 +105,7 @@ const AuthorizationPage1 = () => {
           <div className="flex gap-0.5 sm:gap-1 px-2 sm:px-4 justify-center items-center max-w-[1320px] mx-auto w-full">
             {/* ===step1==== */}
             <Link
-              href={"/tutorAuthentication/step1"}
+              href={FluentDoorRoutes.tutorAuthenticationStep1}
               className="flex flex-col justify-center items-center gap-2"
             >
               <div className="bg-gradient-to-b flex items-center justify-center from-[#B49AFF] to-[#FF9AAB] h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
@@ -410,7 +411,9 @@ const AuthorizationPage1 = () => {
               type="submit"
               label={"Next Step"}
               disabled={!btnTrigger}
-              onclick={() => router.push("/tutorAuthentication/step2")}
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep2)
+              }
             />
           </div>
         </div>

@@ -16,7 +16,6 @@ const FAQ = () => {
 
   const data = activeTab === "student" ? studentFAQ : tutorFAQ;
 
-  // فیلتر کردن سوال‌ها بر اساس سرچ
   const filteredData = data.filter(
     (item) =>
       item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -41,7 +40,7 @@ const FAQ = () => {
             onClick={() => {
               setActiveTab("student");
               setOpenId(null);
-              setSearchTerm(""); // پاک کردن سرچ موقع تغییر تب
+              setSearchTerm("");
             }}
           >
             <Image

@@ -1,8 +1,9 @@
-'use client'
-import React from "react"; 
+"use client";
+import React from "react";
 import Layout from "../Layout/Layout";
 import Button from "../Button/Button";
 import { useRouter } from "next/navigation";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const AuthenticationTutorStepper = () => {
   const router = useRouter();
@@ -13,7 +14,9 @@ const AuthenticationTutorStepper = () => {
       <div className="mt-[60px]">
         <Layout>
           <div className="mx-4 my-8 md:mx-[60px] text-[#737177] font-semibold flex flex-col gap-3 ">
-            <h2 className="text-[#45444A] text-lg sm:text-3xl font-bold">Tutor Registration</h2>
+            <h2 className="text-[#45444A] text-lg sm:text-3xl font-bold">
+              Tutor Registration
+            </h2>
 
             <p className="mt-5">Welcome to the teacher registration process!</p>
             <p>
@@ -29,12 +32,14 @@ const AuthenticationTutorStepper = () => {
             <p>Are you ready?</p>
           </div>
           <div className="flex justify-end px-4 md:px-12 mb-8">
-            <Button 
-            label="Start" 
-            type="button"
-            widthBtn="200px" 
-            onclick={() =>router.push('tutorAuthentication/step1') } 
-          />
+            <Button
+              label="Start"
+              type="button"
+              widthBtn="200px"
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep1)
+              }
+            />
           </div>
         </Layout>
       </div>
