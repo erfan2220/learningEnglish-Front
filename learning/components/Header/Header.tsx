@@ -41,9 +41,9 @@ export default function Header()
 
     return (
         <header className="fixed inset-x-0 top-0 z-50 bg-white/70 backdrop-blur-md shadow">
-            <div className="mx-[16px] flex items-center justify-between h-16 px-4">
+            <div className="mx-[16px] flex items-center justify-between h-[72px] px-4">
                 <Link href="/" className="flex items-center gap-2">
-                    <Image src="/images/logo.png" alt="logo" width={110} height={28} priority />
+                    <Image src="/images/logo.png" alt="logo" width={90} height={28} priority />
                 </Link>
 
                 {/* desktop nav */}

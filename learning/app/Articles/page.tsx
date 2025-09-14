@@ -1,7 +1,10 @@
+import Articles from "@/components/Articles/Articles";
 import React from "react";
 
 const page = () => {
-  return <div></div>;
+  return <div>
+    <Articles/>
+  </div>;
 };
 
 export default page;

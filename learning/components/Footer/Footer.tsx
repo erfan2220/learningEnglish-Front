@@ -44,7 +44,7 @@ const Footer = () => {
               Learning Resources
             </li>
             <li>
-              <Link href={"/"}>Articles</Link>
+              <Link href={"/Articles"}>Articles</Link>
             </li>
             <li>
               <Link href={"/"}>Language Test</Link>
