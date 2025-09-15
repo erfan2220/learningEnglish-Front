@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 import Image from "next/image";
-
+import { FluentDoorRoutes } from "@/routes/routes";
 
 // ✅ icons served from /public/icons (no import statements)
 const eyeIconClose = "/icons/eyeCloseIcon.svg";
@@ -179,11 +179,11 @@ const SignUpTutor = () => {
             <div className="text-sm text-[#45444A] mt-4 px-10 text-center">
               By clicking Log in or Continue with, you agree to{" "}
               <u>
-                <Link href={"/terms"}>Our Terms</Link>
+                <Link href={FluentDoorRoutes.terms}>Our Terms</Link>
               </u>{" "}
               of Use and{" "}
               <u>
-                <Link href={"/privacy"}>Privacy Policy</Link>
+                <Link href={FluentDoorRoutes.policy}>Privacy Policy</Link>
               </u>
               .
             </div>

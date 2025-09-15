@@ -1,22 +1,25 @@
 "use client";
-import React, { useState } from "react";
-// import levelIcon = "/icons/levelIconGray.svg";
-// import arrowIcon = "/icons/arrowDown.svg";
+import React from "react";
 import Image from "next/image";
 
-const SelectLevel = () => {
-  const [selectedLevel, setSelectedLevel] = useState("");
+interface SelectLevelProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const SelectLevel: React.FC<SelectLevelProps> = ({ value, onChange }) => {
   return (
-    <div className="relative min-w-[160px]">
+    <div className="relative min-w-[120px]">
       <select
         name="selectLevel"
-        value={selectedLevel}
-        onChange={(e) => setSelectedLevel(e.target.value)}
-        className="w-full appearance-none text-[#5C5A60] border-2 border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl pl-10 pr-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full appearance-none text-xs text-[#5C5A60] border-2 border-[#D2D2D2] focus:border-[#5F33E1] top-1/2 rounded-2xl pl-10 pr-4 py-2 bg-white/80 h-11 focus:outline-0"
       >
         <option value="" disabled hidden>
           Level
         </option>
+        <option value="">All</option>
         <option value="A1">A1 - Elementary</option>
         <option value="A2">A2 - Elementary</option>
         <option value="B1">B1 - Intermediate</option>
@@ -26,23 +29,21 @@ const SelectLevel = () => {
       </select>
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        {/* <img
-          src={"/icons/levelIconGray.svg"}
+        <Image
+          src="/icons/levelIconGray.svg"
           alt="level icon"
-          className="w-6 h-6"
-        /> */}
-
-        <Image src="/icons/levelIconGray.svg" alt="level icon" width={24} height={24} />
+          width={24}
+          height={24}
+        />
       </div>
 
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        {/* <img
-          src={"/icons/arrowDown.svg"}
+        <Image
+          src="/icons/arrowDown.svg"
           alt="arrow icon"
-          className="w-6 h-6"
-        /> */}
-
-        <Image src="/icons/arrowDown.svg" alt="arrow icon" width={24} height={24} />
+          width={24}
+          height={24}
+        />
       </div>
     </div>
   );

@@ -7,8 +7,6 @@ const defaultBanner = "/banners/defaultBanner.svg";
 const defaultAuthorPhoto = "/icons/profilePhotoDefault.svg";
 const clockIcon = "/icons/dayIcon.svg";
 
-
-
 const ArticleDetail = ({ id }: { id: number }) => {
   const article = articles.find((article) => article.id === id);
   return (
@@ -20,7 +18,7 @@ const ArticleDetail = ({ id }: { id: number }) => {
               {article?.title}
             </h1>
             <div className="flex gap-2 items-center my-2">
-                <Image src={clockIcon} alt="clockIcon" width={22} height={22}/>
+              <Image src={clockIcon} alt="clockIcon" width={22} height={22} />
               {/* <p className="text-sm text-[#8B8A8E]">Publish date:</p> */}
               <p className="text-sm text-[#8B8A8E] font-medium">
                 {" "}
@@ -48,6 +46,8 @@ const ArticleDetail = ({ id }: { id: number }) => {
               alt={article?.title ?? "Article Banner"}
               width={500}
               height={200}
+              className="rounded-xl shadow-md hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+              data-aos="fade-down"
             />
           </div>
           <div

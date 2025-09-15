@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
-import axios from "axios";
 import { TemporaryCourse } from "@/model/courseType";
 import defaultPhoto from "../../assets/icons/profilePhotoDefault.svg";
 import { Star } from "lucide-react";
@@ -21,6 +20,8 @@ import paymentIcon from "../../assets/icons/paymentWhite.svg";
 import cancelIcon from "../../assets/icons/cancel.svg";
 import Button from "../Button/Button";
 import { Toaster, toast } from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
+import { api } from "@/lib/APIs/axiosInstance";
 
 const bankList = [
   {
@@ -69,18 +70,15 @@ const CartComponent = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/courses/`
-        );
+        const res = await api.get(`/api/courses`);
         setCourses(res.data);
       } catch (error) {
         console.error("Fetching courses failed:", error);
-        setError("Failed to load courses. Please try again.");
+        setError("Failed to load tutors. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
-
     fetchCourses();
   }, []);
 
@@ -128,7 +126,11 @@ const CartComponent = () => {
   };
 
   if (loading) {
-    return <div className="p-12 max-w-[1320px] mx-auto mt-12">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center mt-[60px] h-64">
+        <BeatLoader color="#5F33E1" />
+      </div>
+    );
   }
 
   if (error) {
@@ -143,14 +145,14 @@ const CartComponent = () => {
 
   if (filteredCourses.length === 0) {
     return (
-      <div className="p-12 max-w-[1320px] mx-auto mt-12">No course found.</div>
+      <div className="p-12 max-w-[1320px] mx-auto mt-12">Your Cart Is Empty.</div>
     );
   }
 
   const selectedCourse = filteredCourses[0];
 
   return (
-    <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto">
+    <div className="p-2 pt-12 sm:pt-6 md:p-12 max-w-[1320px] mx-auto">
       <div className="mt-[20px]">
         <div className="p-4 sm:p-12">
           <p className="font-bold text-2xl text-[#45444A]">

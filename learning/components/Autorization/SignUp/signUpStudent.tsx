@@ -14,6 +14,7 @@ import axios from "axios";
 // import emailIcon = "/icons/emailGray.svg";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const SignUpStudent = () => {
   const [firstName, setFirstName] = useState("");
@@ -202,11 +203,11 @@ const SignUpStudent = () => {
             <div className="text-sm text-[#45444A] mt-4 px-10 text-center">
               By clicking Log in or Continue with, you agree to{" "}
               <u>
-                <Link href={"/terms"}>Our Terms</Link>
+                <Link href={FluentDoorRoutes.terms}>Our Terms</Link>
               </u>{" "}
               of Use and{" "}
               <u>
-                <Link href={"/policy"}>Privacy Policy</Link>
+                <Link href={FluentDoorRoutes.policy}>Privacy Policy</Link>
               </u>
               .
             </div>

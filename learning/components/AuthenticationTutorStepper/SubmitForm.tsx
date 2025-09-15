@@ -90,8 +90,6 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
     };
   }, []);
 
-  
-
   const handleClick = async () => {
     try {
       // Gather data from localStorage with proper typing

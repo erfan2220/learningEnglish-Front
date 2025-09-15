@@ -1,108 +1,86 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-// import levelIcon = "/icons/levelIconGray.svg";
-// import arrowIcon = "/icons/arrowDown.svg";
-import Inputs from "../Input/Input";
 import Image from "next/image";
 
-const SelectPrice = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedPriceType, setSelectedPriceType] = useState<
-    "free" | "range" | ""
-  >("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+interface SelectPriceProps {
+  free: boolean;
+  price: number;
+  onChangeFree: (value: boolean) => void;
+  onChangePrice: (value: number) => void;
+}
+
+const SelectPrice: React.FC<SelectPriceProps> = ({
+  free,
+  price,
+  onChangeFree,
+  onChangePrice,
+}) => {
+  const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
-        event.target instanceof Node &&
-        !dropdownRef.current.contains(event.target)
+        !dropdownRef.current.contains(event.target as Node)
       ) {
-        setIsOpen(false);
+        setOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   return (
-    <div className="relative min-w-[160px]" ref={dropdownRef}>
-      <button
-        className="w-full text-left text-[#5C5A60] border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-10 py-2 bg-white/80 text-sm h-11"
-        onClick={() => setIsOpen(!isOpen)}
+    <div ref={dropdownRef} className="relative w-full min-w-[120px]">
+      <div
+        onClick={() => setOpen(!open)}
+        className="flex items-center justify-between h-11 border-2 border-[#D2D2D2] rounded-2xl cursor-pointer bg-white/80"
       >
-        {selectedPriceType === "free"
-          ? "Free"
-          : selectedPriceType === "range"
-          ? `From ${minPrice || "-"} to ${maxPrice || "-"}`
-          : "Price"}
-      </button>
-
-      <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        {/* <img
-          src={"/icons/levelIconGray.svg"}
-          alt="level icon"
-          className="w-6 h-6"
-        /> */}
-
-        <Image src="/icons/levelIconGray.svg" alt="icon" width={24} height={24} />
-      </div>
-      <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-        {/* <img
-          src={"/icons/arrowDown.svg"}
-          alt="arrow icon"
-          className="w-6 h-6"
-        /> */}
-
-        <Image src="/icons/arrowDown.svg" alt="arrow icon" width={24} height={24} />
+        <div className="absolute left-3 top-3 pointer-events-none">
+          <Image
+            src="/icons/levelIconGray.svg"
+            alt="price icon"
+            width={24}
+            height={24}
+          />
+        </div>
+        <span className="px-10 text-xs">Price</span>
+        <Image src="/icons/arrowDown.svg" alt="arrow" width={20} height={20} />
       </div>
 
-      {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-white border border-gray-300 mt-2 rounded-xl p-3 z-10 shadow">
-          <div
-            className="cursor-pointer py-1 hover:text-purple-600"
-            onClick={() => {
-              setSelectedPriceType("free");
-              setIsOpen(false);
-              setMinPrice("");
-              setMaxPrice("");
-            }}
-          >
-            Free
-          </div>
-
-          <div className="my-2 border-t border-gray-200"></div>
-
-          <div className="space-y-2">
-            <Inputs
-              type="number"
-              value={minPrice}
-              placeholder="Minimum"
-              onchange={(e) => {
-                setMinPrice(e.target.value);
-                setSelectedPriceType("range");
-              }}
-              width="160px"
+      {open && (
+        <div className="absolute z-10 mt-2 w-full bg-white/90 border-2 border-[#D2D2D2] rounded-2xl py-4 shadow-lg">
+          {/* Free checkbox */}
+          <label className="flex items-center gap-2 mb-4 cursor-pointer px-4">
+            <input
+              type="checkbox"
+              checked={free}
+              onChange={(e) => onChangeFree(e.target.checked)}
+              className="w-4 h-4 accent-[#5F33E1]"
             />
-            <Inputs
-              type="number"
-              value={maxPrice}
-              placeholder="Maximum"
-              onchange={(e) => {
-                setMaxPrice(e.target.value);
-                setSelectedPriceType("range");
-              }}
-              width="160px"
+            <span className="text-xs text-[#5C5A60]">Only Free Courses</span>
+          </label>
+
+          {/* Range input */}
+          <div className="px-4">
+            <input
+              type="range"
+              min={0}
+              max={5000000}
+              step={50000}
+              value={price}
+              onChange={(e) => onChangePrice(Number(e.target.value))}
+              className="w-full accent-[#5F33E1]"
             />
-            <button
-              onClick={() => setIsOpen(false)}
-              className="w-full text-sm text-center py-2 bg-purple-600 text-white rounded-xl mt-2"
-            >
-              Apply
-            </button>
+            <p className="text-xs mt-1 text-[#5C5A60]">
+              Up to:{" "}
+              <span className="font-semibold">
+                {price.toLocaleString()} Toman
+              </span>
+            </p>
           </div>
         </div>
       )}

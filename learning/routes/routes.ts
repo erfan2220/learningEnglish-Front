@@ -9,7 +9,7 @@ export const FluentDoorRoutes = {
   signUpTutor: "/signupTutor",
   FAQ: "/FAQ",
   policy: "/policy",
-  terms: "/terms",
+  terms: "/serviceTerms",
   contactUs: "/contactUs",
   tutorDashboard: "/dashboard/tutor",
   Articles: "/Articles",
@@ -25,6 +25,5 @@ export const FluentDoorRoutes = {
   tutorAuthenticationStep7: "/tutorAuthentication/step7",
   //   =============================
   studentDashboard: "/dashboard/student",
-  studentDashboardCourses:"/dashboard/student/detail/courses"
-
+  studentDashboardCourses: "/dashboard/student/detail/courses",
 };

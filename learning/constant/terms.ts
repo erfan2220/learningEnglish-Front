@@ -1,0 +1,50 @@
+export const serviceTerms = [
+  {
+    id: 1,
+    question: "What rules apply to tutors on FluentDoor?",
+    answer:
+      "Tutors on FluentDoor must conduct lessons using a computer or laptop with a stable internet connection and keep their camera on during the entire class. They must teach in a quiet, well-lit environment with a neutral background and wear appropriate clothing that reflects professionalism. Smoking, eating, or any distracting behavior during lessons is not allowed. Every class must take place strictly on the FluentDoor platform, and any attempt to organize private lessons or share personal contact details with students outside the system will result in account suspension.",
+  },
+  {
+    id: 2,
+    question: "What are the attendance and cancellation rules for tutors?",
+    answer:
+      "Tutors are required to start classes on time and remain present until the scheduled end. Repeated late arrivals, early departures, or unjustified absences may lead to penalties, reduced visibility in search results, or even account suspension. If a student requests a cancellation, the tutor must respond within 24 hours. Failing to respond will lead to the class being automatically canceled by the system. For group classes, tutors must proceed with the lesson even if only one student attends. In case of technical issues, tutors are responsible for rescheduling and providing a make-up class at no additional cost to the student.",
+  },
+  {
+    id: 3,
+    question: "How are tutor payments handled?",
+    answer:
+      "Payments for tutors are managed exclusively through FluentDoor. Tutors may withdraw their earnings up to twice a month, and withdrawal requests are usually processed within 2–10 business days, depending on the chosen payment method. Tutors are eligible to withdraw up to 90% of their available balance at a time, while the remaining amount covers platform commissions and transaction fees. Commission rates vary depending on tutor activity and performance, starting at 30% and decreasing with consistent, high-quality teaching. Direct payments, sharing bank details, or attempting to bypass the platform’s payment system are strictly prohibited and may result in account termination.",
+  },
+  {
+    id: 4,
+    question: "What are the registration requirements for tutors?",
+    answer:
+      "To register as a tutor, applicants must provide accurate and verifiable personal details, including their educational background and teaching experience. Fake profiles, misleading qualifications, or multiple accounts are strictly forbidden and may lead to permanent suspension and possible legal action. Tutors must also upload a professional introduction video that does not contain personal contact information, and they are expected to keep their teaching calendar regularly updated. Login credentials must remain private, and tutors are responsible for protecting their accounts against unauthorized access.",
+  },
+  {
+    id: 5,
+    question: "What are the student rules during lessons?",
+    answer:
+      "Students using FluentDoor are expected to participate in lessons from a quiet and well-lit environment, preferably with a laptop or desktop device for better interaction. Inviting additional participants into a private session is not permitted, and doing so will cancel the lesson without refund. Students must communicate respectfully, wear appropriate clothing, and avoid disruptive behavior. Recording or distributing lessons without explicit tutor consent is not allowed. Violation of these rules may result in suspension or permanent removal from the platform.",
+  },
+  {
+    id: 6,
+    question: "How do attendance and cancellations work for students?",
+    answer:
+      "Students are responsible for attending lessons on time. Late arrivals or absences will not be refunded. If a tutor is late or fails to show up, students may file a report through FluentDoor’s support system. For group lessons, the session begins once at least one student has joined. Students may cancel scheduled classes according to the tutor’s selected cancellation policy. Under the flexible policy, students can cancel without penalty up to 24 hours before the lesson. Under the strict policy, cancellations made less than 24 hours before the lesson are non-refundable.",
+  },
+  {
+    id: 7,
+    question: "How are student payments managed?",
+    answer:
+      "All payments for classes must be processed through FluentDoor’s secure payment gateway. Direct transfers to tutors or attempts to bypass the system are strictly forbidden. Purchased lesson packages must be scheduled and used within 3 months; otherwise, unused lessons will be converted into platform credit that can be applied to future bookings. Refunds may only be requested for eligible cases, such as tutor absence or verified technical issues, and will be processed within 30 days back to the student’s registered payment account. Refunds cannot be transferred to third-party accounts.",
+  },
+  {
+    id: 8,
+    question: "What ethical guidelines must students follow?",
+    answer:
+      "Students must treat tutors and other learners with respect and professionalism. Using offensive language, harassment, or discriminatory behavior will not be tolerated. Students must provide truthful personal information and avoid creating duplicate or fake accounts. Profile photos must be appropriate and free of offensive content. FluentDoor may monitor and review lessons for quality control purposes. Any disputes or issues with tutors should be reported directly to FluentDoor’s support team rather than handled privately. Violation of these ethical rules may result in temporary suspension or permanent banning from the platform.",
+  },
+];

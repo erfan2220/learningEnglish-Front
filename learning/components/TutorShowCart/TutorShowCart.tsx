@@ -31,7 +31,7 @@ const TutorShowCart = ({ tutorId }: { tutorId: number }) => {
   }, []);
 
   if (loading) {
-    return <div className="p-4">Loading tutor...</div>;
+    return <div className="p-4"></div>;
   }
 
   const tutor = tutors.find((t) => t.id === tutorId);

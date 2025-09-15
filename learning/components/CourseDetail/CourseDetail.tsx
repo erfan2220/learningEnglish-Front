@@ -15,6 +15,7 @@ import timeIcon from "./../../assets/icons/length.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
+import { BeatLoader } from "react-spinners";
 
 const CourseDetail = ({ id }: { id: number }) => {
   const [course, setCourse] = useState<TemporaryCourse | null>(null);
@@ -46,7 +47,9 @@ const CourseDetail = ({ id }: { id: number }) => {
   if (loading) {
     return (
       <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[60px]">
-        <p>Loading...</p>
+        <div className="flex justify-center items-center h-64">
+          <BeatLoader color="#5F33E1" />
+        </div>
       </div>
     );
   }

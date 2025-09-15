@@ -1,9 +1,5 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-// import startPic from "/images/pana.svg";
-// import tutorPic from ".//images/tutorPic.svg";
-// import ukFlag from "/icons/ukFlag.svg";
-// import frenchFlag from "/icons/frenchFlag.svg";
 import Link from "next/link";
 import Country from "../Country/Country";
 import TutorialStep from "../TutorialStep/TutorialStep";
@@ -42,11 +38,7 @@ const LandingPage = () => {
             </div>
 
             <div className="w-full md:w-1/2 md:mb-0 mb-6">
-              {/* <img
-                src={"/images/pana.svg"}
-                alt="start pic"
-                className="w-[500px] h-[500px] mx-auto"
-              /> */}
+             
               <Image
                 src="/images/pana.svg"
                 alt="start pic"

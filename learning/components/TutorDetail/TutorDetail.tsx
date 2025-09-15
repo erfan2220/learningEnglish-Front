@@ -82,9 +82,10 @@ const TutorDetail = ({ id }: { id: number }) => {
 
   if (loading) {
     return (
-      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[100px] flex items-center justify-center">
-        <BeatLoader color="#5F33E1" />
-        {/* <p>Loading...</p> */}
+      <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[60px]">
+        <div className="flex justify-center items-center h-64">
+          <BeatLoader color="#5F33E1" />
+        </div>
       </div>
     );
   }

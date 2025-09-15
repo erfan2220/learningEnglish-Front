@@ -9,14 +9,23 @@ import "swiper/css/pagination";
 import { articles } from "@/constant/articles";
 import Image from "next/image";
 import Button from "../Button/Button";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
+import Pagination2 from "../Pagination/Pagination";
 
 const readMoreIcon = "/icons/readMoreIcon.svg";
 
 const Articles = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const router = useRouter();
+  const searchParam = useSearchParams();
+
+  const ppg = 3;
+  const CurrentPage = parseInt(searchParam.get("page") || "1");
+  const firstIndex = (CurrentPage - 1) * ppg;
+  const endIndex = firstIndex + ppg;
+  const showArticles = articles.slice(firstIndex, endIndex);
+  const totalPages = Math.ceil(articles.length / ppg);
 
   const recentArticles = useMemo(() => {
     const sortedArticles = [...articles];
@@ -88,7 +97,7 @@ const Articles = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {articles.map((article, index) => (
+        {showArticles.map((article, index) => (
           <div
             key={article.id}
             className={`bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] ${
@@ -133,6 +142,16 @@ const Articles = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-center items-center text-center">
+        {totalPages > 1 && (
+          <Pagination2
+            currentPage={CurrentPage}
+            totalPages={totalPages}
+            basePath="?page="
+          />
+        )}
       </div>
     </div>
   );
