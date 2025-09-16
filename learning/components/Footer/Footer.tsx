@@ -1,7 +1,8 @@
+"use client";
 import Link from "next/link";
 import React from "react";
-import SocialMediaIcon from "../SocialMediaIcon/SocialMediaIcon";
-import { socialMediaIcons } from "@/constant/socialMediaIcons";
+// import SocialMediaIcon from "../SocialMediaIcon/SocialMediaIcon";
+// import { socialMediaIcons } from "@/constant/socialMediaIcons";
 import { FluentDoorRoutes } from "@/routes/routes";
 
 const Footer = () => {
@@ -12,11 +13,26 @@ const Footer = () => {
         <div>
           <ul>
             <li className="font-bold mb-2 text-[#45444A]">Languages</li>
-            <li>
+            <li
+              onClick={() =>
+                localStorage.setItem("languageFilterCourse", "English")
+              }
+            >
               <Link href={`${FluentDoorRoutes.courses}`}>Learn English</Link>
             </li>
-            <li>
+            <li
+              onClick={() =>
+                localStorage.setItem("languageFilterCourse", "French")
+              }
+            >
               <Link href={`${FluentDoorRoutes.courses}`}>Learn French</Link>
+            </li>
+            <li
+              onClick={() =>
+                localStorage.setItem("languageFilterCourse", "Persian")
+              }
+            >
+              <Link href={`${FluentDoorRoutes.courses}`}>Learn Persian</Link>
             </li>
           </ul>
         </div>
@@ -26,11 +42,26 @@ const Footer = () => {
         <div>
           <ul>
             <li className="font-bold mb-3 text-[#45444A]">Teacher & Tutor</li>
-            <li>
+            <li
+              onClick={() =>
+                localStorage.setItem("languageFilterTutor", "English")
+              }
+            >
               <Link href={`${FluentDoorRoutes.tutor}`}>English Tutor</Link>
             </li>
-            <li>
+            <li
+              onClick={() =>
+                localStorage.setItem("languageFilterTutor", "French")
+              }
+            >
               <Link href={`${FluentDoorRoutes.tutor}`}>French Tutor</Link>
+            </li>
+            <li
+              onClick={() =>
+                localStorage.setItem("languageFilterTutor", "Persian")
+              }
+            >
+              <Link href={`${FluentDoorRoutes.tutor}`}>Persian Tutor</Link>
             </li>
             <li>
               <Link href={`${FluentDoorRoutes.signUpTutor}`}>
@@ -50,7 +81,9 @@ const Footer = () => {
               <Link href={`${FluentDoorRoutes.Articles}`}>Articles</Link>
             </li>
             <li>
-              <Link href={"/"}>Language Test</Link>
+              <Link href={`${FluentDoorRoutes.languageTest}`}>
+                Language Test
+              </Link>
             </li>
             <li>
               <Link href={"/"}>Language Challenge</Link>
@@ -68,7 +101,12 @@ const Footer = () => {
                 <Link href={`${FluentDoorRoutes.FAQ}`}>FAQ</Link>
               </li>
               <li>
-                <Link href={`${FluentDoorRoutes.policy}`}>Policies & Regulations</Link>
+                <Link href={`${FluentDoorRoutes.policy}`}>
+                  Policies & Regulations
+                </Link>
+              </li>
+              <li>
+                <Link href={`${FluentDoorRoutes.terms}`}>Service Terms</Link>
               </li>
               <li>
                 <Link href={`${FluentDoorRoutes.contactUs}`}>Contact Us</Link>
@@ -79,13 +117,13 @@ const Footer = () => {
       </div>
       <hr />
 
-      <div className="flex gap-4 mt-6">
+      {/* <div className="flex gap-4 mt-6">
         {socialMediaIcons.map((icon) => (
           <div key={icon.id}>
             <SocialMediaIcon socialIcon={icon.icon} address={icon.address} />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

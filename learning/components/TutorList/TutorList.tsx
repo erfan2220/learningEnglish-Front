@@ -24,7 +24,7 @@ const TutorList = () => {
 
   // filters
   const [filters, setFilters] = useState({
-    language: "",
+    language: localStorage.getItem("languageFilterTutor") || "",
     search: "",
   });
 
@@ -53,6 +53,15 @@ const TutorList = () => {
 
     setFilters({ language, search });
     setSearchTerms(search);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (!window.location.pathname.includes("/tutor")) {
+        localStorage.removeItem("languageFilterTutor");
+        localStorage.removeItem("searchTermsFilterTutor");
+      }
+    };
   }, []);
 
   // save searchTerms to filters
@@ -144,8 +153,8 @@ const TutorList = () => {
         </div>
       ) : error ? (
         <div className="flex justify-center items-center h-64">
-          <p className="text-center text-lg p-8 bg-white/80 text-[#8B8A8E]">
-            error : {error}
+           <p className="text-center text-lg p-8 bg-white/80 rounded-2xl shadow-md border-4 border-[#afaeb2] text-[#6e6d75]">
+            Error : {error}
           </p>
         </div>
       ) : showTutors.length === 0 ? (

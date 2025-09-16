@@ -11,7 +11,7 @@ export const FluentDoorRoutes = {
   policy: "/policy",
   terms: "/serviceTerms",
   contactUs: "/contactUs",
-  tutorDashboard: "/dashboard/tutor",
+  languageTest: "/languageTest",
   Articles: "/Articles",
   ArticlesDetail: "/Articles/detail",
   cart: "/cart",
@@ -23,6 +23,8 @@ export const FluentDoorRoutes = {
   tutorAuthenticationStep5: "/tutorAuthentication/step5",
   tutorAuthenticationStep6: "/tutorAuthentication/step6",
   tutorAuthenticationStep7: "/tutorAuthentication/step7",
+  //   =============================
+  tutorDashboard: "/dashboard/tutor",
   //   =============================
   studentDashboard: "/dashboard/student",
   studentDashboardCourses: "/dashboard/student/detail/courses",
