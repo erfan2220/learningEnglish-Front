@@ -13,7 +13,7 @@ const Inputs: React.FC<InputsProps> = ({
   icon1,
   icon2,
   inputIcon,
-  disabled=false
+  disabled = false,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,7 +22,7 @@ const Inputs: React.FC<InputsProps> = ({
       {label && <label className="text-xs mx-2 text-[#45444A]">{label}</label>}
       <div className="flex relative items-center ">
         <input
-          className={`border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0`}
+          className={`border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-xs sm:text-sm h-11 focus:outline-0`}
           type={type === "password" && showPassword ? "text" : type}
           placeholder={placeholder}
           value={value}
@@ -34,27 +34,19 @@ const Inputs: React.FC<InputsProps> = ({
         />
         {inputIcon && (
           <div className="absolute top-[12px] left-3 cursor-pointer">
-            {/* <img
-              src={inputIcon}
-              alt="input icon"
-              className="w-[22px] h-[22px]"
-            /> */}
             <Image src={inputIcon} alt="input icon" width={22} height={22} />
           </div>
         )}
         {icon1 && icon2 && (
           <div
-            className="absolute right-8 cursor-pointer"
+            className="absolute right-4 cursor-pointer"
             onClick={() => {
               if (type === "password") setShowPassword((prev) => !prev);
             }}
           >
             {showPassword ? (
-              // <img src={icon2} alt="icon icon" className="w-6 h-6" />
               <Image src={icon2} alt="icon pic" width={24} height={24} />
             ) : (
-              // <img src={icon1} alt="icon icon" className="w-6 h-6" />
-
               <Image src={icon1} alt="icon pic" width={24} height={24} />
             )}
           </div>

@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { isAxiosError } from "axios";
-import axios from "axios";
-import { api } from "@/lib/APIs/axiosInstance";
 import { FluentDoorRoutes } from "@/routes/routes";
+import Layout from "@/components/Layout/Layout";
+import Inputs from "@/components/Input/Input";
 const LS_EMAIL_KEY = "le_remember_email";
 const LS_REMEMBER_KEY = "le_remember_me";
 
@@ -57,9 +56,7 @@ export default function SignIn() {
     }
   }, [remember, email]);
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     if (!canSubmit) return;
@@ -81,6 +78,7 @@ export default function SignIn() {
       router.push("/");
     } catch (err) {
       // Handle any errors
+      console.error(err);
       setError("Failed to authenticate");
     } finally {
       setBusy(false);
@@ -88,138 +86,166 @@ export default function SignIn() {
   }
 
   return (
-    <main className="min-h-[100dvh] bg-gradient-to-b from-white to-indigo-50">
-      <div className="max-w-md mx-auto px-6 pt-28 pb-16">
-        <div className="bg-white/90 backdrop-blur rounded-2xl shadow-xl border p-6 md:p-8">
-          <h1 className="text-3xl font-bold text-gray-800 text-center">
-            Sign In
-          </h1>
-          <p className="text-sm text-gray-600 text-center mt-2">
-            <span className="font-medium underline">
-              <Link href={FluentDoorRoutes.signUpStudent}>
-                Sign up as a student
-              </Link>
-            </span>{" "}
-            or{" "}
-            <span className="font-medium underline">
-              <Link href={FluentDoorRoutes.signUpTutor}>
-                Sign up as a tutor
-              </Link>
-            </span>
-          </p>
+    <main className="p-2 pt-6 md:p-12 max-w-2xl mx-auto ">
+      <div className="mt-[60px]">
+        <Layout>
+          <div className="flex flex-col gap-3 items-center justify-center px-3 sm:px-8  pt-10 w-full">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center">
+              Sign In
+            </h1>
+            <p className="text-sm text-gray-600 text-center mt-2">
+              <span className="font-medium underline">
+                <Link href={FluentDoorRoutes.signUpStudent}>
+                  Sign up as a student
+                </Link>
+              </span>{" "}
+              or{" "}
+              <span className="font-medium underline">
+                <Link href={FluentDoorRoutes.signUpTutor}>
+                  Sign up as a tutor
+                </Link>
+              </span>
+            </p>
 
-          {/* Social auth */}
-          <Link
-            href="/signinGoogle"
-            className="mt-6 flex items-center justify-center gap-2 w-full border rounded-xl py-2.5 hover:bg-gray-50 transition"
-          >
-            {/* Use asset from /public to avoid build-time image processing */}
-            <Image
-              src="/icons/google.svg"
-              alt="google icon"
-              width={20}
-              height={20}
-            />
-            <span className="text-sm font-semibold text-gray-700">
-              Continue with Google
-            </span>
-          </Link>
-
-          <div className="flex items-center gap-3 my-6">
-            <div className="h-px bg-gray-200 flex-1" />
-            <span className="text-xs text-gray-500">or</span>
-            <div className="h-px bg-gray-200 flex-1" />
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
-            <label className="block text-sm font-medium text-gray-700">
-              Email
-              <input
-                type="email"
-                className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-200"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email"
-                required
+            {/* Social auth */}
+            <Link
+              href="/signinGoogle"
+              className="flex gap-2 w-full border-2 mt-4 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-3"
+            >
+              {/* Use asset from /public to avoid build-time image processing */}
+              <Image
+                src="/icons/google.svg"
+                alt="google icon"
+                width={20}
+                height={20}
               />
-            </label>
+              <span className="text-[#727177] text-sm font-semibold">
+                Continue with Google
+              </span>
+            </Link>
 
-            {/* Password with show/hide */}
-            <label className="block text-sm font-medium text-gray-700">
-              Password
-              <div className="mt-1 relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className="w-full rounded-lg border px-3 py-2 pr-10 outline-none focus:ring-2 focus:ring-indigo-200"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((s) => !s)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {showPassword ? "🙈" : "👁️"}
-                </button>
-              </div>
-            </label>
-
-            {/* Remember + Forgot */}
-            <div className="flex items-center justify-between">
-              <label className="inline-flex items-center gap-2 text-sm text-gray-700">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 rounded border-gray-300"
-                  checked={remember}
-                  onChange={(e) => setRemember(e.target.checked)}
-                />
-                Remember me
-              </label>
-              <Link
-                href="/forgotPassword"
-                className="text-sm text-indigo-700 hover:underline"
-              >
-                Forgot password?
-              </Link>
+            <div className="w-full flex items-center justify-center gap-2 mb-2 mx-8">
+              <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
+              <p className="text-[#45444A]">or</p>
+              <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
             </div>
 
-            {/* Error */}
-            {error && (
-              <div className="rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm px-3 py-2">
-                {error}
-              </div>
-            )}
+            <form onSubmit={handleSubmit} className="space-y-4 w-full">
+              {/* Email */}
 
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={!canSubmit}
-              className="w-full rounded-xl bg-[#5F33E1] text-white py-2.5 font-semibold
+              <Inputs
+                type="email"
+                value={email}
+                onchange={(e) => setEmail(e.target.value)}
+                placeholder="email@example.com"
+                label="Email"
+                width="100%"
+                inputIcon="/icons/userIconGray.svg"
+              />
+
+              {/* <label className="block text-sm font-medium text-gray-700">
+                Email
+                <input
+                  type="email"
+                  className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-200"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
+                  required
+                />
+              </label> */}
+
+              {/* Password with show/hide */}
+
+              <Inputs
+                type="password"
+                value={password}
+                onchange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                label="Password"
+                width="100%"
+                icon1="/icons/eyeCloseIcon.svg"
+                icon2="/icons/eyeIcon.svg"
+                inputIcon="/icons/passwordIconGray.svg"
+              />
+              {/* <label className="block text-sm font-medium text-gray-700">
+                Password
+                <div className="mt-1 relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="w-full rounded-lg border px-3 py-2 pr-10 outline-none focus:ring-2 focus:ring-indigo-200"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="current-password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((s) => !s)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? "🙈" : "👁️"}
+                  </button>
+                </div>
+              </label> */}
+
+              {/* Remember + Forgot */}
+              <div className="flex items-center justify-between">
+                <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 rounded border-gray-300"
+                    checked={remember}
+                    onChange={(e) => setRemember(e.target.checked)}
+                  />
+                  Remember me
+                </label>
+                <Link
+                  href="/forgotPassword"
+                  className="text-sm text-indigo-700 hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+
+              {/* Error */}
+              {error && (
+                <div className="rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm px-3 py-2">
+                  {error}
+                </div>
+              )}
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={!canSubmit}
+                className="w-full rounded-xl bg-[#5F33E1] text-white py-2.5 font-semibold
                          hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed
                          transition"
-            >
-              {busy ? "Signing in..." : "Sign In"}
-            </button>
+              >
+                {busy ? "Signing in..." : "Sign In"}
+              </button>
 
-            <p className="text-xs text-center text-gray-500 mt-3">
-              By signing in you agree to our{" "}
-              <Link href={FluentDoorRoutes.terms} className="underline">
-                Terms
-              </Link>{" "}
-              and{" "}
-              <Link href={FluentDoorRoutes.policy} className="underline">
-                Privacy Policy
-              </Link>
-              .
-            </p>
-          </form>
-        </div>
+              <p className="text-xs text-center text-gray-500 mt-3 mb-8">
+                By signing in you agree to our{" "}
+                <Link href={FluentDoorRoutes.terms} className="underline">
+                  Terms
+                </Link>{" "}
+                and{" "}
+                <Link href={FluentDoorRoutes.policy} className="underline">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </form>
+          </div>
+        </Layout>
+        {/* ===================== */}
       </div>
     </main>
   );

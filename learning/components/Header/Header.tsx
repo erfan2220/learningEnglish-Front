@@ -44,7 +44,7 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white/70 backdrop-blur-md shadow">
-      <div className="mx-[16px] flex items-center justify-between h-[72px] px-4">
+      <div className="sm:mx-[16px] flex items-center justify-between h-[72px] px-1 sm:px-4">
         <Link
           href={FluentDoorRoutes.homePage}
           className="flex items-center gap-2"
@@ -59,7 +59,9 @@ export default function Header() {
         </Link>
 
         {/* desktop nav */}
-        <NavList />
+        <div className="hidden md:block">
+          <NavList />
+        </div>
 
         {/* right section */}
         <div className="flex items-center gap-3" ref={menuRef}>
@@ -70,7 +72,7 @@ export default function Header() {
               {/* avatar button */}
               <button
                 onClick={() => setMenuOpen((s) => !s)}
-                className="flex items-center gap-2 px-3 py-1 rounded-lg border hover:bg-gray-50"
+                className="flex items-center gap-2 px-3 py-1 rounded-lg border-2 border-[#D2D2D2] shadow-md hover:bg-gray-50"
                 aria-haspopup="menu"
                 aria-expanded={menuOpen}
               >
@@ -90,7 +92,7 @@ export default function Header() {
               {menuOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border p-2"
+                  className="absolute right-0 mt-2 w-64 text-[#5C5A60] bg-white/80 rounded-xl border-2 border-[#D2D2D2] shadow-md  p-2"
                 >
                   <div className="px-3 py-2">
                     <div className="font-semibold truncate">
@@ -100,31 +102,34 @@ export default function Header() {
                       {user.email}
                     </div>
                     <div className="text-xs mt-1">
-                      Role: {user.is_teacher ? "Tutor" : "Student"}
+                      Role:{" "}
+                      <b className="text-[#4921BF] font-semibold">
+                        {user.is_teacher ? "Tutor" : "Student"}
+                      </b>
                     </div>
                   </div>
                   <hr />
                   <button
                     onClick={onDashboard}
-                    className="w-full text-left px-3 py-2 hover:bg-gray-50 rounded-lg"
+                    className="w-full text-left text-sm sm:text-base flex items-center px-3 py-2 hover:bg-[#e8e1fc] cursor-pointer rounded-lg mt-2"
                     role="menuitem"
                   >
                     Dashboard
                   </button>
-                  {/* <Link
-                                        href="/profile"
-                                        className="block px-3 py-2 hover:bg-gray-50 rounded-lg"
-                                        role="menuitem"
-                                        onClick={() => setMenuOpen(false)}
-                                    >
-                                        Profile
-                                    </Link> */}
+                  <Link
+                    href="/"
+                    className="px-3 text-sm sm:text-base flex items-center py-2 hover:bg-[#e8e1fc] cursor-pointer rounded-lg"
+                    role="menuitem"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Settings
+                  </Link>
                   <button
                     onClick={async () => {
                       await logout();
                       setMenuOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 hover:bg-gray-50 rounded-lg text-red-600"
+                    className="w-full text-sm sm:text-base flex items-center text-left px-3 py-2 hover:bg-[#e8e1fc] cursor-pointer rounded-lg text-red-600"
                     role="menuitem"
                   >
                     Logout
@@ -165,7 +170,7 @@ export default function Header() {
       <div
         className={`md:hidden ${
           mobileOpen ? "block" : "hidden"
-        } bg-white border-t`}
+        } bg-[#F1ECFF] text-sm border-t`}
       >
         <div className="px-4 py-3 space-y-1">
           <Link
