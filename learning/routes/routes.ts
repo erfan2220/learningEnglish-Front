@@ -11,7 +11,12 @@ export const FluentDoorRoutes = {
   policy: "/policy",
   terms: "/serviceTerms",
   contactUs: "/contactUs",
+  // ===============================
   languageTest: "/languageTest",
+  languageTestEnglish: "/languageTest/English",
+  languageTestEnglishQuestion: "/languageTest/English/Questions",
+  languageTestEnglishResult: "/languageTest/English/Result",
+  // =====================================
   Articles: "/Articles",
   ArticlesDetail: "/Articles/detail",
   cart: "/cart",

@@ -1,12 +1,14 @@
+"use client";
 import React from "react";
 import Layout from "../Layout/Layout";
 import Button from "../Button/Button";
+import { useRouter } from "next/navigation";
+import { FluentDoorRoutes } from "@/routes/routes";
 
 const LanguageTest = () => {
+  const router = useRouter();
   return (
     <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto">
-      {/* ====================header section==================== */}
-
       <div className="mt-[60px]">
         <Layout>
           <div>
@@ -160,7 +162,13 @@ const LanguageTest = () => {
               you’ll know your exact level and how to improve step by step.
             </p>
             <p>👉 Click the button below and start your test now!</p>
-            <Button label="Start Now" type="button" />
+            <Button
+              label="Start Now"
+              type="button"
+              onclick={() =>
+                router.push(FluentDoorRoutes.languageTestEnglishQuestion)
+              }
+            />
           </div>
         </Layout>
       </div>
