@@ -82,6 +82,14 @@ const CartComponent = () => {
     fetchCourses();
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (!window.location.pathname.includes("/cart")) {
+        localStorage.removeItem("bankName");
+      }
+    };
+  }, []);
+
   // Calculate price using useMemo to avoid recalculating on every render
   const { fee, basePrice } = useMemo(() => {
     if (courses.length === 0 || !courseSelectedId) {
@@ -145,7 +153,9 @@ const CartComponent = () => {
 
   if (filteredCourses.length === 0) {
     return (
-      <div className="p-12 max-w-[1320px] mx-auto mt-12">Your Cart Is Empty.</div>
+      <div className="p-12 max-w-[1320px] mx-auto mt-12">
+        Your Cart Is Empty.
+      </div>
     );
   }
 

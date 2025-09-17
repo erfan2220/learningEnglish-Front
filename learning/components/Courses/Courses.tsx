@@ -22,7 +22,7 @@ const Courses = () => {
   const [searchTerms, setSearchTerms] = useState("");
 
   const [filters, setFilters] = useState({
-    language: "",
+    language: localStorage.getItem("languageFilterCourse") || "",
     level: "",
     time: "",
     date: "",
@@ -189,8 +189,8 @@ const Courses = () => {
           </div>
         ) : error ? (
           <div className="flex justify-center items-center h-64">
-            <p className="text-center text-lg p-8 bg-white/80 text-[#8B8A8E]">
-              error : {error}
+            <p className="text-center text-lg p-8 bg-white/80 rounded-2xl shadow-md border-4 border-[#afaeb2] text-[#6e6d75]">
+              Error : {error}
             </p>
           </div>
         ) : showCourses.length === 0 ? (

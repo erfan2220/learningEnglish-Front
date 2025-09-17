@@ -3,7 +3,6 @@
 export type ISODate = string;
 export type URLString = string;
 
-
 export interface Tutor {
   id: number;
   user: {
@@ -13,17 +12,17 @@ export interface Tutor {
     last_name: string;
   };
   profile_picture: URLString | null;
-  languages_spoken: string[];       // always present (array)
+  languages_spoken: string[]; // always present (array)
   country: string;
   subjects: string[];
   phone_number: string;
   bio: string;
-  intro_video_url: string;          // may be "" (empty string)
+  intro_video_url: string; // may be "" (empty string)
   intro_video_file: URLString | null;
   certificates: Certificate[];
   educations: Education[];
   experiences: Experience[];
-  courses: unknown[];               // API returns []; shape unknown yet
+  courses: unknown[]; // API returns []; shape unknown yet
 }
 
 export interface Certificate {
@@ -102,7 +101,7 @@ export type ButtonProps = {
   colorBtnBorder?: string;
   colorBtnHover?: string;
   colorBtnActive?: string;
-  colorBtnTextHover?:string;
+  colorBtnTextHover?: string;
   // btnIcon?: StaticImageData|null;
   btnIcon?: string | null;
   marginTop?: string;
