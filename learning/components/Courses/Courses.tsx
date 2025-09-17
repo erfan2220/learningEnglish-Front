@@ -184,7 +184,7 @@ const Courses = () => {
         {loading ? (
           <div className="flex justify-center items-center h-64">
             <p className="text-center text-lg">
-              <BeatLoader color="#5F33E1" />
+              {/*<BeatLoader color="#5F33E1" />*/}
             </p>
           </div>
         ) : error ? (
