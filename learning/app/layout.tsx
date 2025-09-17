@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import GlobalLoader from "@/components/ui/GlobalLoader";
+// import GlobalLoader from "@/components/ui/GlobalLoader";
 import {AuthProvider} from "@/context/AuthContext";
 import Providers from "./providers"
 export const metadata: Metadata = {

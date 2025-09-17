@@ -25,13 +25,13 @@ const EnglishTestResult = () => {
     <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto">
       <div className="mt-[60px]">
         <Layout>
-          <div>
-            <h1 className="text-2xl font-bold mb-6">English Test Result</h1>
+          <div className=" px-4 sm:px-10 text-sm mb-8 sm:text-base text-[#5C5A60]">
+            <h1 className="text-2xl font-bold my-6">English Test Result</h1>
             <p className="mb-2 text-lg">
               Your Score: {score} / {EnglishQuestions.length}
             </p>
             <p className="mb-2 text-lg">
-              Percentage: {((score / EnglishQuestions.length) * 100).toFixed(2)}
+              Percentage: {((score / EnglishQuestions.length) * 100).toFixed(0)}
               %
             </p>
             <p className="text-xl font-semibold mt-4">
