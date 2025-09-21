@@ -85,6 +85,10 @@ export default function SignIn() {
     }
   }
 
+  useEffect(() => {
+    localStorage.setItem("emailForgotPassword", email);
+  }, [email]);
+
   return (
     <main className="p-2 pt-6 md:p-12 max-w-2xl mx-auto ">
       <div className="mt-[60px]">
@@ -136,25 +140,15 @@ export default function SignIn() {
               <Inputs
                 type="email"
                 value={email}
-                onchange={(e) => setEmail(e.target.value)}
+                onchange={(e) => {
+                  setEmail(e.target.value);
+                  localStorage.setItem("emailForgotPassword", email);
+                }}
                 placeholder="email@example.com"
                 label="Email"
                 width="100%"
                 inputIcon="/icons/userIconGray.svg"
               />
-
-              {/* <label className="block text-sm font-medium text-gray-700">
-                Email
-                <input
-                  type="email"
-                  className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-200"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="email"
-                  required
-                />
-              </label> */}
 
               {/* Password with show/hide */}
 
@@ -169,30 +163,6 @@ export default function SignIn() {
                 icon2="/icons/eyeIcon.svg"
                 inputIcon="/icons/passwordIconGray.svg"
               />
-              {/* <label className="block text-sm font-medium text-gray-700">
-                Password
-                <div className="mt-1 relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    className="w-full rounded-lg border px-3 py-2 pr-10 outline-none focus:ring-2 focus:ring-indigo-200"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="current-password"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((s) => !s)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                    aria-label={
-                      showPassword ? "Hide password" : "Show password"
-                    }
-                  >
-                    {showPassword ? "🙈" : "👁️"}
-                  </button>
-                </div>
-              </label> */}
 
               {/* Remember + Forgot */}
               <div className="flex items-center justify-between">
@@ -206,7 +176,7 @@ export default function SignIn() {
                   Remember me
                 </label>
                 <Link
-                  href="/forgotPassword"
+                  href={FluentDoorRoutes.ForgotPassword}
                   className="text-sm text-indigo-700 hover:underline"
                 >
                   Forgot password?

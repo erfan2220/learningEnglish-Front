@@ -7,7 +7,7 @@ import { FluentDoorRoutes } from "@/routes/routes";
 
 const Footer = () => {
   return (
-    <div className="bg-white/70 backdrop-blur-md px-8 sm:px-[80px] py-8 pb-[70px]">
+    <div className=" left-0 right-0 bottom-0 bg-white/70 backdrop-blur-md px-8 sm:px-[80px] py-8 pb-[70px]">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-8 text-[#737177] text-sm">
         {/* ///////////////////////////// */}
         <div>

@@ -18,10 +18,12 @@ const priceIconWhite = "/icons/priceIconWhite.svg";
 const locationIcon = "/icons/locationGray.svg";
 const experienceIcon = "/icons/experienceGray.svg";
 const dateIcon = "/icons/dayIcon.svg";
+const organizationIcon = "/icons/organization.svg"
 
-// تعریف نوع داده‌ها برای TypeScript (اختیاری)
+
 const defaultExperience = {
   experience: "",
+  organization:"",
   country: "",
   city: "",
   startDate: "",
@@ -97,6 +99,7 @@ const AuthorizationPage5 = () => {
     experience.every(
       (exp) =>
         exp.experience !== "" &&
+        exp.organization !== "" &&
         exp.country !== "" &&
         exp.city !== "" &&
         exp.startDate !== "" &&
@@ -118,6 +121,7 @@ const AuthorizationPage5 = () => {
     index: number,
     field:
       | "experience"
+      | "organization"
       | "country"
       | "city"
       | "startDate"
@@ -383,6 +387,20 @@ const AuthorizationPage5 = () => {
                     value={exp.experience}
                     onchange={(e) =>
                       handleChange(index, "experience", e.target.value)
+                    }
+                    width="100%"
+                  />
+                </div>
+
+                <div className="w-full">
+                  <Inputs
+                    placeholder="Organization"
+                    type="text"
+                    inputIcon={organizationIcon}
+                    label="Organization"
+                    value={exp.organization}
+                    onchange={(e) =>
+                      handleChange(index, "organization", e.target.value)
                     }
                     width="100%"
                   />

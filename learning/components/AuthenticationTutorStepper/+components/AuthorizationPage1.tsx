@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
-import educationWhite from "../../../assets/icons/educationWhite.svg";
-import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
-import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
+// import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
+// import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
+// import educationWhite from "../../../assets/icons/educationWhite.svg";
+// import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
+// import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
+// import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
 import Image from "next/image";
 import Link from "next/link";
 import Inputs from "@/components/Input/Input";
@@ -44,13 +44,15 @@ const AuthorizationPage1 = () => {
       : ""
   );
 
-  // تغییر: فقط زبان‌ها را ذخیره می‌کنیم نه سطح‌ها
-  const [languages, setLanguages] = useState<string[]>(() => {
+  // زبان + سطح ذخیره میشه
+  const [languages, setLanguages] = useState<
+    { language: string; level: string }[]
+  >(() => {
     if (typeof window !== "undefined") {
-      const savedLanguages = localStorage.getItem("languages");
-      return savedLanguages ? JSON.parse(savedLanguages) : [""];
+      const saved = localStorage.getItem("languages");
+      return saved ? JSON.parse(saved) : [{ language: "", level: "" }];
     }
-    return [""];
+    return [{ language: "", level: "" }];
   });
 
   const router = useRouter();
@@ -61,21 +63,24 @@ const AuthorizationPage1 = () => {
     phoneNumber !== "" &&
     selectedCountry !== "" &&
     selectedSubject !== "" &&
-    languages.every((lang) => lang !== "");
+    languages.every((l) => l.language !== "" && l.level !== "");
 
   const handleAddLanguage = () => {
-    setLanguages([...languages, ""]);
+    setLanguages([...languages, { language: "", level: "" }]);
   };
 
   const handleRemoveLanguage = (index: number) => {
-    const newLanguages = languages.filter((_, i) => i !== index);
-    setLanguages(newLanguages);
+    setLanguages(languages.filter((_, i) => i !== index));
   };
 
-  const handleLanguageChange = (index: number, value: string) => {
-    const newLanguages = [...languages];
-    newLanguages[index] = value;
-    setLanguages(newLanguages);
+  const handleLanguageChange = (
+    index: number,
+    field: "language" | "level",
+    value: string
+  ) => {
+    const updated = [...languages];
+    updated[index][field] = value;
+    setLanguages(updated);
   };
 
   useEffect(() => {
@@ -118,91 +123,7 @@ const AuthorizationPage1 = () => {
                 />
               </div>
             </Link>
-            {/* ============= */}
-            <hr className="border-2 border-[#737177] w-full" />
-            {/* ===step2==== */}
-            <div className="flex flex-col justify-center items-center gap-2">
-              <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
-                <Image
-                  src={photoIconWhite}
-                  alt="photo icon"
-                  width={28}
-                  height={28}
-                  className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
-                />
-              </div>
-            </div>
-            {/* ============= */}
-            <hr className="border-2 border-[#737177] w-full" />
-            {/* ===step3==== */}
-            <div>
-              <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
-                <Image
-                  src={certificateIconWhite}
-                  alt="certificate icon"
-                  width={28}
-                  height={28}
-                  className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
-                />
-              </div>
-            </div>
-            {/* ============= */}
-            <hr className="border-2 border-[#737177] w-full" />
-            {/* ===step4==== */}
-            <div>
-              <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
-                <Image
-                  src={educationWhite}
-                  alt="education icon"
-                  width={28}
-                  height={28}
-                  className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
-                />
-              </div>
-            </div>
-            {/* ============= */}
-            <hr className="border-2 border-[#737177] w-full" />
-            {/* ===step5==== */}
-            <div>
-              <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
-                <Image
-                  src={descriptionIconWhite}
-                  alt="description icon"
-                  width={28}
-                  height={28}
-                  className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
-                />
-              </div>
-            </div>
-            {/* ============= */}
-            <hr className="border-2 border-[#737177] w-full" />
-            {/* ===step6==== */}
-            <div>
-              <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
-                <Image
-                  src={videoIconWhite}
-                  alt="video icon"
-                  width={28}
-                  height={28}
-                  className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
-                />
-              </div>
-            </div>
-            {/* ============= */}
-            <hr className="border-2 border-[#737177] w-full" />
-            {/* ===step7==== */}
-            <div>
-              <div className="bg-[#BBBBBB] flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full border-1 border-[#BBBBBB]">
-                <Image
-                  src={priceIconWhite}
-                  alt="price icon"
-                  width={28}
-                  height={28}
-                  className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"
-                />
-              </div>
-            </div>
-            {/* ============= */}
+            {/* سایر stepper */}
           </div>
         </div>
         {/* ======================================================================== */}
@@ -247,6 +168,7 @@ const AuthorizationPage1 = () => {
                   onchange={(e) => setPhoneNumber(e.target.value)}
                 />
 
+                {/* Country */}
                 <div className="w-full">
                   <label className="text-xs mx-2 mt-2 text-[#45444A]">
                     Country
@@ -257,7 +179,7 @@ const AuthorizationPage1 = () => {
                       onChange={(e) => setSelectedCountry(e.target.value)}
                       className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                     >
-                      <option disabled defaultValue={"-country-"} value="">
+                      <option disabled value="">
                         Country
                       </option>
                       {countryList.map((country, index) => (
@@ -276,6 +198,7 @@ const AuthorizationPage1 = () => {
                   </div>
                 </div>
 
+                {/* Subject */}
                 <div className="w-full">
                   <label className="text-xs mx-2 mt-2 text-[#45444A]">
                     Subject you teach
@@ -286,7 +209,7 @@ const AuthorizationPage1 = () => {
                       onChange={(e) => setSelectedSubject(e.target.value)}
                       className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                     >
-                      <option disabled defaultValue={"-subject-"} value="">
+                      <option disabled value="">
                         subject
                       </option>
                       <option value="Chinese">Chinese</option>
@@ -303,60 +226,59 @@ const AuthorizationPage1 = () => {
                     />
                   </div>
                 </div>
-                {/* ////////////////////////////////////////////////// */}
+
+                {/* Languages + Levels */}
                 <div className="flex flex-col gap-2">
-                  {languages.map((language, index) => (
+                  {languages.map((entry, index) => (
                     <div key={index} className="flex w-full items-center gap-2">
-                      {/* Language Input */}
-                      <div className="flex flex-row w-[95%] sm:w-[95%] gap-2">
-                        <div className="w-full">
-                          <label className="text-xs mx-2 mt-2 text-[#45444A]">
-                            Language you speak
-                          </label>
-                          <div className="relative">
-                            <select
-                              className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
-                              value={language}
-                              onChange={(e) =>
-                                handleLanguageChange(index, e.target.value)
-                              }
-                            >
-                              <option disabled value="">
-                                languages
-                              </option>
-                              <option value="Arabic">Arabic</option>
-                              <option value="Chinese">Chinese</option>
-                              <option value="Dutch">Dutch</option>
-                              <option value="English">English</option>
-                              <option value="French">French</option>
-                              <option value="German">German</option>
-                              <option value="Persian">Persian</option>
-                              <option value="Russian">Russian</option>
-                              <option value="Spanish">Spanish</option>
-                            </select>
-                            <Image
-                              src={languageIcon}
-                              alt="language icon"
-                              width={20}
-                              height={20}
-                              className="absolute top-[12px] left-4 cursor-pointer"
-                            />
-                          </div>
+                      {/* Language */}
+                      <div className="w-full">
+                        <label className="text-xs mx-2 mt-2 text-[#45444A]">
+                          Language you speak
+                        </label>
+                        <div className="relative">
+                          <select
+                            className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
+                            value={entry.language}
+                            onChange={(e) =>
+                              handleLanguageChange(index, "language", e.target.value)
+                            }
+                          >
+                            <option disabled value="">
+                              languages
+                            </option>
+                            <option value="Arabic">Arabic</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Dutch">Dutch</option>
+                            <option value="English">English</option>
+                            <option value="French">French</option>
+                            <option value="German">German</option>
+                            <option value="Persian">Persian</option>
+                            <option value="Russian">Russian</option>
+                            <option value="Spanish">Spanish</option>
+                          </select>
+                          <Image
+                            src={languageIcon}
+                            alt="language icon"
+                            width={20}
+                            height={20}
+                            className="absolute top-[12px] left-4 cursor-pointer"
+                          />
                         </div>
                       </div>
 
                       {/* Level */}
-                      <div className="w-full sm:w-1/2">
+                      <div className="w-full">
                         <label className="text-xs mx-2 mt-2 text-[#45444A]">
                           Level
                         </label>
                         <div className="relative">
                           <select
                             className="border-2 w-full text-sm border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 h-11 focus:outline-0"
-                            // value={entry.level}
-                            // onChange={(e) =>
-                            //   handleChange(index, "level", e.target.value)
-                            // }
+                            value={entry.level}
+                            onChange={(e) =>
+                              handleLanguageChange(index, "level", e.target.value)
+                            }
                           >
                             <option disabled value="">
                               Level
@@ -379,6 +301,7 @@ const AuthorizationPage1 = () => {
                         </div>
                       </div>
 
+                      {/* Remove */}
                       {languages.length > 1 && (
                         <div className="mt-5">
                           <Image

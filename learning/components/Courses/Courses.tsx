@@ -9,7 +9,6 @@ import CourseCart from "../CourseCart/CourseCart";
 import SelectPrice from "./SelectPrice";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TemporaryCourse } from "@/model/courseType";
-import { BeatLoader } from "react-spinners";
 import { api } from "@/lib/APIs/axiosInstance";
 import Pagination from "../Pagination/Pagination";
 

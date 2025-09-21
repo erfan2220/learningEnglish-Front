@@ -5,9 +5,10 @@ import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
 import Inputs from "@/components/Input/Input";
-import CheckBox from "@/components/CheckBox.tsx/CheckBox";
+
 import SubmitForm from "../SubmitForm";
 import { FluentDoorRoutes } from "@/routes/routes";
+import CheckBox from "@/components/CheckBox.tsx/CheckBox";
 
 // ✅ icons from /public/icons
 const aboutIconWhite = "/icons/aboutIconWhite.svg";
@@ -26,26 +27,28 @@ const courseTypeIcon = "/icons/lessonGray.svg";
 const timeSlot = "/icons/clockGray.svg";
 const calender = "/icons/dayIcon.svg";
 
+// تعریف نوع داده برای Time Slot
+interface TimeSlot {
+  days_available: string[];
+  time_slots: string[];
+  start_date: string;
+}
+
 const AuthorizationPage7 = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
-  // مقدار اولیه course
+  // مقدار اولیه course منطبق با ساختار backend
   const initialCourse = {
-    courseTitle: "",
-    duration: "",
-    price: "",
-    lessonPackage: "",
-    courseType: "",
-    languagePart: "",
+    course_title: "",
+    duration_minutes: 0,
+    price_per_hour: "",
+    lesson_package: "",
+    course_type: "",
+    language: "",
     description: "",
-    timeSlots: [
-      {
-        daysAvailable: [] as string[],
-        timeSlotPart: "",
-        startDate: "",
-      },
-    ],
+    start_date: "",
+    time_slots: [] as TimeSlot[],
   };
 
   const [course, setCourse] = useState(initialCourse);
@@ -54,7 +57,19 @@ const AuthorizationPage7 = () => {
   useEffect(() => {
     const storedCourse = localStorage.getItem("courseData");
     if (storedCourse) {
-      setCourse(JSON.parse(storedCourse));
+      const parsedCourse = JSON.parse(storedCourse);
+      
+      // اطمینان از اینکه time_slots ساختار درستی دارند
+      const validatedTimeSlots = parsedCourse.time_slots.map((slot: any) => ({
+        days_available: slot.days_available || [],
+        time_slots: slot.time_slots || [],
+        start_date: slot.start_date || parsedCourse.start_date || "",
+      }));
+      
+      setCourse({
+        ...parsedCourse,
+        time_slots: validatedTimeSlots,
+      });
     }
   }, []);
 
@@ -64,39 +79,81 @@ const AuthorizationPage7 = () => {
   }, [course]);
 
   const btnTrigger =
-    course.courseTitle !== "" &&
-    course.duration !== "" &&
-    course.price !== "" &&
-    course.lessonPackage !== "" &&
-    course.languagePart !== "" &&
-    course.courseType !== "" &&
+    course.course_title !== "" &&
+    course.duration_minutes > 0 &&
+    course.price_per_hour !== "" &&
+    course.lesson_package !== "" &&
+    course.language !== "" &&
+    course.course_type !== "" &&
     course.description !== "" &&
-    course.timeSlots.every(
-      (slot) =>
-        slot.daysAvailable.length > 0 &&
-        slot.timeSlotPart !== "" &&
-        slot.startDate !== ""
+    course.start_date !== "" &&
+    course.time_slots.length > 0 &&
+    course.time_slots.every(
+      (slot) => slot.days_available.length > 0 && slot.time_slots.length > 0
     );
 
   const handleAddTimeSlot = () => {
     setCourse({
       ...course,
-      timeSlots: [
-        ...course.timeSlots,
+      time_slots: [
+        ...course.time_slots,
         {
-          daysAvailable: [],
-          timeSlotPart: "",
-          startDate: "",
+          days_available: [],
+          time_slots: [],
+          start_date: course.start_date,
         },
       ],
     });
   };
 
   const handleRemoveTimeSlot = (index: number) => {
-    const updatedTimeSlots = course.timeSlots.filter((_, i) => i !== index);
+    const updatedTimeSlots = course.time_slots.filter((_, i) => i !== index);
     setCourse({
       ...course,
-      timeSlots: updatedTimeSlots,
+      time_slots: updatedTimeSlots,
+    });
+  };
+
+  const handleDayToggle = (index: number, day: string) => {
+    const updatedTimeSlots = [...course.time_slots];
+    if (updatedTimeSlots[index].days_available.includes(day)) {
+      updatedTimeSlots[index].days_available = updatedTimeSlots[
+        index
+      ].days_available.filter((d) => d !== day);
+    } else {
+      updatedTimeSlots[index].days_available = [
+        ...updatedTimeSlots[index].days_available,
+        day,
+      ];
+    }
+    setCourse({
+      ...course,
+      time_slots: updatedTimeSlots,
+    });
+  };
+
+  const handleTimeSlotAdd = (index: number, timeSlot: string) => {
+    const updatedTimeSlots = [...course.time_slots];
+    if (!updatedTimeSlots[index].time_slots.includes(timeSlot)) {
+      updatedTimeSlots[index].time_slots = [
+        ...updatedTimeSlots[index].time_slots,
+        timeSlot,
+      ];
+      setCourse({
+        ...course,
+        time_slots: updatedTimeSlots,
+      });
+    }
+  };
+
+  const handleTimeSlotRemove = (index: number, timeSlot: string) => {
+    const updatedTimeSlots = [...course.time_slots];
+    updatedTimeSlots[index].time_slots = updatedTimeSlots[
+      index
+    ].time_slots.filter((slot) => slot !== timeSlot);
+    setCourse({
+      ...course,
+      time_slots: updatedTimeSlots,
     });
   };
 
@@ -191,7 +248,7 @@ const AuthorizationPage7 = () => {
               </div>
             </Link>
             {/* ============= */}
-            <hr className="border-2 border-[#737177] w-full" />
+            <hr className="border-2 border[#737177] w-full" />
             {/* ===step6==== */}
             <Link
               href={FluentDoorRoutes.tutorAuthenticationStep6}
@@ -244,25 +301,25 @@ const AuthorizationPage7 = () => {
               label="Course Title"
               inputIcon={courseTitleIcon}
               width="100%"
-              value={course.courseTitle}
+              value={course.course_title}
               onchange={(e) => {
                 setCourse({
                   ...course,
-                  courseTitle: e.target.value,
+                  course_title: e.target.value,
                 });
               }}
             />
             <Inputs
               placeholder="Duration in Minute"
-              type="text"
+              type="number"
               label="Duration in Minute"
               inputIcon={durationTime}
               width="100%"
-              value={course.duration}
+              value={course.duration_minutes}
               onchange={(e) => {
                 setCourse({
                   ...course,
-                  duration: e.target.value,
+                  duration_minutes: parseInt(e.target.value) || 0,
                 });
               }}
             />
@@ -272,11 +329,11 @@ const AuthorizationPage7 = () => {
               label="Price per Hour"
               inputIcon={priceIcon}
               width="100%"
-              value={course.price}
+              value={course.price_per_hour}
               onchange={(e) => {
                 setCourse({
                   ...course,
-                  price: e.target.value,
+                  price_per_hour: e.target.value,
                 });
               }}
             />
@@ -286,11 +343,11 @@ const AuthorizationPage7 = () => {
               label="Lesson package"
               inputIcon={lesson}
               width="100%"
-              value={course.lessonPackage}
+              value={course.lesson_package}
               onchange={(e) => {
                 setCourse({
                   ...course,
-                  lessonPackage: e.target.value,
+                  lesson_package: e.target.value,
                 });
               }}
             />
@@ -302,11 +359,11 @@ const AuthorizationPage7 = () => {
               </label>
               <div className="relative">
                 <select
-                  value={course.courseType}
+                  value={course.course_type}
                   onChange={(e) => {
                     setCourse({
                       ...course,
-                      courseType: e.target.value,
+                      course_type: e.target.value,
                     });
                   }}
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
@@ -314,8 +371,8 @@ const AuthorizationPage7 = () => {
                   <option disabled value="">
                     Course Type
                   </option>
-                  <option value="Offline">Offline</option>
-                  <option value="Online">Online</option>
+                  <option value="offline">Offline</option>
+                  <option value="online">Online</option>
                 </select>
 
                 <Image
@@ -335,11 +392,11 @@ const AuthorizationPage7 = () => {
               </label>
               <div className="relative">
                 <select
-                  value={course.languagePart}
+                  value={course.language}
                   onChange={(e) => {
                     setCourse({
                       ...course,
-                      languagePart: e.target.value,
+                      language: e.target.value,
                     });
                   }}
                   className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
@@ -368,7 +425,7 @@ const AuthorizationPage7 = () => {
               </div>
             </div>
 
-            <div className=" mt-1 w-full ">
+            <div className="mt-1 w-full">
               <label className="pl-2 text-xs">Description</label>
               <textarea
                 value={course.description}
@@ -383,6 +440,26 @@ const AuthorizationPage7 = () => {
                 className="w-full text-sm border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl p-2 focus:outline-0 bg-white/80"
               ></textarea>
             </div>
+            <Inputs
+              placeholder="Start Date"
+              type="Date"
+              label="Start Date"
+              inputIcon={calender}
+              width="100%"
+              value={course.start_date}
+              onchange={(e) => {
+                const newStartDate = e.target.value;
+                setCourse({
+                  ...course,
+                  start_date: newStartDate,
+                  // به روز رسانی start_date برای تمام time slots
+                  time_slots: course.time_slots.map(slot => ({
+                    ...slot,
+                    start_date: newStartDate
+                  }))
+                });
+              }}
+            />
           </div>
 
           {/* زمان‌بندی‌های دوره */}
@@ -391,12 +468,12 @@ const AuthorizationPage7 = () => {
               Time Slots
             </h2>
 
-            {course.timeSlots.map((timeSlotItem, index) => (
+            {course.time_slots.map((timeSlotItem, index) => (
               <div
                 key={index}
                 className="relative border border-[#D2D2D2] p-4 rounded-2xl mb-4"
               >
-                {course.timeSlots.length > 1 && (
+                {course.time_slots.length > 1 && (
                   <button
                     type="button"
                     onClick={() => handleRemoveTimeSlot(index)}
@@ -408,8 +485,8 @@ const AuthorizationPage7 = () => {
 
                 {/* ====================== */}
                 <div className="w-full mt-3">
-                  <label>Days Available</label>
-                  <div className="w-full flex flex-wrap gap-x-4 gap-y-0 ">
+                  <label className="text-xs mx-2 text-[#45444A]">Days Available</label>
+                  <div className="w-full flex flex-wrap gap-x-4 gap-y-2 mt-2">
                     {[
                       "Monday",
                       "Tuesday",
@@ -422,25 +499,8 @@ const AuthorizationPage7 = () => {
                       <CheckBox
                         key={day}
                         label={day}
-                        checked={timeSlotItem.daysAvailable.includes(day)}
-                        onChange={(e) => {
-                          const updatedTimeSlots = [...course.timeSlots];
-                          if (e.target.checked) {
-                            updatedTimeSlots[index].daysAvailable = [
-                              ...updatedTimeSlots[index].daysAvailable,
-                              day,
-                            ];
-                          } else {
-                            updatedTimeSlots[index].daysAvailable =
-                              updatedTimeSlots[index].daysAvailable.filter(
-                                (d) => d !== day
-                              );
-                          }
-                          setCourse({
-                            ...course,
-                            timeSlots: updatedTimeSlots,
-                          });
-                        }}
+                        checked={timeSlotItem.days_available.includes(day)}
+                        onChange={() => handleDayToggle(index, day)}
                       />
                     ))}
                   </div>
@@ -453,20 +513,15 @@ const AuthorizationPage7 = () => {
                   </label>
                   <div className="relative">
                     <select
-                      value={timeSlotItem.timeSlotPart}
                       onChange={(e) => {
-                        const updatedTimeSlots = [...course.timeSlots];
-                        updatedTimeSlots[index].timeSlotPart = e.target.value;
-                        setCourse({
-                          ...course,
-                          timeSlots: updatedTimeSlots,
-                        });
+                        if (e.target.value) {
+                          handleTimeSlotAdd(index, e.target.value);
+                          e.target.value = ""; // Reset selection
+                        }
                       }}
                       className="border-2 w-full border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl pl-10 px-4 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                     >
-                      <option disabled value="">
-                        Time Slot
-                      </option>
+                      <option value="">Select Time Slot</option>
                       <option value="00:00 - 02:00">00:00 - 02:00</option>
                       <option value="02:00 - 04:00">02:00 - 04:00</option>
                       <option value="04:00 - 06:00">04:00 - 06:00</option>
@@ -490,32 +545,39 @@ const AuthorizationPage7 = () => {
                     />
                   </div>
                 </div>
+
+                {/* نمایش time slots انتخاب شده */}
+                <div className="mt-4">
+                  {timeSlotItem.time_slots.length > 0 ? (
+                    timeSlotItem.time_slots.map((slot, slotIndex) => (
+                      <div
+                        key={slotIndex}
+                        className="flex items-center justify-between bg-gray-100 p-2 rounded-md mb-2"
+                      >
+                        <span>{slot}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleTimeSlotRemove(index, slot)}
+                          className="text-red-500 font-bold text-lg"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 text-sm">No time slots selected</p>
+                  )}
+                </div>
                 {/* ============== */}
-                <Inputs
-                  placeholder="Start Date"
-                  type="Date"
-                  label="Start Date"
-                  inputIcon={calender}
-                  width="100%"
-                  value={timeSlotItem.startDate}
-                  onchange={(e) => {
-                    const updatedTimeSlots = [...course.timeSlots];
-                    updatedTimeSlots[index].startDate = e.target.value;
-                    setCourse({
-                      ...course,
-                      timeSlots: updatedTimeSlots,
-                    });
-                  }}
-                />
               </div>
             ))}
 
-            <p
+            <button
               onClick={handleAddTimeSlot}
-              className="text-[#5F33E1] cursor-pointer font-medium mt-2"
+              className="text-[#5F33E1] cursor-pointer font-medium mt-2 flex items-center"
             >
-              + Add Time Slot
-            </p>
+              <span className="text-lg mr-1">+</span> Add Time Slot
+            </button>
           </div>
           {/* ========================================= */}
 
@@ -533,11 +595,6 @@ const AuthorizationPage7 = () => {
               type="button"
               label={"Submit"}
               disabled={!btnTrigger}
-              // onclick={() => {
-              //   alert(
-              //     "Thank you for your submission! We will review your information and get back to you shortly."
-              //   );
-              // }}
               onclick={() => setIsOpen(true)}
             />
           </div>

@@ -129,7 +129,10 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
           phone_number: phoneNumber,
           country: country,
           subjects: [subjectTeach],
-          languages_spoken: languageEntries,
+          languages_spoken: languageEntries.map((l) => ({
+            language: l.language,
+            level: l.level,
+          })),
         },
         profile_picture: tutorProfilePhoto,
         certificates: certifications.map((c) => ({
