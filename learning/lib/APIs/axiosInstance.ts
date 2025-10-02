@@ -11,7 +11,8 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL; // e.g. http://127.0.0.1:8
 export const api = axios.create({
     baseURL,
     withCredentials: false,
-    headers: { 'Content-Type': 'application/json' },
+    timeout:100000,//100 seconds
+    // headers: { 'Content-Type': 'application/json' },
 });
 
 // Extend Axios config with our meta
@@ -44,6 +45,17 @@ export function attachAxiosLoading(instance: AxiosInstance, store: AppStore) {
                 config.headers['Authorization'] = `Bearer ${access}`;
             }
         }
+
+        // ✅ If sending FormData, let the browser set the boundary
+        if (config.data instanceof FormData) {
+            config.headers = config.headers ?? {};
+            delete (config.headers as any)["Content-Type"];
+        } else {
+            // For plain JSON payloads only:
+            config.headers = config.headers ?? {};
+            config.headers["Content-Type"] = config.headers["Content-Type"] ?? "application/json";
+        }
+
 
         return config;
     });

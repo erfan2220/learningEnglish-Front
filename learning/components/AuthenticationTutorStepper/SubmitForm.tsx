@@ -1,229 +1,207 @@
 "use client";
 import React, { useEffect } from "react";
 import Button from "../Button/Button";
-import axios from "axios";
+import { api } from "@/lib/APIs/axiosInstance";
 import { useTutorAuthStore } from "@/model/useTutorAuthStore";
 import { useRouter } from "next/navigation";
 
 const cancelIcon = "/icons/cancel.svg";
 
-// Define interfaces for your data structures
-interface LanguageEntry {
-  language: string;
-  level: string;
-}
-
-interface Certification {
-  certTitle: string;
-  issueBy: string;
-  issueDate: string;
-  imagePreview?: string;
-}
-
-interface Education {
-  degree: string;
-  institution: string;
-  country: string;
-  city: string;
-  field: string;
-  startDate: string;
-  endDate: string;
-}
-
-interface Experience {
-  experience: string;
-  organization?: string;
-  city: string;
-  country: string;
-  startDate: string;
-  endDate: string;
-  describe: string;
-}
-
-interface TimeSlot {
-  daysAvailable: string[];
-  timeSlotPart: string;
-  startDate: string;
-}
-
+interface LanguageEntry { language: string; level: string }
+interface Certification { certTitle: string; issueBy: string; issueDate: string; imagePreview?: string }
+interface Education { degree: string; institution: string; country: string; city: string; field: string; startDate: string; endDate: string }
+interface Experience { experience: string; organization?: string; city: string; country: string; startDate: string; endDate: string; describe: string }
+interface TimeSlot { daysAvailable: string[]; timeSlotPart: string; startDate: string }
 interface CourseData {
-  courseTitle: string;
-  duration: string;
-  price: string;
-  lessonPackage: string;
-  courseType: string;
-  languagePart: string;
-  timeSlots?: TimeSlot[];
-  description: string;
+  courseTitle: string; duration: string; price: string; lessonPackage: string;
+  courseType: string; languagePart: string; timeSlots?: TimeSlot[]; description: string;
 }
-
 interface TutorAuthStep5 {
-  bio: string;
-  teachingStyle: string;
-  goalsTeach: string;
-  expect: string;
-  experience?: Experience[];
+  bio: string; teachingStyle: string; goalsTeach: string; expect: string; experience?: Experience[];
 }
+interface SubmitFormProps { onclick: () => void }
 
-interface SubmitFormProps {
-  onclick: () => void;
+function dataUrlToFile(dataUrl: string, filename: string): File | null {
+  try {
+    if (!dataUrl.startsWith("data:")) return null;
+    const [meta, b64] = dataUrl.split(",");
+    const mime = meta.match(/data:(.*?);base64/)?.[1] || "application/octet-stream";
+    const bin = atob(b64);
+    const len = bin.length;
+    const u8 = new Uint8Array(len);
+    for (let i = 0; i < len; i++) u8[i] = bin.charCodeAt(i);
+    return new File([u8], filename, { type: mime });
+  } catch {
+    return null;
+  }
 }
 
 const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
-  const { step6 } = useTutorAuthStore();
   const router = useRouter();
+  const { step6 } = useTutorAuthStore(); // expect: { videoFile?: File | null }
 
   useEffect(() => {
     return () => {
       if (!window.location.pathname.includes("/tutorAuthentication")) {
-        localStorage.removeItem("firstName");
-        localStorage.removeItem("lastName");
-        localStorage.removeItem("phoneNumber");
-        localStorage.removeItem("country");
-        localStorage.removeItem("subjectTeach");
-        localStorage.removeItem("languages");
-        localStorage.removeItem("certifications");
-        localStorage.removeItem("educations");
-        localStorage.removeItem("tutorAuthStep5");
-        localStorage.removeItem("courseData");
+        [
+          "firstName","lastName","phoneNumber","country","subjectTeach","languages",
+          "tutorProfilePhoto","certifications","educations","tutorAuthStep5","courseData"
+        ].forEach(localStorage.removeItem);
       }
     };
   }, []);
 
   const handleClick = async () => {
     try {
-      // Gather data from localStorage with proper typing
-      const firstName = localStorage.getItem("firstName") || "";
-      const lastName = localStorage.getItem("lastName") || "";
+      // --- read localStorage ---
+      const firstName   = localStorage.getItem("firstName") || "";
+      const lastName    = localStorage.getItem("lastName") || "";
       const phoneNumber = localStorage.getItem("phoneNumber") || "";
-      const country = localStorage.getItem("country") || "";
-      const subjectTeach = localStorage.getItem("subjectTeach") || "";
+      const country     = localStorage.getItem("country") || "";
+      const subject     = localStorage.getItem("subjectTeach") || "";
+      const photoB64    = localStorage.getItem("tutorProfilePhoto") || "";
 
-      const languageEntries: LanguageEntry[] = JSON.parse(
-        localStorage.getItem("languages") || "[]"
-      );
+      const languagesRaw = localStorage.getItem("languages") || "[]";
+      const certsRaw     = localStorage.getItem("certifications") || "[]";
+      const edusRaw      = localStorage.getItem("educations") || "[]";
+      const step5Raw     = localStorage.getItem("tutorAuthStep5") || "{}";
+      const courseRaw    = localStorage.getItem("courseData") || "{}";
 
-      const tutorProfilePhoto = localStorage.getItem("tutorProfilePhoto") || "";
+      // --- parse & normalize ---
+      const languagesAny = JSON.parse(languagesRaw);
+      const languages_spoken: LanguageEntry[] = Array.isArray(languagesAny)
+          ? languagesAny.map((l: any) =>
+              typeof l === "string" ? { language: l, level: "B1" } : {
+                language: l.language ?? "", level: l.level ?? "B1"
+              }
+          )
+          : [];
 
-      const certifications: Certification[] = JSON.parse(
-        localStorage.getItem("certifications") || "[]"
-      );
+      const certifications: Certification[] = JSON.parse(certsRaw);
+      const educations: Education[] = JSON.parse(edusRaw);
+      const step5: TutorAuthStep5 = JSON.parse(step5Raw);
+      const course: CourseData = JSON.parse(courseRaw);
 
-      const educations: Education[] = JSON.parse(
-        localStorage.getItem("educations") || "[]"
-      );
+      // --- build FormData ---
+      const fd = new FormData();
 
-      const tutorAuthStep5: TutorAuthStep5 = JSON.parse(
-        localStorage.getItem("tutorAuthStep5") || "{}"
-      );
+      // top-level fields (NO "user" wrapper)
+      fd.append("first_name", firstName);
+      fd.append("last_name", lastName);
+      if (phoneNumber) fd.append("phone_number", phoneNumber);
+      if (country)     fd.append("country", country);
 
-      const courseData: CourseData = JSON.parse(
-        localStorage.getItem("courseData") || "{}"
-      );
+      fd.append("subjects", JSON.stringify(subject ? [subject] : []));
+      fd.append("languages_spoken", JSON.stringify(languages_spoken));
 
-      // Map data to API format
-      const tutorData = {
-        user: {
-          first_name: firstName,
-          last_name: lastName,
-          phone_number: phoneNumber,
-          country: country,
-          subjects: [subjectTeach],
-          languages_spoken: languageEntries,
-        },
-        profile_picture: tutorProfilePhoto,
-        certificates: certifications.map((c) => ({
-          title: c.certTitle,
-          issued_by: c.issueBy,
-          issue_date: c.issueDate,
-          certificate_image: c.imagePreview || "",
-        })),
-        educations: educations.map((e) => ({
-          degree: e.degree,
-          institution_name: e.institution,
-          country: e.country,
-          city: e.city,
-          field: e.field,
-          start_date: e.startDate,
-          end_date: e.endDate,
-        })),
-        bio: tutorAuthStep5.bio,
-        teaching_style: tutorAuthStep5.teachingStyle,
-        description: tutorAuthStep5.goalsTeach,
-        expectation: tutorAuthStep5.expect,
-        experiences:
-          tutorAuthStep5.experience?.map((ex) => ({
+      // profile picture as file
+      if (photoB64.startsWith("data:")) {
+        const pf = dataUrlToFile(photoB64, "profile.jpg");
+        if (pf) fd.append("profile_picture", pf);
+      }
+
+      // step 3: certificates (omit nested file unless your backend supports it)
+      fd.append("certificates", JSON.stringify(
+          certifications.map((c) => ({
+            title: c.certTitle,
+            issued_by: c.issueBy,
+            issue_date: c.issueDate || null,
+            // certificate_image: (handled by separate endpoint if needed)
+          }))
+      ));
+
+      // step 4: educations
+      fd.append("educations", JSON.stringify(
+          educations.map((e) => ({
+            degree: e.degree,
+            institution_name: e.institution,
+            country: e.country,
+            city: e.city,
+            field: e.field,
+            start_date: e.startDate || null,
+            end_date: e.endDate || null,
+          }))
+      ));
+
+      // step 5: texts
+      if (step5.bio)           fd.append("bio", step5.bio);
+      if (step5.teachingStyle) fd.append("teaching_style", step5.teachingStyle);
+      if (step5.expect)        fd.append("expectation", step5.expect);
+      if (step5.goalsTeach)    fd.append("description", step5.goalsTeach);
+
+      // step 5: experiences
+      fd.append("experiences", JSON.stringify(
+          (step5.experience || []).map((ex) => ({
             title: ex.experience,
             organization: ex.organization || "",
-            city: ex.city,
             country: ex.country,
-            start_date: ex.startDate,
-            end_date: ex.endDate,
+            city: ex.city,
+            start_date: ex.startDate || null,
+            end_date: ex.endDate || null,
             description: ex.describe,
-          })) || [],
-        intro_video_url: step6.videoData || "",
-        courses: [
-          {
-            course_title: courseData.courseTitle,
-            duration_minutes: parseInt(courseData.duration || "0"),
-            course_type: courseData.courseType,
-            price_per_hour: parseFloat(courseData.price || "0"),
-            lesson_package: courseData.lessonPackage,
-            language: courseData.languagePart,
-            days_available:
-              courseData.timeSlots?.flatMap((t) => t.daysAvailable) || [],
-            time_slots: courseData.timeSlots?.map((t) => t.timeSlotPart) || [],
-            start_date: courseData.timeSlots?.[0]?.startDate || "",
-            description: courseData.description,
-          },
-        ],
-      };
+          }))
+      ));
 
-      // console.log(courseData.courseType);
+      // step 6: video as file (do NOT send blob: URL)
+      if (step6?.videoFile) {
+        fd.append("intro_video_file", step6.videoFile);
+      }
+      // If your backend also accepts a public URL:
+      // fd.append("intro_video_url", "https://cdn.example.com/your-video.mp4");
 
-      // Send to API
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/create-tutor-profile/`,
-        tutorData
-      );
-      console.log("Tutor profile created:", response.data);
+      // step 7: course(s)
+      const flatDays = course.timeSlots?.flatMap((t) => t.daysAvailable) ?? [];
+      const times    = course.timeSlots?.map((t) => t.timeSlotPart) ?? [];
+      const start    = course.timeSlots?.[0]?.startDate || null;
+
+      fd.append("courses", JSON.stringify([{
+        course_title:     course.courseTitle || "",
+        duration_minutes: Number.parseInt(course.duration || "0", 10) || 0,
+        course_type:      (course.courseType || "").toLowerCase() === "offline" ? "offline" : "online",
+        price_per_hour:   Number.parseFloat(course.price || "0") || 0,
+        lesson_package:   course.lessonPackage || "",
+        language:         course.languagePart || "",
+        days_available:   flatDays,
+        time_slots:       times,
+        start_date:       start,
+        description:      course.description || "",
+      }]));
+
+      // --- POST (let axios set multipart boundary) ---
+      const res = await api.post("/api/create-tutor-profile/", fd);
+      console.log("Tutor profile created:", res.data);
       alert("✅ Tutor profile created successfully");
       router.push("/dashboard/tutor");
-    } catch (error) {
-      console.error("Error creating tutor profile:", error);
-      alert("❌ Error creating tutor profile");
+    } catch (err: any) {
+      const msg = err?.response?.data
+          ? JSON.stringify(err.response.data, null, 2)
+          : err?.message || "Unknown error";
+      console.error("Error creating tutor profile:", err);
+      alert(`❌ Error creating tutor profile\n\n${msg}`);
     }
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 w-full h-full bg-black/20 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="relative max-w-3xl bg-white p-6 rounded-lg shadow-lg w-full">
-        <div>
-          <p>Are You Sure You Want to Submit Your Information?</p>
-
-          <div className="flex items-center justify-center w-full gap-4 mt-4">
-            <Button
-              label="Cancel"
-              btnIcon={cancelIcon}
-              type="button"
-              widthBtn="100%"
-              colorBtn="#FF3164"
-              colorBtnHover="#a50034"
-              colorBtnActive="#ff6f61"
-              onclick={() => {
-                onclick();
-              }}
-            />
-            <Button
-              label="Submit"
-              type="button"
-              widthBtn="100%"
-              onclick={handleClick}
-            />
+      <div className="fixed top-0 left-0 right-0 w-full h-full bg-black/20 bg-opacity-50 flex items-center justify-center z-50">
+        <div className="relative max-w-3xl bg-white p-6 rounded-lg shadow-lg w-full">
+          <div>
+            <p>Are You Sure You Want to Submit Your Information?</p>
+            <div className="flex items-center justify-center w-full gap-4 mt-4">
+              <Button
+                  label="Cancel"
+                  btnIcon={cancelIcon}
+                  type="button"
+                  widthBtn="100%"
+                  colorBtn="#FF3164"
+                  colorBtnHover="#a50034"
+                  colorBtnActive="#ff6f61"
+                  onclick={onclick}
+              />
+              <Button label="Submit" type="button" widthBtn="100%" onclick={handleClick} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

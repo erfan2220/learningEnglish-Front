@@ -141,12 +141,12 @@ export default function Header() {
               >
                 Sign In
               </Link>
-              <Link
-                href={FluentDoorRoutes.signUpStudent}
-                className="hidden sm:inline-block px-3 py-2 rounded-lg bg-[#5F33E1] text-white hover:opacity-90"
-              >
-                Sign Up
-              </Link>
+              {/*<Link*/}
+              {/*  href={FluentDoorRoutes.signUpStudent}*/}
+              {/*  className="hidden sm:inline-block px-3 py-2 rounded-lg bg-[#5F33E1] text-white hover:opacity-90"*/}
+              {/*>*/}
+              {/*  Sign Up*/}
+              {/*</Link>*/}
             </div>
           )}
 

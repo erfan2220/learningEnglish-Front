@@ -6,7 +6,7 @@ export function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
 
     const needsAuth =
-        path.startsWith("/dashboard") ||
+        // path.startsWith("/dashboard") ||
         path.startsWith("/account") ||
         path.startsWith("/teacher");
 
