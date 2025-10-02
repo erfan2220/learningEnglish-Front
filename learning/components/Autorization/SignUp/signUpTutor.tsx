@@ -49,8 +49,9 @@ const SignUpTutor = () => {
 
       localStorage.setItem("access_token", access);
       localStorage.setItem("refresh_token", refresh);
+      localStorage.setItem("is_teacher", isTeacher.toString());
 
-      router.push("/signin");
+      router.push(`${FluentDoorRoutes.tutorAuthentication}`);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
@@ -74,11 +75,11 @@ const SignUpTutor = () => {
   };
 
   return (
-    <div className="p-6 md:p-12 max-w-2xl mx-auto ">
+    <div className="p-2 pt-6 md:p-12 max-w-2xl mx-auto ">
       <div className="mt-[60px]">
         <Layout>
-          <div className="flex flex-col gap-3 items-center justify-center px-8  pt-10 w-full">
-            <h1 className="font-bold text-3xl text-[#45444A] ">
+          <div className="flex flex-col gap-3 items-center justify-center px-3 sm:px-8  pt-10 w-full">
+            <h1 className="font-bold text-2xl sm:text-3xl text-[#45444A] ">
               Sign Up as a Tutor
             </h1>
             <p className="text-[#45444A] text-sm ">
@@ -114,7 +115,10 @@ const SignUpTutor = () => {
             <p className="text-[#45444A]">or</p>
             <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
           </div>
-          <form onSubmit={handleSubmit} className="p-8 pt-0 w-full">
+          <form
+            onSubmit={handleSubmit}
+            className="px-3 flex flex-col gap-2 sm:p-8 sm:pt-0 w-full"
+          >
             <div className="flex flex-col gap-2">
               <Inputs
                 type="text"
@@ -157,12 +161,7 @@ const SignUpTutor = () => {
               />
             </div>
 
-            <div className=" text-[#45444A] text-xs mt-1 mx-2">
-              <u>
-                <Link href={"/forgotPassword"}>Forgot Your Password?</Link>
-              </u>
-            </div>
-            <div className="flex gap-2 mx-2 mt-6 mb-8">
+            <div className="flex gap-2 mx-2 mt-2 mb-2 ">
               <input type="checkbox" className="w-5 h-5 rounded-2xl" />
               <p className="text-[#45444A] text-sm">Remember Me</p>
             </div>
@@ -176,7 +175,7 @@ const SignUpTutor = () => {
               btnIcon={signUpIcon}
             />
 
-            <div className="text-sm text-[#45444A] mt-4 px-10 text-center">
+            <div className="text-xs sm:text-sm text-[#45444A] mt-2 mb-8 sm:mb-0 sm:mt-4 px-0 sm:px-10 text-center">
               By clicking Log in or Continue with, you agree to{" "}
               <u>
                 <Link href={FluentDoorRoutes.terms}>Our Terms</Link>

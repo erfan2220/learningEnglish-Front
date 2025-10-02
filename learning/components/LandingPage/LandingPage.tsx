@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../Layout/Layout";
 import Link from "next/link";
-import Country from "../Country/Country";
 import TutorialStep from "../TutorialStep/TutorialStep";
 import { stepsData } from "@/constant/stepsData";
 import FeatureItemLandingPage from "../FeatureItemLandingPage/FeatureItemLandingPage";
@@ -11,6 +10,7 @@ import Slide from "../Slide/Slide";
 import Button from "../Button/Button";
 import Image from "next/image";
 import { FluentDoorRoutes } from "@/routes/routes";
+import LanguageSection from "./+components/LanguageSection";
 
 const LandingPage = () => {
   return (
@@ -38,7 +38,6 @@ const LandingPage = () => {
             </div>
 
             <div className="w-full md:w-1/2 md:mb-0 mb-6">
-             
               <Image
                 src="/images/pana.svg"
                 alt="start pic"
@@ -53,32 +52,7 @@ const LandingPage = () => {
 
       {/* ====================language section==================== */}
 
-      <Layout>
-        <div className="flex items-center justify-evenly p-1">
-          <Link href={`${FluentDoorRoutes.courses}`}>
-            <Country
-              flag={"icons/ukFlag.svg"}
-              countryName={"English"}
-              width={"32px"}
-              textSize={"18px"}
-              fontWeight={"bold"}
-            />
-          </Link>
-
-          <Link
-            href={`${FluentDoorRoutes.courses}`}
-            className="flex gap-2 items-center"
-          >
-            <Country
-              flag={"icons/frenchFlag.svg"}
-              countryName={"French"}
-              width={"32px"}
-              textSize={"18px"}
-              fontWeight={"16px"}
-            />
-          </Link>
-        </div>
-      </Layout>
+      <LanguageSection />
 
       {/* ====================tutor cart section==================== */}
 

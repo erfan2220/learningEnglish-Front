@@ -4,14 +4,22 @@ export const FluentDoorRoutes = {
   coursesDetail: "/courses/detail",
   tutor: "/tutor",
   tutorDetail: "/tutor/detail",
+  // =================================
   signIn: "/signin",
+  ForgotPassword: "/forgotPassword",
+  ResetPassword: "/forgotPassword/resetPassword",
   signUpStudent: "/signupStudent",
   signUpTutor: "/signupTutor",
   FAQ: "/FAQ",
   policy: "/policy",
   terms: "/serviceTerms",
   contactUs: "/contactUs",
-  tutorDashboard: "/dashboard/tutor",
+  // =================================
+  languageTest: "/languageTest",
+  languageTestEnglish: "/languageTest/English",
+  languageTestEnglishQuestion: "/languageTest/English/Questions",
+  languageTestEnglishResult: "/languageTest/English/Result",
+  // =================================
   Articles: "/Articles",
   ArticlesDetail: "/Articles/detail",
   cart: "/cart",
@@ -23,7 +31,9 @@ export const FluentDoorRoutes = {
   tutorAuthenticationStep5: "/tutorAuthentication/step5",
   tutorAuthenticationStep6: "/tutorAuthentication/step6",
   tutorAuthenticationStep7: "/tutorAuthentication/step7",
-  //   =============================
+  // =================================
+  tutorDashboard: "/dashboard/tutor",
+  // =================================
   studentDashboard: "/dashboard/student",
   studentDashboardCourses: "/dashboard/student/detail/courses",
 };

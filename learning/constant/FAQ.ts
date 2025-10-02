@@ -1,9 +1,9 @@
 export const tutorFAQ = [
   {
     id: 1,
-    question: "How much commission does Learniva take from my earnings?",
+    question: "How much commission does FluentDoor take from my earnings?",
     answer:
-      "Learniva charges a 15% commission on lesson fees, which is deducted before the earnings reach your wallet.",
+      "FluentDoor charges a 15% commission on lesson fees, which is deducted before the earnings reach your wallet.",
   },
   {
     id: 2,
@@ -16,11 +16,11 @@ export const tutorFAQ = [
     question:
       "Do I need to pay any subscription or extra fees to access platform features?",
     answer:
-      "No—there are no extra charges. Some optional premium features like 'Learniva Plus' may exist, but basic teaching features are free.",
+      "No—there are no extra charges. Some optional premium features like 'FluentDoor Plus' may exist, but basic teaching features are free.",
   },
   {
     id: 4,
-    question: "Can I set my own hourly rate on Learniva?",
+    question: "Can I set my own hourly rate on FluentDoor?",
     answer:
       "Yes—you choose your hourly rate (minimum around €5). Many start lower to build reviews and gradually increase rates.",
   },
@@ -34,9 +34,9 @@ export const tutorFAQ = [
   {
     id: 6,
     question:
-      "What kind of support does Learniva provide for finding new students?",
+      "What kind of support does FluentDoor provide for finding new students?",
     answer:
-      "Learniva markets your profile, highlights new teachers, and displays active tutors to interested students. Engaging with the community also helps increase visibility.",
+      "FluentDoor markets your profile, highlights new teachers, and displays active tutors to interested students. Engaging with the community also helps increase visibility.",
   },
   {
     id: 7,
@@ -47,19 +47,19 @@ export const tutorFAQ = [
   {
     id: 8,
     question:
-      "Do I need to prepare lesson materials, or does Learniva provide them?",
+      "Do I need to prepare lesson materials, or does FluentDoor provide them?",
     answer:
-      "Learniva does not supply lesson content. Tutors are expected to prepare their own materials, though many share resources or use online tools during sessions.",
+      "FluentDoor does not supply lesson content. Tutors are expected to prepare their own materials, though many share resources or use online tools during sessions.",
   },
   {
     id: 9,
     question: "How do I get paid for my lessons?",
     answer:
-      "Payments are transferred to your Learniva Wallet and can be withdrawn via Payoneer, bank transfer, or other supported methods once the minimum balance is reached.",
+      "Payments are transferred to your FluentDoor Wallet and can be withdrawn via Payoneer, bank transfer, or other supported methods once the minimum balance is reached.",
   },
   {
     id: 10,
-    question: "Can I teach more than one language on Learniva?",
+    question: "Can I teach more than one language on FluentDoor?",
     answer:
       "Yes—if you are fluent in multiple languages, you can add them to your profile and offer lessons in each one.",
   },
