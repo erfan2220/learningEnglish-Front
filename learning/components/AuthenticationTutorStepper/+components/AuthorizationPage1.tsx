@@ -11,19 +11,19 @@ import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 
 // icons
-import aboutIconWhite from "@/assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "@/assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "@/assets/icons/certificateIconWhite.svg";
-import educationWhite from "@/assets/icons/educationWhite.svg";
-import descriptionIconWhite from "@/assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "@/assets/icons/videoIconWhite.svg";
-import priceIconWhite from "@/assets/icons/priceIconWhite.svg";
-import countryIcon from "@/assets/icons/locationGray.svg";
-import phoneIcon from "@/assets/icons/phoneGray.svg";
-import subjectIcon from "@/assets/icons/educationGray.svg";
-import userIcon from "@/assets/icons/userIconGray.svg";
+import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
+import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
+import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
+import educationWhite from "../../../assets/icons/educationWhite.svg";
+import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
+import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
+import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
+import countryIcon from "../../../assets/icons/locationGray.svg";
+import phoneIcon from "../../../assets/icons/phoneGray.svg";
+import subjectIcon from "../../../assets/icons/educationGray.svg";
+import userIcon from "../../../assets/icons/userIconGray.svg";
 
-import { countryList } from "@/mock/countryList";
+import { countryList } from "../../../mock/countryList";
 
 /** tiny in-file hook so you don't need a separate hooks file */
 function useLocalStorage<T>(key: string, initialValue: T) {
@@ -62,7 +62,7 @@ export default function AuthorizationPage1() {
   const [lastName, setLastName] = useLocalStorage("lastName", "");
   const [phoneNumber, setPhoneNumber] = useLocalStorage("phoneNumber", "");
   const [selectedCountry, setSelectedCountry] = useLocalStorage("country", "");
-  const [selectedSubject, setSelectedSubject] = useLocalStorage("subjectTeach", "");
+  const [selectedSubject, setSelectedSubject] = useLocalStorage<string []>("subjectTeach", []);
   const [languages, setLanguages] = useLocalStorage<string[]>("languages", [""]);
 
   const canContinue = useMemo(
@@ -71,7 +71,8 @@ export default function AuthorizationPage1() {
           lastName.trim() !== "" &&
           phoneNumber.trim() !== "" &&
           selectedCountry.trim() !== "" &&
-          selectedSubject.trim() !== "" &&
+          selectedSubject.length > 0 &&  // Ensure selectedSubject is not an empty array
+          selectedSubject.every((subject) => subject.trim() !== "") &&  // Ensure each subject is non-empty
           languages.every((l) => l.trim() !== ""),
       [firstName, lastName, phoneNumber, selectedCountry, selectedSubject, languages]
   );
@@ -143,8 +144,8 @@ export default function AuthorizationPage1() {
 
                 <SelectWithIcon
                     label="Subject you teach"
-                    value={selectedSubject}
-                    onChange={setSelectedSubject}
+                    value={selectedSubject[0]}  // Displaying the first subject in the array
+                    onChange={(value) => setSelectedSubject([`${value}`])}
                     icon={subjectIcon}
                     options={["Chinese", "English", "French", "Persian"].map((s) => ({ value: s, label: s }))}
                     placeholder="subject"

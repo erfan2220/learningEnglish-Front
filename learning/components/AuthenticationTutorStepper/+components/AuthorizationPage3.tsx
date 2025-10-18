@@ -7,13 +7,13 @@ import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 
 // import icons as modules so Stepper works with StaticImageData
-import aboutIconWhite from "@/assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "@/assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "@/assets/icons/certificateIconWhite.svg";
-import educationWhite from "@/assets/icons/educationWhite.svg";
-import descriptionIconWhite from "@/assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "@/assets/icons/videoIconWhite.svg";
-import priceIconWhite from "@/assets/icons/priceIconWhite.svg";
+import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
+import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
+import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
+import educationWhite from "../../../assets/icons/educationWhite.svg";
+import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
+import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
+import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
 
 const STORAGE_KEY = "certifications";
 const CERT_PLACEHOLDER = "/icons/certFile.svg";

@@ -58,7 +58,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
       const lastName    = localStorage.getItem("lastName") || "";
       const phoneNumber = localStorage.getItem("phoneNumber") || "";
       const country     = localStorage.getItem("country") || "";
-      const subject     = localStorage.getItem("subjectTeach") || "";
+      const subject = localStorage.getItem("subjectTeach") || '[""]';  // Ensure it is parsed as a
       const photoB64    = localStorage.getItem("tutorProfilePhoto") || "";
 
       const languagesRaw = localStorage.getItem("languages") || "[]";
@@ -82,6 +82,12 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
       const step5: TutorAuthStep5 = JSON.parse(step5Raw);
       const course: CourseData = JSON.parse(courseRaw);
 
+      function toISODate(d?: string) {
+        if (!d) return "";
+        if (/^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
+        const dt = new Date(d);
+        return Number.isNaN(dt.getTime()) ? "" : dt.toISOString().slice(0, 10);
+      }
       // --- build FormData ---
       const fd = new FormData();
 
@@ -91,7 +97,9 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
       if (phoneNumber) fd.append("phone_number", phoneNumber);
       if (country)     fd.append("country", country);
 
-      fd.append("subjects", JSON.stringify(subject ? [subject] : []));
+      const subjectArray = Array.isArray(subject) ? subject : [subject]; // In case it's stored incorrectly
+      fd.append("subjects", `"${subject}"`)
+      console.log(JSON.stringify(subjectArray));
       fd.append("languages_spoken", JSON.stringify(languages_spoken));
 
       // profile picture as file
@@ -105,7 +113,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
           certifications.map((c) => ({
             title: c.certTitle,
             issued_by: c.issueBy,
-            issue_date: c.issueDate || null,
+            issue_date: toISODate(c.issueDate) || null,
             // certificate_image: (handled by separate endpoint if needed)
           }))
       ));
@@ -118,8 +126,8 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
             country: e.country,
             city: e.city,
             field: e.field,
-            start_date: e.startDate || null,
-            end_date: e.endDate || null,
+            start_date: toISODate(e.startDate) || null,
+            end_date: toISODate(e.endDate) || null,
           }))
       ));
 
@@ -136,8 +144,8 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
             organization: ex.organization || "",
             country: ex.country,
             city: ex.city,
-            start_date: ex.startDate || null,
-            end_date: ex.endDate || null,
+            start_date: toISODate(ex.startDate) || null,
+            end_date: toISODate(ex.endDate) || null,
             description: ex.describe,
           }))
       ));
@@ -152,7 +160,8 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
       // step 7: course(s)
       const flatDays = course.timeSlots?.flatMap((t) => t.daysAvailable) ?? [];
       const times    = course.timeSlots?.map((t) => t.timeSlotPart) ?? [];
-      const start    = course.timeSlots?.[0]?.startDate || null;
+      // courses
+      const start = toISODate(course.timeSlots?.[0]?.startDate) || null;
 
       fd.append("courses", JSON.stringify([{
         course_title:     course.courseTitle || "",
@@ -180,6 +189,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
       alert(`❌ Error creating tutor profile\n\n${msg}`);
     }
   };
+
 
   return (
       <div className="fixed top-0 left-0 right-0 w-full h-full bg-black/20 bg-opacity-50 flex items-center justify-center z-50">

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import languageIcon from "@/assets/icons/languageGray.svg";
-import binIcon from "@/assets/icons/binGray.svg";
+import languageIcon from "../../../../assets/icons/languageGray.svg";
+import binIcon from "../../../../assets/icons/binGray.svg";
 
 const LANGUAGE_OPTIONS = [
     "Arabic",
