@@ -2,11 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { TemporaryCourse } from "@/model/courseType";
 import Image from "next/image";
-import notFoundPic from "../../assets/images/notFound.png";
 import Button from "../Button/Button";
 import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 
+const notFoundPic = "/images/notFound.png";
 const CourseCart = ({ course }: { course: TemporaryCourse }) => {
   const router = useRouter();
   return (

@@ -9,13 +9,13 @@ import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 
 // Stepper icons as modules (StaticImageData)
-import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
-import educationWhite from "../../../assets/icons/educationWhite.svg";
-import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
-import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
+const aboutIconWhite = "/icons/aboutIconWhite.svg";
+const photoIconWhite = "/icons/photoIconWhite.svg";
+const certificateIconWhite = "/icons/certificateIconWhite.svg";
+const educationWhite = "/icons/educationWhite.svg";
+const descriptionIconWhite = "/icons/descriptionIconWhite.svg";
+const videoIconWhite = "/icons/videoIconWhite.svg";
+const priceIconWhite = "/icons/priceIconWhite.svg";
 
 type Experience = {
   experience: string;
@@ -40,7 +40,14 @@ export default function AuthorizationPage5() {
 
   // experiences
   const [experience, setExperience] = useState<Experience[]>([
-    { experience: "", country: "", city: "", startDate: "", endDate: "", describe: "" },
+    {
+      experience: "",
+      country: "",
+      city: "",
+      startDate: "",
+      endDate: "",
+      describe: "",
+    },
   ]);
   const [experiencesValid, setExperiencesValid] = useState(false);
 
@@ -53,23 +60,32 @@ export default function AuthorizationPage5() {
         const data = JSON.parse(raw);
 
         const normalize = (arr: any[]): Experience[] =>
-            (Array.isArray(arr) ? arr : []).map((it) => ({
-              experience: (it.experience ?? it.title ?? "") as string,
-              country: (it.country ?? "") as string,
-              city: (it.city ?? "") as string,
-              startDate: (it.startDate ?? "") as string,
-              endDate: (it.endDate ?? "") as string,
-              describe: (it.describe ?? it.description ?? "") as string,
-            }));
+          (Array.isArray(arr) ? arr : []).map((it) => ({
+            experience: (it.experience ?? it.title ?? "") as string,
+            country: (it.country ?? "") as string,
+            city: (it.city ?? "") as string,
+            startDate: (it.startDate ?? "") as string,
+            endDate: (it.endDate ?? "") as string,
+            describe: (it.describe ?? it.description ?? "") as string,
+          }));
 
         setBio(data.bio ?? "");
         setTeachingStyle(data.teachingStyle ?? "");
         setGoalsTeach(data.goalsTeach ?? "");
         setExpect(data.expect ?? "");
         setExperience(
-            data.experience && data.experience.length
-                ? normalize(data.experience)
-                : [{ experience: "", country: "", city: "", startDate: "", endDate: "", describe: "" }]
+          data.experience && data.experience.length
+            ? normalize(data.experience)
+            : [
+                {
+                  experience: "",
+                  country: "",
+                  city: "",
+                  startDate: "",
+                  endDate: "",
+                  describe: "",
+                },
+              ]
         );
       }
     } catch {
@@ -84,8 +100,8 @@ export default function AuthorizationPage5() {
     if (!isLoaded || typeof window === "undefined") return;
     try {
       window.localStorage.setItem(
-          STORAGE_KEY,
-          JSON.stringify({ bio, teachingStyle, goalsTeach, expect, experience })
+        STORAGE_KEY,
+        JSON.stringify({ bio, teachingStyle, goalsTeach, expect, experience })
       );
     } catch {}
   }, [bio, teachingStyle, goalsTeach, expect, experience, isLoaded]);
@@ -93,89 +109,113 @@ export default function AuthorizationPage5() {
   // overall validity
   const safe = (v?: string) => (v ?? "").trim();
   const textValid = useMemo(
-      () => !!(safe(bio) && safe(teachingStyle) && safe(goalsTeach) && safe(expect)),
-      [bio, teachingStyle, goalsTeach, expect]
+    () =>
+      !!(safe(bio) && safe(teachingStyle) && safe(goalsTeach) && safe(expect)),
+    [bio, teachingStyle, goalsTeach, expect]
   );
 
   const canContinue = Boolean(textValid && experiencesValid);
 
-  console.log("canContinue",canContinue);
-  console.log("textValid",textValid);
-  console.log("experiencesValid",experiencesValid);
-
-
+  console.log("canContinue", canContinue);
+  console.log("textValid", textValid);
+  console.log("experiencesValid", experiencesValid);
 
   const steps = [
-    { href: FluentDoorRoutes.tutorAuthenticationStep1, icon: aboutIconWhite, alt: "about" },
-    { href: FluentDoorRoutes.tutorAuthenticationStep2, icon: photoIconWhite, alt: "photo" },
-    { href: FluentDoorRoutes.tutorAuthenticationStep3, icon: certificateIconWhite, alt: "certificate" },
-    { href: FluentDoorRoutes.tutorAuthenticationStep4, icon: educationWhite, alt: "education" },
-    { href: FluentDoorRoutes.tutorAuthenticationStep5, icon: descriptionIconWhite, alt: "description" },
+    {
+      href: FluentDoorRoutes.tutorAuthenticationStep1,
+      icon: aboutIconWhite,
+      alt: "about",
+    },
+    {
+      href: FluentDoorRoutes.tutorAuthenticationStep2,
+      icon: photoIconWhite,
+      alt: "photo",
+    },
+    {
+      href: FluentDoorRoutes.tutorAuthenticationStep3,
+      icon: certificateIconWhite,
+      alt: "certificate",
+    },
+    {
+      href: FluentDoorRoutes.tutorAuthenticationStep4,
+      icon: educationWhite,
+      alt: "education",
+    },
+    {
+      href: FluentDoorRoutes.tutorAuthenticationStep5,
+      icon: descriptionIconWhite,
+      alt: "description",
+    },
     { icon: videoIconWhite, alt: "video" },
     { icon: priceIconWhite, alt: "price" },
   ];
 
   if (!isLoaded) {
     return (
-        <div className="py-2 pt-6 md:py-12 flex justify-center items-center">
-          Loading...
-        </div>
+      <div className="py-2 pt-6 md:py-12 flex justify-center items-center">
+        Loading...
+      </div>
     );
   }
 
   return (
-      <div className="py-2 pt-6 md:py-12">
-        <div className="mt-[60px]">
-          {/* Stepper */}
-          <Stepper steps={steps} activeIndex={4} />
+    <div className="py-2 pt-6 md:py-12">
+      <div className="mt-[60px]">
+        {/* Stepper */}
+        <Stepper steps={steps} activeIndex={4} />
 
-          {/* Card */}
-          <div className="flex flex-col justify-start text-sm sm:text-base text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
-            <h1 className="text-[#45444A] font-bold text-xl">Description</h1>
-            <p>
-              Please write 3–5 short paragraphs to describe yourself, your teaching style, and what students can expect
-              from your lessons. This helps learners decide if you’re the right fit for them.
-            </p>
+        {/* Card */}
+        <div className="flex flex-col justify-start text-sm sm:text-base text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
+          <h1 className="text-[#45444A] font-bold text-xl">Description</h1>
+          <p>
+            Please write 3–5 short paragraphs to describe yourself, your
+            teaching style, and what students can expect from your lessons. This
+            helps learners decide if you’re the right fit for them.
+          </p>
 
-            <form className="w-full">
-              <DescriptionFields
-                  bio={bio}
-                  teachingStyle={teachingStyle}
-                  goalsTeach={goalsTeach}
-                  expect={expect}
-                  onChange={(field, val) => {
-                    if (field === "bio") setBio(val);
-                    if (field === "teachingStyle") setTeachingStyle(val);
-                    if (field === "goalsTeach") setGoalsTeach(val);
-                    if (field === "expect") setExpect(val);
-                  }}
-              />
+          <form className="w-full">
+            <DescriptionFields
+              bio={bio}
+              teachingStyle={teachingStyle}
+              goalsTeach={goalsTeach}
+              expect={expect}
+              onChange={(field, val) => {
+                if (field === "bio") setBio(val);
+                if (field === "teachingStyle") setTeachingStyle(val);
+                if (field === "goalsTeach") setGoalsTeach(val);
+                if (field === "expect") setExpect(val);
+              }}
+            />
 
-              <ExperiencesList
-                  items={experience}
-                  countryOptions={countryList}
-                  onItemsChange={setExperience}
-                  onValidityChange={setExperiencesValid}
-              />
-            </form>
+            <ExperiencesList
+              items={experience}
+              countryOptions={countryList}
+              onItemsChange={setExperience}
+              onValidityChange={setExperiencesValid}
+            />
+          </form>
 
-            <div className="flex items-center justify-between mt-6 w-full">
-              <Button
-                  type="button"
-                  label={"Back"}
-                  btnIcon={null}
-                  onclick={() => router.push(FluentDoorRoutes.tutorAuthenticationStep4)}
-              />
+          <div className="flex items-center justify-between mt-6 w-full">
+            <Button
+              type="button"
+              label={"Back"}
+              btnIcon={null}
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep4)
+              }
+            />
 
-              <Button
-                  type="button"
-                  label={"Next Step"}
-                  disabled={!canContinue}
-                  onclick={() => router.push(FluentDoorRoutes.tutorAuthenticationStep6)}
-              />
-            </div>
+            <Button
+              type="button"
+              label={"Next Step"}
+              disabled={!canContinue}
+              onclick={() =>
+                router.push(FluentDoorRoutes.tutorAuthenticationStep6)
+              }
+            />
           </div>
         </div>
       </div>
+    </div>
   );
 }

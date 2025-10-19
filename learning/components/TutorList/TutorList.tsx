@@ -5,11 +5,12 @@ import TutorShowCart from "../TutorShowCart/TutorShowCart";
 import { useSearchParams, useRouter } from "next/navigation";
 import SelectLanguage from "../Courses/SelectLanguage";
 import Inputs from "../Input/Input";
-import searchIcon from "./../../assets/icons/searchIconGray.svg";
 import { Tutor } from "@/model/tutorType";
 import { api } from "@/lib/APIs/axiosInstance";
 import { BeatLoader } from "react-spinners";
 import Pagination from "../Pagination/Pagination";
+
+const searchIcon = "/icons/searchIconGray.svg";
 
 const TutorList = () => {
   const router = useRouter();

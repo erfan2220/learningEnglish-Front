@@ -1,21 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
-import Country from "../Country/Country";
-import clockIcon from "./../../assets/icons/clockPurple.svg";
-import levelIcon from "./../../assets/icons/levelIcon.svg";
-import peopleIcon from "./../../assets/icons/people.svg";
-import languageIcon from "./../../assets/icons/languagePurple.svg";
-import Button from "../Button/Button";
-import { api } from "../../lib/APIs/axiosInstance";
-import { TemporaryCourse } from "@/model/courseType";
-import profilePhoto from "./../../assets/icons/profilePhotoDefault.svg";
-import dayIcon from "./../../assets/icons/dayPink.svg";
-import timeIcon from "./../../assets/icons/length.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 import { BeatLoader } from "react-spinners";
+import { api } from "../../lib/APIs/axiosInstance";
+import { TemporaryCourse } from "@/model/courseType";
+import Button from "../Button/Button";
+import Country from "../Country/Country";
+
+const clockIcon = "/icons/clockPurple.svg";
+const levelIcon = "/icons/levelIcon.svg";
+const peopleIcon = "/icons/people.svg";
+const languageIcon = "/icons/languagePurple.svg";
+const profilePhoto = "/icons/profilePhotoDefault.svg";
+const dayIcon = "/icons/dayPink.svg";
+const timeIcon = "/icons/length.svg";
+
 
 const CourseDetail = ({ id }: { id: number }) => {
   const [course, setCourse] = useState<TemporaryCourse | null>(null);

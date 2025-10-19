@@ -1,19 +1,21 @@
-// TutorShowCart.tsx
+
 "use client";
 import React, { useEffect, useState } from "react";
-import favoriteIcon from "./../../assets/icons/star.svg";
 import Image from "next/image";
-import heartIcon from "./../../assets/icons/heartFillRed.svg";
-import photoDefault from "../../assets/icons/profilePhotoDefault.svg";
 import Link from "next/link";
 import axios from "axios";
 import { Tutor } from "@/model/tutorType";
+
+const favoriteIcon = "/icons/star.svg";
+const heartIcon = "/icons/heartFillRed.svg";
+const photoDefault = "/icons/profilePhotoDefault.svg";
 
 type Props = { tutorId: string | number }; // ✅ accept both
 
 const TutorShowCart = ({ tutorId }: Props) => {
   const [tutors, setTutors] = useState<Tutor[]>([]);
   const [loading, setLoading] = useState(true);
+   const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const fetchTutors = async () => {
@@ -39,7 +41,7 @@ const TutorShowCart = ({ tutorId }: Props) => {
 
   if (!tutor) return <div className="p-4">Tutor not found</div>;
 
-  const [imgError, setImgError] = useState(false);
+ 
 
   return (
       <div className="flex pb-4 px-4 flex-wrap items-center justify-center w-full h-[360px] sm:mx-2 [@media(min-width:400px)]:w-[320px] sm:w-[320px] rounded-lg border border-gray-300 bg-white shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">

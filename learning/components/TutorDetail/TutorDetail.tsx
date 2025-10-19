@@ -1,23 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout/Layout";
-import locationIcon from "./../../assets/icons/locationPink.svg";
-import languageIcon from "./../../assets/icons/languagePurple.svg";
-import tickIcon from "./../../assets/icons/tickGreen.svg";
-import learningIcon from "../../assets/icons/learningOrange.svg";
 import Country from "../Country/Country";
-import locationIconBlue from "./../../assets/icons/locationBlue.svg";
-import fieldIcon from "./../../assets/icons/institutionGreen.svg";
-import degreeIcon from "./../../assets/icons/educationPink.svg";
-import starIcon from "./../../assets/icons/star.svg";
-import studentIcon from "./../../assets/icons/studentPink.svg";
-import lessonIcon from "./../../assets/icons/lessonsBlue.svg";
-import levelIcon from "./../../assets/icons/levelIcon.svg";
-import photoDefault from "../../assets/icons/profilePhotoDefault.svg";
-// import ReviewCart from "../ReviewCart/ReviewCart";
-import VideoPlayer from "../VideoPlayer/VideoPlayer";
-import closeIcon from "../../assets/icons/closeBlue.svg";
-import sendIcon from "../../assets/icons/sentWhite.svg";
 import Image from "next/image";
 import Button from "../Button/Button";
 import { datePicker, timePicker } from "@/mock/DayTime";
@@ -25,6 +9,24 @@ import { Tutor } from "@/model/tutorType";
 import { api } from "@/lib/APIs/axiosInstance";
 import { TemporaryCourse } from "@/model/courseType";
 import { BeatLoader } from "react-spinners";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
+
+const locationIcon = "/icons/locationPink.svg";
+const languageIcon = "/icons/languagePurple.svg";
+const tickIcon = "/icons/tickGreen.svg";
+const learningIcon = "/icons/learningOrange.svg";
+const locationIconBlue = "/icons/locationBlue.svg";
+const fieldIcon = "/icons/institutionGreen.svg";
+const degreeIcon = "/icons/educationPink.svg";
+const starIcon = "/icons/star.svg";
+const studentIcon = "/icons/studentPink.svg";
+const lessonIcon = "/icons/lessonsBlue.svg";
+const levelIcon = "/icons/levelIcon.svg";
+const photoDefault = "/icons/profilePhotoDefault.svg";
+const closeIcon = "/icons/closeBlue.svg";
+const sendIcon = "/icons/sentWhite.svg";
+
+// import ReviewCart from "../ReviewCart/ReviewCart";
 // import axios from "axios";
 
 const TutorDetail = ({ id }: { id: number }) => {

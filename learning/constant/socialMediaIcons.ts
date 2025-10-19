@@ -1,9 +1,9 @@
 
-import facebookIcon from "./../assets/icons/facebook.svg"
-import XIcon from "./../assets/icons/social-x.svg"
-import instagramIcon from "./../assets/icons/instagram.svg"
-import youtubeIcon from "./../assets/icons/youtube.svg"
-import linkdinIcon from "./../assets/icons/linkdin.svg"
+const facebookIcon = "/icons/facebook.svg"
+const XIcon = "/icons/social-x.svg"
+const instagramIcon = "/icons/instagram.svg"
+const youtubeIcon = "/icons/youtube.svg"
+const linkdinIcon = "/icons/linkdin.svg"
 
 
 export const socialMediaIcons = [

@@ -9,13 +9,13 @@ import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 
 // Stepper icons as modules (StaticImageData)
-import aboutIconWhite from "../../../assets/icons/aboutIconWhite.svg";
-import photoIconWhite from "../../../assets/icons/photoIconWhite.svg";
-import certificateIconWhite from "../../../assets/icons/certificateIconWhite.svg";
-import educationWhite from "../../../assets/icons/educationWhite.svg";
-import descriptionIconWhite from "../../../assets/icons/descriptionIconWhite.svg";
-import videoIconWhite from "../../../assets/icons/videoIconWhite.svg";
-import priceIconWhite from "../../../assets/icons/priceIconWhite.svg";
+const aboutIconWhite = "/icons/aboutIconWhite.svg";
+const photoIconWhite = "/icons/photoIconWhite.svg";
+const certificateIconWhite = "/icons/certificateIconWhite.svg";
+const educationWhite = "/icons/educationWhite.svg";
+const descriptionIconWhite = "/icons/descriptionIconWhite.svg";
+const videoIconWhite = "/icons/videoIconWhite.svg";
+const priceIconWhite = "/icons/priceIconWhite.svg";
 
 type TimeSlotData = {
   daysAvailable: string[];
@@ -103,7 +103,7 @@ export default function AuthorizationPage7() {
           <Stepper steps={steps} activeIndex={6} />
 
           {/* Card */}
-          <div className="w-full flex flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
+          <div className=" flex flex-col justify-start text-[#737177] items-start gap-4 mt-10 bg-white/70 max-w-xl mx-auto w-full p-6 rounded-2xl">
             <h1 className="text-[#45444A] font-bold text-xl">Pricing</h1>
             <p className="text-sm sm:text-base">
               Add your available lesson types, durations, and prices. You can also offer trial lessons and discounts for

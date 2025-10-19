@@ -1,14 +1,14 @@
 "use client";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 export type Step = {
     href?: string;
-    icon: StaticImageData;
+    icon: string;
     alt: string;
 };
 
-function StepDot({ active, icon, alt }: { active: boolean; icon: StaticImageData; alt: string }) {
+function StepDot({ active, icon, alt }: { active: boolean; icon: string; alt: string }) {
     return (
         <div
             className={
