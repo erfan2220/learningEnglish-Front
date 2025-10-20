@@ -1,5 +1,7 @@
 "use client";
 import Image from "next/image";
+
+
 const languageIcon = "/icons/languageGray.svg";
 const binIcon = "/icons/binGray.svg";
 

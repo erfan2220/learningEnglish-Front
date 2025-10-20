@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+
+    i18n:{
+      locales:['en','fr','fa'],
+      defaultLocale:'en',
+      // localeDetection:true,
+    },
+    reactStrictMode:true,
     images: { unoptimized: true },
     eslint: { ignoreDuringBuilds: true },
 

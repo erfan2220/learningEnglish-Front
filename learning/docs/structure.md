@@ -11,7 +11,6 @@ root/
 ├── tsconfig.json
 │
 ├── app/                            # Next.js App Router root
-│   ├── [lang]/                     # (i18n planned) dynamic language segment
 │   ├── Articles/                   # Articles / Blog section
 │   ├── cart/                       # Shopping cart
 │   ├── contactUs/                  # Contact page
