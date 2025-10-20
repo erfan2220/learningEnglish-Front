@@ -96,7 +96,7 @@ const SubmitForm: React.FC<SubmitFormProps> = ({ onclick }) => {
           "educations",
           "tutorAuthStep5",
           "courseData",
-        ].forEach(localStorage.removeItem);
+        ].forEach((key) => localStorage.removeItem(key));
       }
     };
   }, []);
