@@ -1,4 +1,4 @@
-import TutorShowCart from "@/components/TutorShowCart/TutorShowCart";
+import TutorShowCart from "@/components/Tutor/TutorShowCart/TutorShowCart";
 import { studentDetail } from "@/mock/studentMockData";
 import React from "react";
 

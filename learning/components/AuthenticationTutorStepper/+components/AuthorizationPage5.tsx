@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import Stepper from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage5Components/stepper";
 import DescriptionFields from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage5Components/DescriptionFields";
 import ExperiencesList from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage5Components/ExperiencesList";

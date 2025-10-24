@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Inputs from "@/components/Input/Input";
+import Inputs from "@/components/Common/Input/Input";
 
 const locationIcon = "/icons/locationGray.svg";
 const experienceIcon = "/icons/experienceGray.svg";

@@ -1,6 +1,6 @@
 "use client";
-import Button from "@/components/Button/Button";
-import Inputs from "@/components/Input/Input";
+import Button from "@/components/Common/Button/Button";
+import Inputs from "@/components/Common/Input/Input";
 import React, { useState } from "react";
 
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";

@@ -2,7 +2,7 @@
 import React from "react";
 
 import { courseMockDetail } from "@/mock/courseMockData";
-import Country from "@/components/Country/Country";
+import Country from "@/components/Common/Country/Country";
 import Link from "next/link";
 import { tutorMockDetail } from "@/mock/tutorMockData";
 import Image from "next/image";

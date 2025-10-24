@@ -1,5 +1,5 @@
 "use client";
-import Country from "@/components/Country/Country";
+import Country from "@/components/Common/Country/Country";
 import Layout from "@/components/Layout/Layout";
 import { FluentDoorRoutes } from "@/routes/routes";
 import Link from "next/link";

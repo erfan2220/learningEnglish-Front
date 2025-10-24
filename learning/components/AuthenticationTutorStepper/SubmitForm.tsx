@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import Button from "../Button/Button";
+import Button from "../Common/Button/Button";
 import { api } from "@/lib/APIs/axiosInstance";
 import { useTutorAuthStore } from "@/model/useTutorAuthStore";
 import { useRouter } from "next/navigation";

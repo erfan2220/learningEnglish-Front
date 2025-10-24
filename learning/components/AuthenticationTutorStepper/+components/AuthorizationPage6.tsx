@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import Stepper from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage6Components/stepper";
 import VideoUploader from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage6Components/VideoUploader";
 import VideoGuidelines from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage6Components/VideoGuidelines";

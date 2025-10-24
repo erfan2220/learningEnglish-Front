@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import Stepper from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage7Components/stepper";
 import CourseBasicsForm, { CourseBasics } from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage7Components/CourseBasicsForm";
 import TimeSlotsList from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage7Components/TimeSlotsList";

@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 
-import Inputs from "@/components/Input/Input";
-import Button from "@/components/Button/Button";
+import Inputs from "@/components/Common/Input/Input";
+import Button from "@/components/Common/Button/Button";
 import { countryList } from "@/mock/countryList";
 import Image from "next/image";
 

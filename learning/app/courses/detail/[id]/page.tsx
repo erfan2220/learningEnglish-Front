@@ -1,4 +1,4 @@
-import CourseDetail from "@/components/CourseDetail/CourseDetail";
+import CourseDetail from "@/components/Course/CourseDetail/CourseDetail";
 import React from "react";
 
 interface Props {

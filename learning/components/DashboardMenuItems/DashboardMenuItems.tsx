@@ -28,22 +28,18 @@ const DashboardMenuItems = ({
         hover:cursor-pointer hover:scale-[1.02] border-[#D2D2D2]`}
       style={{ width: `${width}` }}
     >
-      <div className="lg:w-[49%] md:w-[100px] md:ml-1 flex items-center">
+      <div className="lg:w-[49%] md:w-[100px] md:ml-1 flex items-center gap-1">
         <div>
-          {/* <img
-            src={icon}
-            alt="menu-icon"
-            style={{ width: "80%", height: "80%" }}
-          /> */}
           <Image
             src={icon}
             alt={"menu-icon"}
             width={24}
             height={24}
-            style={{ width: "80%", height: "80%" }}
+            className="w-6 h-6 min-w-5 min-h-5"
+            // style={{ width: "80%", height: "80%" }}
           />
         </div>
-        <p className="hidden md:block">{title}</p>
+        <p className="hidden md:block md:text-xs lg:text-[14px]">{title}</p>
       </div>
     </Link>
   );

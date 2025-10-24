@@ -58,7 +58,6 @@ export type Course = {
 
 export type CourseList = Course[];
 
-
 //////////////////////////////////////////////////////////////////////////
 export interface TemporaryTutor {
   id: number;
@@ -86,9 +85,11 @@ export interface TemporaryCourse {
   detail: string;
   requirements: string;
   materials: string;
-  lessons: string[]; 
+  lessons: string[];
   tutor: TemporaryTutor;
   image: string;
   language_flag: string;
-  course_duration:string
+  course_duration: string;
 }
+
+

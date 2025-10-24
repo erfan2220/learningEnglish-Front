@@ -1,9 +1,9 @@
 "use client";
 import Layout from "@/components/Layout/Layout";
 import React, { useEffect, useState } from "react";
-import CheckBox from "@/components/CheckBox.tsx/CheckBox";
+import CheckBox from "@/components/Common/CheckBox.tsx/CheckBox";
 import { EnglishQuestions } from "@/constant/EnglishQuestions";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 

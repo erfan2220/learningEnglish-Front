@@ -34,6 +34,12 @@ export const FluentDoorRoutes = {
   // =================================
   tutorDashboard: "/dashboard/tutor",
   // =================================
+  adminDashboard: "/dashboard/admin",
+  articleAdminDashboard: "/dashboard/admin/detail/articles",
+  addArticleAdminDashboard: "/dashboard/admin/detail/add_articles",
+  editArticleAdminDashboard: "/dashboard/admin/detail/articles/edit",
+  billsAdminDashboard: "/dashboard/admin/detail/bills",
+  // =================================
   studentDashboard: "/dashboard/student",
   studentDashboardCourses: "/dashboard/student/detail/courses",
 };

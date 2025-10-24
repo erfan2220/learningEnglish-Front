@@ -1,4 +1,5 @@
-import ArticleDetail from "@/components/ArticleDetail/ArticleDetail";
+
+import ArticleDetail from "@/components/Articles/ArticleDetail";
 import React from "react";
 
 interface Props {

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { FluentDoorRoutes } from "@/routes/routes";
 import Layout from "@/components/Layout/Layout";
-import Inputs from "@/components/Input/Input";
+import Inputs from "@/components/Common/Input/Input";
 const LS_EMAIL_KEY = "le_remember_email";
 const LS_REMEMBER_KEY = "le_remember_me";
 

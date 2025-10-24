@@ -1,4 +1,4 @@
-import TutorDashboard from "@/components/TutorDashboard/TutorDashboard";
+import TutorDashboard from "@/components/Tutor/TutorDashboard/TutorDashboard";
 import React from "react";
 
 const StudentDashboardLayout = ({

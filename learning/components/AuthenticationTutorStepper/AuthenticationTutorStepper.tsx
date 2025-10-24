@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Layout from "../Layout/Layout";
-import Button from "../Button/Button";
+import Button from "../Common/Button/Button";
 import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 

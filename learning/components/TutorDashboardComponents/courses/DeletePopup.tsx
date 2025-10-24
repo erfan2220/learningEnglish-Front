@@ -1,4 +1,4 @@
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import React from "react";
 
 interface DeletePopupProps {

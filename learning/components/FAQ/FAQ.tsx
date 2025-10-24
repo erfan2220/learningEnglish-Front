@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { studentFAQ, tutorFAQ } from "../../constant/FAQ";
 import Image from "next/image";
-import Inputs from "../Input/Input";
+import Inputs from "../Common/Input/Input";
 
 const studentWhite = "/icons/studentWhite.svg";
 const tutorWhite = "/icons/tutorWhite.svg";

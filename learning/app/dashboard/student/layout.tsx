@@ -1,4 +1,5 @@
-import StudentDashboard from "@/components/StudentDashboard/StudentDashboard";
+
+import StudentDashboard from "@/components/Student/StudentDashboard/StudentDashboard";
 import React from "react";
 
 const StudentDashboardLayout = ({

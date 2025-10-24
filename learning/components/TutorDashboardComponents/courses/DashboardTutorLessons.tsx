@@ -4,7 +4,7 @@ import { courseMockDetail } from "@/mock/courseMockData";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import DeletePopup from "./DeletePopup";
 import AddLessonPopUp from "./AddLessonPopUp";
 import Image from "next/image";

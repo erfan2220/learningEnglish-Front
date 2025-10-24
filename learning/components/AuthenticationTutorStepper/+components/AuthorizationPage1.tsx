@@ -2,8 +2,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 // import Image from "next/image";
 // import Layout from "../../Layout/Layout";
-import Inputs from "@/components/Input/Input";
-import Button from "@/components/Button/Button";
+import Inputs from "@/components/Common/Input/Input";
+import Button from "@/components/Common/Button/Button";
 import Stepper from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage1Components/stepper";
 import SelectWithIcon from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage1Components/SelectWithIcon";
 import LanguageList from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage1Components/LanguageList";

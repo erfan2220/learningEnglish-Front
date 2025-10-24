@@ -3,14 +3,14 @@ import Layout from "../Layout/Layout";
 import Link from "next/link";
 import TutorialStep from "../TutorialStep/TutorialStep";
 import { stepsData } from "@/constant/stepsData";
-import FeatureItemLandingPage from "../FeatureItemLandingPage/FeatureItemLandingPage";
 import { featuresData } from "@/constant/features";
 import { becomeTutorData, becomeTutorListData } from "@/constant/becomeTutor";
-import Slide from "../Slide/Slide";
-import Button from "../Button/Button";
+import Slide from "../Tutor/Slide/Slide";
+import Button from "../Common/Button/Button";
 import Image from "next/image";
 import { FluentDoorRoutes } from "@/routes/routes";
 import LanguageSection from "./+components/LanguageSection";
+import FeatureItemLandingPage from "./FeatureItemLandingPage/FeatureItemLandingPage";
 
 const LandingPage = () => {
   return (

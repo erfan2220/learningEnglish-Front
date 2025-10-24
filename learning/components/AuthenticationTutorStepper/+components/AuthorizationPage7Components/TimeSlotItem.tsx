@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import Inputs from "@/components/Input/Input";
-import CheckBox from "@/components/CheckBox.tsx/CheckBox";
+import Inputs from "@/components/Common/Input/Input";
+import CheckBox from "@/components/Common/CheckBox.tsx/CheckBox";
 
 export type TimeSlotData = {
     daysAvailable: string[];

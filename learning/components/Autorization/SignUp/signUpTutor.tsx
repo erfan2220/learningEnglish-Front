@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Button from "../../Button/Button";
+import Button from "../../Common/Button/Button";
 import Layout from "../../Layout/Layout";
-import Inputs from "../../Input/Input";
+import Inputs from "../../Common/Input/Input";
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";

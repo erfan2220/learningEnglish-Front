@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import Stepper from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage4Components/stepper";
 import EducationsList from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage4Components/EducationsList";
 import { countryList } from "@/mock/countryList";

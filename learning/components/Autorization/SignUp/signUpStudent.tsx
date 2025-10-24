@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Layout from "../../Layout/Layout";
-import Inputs from "../../Input/Input";
+import Inputs from "../../Common/Input/Input";
 import Link from "next/link";
 // import eyeIconClose = "/icons/eyeCloseIcon.svg";
 // import eyeIcon = "/icons/eyeIcon.svg";
@@ -13,7 +13,7 @@ import axios from "axios";
 // import passwordIcon = "/icons/passwordIconGray.svg";
 // import emailIcon = "/icons/emailGray.svg";
 import Image from "next/image";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import { FluentDoorRoutes } from "@/routes/routes";
 
 const SignUpStudent = () => {

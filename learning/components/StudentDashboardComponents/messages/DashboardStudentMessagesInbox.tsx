@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 
 import { Student } from "@/model/studentType";
 // ❌ Remove this — it causes the mismatch

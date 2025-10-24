@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import { Student } from "@/model/studentType";
 import { Tutor } from "@/model/tutorType";
 import Image from "next/image";

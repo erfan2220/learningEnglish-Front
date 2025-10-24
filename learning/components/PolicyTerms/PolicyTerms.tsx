@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { policyTerms } from "../../constant/policy";
 import Image from "next/image";
-import Inputs from "../Input/Input";
+import Inputs from "../Common/Input/Input";
 
 const policyPic = "/images/policyPic.svg";
 const searchIcon = "/icons/searchIconGray.svg";

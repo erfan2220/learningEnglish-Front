@@ -1,8 +1,8 @@
 "use client";
-import Inputs from "@/components/Input/Input";
+import Inputs from "@/components/Common/Input/Input";
 import Layout from "@/components/Layout/Layout";
 import React, { useEffect, useMemo, useState } from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 import { api } from "@/lib/APIs/axiosInstance";

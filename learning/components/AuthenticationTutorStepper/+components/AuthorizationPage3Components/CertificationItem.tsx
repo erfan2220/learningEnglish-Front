@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Inputs from "@/components/Input/Input";
+import Inputs from "@/components/Common/Input/Input";
 
 type Props = {
     index: number;

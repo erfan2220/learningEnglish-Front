@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { courseMockDetail } from "@/mock/courseMockData";
 import { studentDetail } from "@/mock/studentMockData";
-import Country from "@/components/Country/Country";
+import Country from "@/components/Common/Country/Country";
 import Link from "next/link";
 import { FluentDoorRoutes } from "@/routes/routes";
 

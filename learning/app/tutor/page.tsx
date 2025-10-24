@@ -1,4 +1,4 @@
-import TutorList from "@/components/TutorList/TutorList";
+import TutorList from "@/components/Tutor/TutorList/TutorList";
 import React, { Suspense } from "react";
 
 const TutorPage = () => {

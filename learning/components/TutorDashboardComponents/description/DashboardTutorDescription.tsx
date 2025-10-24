@@ -1,9 +1,9 @@
 "use client";
-import Inputs from "@/components/Input/Input";
+import Inputs from "@/components/Common/Input/Input";
 import React, { useState } from "react";
 import { countryList } from "@/mock/countryList";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import Image from "next/image";
 
 const experienceIcon = "/icons/experienceGray.svg";

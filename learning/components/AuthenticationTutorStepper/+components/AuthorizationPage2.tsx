@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import Stepper from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage2Components/stepper";
 import PhotoUploader from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage2Components/PhotoUploader";
 import PhotoGuidelines from "@/components/AuthenticationTutorStepper/+components/AuthorizationPage2Components/PhotoGuidelines";

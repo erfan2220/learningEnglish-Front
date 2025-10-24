@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 
-import Inputs from "@/components/Input/Input";
+import Inputs from "@/components/Common/Input/Input";
 
 import Image from "next/image";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 import { countryList } from "@/mock/countryList";
 
 

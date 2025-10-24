@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Inputs from "@/components/Input/Input";
+import Inputs from "@/components/Common/Input/Input";
 
 
 const profilePhoto = "/icons/profilePhoto.svg";
@@ -16,7 +16,7 @@ const passwordIcon = "/icons/passwordIconGray.svg";
 const editIcon = "/icons/penDash.svg";
 const degreeIcon = "/icons/degreeGray.svg";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/Common/Button/Button";
 
 const DashboardStudentInfo = () => {
   const [imagePreview, setImagePreview] = useState(profilePhoto);
