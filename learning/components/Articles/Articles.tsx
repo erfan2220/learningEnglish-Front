@@ -7,15 +7,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
-import Button from "../Common/Button/Button";
 import { useRouter } from "next/navigation";
 import { FluentDoorRoutes } from "@/routes/routes";
 import Pagination2 from "../Common/Pagination/Pagination";
 import { api } from "@/lib/APIs/axiosInstance";
 import { ArticlesType } from "@/model/articles";
 import { BeatLoader } from "react-spinners";
+import {  MoveRight } from "lucide-react";
 
-const readMoreIcon = "/icons/readMoreIcon.svg";
 
 export default function Articles({
   currentPage = 1,
@@ -75,11 +74,12 @@ export default function Articles({
               modules={[Navigation, Pagination, Autoplay]}
               spaceBetween={20}
               slidesPerView={1}
+              loop={true}
               navigation
               pagination={{ clickable: true }}
               autoplay={{ delay: 5000 }}
               onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
-              className="h-[450px] rounded-xl overflow-hidden shadow-lg"
+              className="lg:h-[500px] md:h-[450px] sm:h-[400px] h-[350px] rounded-xl overflow-hidden shadow-lg"
             >
               {recentArticles.map((article, index) => (
                 <SwiperSlide key={article.id} className="relative">
@@ -89,10 +89,10 @@ export default function Articles({
                       alt={article.title}
                       width={100}
                       height={100}
-                      className="w-full h-full object-cover rounded-lg filter brightness-85"
+                      className="w-full h-full object-fit rounded-lg filter brightness-85"
                     />
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20 bg-gradient-to-b from-transparent to black">
+                  <div className="absolute mx-2 mb-2 bottom-0 left-0 right-0 px-6 py-2 text-white z-20 backdrop-blur-md">
                     <h2 className="text-xl sm:text-3xl font-bold mb-2">
                       {article.title}
                     </h2>
@@ -105,20 +105,50 @@ export default function Articles({
                             .substring(0, 150) + "...",
                       }}
                     />
-                    <Button
-                      label="read more"
-                      type="button"
-                      btnIcon={readMoreIcon}
-                      colorBtn="#737177"
-                      colorBtnHover="#45444A"
-                      colorBtnActive="#BBBBBB"
-                      onclick={() => {
-                        setActiveSlide(index);
-                        router.push(
-                          `${FluentDoorRoutes.ArticlesDetail}/${article.id}`
-                        );
-                      }}
-                    />
+                    <div className="flex items-end justify-end">
+                      <button
+                        onClick={() => {
+                          setActiveSlide(index);
+                          router.push(
+                            `${FluentDoorRoutes.ArticlesDetail}/${article.id}`
+                          );
+                        }}
+                        className="
+                        relative
+                        group
+                        bg-white/20 border-2 border-gray-200 text-white
+                        rounded-full
+                        w-10 h-10
+                        overflow-hidden
+                        transition-all duration-500
+                        hover:w-32
+                        px-2
+                      "
+                      >
+                        <span
+                          className="
+                          absolute left-4 top-[17px] -translate-y-1/2
+                          opacity-0
+                          transition-all duration-500
+                          group-hover:opacity-100
+                          whitespace-nowrap
+                          text-sm font-semibold
+                        "
+                        >
+                          Read more
+                        </span>
+
+                        <div
+                          className="
+                          absolute inset-0 flex items-center justify-center
+                          transition-all duration-300
+                          group-hover:justify-end pr-0 group-hover:pr-3 pt-0.5
+                        "
+                        >
+                          <MoveRight className="text-white text-lg transition-transform duration-300 group-hover:translate-x-1" />
+                        </div>
+                      </button>
+                    </div>
                   </div>
                 </SwiperSlide>
               ))}
