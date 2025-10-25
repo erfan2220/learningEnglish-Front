@@ -41,7 +41,7 @@ export default function Articles({
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
     return sortedArticles.slice(0, 5);
-  }, []); // articles is a module constant
+  }, [articles]);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -147,7 +147,15 @@ export default function Articles({
                   </h3>
                   <div className="flex justify-between text-[#8B8A8E] text-xs mb-2">
                     <p>{article.author}</p>
-                    <p>{article.created_at}</p>
+                    <p>
+                      {new Date(
+                        article.created_at.slice(0, 10)
+                      ).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </p>
                   </div>
 
                   <div

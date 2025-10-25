@@ -55,8 +55,37 @@ const ArticleDetail = ({ id }: { id: number }) => {
                   />
                   {/* <p className="text-sm text-[#8B8A8E]">Publish date:</p> */}
                   <p className="text-sm text-[#8B8A8E] font-medium">
-                    {" "}
-                    {article?.created_at}
+                    create on: {" "}
+                    <b className="text-gray-500">
+                      {new Date(
+                      article.created_at.slice(0, 10)
+                    ).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                    </b>
+                  </p>
+                </div>
+                <div className="flex gap-2 items-center my-2">
+                  <Image
+                    src={clockIcon}
+                    alt="clockIcon"
+                    width={22}
+                    height={22}
+                  />
+                  {/* <p className="text-sm text-[#8B8A8E]">Publish date:</p> */}
+                  <p className="text-sm text-[#8B8A8E] font-medium">
+                    update on: {" "}
+                     <b className="text-gray-500">
+                      {new Date(
+                      article.updated_at.slice(0, 10)
+                    ).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                    </b>
                   </p>
                 </div>
                 <div className="flex gap-2 items-center ">
