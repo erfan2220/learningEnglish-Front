@@ -1,4 +1,5 @@
-import TutorDetail from "@/components/TutorDetail/TutorDetail";
+import TutorDetail from "@/components/Tutor/TutorDetail/TutorDetail";
+
 
 
 interface Props {
