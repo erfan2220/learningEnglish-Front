@@ -1,20 +1,21 @@
+// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { decodeJwt } from "jose";
 // import { match } from '@formatjs/intl-localematcher'
 import { match as matchLocale } from '@formatjs/intl-localematcher'
-import Negotiator from 'negotiator'
+import Negotiator from "negotiator";
 
-const locales = ['en', 'nl'] as const
-const defaultLocale = 'en'
-
+import {locales,defaultLocale} from "./lib/i18n"
 
 const PUBLIC_FILE = /\.(.*)$/ // e.g. /favicon.ico, /robots.txt, /images.png
 
 // let languages = new Negotiator({ headers }).languages()
 // let headers = { 'accept-language': 'en-US,en;q=0.5' }
 
-function getLocale(req: NextRequest) {
+function getLocale(req: NextRequest)
+{
+
     // Build a node-like headers object for Negotiator
     const negotiatorHeaders:Record<string, string> = {}
 
