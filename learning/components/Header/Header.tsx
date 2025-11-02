@@ -7,6 +7,7 @@ import NavList from "./NavList";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { FluentDoorRoutes } from "@/routes/routes";
+import Cookies from "js-cookie";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false); // profile dropdown
@@ -40,6 +41,19 @@ export default function Header() {
         : `${FluentDoorRoutes.studentDashboard}`
     );
     setMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setMenuOpen(false);
+
+    // پاک کردن تمام کوکی‌ها
+    const allCookies = Cookies.get();
+    Object.keys(allCookies).forEach((cookieName) => {
+      Cookies.remove(cookieName);
+    });
+
+    router.push(FluentDoorRoutes.homePage);
   };
 
   return (
@@ -125,10 +139,7 @@ export default function Header() {
                     Settings
                   </Link>
                   <button
-                    onClick={async () => {
-                      await logout();
-                      setMenuOpen(false);
-                    }}
+                    onClick={handleLogout}
                     className="w-full text-sm sm:text-base flex items-center text-left px-3 py-2 hover:bg-[#e8e1fc] cursor-pointer rounded-lg text-red-600"
                     role="menuitem"
                   >

@@ -94,6 +94,12 @@ const TutorList = () => {
 
     const matchLanguage = !language || tutorSubjects.includes(language);
 
+    // const matchPrice = !tutor.
+    //   ? true
+    //   : filters.price === "0"
+    //   ? Number(course.price_per_toman) === 0
+    //   : Number(course.price_per_toman) <= Number(filters.price);
+
     return matchSearch && matchLanguage;
   });
 
@@ -133,6 +139,14 @@ const TutorList = () => {
             value={filters.language}
             onChange={(value) => updateFilter("language", value)}
           />
+        </div>
+        <div>
+          {/* <SelectPrice
+              free={filters.price === "0"}
+              price={Number(filters.price) || 0}
+              onChangeFree={(value) => updateFilter("price", value ? "0" : "")}
+              onChangePrice={(value) => updateFilter("price", value.toString())}
+            /> */}
         </div>
       </div>
 

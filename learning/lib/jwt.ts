@@ -21,3 +21,4 @@ export async function getAccessClaims(): Promise<AccessClaims | null> {
         return null;
     }
 }
+

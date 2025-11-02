@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { TemporaryCourse } from "@/model/courseType";
 import { api } from "@/lib/APIs/axiosInstance";
 import Pagination from "../../Common/Pagination/Pagination";
+import { BeatLoader } from "react-spinners";
 
 const Courses = () => {
   const router = useRouter();
@@ -183,7 +184,7 @@ const Courses = () => {
         {loading ? (
           <div className="flex justify-center items-center h-64">
             <p className="text-center text-lg">
-              {/*<BeatLoader color="#5F33E1" />*/}
+              <BeatLoader color="#5F33E1" />
             </p>
           </div>
         ) : error ? (

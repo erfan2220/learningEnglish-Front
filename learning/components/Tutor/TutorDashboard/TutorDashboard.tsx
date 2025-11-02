@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import DashboardMenuItems from "../../DashboardMenuItems/DashboardMenuItems";
-import MenuItemMessages from "../../menuItemMessages/MenuItemMessages";
+// import MenuItemMessages fسrom "../../menuItemMessages/MenuItemMessages";
 
 import Image from "next/image";
 
@@ -12,7 +12,7 @@ const educationIcon = "/icons/educationGrayD.svg";
 const descriptionIcon = "/icons/descriptionGray.svg";
 const addIcon = "/icons/addGray.svg";
 const courseIcon = "/icons/course.svg";
-const signoutIcon = "/icons/signout.svg";
+// const signoutIcon = "/icons/signout.svg";
 const logoIcon = "/icons/logoIcon.png";
 const billIcon = "/icons/bills.svg";
 
@@ -96,15 +96,15 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
             width={"100%"}
           />
 
-          <MenuItemMessages role="tutor" />
+          {/* <MenuItemMessages role="tutor" /> */}
 
-          <DashboardMenuItems
+          {/* <DashboardMenuItems
             role={role}
             topic={"signOut"}
             icon={signoutIcon}
             title={"Sign Out"}
             width={"100%"}
-          />
+          /> */}
         </div>
       </div>
 

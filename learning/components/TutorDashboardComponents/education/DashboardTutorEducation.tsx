@@ -117,11 +117,7 @@ const DashboardTutorEducation = () => {
                     Specialist Degree
                   </option>
                 </select>
-                {/* <img
-                  src={"/icons/degreeGray.svg"}
-                  alt="degreeIcon"
-                  className="w-6 h-6 absolute top-[20px] left-4 -translate-y-1/2"
-                /> */}
+               
                 <Image
                   src={degreeIcon}
                   alt="degree icon"
@@ -168,12 +164,7 @@ const DashboardTutorEducation = () => {
                     </option>
                   ))}
                 </select>
-                {/* <img
-                  src={"/icons/locationGray.svg"}
-                  alt="locationIcon"
-                  className="w-6 h-6 absolute top-[20px] left-4 -translate-y-1/2"
-                /> */}
-
+                
                 <Image
                   src={locationIcon}
                   alt="country icon"
