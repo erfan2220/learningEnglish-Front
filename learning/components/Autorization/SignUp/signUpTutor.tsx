@@ -89,32 +89,32 @@ const SignUpTutor = () => {
               </u>
             </p>
 
-            <Link
-              href={"/signinGoogle"}
-              className="flex gap-2 w-full border-2 my-5 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-2"
-            >
-              {/* <img
-                src={"/icons/google.svg"}
-                alt="google icon"
-                className="w-6 h-6"
-              /> */}
-              <Image
-                src={googleIcon}
-                alt="google icon"
-                width={24}
-                height={24}
-              />
-              <p className="text-[#727177] text-sm font-semibold">
-                Continue with Google
-              </p>
-            </Link>
+            {/*<Link*/}
+            {/*  href={"/signinGoogle"}*/}
+            {/*  className="flex gap-2 w-full border-2 my-5 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-2"*/}
+            {/*>*/}
+            {/*  /!* <img*/}
+            {/*    src={"/icons/google.svg"}*/}
+            {/*    alt="google icon"*/}
+            {/*    className="w-6 h-6"*/}
+            {/*  /> *!/*/}
+            {/*  <Image*/}
+            {/*    src={googleIcon}*/}
+            {/*    alt="google icon"*/}
+            {/*    width={24}*/}
+            {/*    height={24}*/}
+            {/*  />*/}
+            {/*  <p className="text-[#727177] text-sm font-semibold">*/}
+            {/*    Continue with Google*/}
+            {/*  </p>*/}
+            {/*</Link>*/}
           </div>
 
-          <div className="flex items-center justify-center gap-2 mb-2 mx-8">
-            <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
-            <p className="text-[#45444A]">or</p>
-            <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
-          </div>
+          {/*<div className="flex items-center justify-center gap-2 mb-2 mx-8">*/}
+          {/*  <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />*/}
+          {/*  <p className="text-[#45444A]">or</p>*/}
+          {/*  <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />*/}
+          {/*</div>*/}
           <form
             onSubmit={handleSubmit}
             className="px-3 flex flex-col gap-2 sm:p-8 sm:pt-0 w-full"

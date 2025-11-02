@@ -123,16 +123,16 @@ export default function SignIn() {
                 width={20}
                 height={20}
               />
-              <span className="text-[#727177] text-sm font-semibold">
-                Continue with Google
-              </span>
+              {/*<span className="text-[#727177] text-sm font-semibold">*/}
+              {/*  Continue with Google*/}
+              {/*</span>*/}
             </Link>
 
-            <div className="w-full flex items-center justify-center gap-2 mb-2 mx-8">
-              <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
-              <p className="text-[#45444A]">or</p>
-              <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
-            </div>
+            {/*<div className="w-full flex items-center justify-center gap-2 mb-2 mx-8">*/}
+            {/*  <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />*/}
+            {/*  <p className="text-[#45444A]">or</p>*/}
+            {/*  <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />*/}
+            {/*</div>*/}
 
             <form onSubmit={handleSubmit} className="space-y-4 w-full">
               {/* Email */}
