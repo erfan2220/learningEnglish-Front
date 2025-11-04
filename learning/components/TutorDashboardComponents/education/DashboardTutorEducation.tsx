@@ -1,10 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Inputs from "@/components/Common/Input/Input";
 import Button from "@/components/Common/Button/Button";
 import { countryList } from "@/mock/countryList";
 import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
+import { api } from "@/lib/APIs/axiosInstance";
+import toast from "react-hot-toast";
 
 const instituteIcon = "/icons/institutionGray.svg";
 const locationIcon = "/icons/locationGray.svg";
@@ -13,6 +16,23 @@ const degreeIcon = "/icons/degreeGray.svg";
 const fieldIcon = "/icons/educationGray.svg";
 
 const DashboardTutorEducation = () => {
+const { user } = useAuth();
+const[education,setEducation]=useState([])
+
+useEffect(() => {
+      const fetchEducations = async () => {
+        try {
+          const res = await api.get(`/api/tutor-educations/${user?.id}/`);
+          setEducation(res.data);
+        } catch (error) {
+          console.error("Fetching educations failed:", error);
+          toast.error("Failed to fetch educations. Please try again later.");
+        } 
+      };
+      fetchEducations();
+    }, []);
+
+
   const [educations, setEducations] = useState([
     {
       degree: "",
@@ -24,6 +44,8 @@ const DashboardTutorEducation = () => {
       endDate: "",
     },
   ]);
+
+  console.log(education)
 
   const handleAddEducation = () => {
     setEducations([
@@ -68,6 +90,8 @@ const DashboardTutorEducation = () => {
     //api
   };
 
+  
+    
   return (
     <div className="my-12 px-1 md:px-4 lg:px-8">
       <h1 className="text-[#45444A] font-bold text-2xl">Educations</h1>
@@ -117,7 +141,7 @@ const DashboardTutorEducation = () => {
                     Specialist Degree
                   </option>
                 </select>
-               
+
                 <Image
                   src={degreeIcon}
                   alt="degree icon"
@@ -164,7 +188,7 @@ const DashboardTutorEducation = () => {
                     </option>
                   ))}
                 </select>
-                
+
                 <Image
                   src={locationIcon}
                   alt="country icon"
