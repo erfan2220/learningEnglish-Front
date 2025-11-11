@@ -5,7 +5,6 @@ import Inputs from "@/components/Common/Input/Input";
 import Button from "@/components/Common/Button/Button";
 import { countryList } from "@/mock/countryList";
 import Image from "next/image";
-import { useAuth } from "@/context/AuthContext";
 import { api } from "@/lib/APIs/axiosInstance";
 import toast from "react-hot-toast";
 
@@ -16,22 +15,41 @@ const degreeIcon = "/icons/degreeGray.svg";
 const fieldIcon = "/icons/educationGray.svg";
 
 const DashboardTutorEducation = () => {
-const { user } = useAuth();
-const[education,setEducation]=useState([])
+  const [getEducation, setGetEducation] = useState([]);
+  const [me, setMe] = useState({});
 
-useEffect(() => {
-      const fetchEducations = async () => {
-        try {
-          const res = await api.get(`/api/tutor-educations/${user?.id}/`);
-          setEducation(res.data);
-        } catch (error) {
-          console.error("Fetching educations failed:", error);
-          toast.error("Failed to fetch educations. Please try again later.");
-        } 
-      };
-      fetchEducations();
-    }, []);
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await api.get(`/api/me`);
+        setMe(res.data);
+      } catch (error) {
+        console.error("Fetching me failed:", error);
+        toast.error("Failed to fetch me. Please try again later.");
+      }
+    };
+    fetchMe();
+  }, []);
 
+  console.log("me:", me);
+
+  useEffect(() => {
+    if (!me?.id) return;
+
+    const fetchEducations = async () => {
+      try {
+        const res = await api.get(`/api/tutor-educations/${me.id}`);
+        setGetEducation(res.data);
+      } catch (error) {
+        console.error("Fetching educations failed:", error);
+        toast.error("Failed to fetch educations. Please try again later.");
+      }
+    };
+
+    fetchEducations();
+  }, [me]);
+
+  console.log(getEducation);
 
   const [educations, setEducations] = useState([
     {
@@ -44,8 +62,6 @@ useEffect(() => {
       endDate: "",
     },
   ]);
-
-  console.log(education)
 
   const handleAddEducation = () => {
     setEducations([
@@ -84,14 +100,39 @@ useEffect(() => {
     setEducations(updated);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log("Final Education Data:", educations);
-    //api
+
+    if (!me?.id) {
+      toast.error("User not found. Please try again.");
+      return;
+    }
+
+    try {
+      await Promise.all(
+        educations.map((edu) => {
+          const payload = {
+            degree: edu.degree,
+            institution_name: edu.institution,
+            country: edu.country,
+            city: edu.city,
+            field: edu.field,
+            start_date: edu.startDate,
+            end_date: edu.endDate,
+            tutor: me.id,
+          };
+
+          return api.patch(`/api/tutor-educations/${me.id}`, payload);
+        })
+      );
+
+      toast.success("Educations updated successfully!");
+    } catch (error) {
+      console.error("Updating educations failed:", error);
+      toast.error("Failed to update educations. Please try again later.");
+    }
   };
 
-  
-    
   return (
     <div className="my-12 px-1 md:px-4 lg:px-8">
       <h1 className="text-[#45444A] font-bold text-2xl">Educations</h1>
@@ -173,7 +214,7 @@ useEffect(() => {
               <div className="relative w-full">
                 <select
                   name="selectCountry"
-                  value={edu.degree}
+                  value={edu.country}
                   onChange={(e) =>
                     handleChange(index, "country", e.target.value)
                   }

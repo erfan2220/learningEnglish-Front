@@ -1,15 +1,15 @@
 "use client";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import Inputs from "@/components/Common/Input/Input";
 import Button from "@/components/Common/Button/Button";
 import Image from "next/image";
+import { api } from "@/lib/APIs/axiosInstance";
+import toast from "react-hot-toast";
 
 const certFile = "/icons/certFile.svg";
 const certIcon = "/icons/certificateGray.svg";
 const issueByIcon = "/icons/issueBy.svg";
 const dateIcon = "/icons/dayIcon.svg";
-
 
 const DashboardTutorCertification = () => {
   const [certifications, setCertifications] = useState([
@@ -18,9 +18,44 @@ const DashboardTutorCertification = () => {
       issueBy: "",
       issueDate: "",
       imagePreview: certFile,
+      imageBase64: "", // اینو اضافه کردیم برای ذخیره بیس ۶۴
     },
   ]);
+  const [getCertification, setGetCertification] = useState([]);
+  const [me, setMe] = useState({});
 
+  // گرفتن اطلاعات کاربر
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await api.get(`/api/me`);
+        setMe(res.data);
+      } catch (error) {
+        console.error("Fetching me failed:", error);
+        toast.error("Failed to fetch me. Please try again later.");
+      }
+    };
+    fetchMe();
+  }, []);
+
+  // گرفتن مدارک قبلی
+  useEffect(() => {
+    if (!me?.id) return;
+    const fetchCertifications = async () => {
+      try {
+        const res = await api.get(`/api/tutor-certificates/${me.id}`);
+        setGetCertification(res.data);
+      } catch (error) {
+        console.error("Fetching certifications failed:", error);
+        toast.error("Failed to fetch certifications. Please try again later.");
+      }
+    };
+    fetchCertifications();
+  }, [me]);
+
+  console.log(getCertification)
+
+  // افزودن مدرک جدید
   const handleAddCertification = () => {
     setCertifications([
       ...certifications,
@@ -29,15 +64,18 @@ const DashboardTutorCertification = () => {
         issueBy: "",
         issueDate: "",
         imagePreview: certFile,
+        imageBase64: "",
       },
     ]);
   };
 
+  // حذف مدرک
   const handleRemoveCertification = (index: number) => {
     const updatedCerts = certifications.filter((_, i) => i !== index);
     setCertifications(updatedCerts);
   };
 
+  // تغییر مقدار فیلدهای متنی
   const handleChange = (
     index: number,
     field: "certTitle" | "issueBy" | "issueDate",
@@ -48,23 +86,62 @@ const DashboardTutorCertification = () => {
     setCertifications(updatedCerts);
   };
 
-  const handleImageChange = (
+  // تبدیل عکس به base64 و ذخیره در state
+  const handleImageChange = async (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const imageURL = URL.createObjectURL(file);
-    const updatedCerts = [...certifications];
-    updatedCerts[index].imagePreview = imageURL;
-    setCertifications(updatedCerts);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result as string;
+      const updatedCerts = [...certifications];
+      updatedCerts[index].imagePreview = base64String; // برای نمایش در صفحه
+      updatedCerts[index].imageBase64 = base64String; // برای ارسال به API
+      setCertifications(updatedCerts);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // ارسال اطلاعات به API
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!me?.id) {
+      toast.error("User not found");
+      return;
+    }
+
+    try {
+      for (const cert of certifications) {
+        const payload = {
+          title: cert.certTitle,
+          issued_by: cert.issueBy,
+          issue_date: cert.issueDate,
+          certificate_image: cert.imageBase64.startsWith("data:")
+            ? cert.imageBase64
+            : "",
+
+          // certificate_image: cert.imageBase64, // عکس به‌صورت base64
+          tutor: me.id,
+        };
+
+        await api.patch(`/api/tutor-certificates/${me.id}`, payload);
+      }
+
+      toast.success("Certifications updated successfully!");
+    } catch (error) {
+      console.error("Updating certifications failed:", error);
+      toast.error("Failed to update certifications.");
+    }
   };
 
   return (
     <div className="my-12 px-1 md:px-4 lg:px-8">
       <h1 className="text-[#45444A] font-bold text-2xl">Certifications</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         {certifications.map((cert, index) => (
           <div
             key={index}
@@ -73,6 +150,7 @@ const DashboardTutorCertification = () => {
             {/* delete certification  */}
             {certifications.length > 1 && (
               <button
+                type="button"
                 onClick={() => handleRemoveCertification(index)}
                 className="absolute top-0 right-0 text-[#E13350] text-xs sm:text-sm font-bold underline"
               >

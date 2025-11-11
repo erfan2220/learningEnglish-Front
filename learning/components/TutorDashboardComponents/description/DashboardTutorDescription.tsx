@@ -1,14 +1,26 @@
 "use client";
 import Inputs from "@/components/Common/Input/Input";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { countryList } from "@/mock/countryList";
 
 import Button from "@/components/Common/Button/Button";
 import Image from "next/image";
+import { api } from "@/lib/APIs/axiosInstance";
+import toast from "react-hot-toast";
 
 const experienceIcon = "/icons/experienceGray.svg";
 const locationIcon = "/icons/locationGray.svg";
 const dateIcon = "/icons/dayIcon.svg";
+
+interface Experience {
+  experience: string;
+  organization: string;
+  country: string;
+  city: string;
+  startDate: string;
+  endDate: string;
+  describe: string;
+}
 
 const DashboardTutorDescription = () => {
   const [bio, setBio] = useState("");
@@ -19,6 +31,7 @@ const DashboardTutorDescription = () => {
   const [experience, setExperience] = useState([
     {
       experience: "",
+      organization: "",
       country: "",
       city: "",
       startDate: "",
@@ -27,11 +40,46 @@ const DashboardTutorDescription = () => {
     },
   ]);
 
+  const [getExperiences, setGetExperiences] = useState([]);
+  const [me, setMe] = useState({});
+
+  // گرفتن اطلاعات کاربر
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await api.get(`/api/me`);
+        setMe(res.data);
+      } catch (error) {
+        console.error("Fetching me failed:", error);
+        toast.error("Failed to fetch me. Please try again later.");
+      }
+    };
+    fetchMe();
+  }, []);
+  console.log(getExperiences);
+
+  // گرفتن تجربیات قبلی
+  useEffect(() => {
+    if (!me?.id) return;
+    const fetchExperiences = async () => {
+      try {
+        const res = await api.get(`/api/tutor-experiences/${me.id}`);
+        setGetExperiences(res.data);
+      } catch (error) {
+        console.error("Fetching experiences failed:", error);
+        toast.error("Failed to fetch experiences. Please try again later.");
+      }
+    };
+    fetchExperiences();
+  }, [me]);
+
+  // افزودن تجربه جدید
   const handleAddExperience = () => {
     setExperience([
       ...experience,
       {
         experience: "",
+        organization: "",
         country: "",
         city: "",
         startDate: "",
@@ -41,21 +89,16 @@ const DashboardTutorDescription = () => {
     ]);
   };
 
+  // حذف تجربه
   const handleRemoveExperience = (index: number) => {
     const updated = experience.filter((_, i) => i !== index);
     setExperience(updated);
   };
 
+  // تغییر مقدار فیلدها
   const handleChange = (
     index: number,
-    field:
-      | "experience"
-      | "country"
-      | "city"
-      | "startDate"
-      | "endDate"
-      | "describe",
-
+    field: keyof Experience,
     value: string
   ) => {
     const updated = [...experience];
@@ -63,10 +106,49 @@ const DashboardTutorDescription = () => {
     setExperience(updated);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ارسال به API
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log("Final Education Data:", educations);
-    //api
+
+    if (!me?.id) {
+      toast.error("User not found");
+      return;
+    }
+
+    try {
+      // آپدیت تجربه‌ها
+      const experiencePromises = experience.map((exp) => {
+        const payload = {
+          title: exp.experience,
+          organization: exp.organization,
+          country: exp.country,
+          city: exp.city,
+          start_date: exp.startDate,
+          end_date: exp.endDate,
+          description: exp.describe,
+          tutor: me.id,
+        };
+
+        return api.patch(`/api/tutor-experiences/${me.id}`, payload);
+      });
+
+      await Promise.all(experiencePromises);
+
+      //  آپدیت توضیحات مدرس (bio, teaching_style, expectation, description)
+      const tutorPayload = {
+        bio,
+        teaching_style: teachingStyle,
+        expectation: expect,
+        description: goalsTeach,
+      };
+
+      await api.patch(`/api/tutors/${me.id}`, tutorPayload);
+
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.error("Updating tutor info failed:", error);
+      toast.error("Failed to update information.");
+    }
   };
 
   return (
@@ -171,6 +253,20 @@ const DashboardTutorDescription = () => {
             </div>
 
             <div className="w-full sm:w-[450px]">
+              <Inputs
+                placeholder="Experience Organization"
+                type="text"
+                inputIcon={experienceIcon}
+                label="Experience Organization"
+                value={exp.organization}
+                onchange={(e) =>
+                  handleChange(index, "organization", e.target.value)
+                }
+                width="100%"
+              />
+            </div>
+
+            <div className="w-full sm:w-[450px]">
               <label className="text-[#5C5A60] mx-2 text-xs mb-1 block">
                 Country
               </label>
@@ -192,11 +288,7 @@ const DashboardTutorDescription = () => {
                     </option>
                   ))}
                 </select>
-                {/* <img
-                  src={"/icons/locationGray.svg"}
-                  alt="locationIcon"
-                  className="w-6 h-6 absolute top-[20px] left-4 -translate-y-1/2"
-                /> */}
+
                 <Image
                   src={locationIcon}
                   alt="country icon"
@@ -273,7 +365,7 @@ const DashboardTutorDescription = () => {
 
         {/*  submit btn */}
         <div className="flex justify-end mt-8">
-          <Button type="submit" label="Update Education" />
+          <Button type="submit" label="Update Description" />
         </div>
       </form>
     </div>

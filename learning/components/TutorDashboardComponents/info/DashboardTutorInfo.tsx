@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import Inputs from "@/components/Common/Input/Input";
-
 import Image from "next/image";
-
 import Button from "@/components/Common/Button/Button";
 import { countryList } from "@/mock/countryList";
-
+import { api } from "@/lib/APIs/axiosInstance";
+import toast from "react-hot-toast";
 
 const userIcon = "/icons/userIconGray.svg";
 const emailIcon = "/icons/emailGray.svg";
@@ -22,7 +20,6 @@ const levelIcon = "/icons/levelIconGray.svg";
 const binIcon = "/icons/binGray.svg";
 const profilePhoto = "/icons/profilePhoto.svg";
 
-
 const DashboardTutorInfo = () => {
   const [imagePreview, setImagePreview] = useState(profilePhoto);
   const [firstName, setFirstName] = useState("");
@@ -33,6 +30,7 @@ const DashboardTutorInfo = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [me, setMe] = useState({});
 
   const [entries, setEntries] = useState([{ language: "", level: "" }]);
 
@@ -77,36 +75,108 @@ const DashboardTutorInfo = () => {
     setIsDisabled(!isDisabled);
   };
 
+  // گرفتن اطلاعات کاربر
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await api.get(`/api/me`);
+        setMe(res.data);
+      } catch (error) {
+        console.error("Fetching me failed:", error);
+        toast.error("Failed to fetch me. Please try again later.");
+      }
+    };
+    fetchMe();
+  }, []);
+
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (typeof reader.result === "string") resolve(reader.result);
+        else reject("Failed to convert file");
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      // گرفتن فایل عکس
+      const imageInput = document.querySelector<HTMLInputElement>(
+        'input[type="file"][accept="image/*"]'
+      );
+      let profile_picture = "";
+      if (imageInput?.files?.[0]) {
+        profile_picture = await fileToBase64(imageInput.files[0]);
+      }
+
+      // گرفتن فایل ویدیو
+      const videoInput = document.querySelector<HTMLInputElement>(
+        'input[type="file"][accept="video/*"]'
+      );
+      let intro_video_file = "";
+      if (videoInput?.files?.[0]) {
+        intro_video_file = await fileToBase64(videoInput.files[0]);
+      }
+
+      // آماده کردن رشته زبان‌ها
+      const languages_spoken = entries
+        .map((entry) => `${entry.language}:${entry.level}`)
+        .join(",");
+
+      // رشته موضوع
+      const subjects = selectedSubject;
+
+      // ساخت payload
+      const payload = {
+        profile_picture,
+        languages_spoken,
+        country: selectedCountry,
+        subjects,
+        phone_number: phoneNumber,
+        intro_video_file,
+      };
+
+      // فراخوانی API
+      await api.patch(`/api/tutors/${me.id}`, payload);
+
+      toast.success("Information updated successfully!");
+    } catch (error) {
+      console.error("Updating tutor info failed:", error);
+      toast.error("Failed to update information.");
+    }
+  };
+
   return (
     <div className="my-8 px-1 md:px-2 lg:px-4">
-      <div className="flex flex-col justify-center items-center">
-        <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-gray-300">
-          {/* <img
-            src={imagePreview}
-            alt="imagePreview"
-            className="w-[120px] h-[120px] object-cover"
-          /> */}
-          <Image
-            src={imagePreview}
-            alt="profile photo"
-            width={120}
-            height={120}
-            className="object-cover"
-          />
-        </div>
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-col justify-center items-center">
+          <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-gray-300">
+            <Image
+              src={imagePreview}
+              alt="profile photo"
+              width={120}
+              height={120}
+              className="object-cover"
+            />
+          </div>
 
-        <label className="cursor-pointer text-blue-600 underline">
-          Upload photo
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="hidden"
-          />
-        </label>
-      </div>
-      {/* ///////////////////////////////////////////// */}
-      <form>
+          <label className="cursor-pointer text-blue-600 underline">
+            Upload photo
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </label>
+        </div>
+        {/* ///////////////////////////////////////////// */}
+
         <div className="flex flex-col md:flex-row text-[#45444A] mt-12">
           <div className="w-full md:w-1/3 ml-4 flex md:items-start md:justify-center font-bold mt-4 md:mt-6 mb-4 md:mb-0">
             Personal Information
@@ -171,11 +241,6 @@ const DashboardTutorInfo = () => {
                     </option>
                   ))}
                 </select>
-                {/* <img
-                  src={"/icons/locationGray.svg"}
-                  alt="countryIcon"
-                  className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                /> */}
 
                 <Image
                   src={countryIcon}
@@ -205,11 +270,6 @@ const DashboardTutorInfo = () => {
                   <option value="French">French</option>
                   <option value="Persian">Persian</option>
                 </select>
-                {/* <img
-                  src={"/icons/educationGray.svg"}
-                  alt="subjectIcon"
-                  className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                /> */}
 
                 <Image
                   src={subjectIcon}
@@ -252,11 +312,6 @@ const DashboardTutorInfo = () => {
                           <option value="Russian">Russian</option>
                           <option value="Spanish">Spanish</option>
                         </select>
-                        {/* <img
-                          src={"/icons/languageGray.svg"}
-                          alt="languageIcon"
-                          className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                        /> */}
 
                         <Image
                           src={languageIcon}
@@ -292,11 +347,6 @@ const DashboardTutorInfo = () => {
                           <option value="C1">C1</option>
                           <option value="C2">C2</option>
                         </select>
-                        {/* <img
-                          src={"/icons/levelIconGray.svg"}
-                          alt="levelIcon"
-                          className="w-5 h-5 absolute top-[12px] left-4 cursor-pointer"
-                        /> */}
 
                         <Image
                           src={levelIcon}
@@ -311,13 +361,6 @@ const DashboardTutorInfo = () => {
 
                   {/* Delete icon */}
                   <div className="mt-5">
-                    {/* <img
-                      src={"/icons/binGray.svg"}
-                      alt="binIcon"
-                      className="w-6 h-6 cursor-pointer"
-                      onClick={() => handleRemove(index)}
-                    /> */}
-
                     <Image
                       src={binIcon}
                       alt="bin"
@@ -410,11 +453,6 @@ const DashboardTutorInfo = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {/* <img
-                    src={"/icons/passwordIconGray.svg"}
-                    alt="passwordIcon"
-                    className="w-6 h-6 absolute top-[20px] left-5 -translate-y-1/2"
-                  /> */}
 
                   <Image
                     src={passwordIcon}
@@ -424,12 +462,6 @@ const DashboardTutorInfo = () => {
                     className="absolute top-[20px] left-5 -translate-y-1/2"
                   />
                 </div>
-                {/* <img
-                  src={"/icons/penDash.svg"}
-                  alt="editIcon"
-                  className="w-7 h-7 cursor-pointer mx-2"
-                  onClick={toggleEdit}
-                /> */}
 
                 <Image
                   src={editIcon}
