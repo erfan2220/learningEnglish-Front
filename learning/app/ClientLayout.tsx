@@ -14,13 +14,14 @@ export default function ClientLayout({
 
   const noFooterRoutes = ["/signin", "/signupTutor", "/signupStudent"];
 
-  const hideFooter = noFooterRoutes.some((route) =>
+  const hideFooterHeader = noFooterRoutes.some((route) =>
     pathname.startsWith(route)
   );
 
   return (
     <>
-      <Header />
+      {!hideFooterHeader && <Header />}
+
       <main className="flex-grow">{children}</main>
 
       <Toaster
@@ -29,7 +30,7 @@ export default function ClientLayout({
         toastOptions={{ duration: 5000 }}
       />
 
-      {!hideFooter && <Footer />}
+      {!hideFooterHeader && <Footer />}
     </>
   );
 }

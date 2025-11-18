@@ -23,6 +23,8 @@ const DashboardTutorCertification = () => {
   ]);
   const [getCertification, setGetCertification] = useState([]);
   const [me, setMe] = useState({});
+  // const { user } = useAuth();
+  // console.log(' user', user)
 
   // گرفتن اطلاعات کاربر
   useEffect(() => {
@@ -43,8 +45,9 @@ const DashboardTutorCertification = () => {
     if (!me?.id) return;
     const fetchCertifications = async () => {
       try {
-        const res = await api.get(`/api/tutor-certificates/${me.id}`);
+        const res = await api.get(`/api/tutor-certificates/?user=${me.id}`);
         setGetCertification(res.data);
+        console.log('getCertification', res.data)
       } catch (error) {
         console.error("Fetching certifications failed:", error);
         toast.error("Failed to fetch certifications. Please try again later.");
@@ -54,6 +57,7 @@ const DashboardTutorCertification = () => {
   }, [me]);
 
   console.log(getCertification)
+  console.log('me', me)
 
   // افزودن مدرک جدید
   const handleAddCertification = () => {
