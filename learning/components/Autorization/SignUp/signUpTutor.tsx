@@ -4,14 +4,12 @@ import Button from "../../Common/Button/Button";
 import Layout from "../../Layout/Layout";
 import Inputs from "../../Common/Input/Input";
 import Link from "next/link";
-
 import { useRouter } from "next/navigation";
 import axios from "axios";
-
 import Image from "next/image";
 import { FluentDoorRoutes } from "@/routes/routes";
+import { api } from "@/lib/APIs/axiosInstance";
 
-// ✅ icons served from /public/icons (no import statements)
 const eyeIconClose = "/icons/eyeCloseIcon.svg";
 const eyeIcon = "/icons/eyeIcon.svg";
 const signUpIcon = "/icons/signupIconWhite.svg";
@@ -20,7 +18,7 @@ const userIcon = "/icons/userIconGray.svg";
 const passwordIcon = "/icons/passwordIconGray.svg";
 const emailIcon = "/icons/emailGray.svg";
 const signUpPic = "/images/signUpPic.svg";
-const logo = "/images/logo2.png";
+const logo = "/images/logo.png";
 
 const SignUpTutor = () => {
   const [firstName, setFirstName] = useState("");
@@ -28,18 +26,37 @@ const SignUpTutor = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
   const isTeacher = true;
 
   const router = useRouter();
+
+  // تابع برای ثبت نام با گوگل
+  const handleGoogleSignUp = () => {
+    // ریدایرکت به endpoint گوگل با پارامتر is_teacher
+    const googleAuthUrl = `${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/google/?is_teacher=true&redirect_uri=${window.location.origin}/signinGoogle`;
+    window.location.href = googleAuthUrl;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
+    // اعتبارسنجی
+    if (!agreeToTerms) {
+      setError("Please agree to the terms and conditions");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
+
     try {
       const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/register/`;
 
-      const response = await axios.post(url, {
+      const response = await api.post(url, {
         email,
         password,
         first_name: firstName,
@@ -53,7 +70,12 @@ const SignUpTutor = () => {
       localStorage.setItem("refresh_token", refresh);
       localStorage.setItem("is_teacher", isTeacher.toString());
 
-      router.push(`${FluentDoorRoutes.tutorAuthentication}`);
+      // پس از ثبت نام، اطلاعات کاربر را دریافت کنید
+      const userResponse = await api.get("/api/me");
+      const user = userResponse.data;
+
+      // هدایت به داشبورد معلم
+      router.push("/tutorDashboard");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
@@ -63,6 +85,10 @@ const SignUpTutor = () => {
             setError(data);
           } else if (data?.message) {
             setError(data.message);
+          } else if (data?.email) {
+            setError(`Email: ${data.email[0]}`);
+          } else if (data?.password) {
+            setError(`Password: ${data.password[0]}`);
           } else {
             setError("Registration failed");
           }
@@ -114,8 +140,9 @@ const SignUpTutor = () => {
                 </u>
               </p>
 
-              <Link
-                href={"/signinGoogle"}
+              {/* دکمه ثبت نام با گوگل */}
+              <button
+                onClick={handleGoogleSignUp}
                 className="flex gap-2 w-full border-2 my-2 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-2"
               >
                 <Image
@@ -127,7 +154,7 @@ const SignUpTutor = () => {
                 <p className="text-[#727177] text-sm font-semibold">
                   Continue with Google
                 </p>
-              </Link>
+              </button>
             </div>
 
             <div className="flex items-center justify-center gap-2 mb-2 mx-8">
@@ -135,6 +162,7 @@ const SignUpTutor = () => {
               <p className="text-[#45444A]">or</p>
               <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
             </div>
+            
             <form
               onSubmit={handleSubmit}
               className="px-3 flex flex-col gap-2 sm:px-8 sm:pt-0 w-full -mt-4"
@@ -148,6 +176,7 @@ const SignUpTutor = () => {
                   label="First Name"
                   width="100%"
                   inputIcon={userIcon}
+                  required
                 />
 
                 <Inputs
@@ -158,6 +187,7 @@ const SignUpTutor = () => {
                   label="Last Name"
                   width="100%"
                   inputIcon={userIcon}
+                  required
                 />
                 <Inputs
                   type="email"
@@ -167,6 +197,7 @@ const SignUpTutor = () => {
                   label="Email"
                   width="100%"
                   inputIcon={emailIcon}
+                  required
                 />
                 <Inputs
                   type="password"
@@ -178,19 +209,32 @@ const SignUpTutor = () => {
                   icon1={eyeIconClose}
                   icon2={eyeIcon}
                   inputIcon={passwordIcon}
+                  required
                 />
               </div>
+              
               <div className="flex gap-2 mx-2 mt-2 ">
-                <input type="checkbox" className="w-5 h-5 rounded-2xl" />
+                <input 
+                  type="checkbox" 
+                  className="w-5 h-5 rounded-2xl" 
+                  checked={agreeToTerms}
+                  onChange={(e) => setAgreeToTerms(e.target.checked)}
+                />
                 <p className="text-[#45444A] text-sm">I agree to the terms</p>
               </div>
-              {error && <p className="text-red-600">{error}</p>}
+              
+              {error && (
+                <div className="rounded-lg border border-red-200 bg-red-50 text-red-700 text-sm px-3 py-2">
+                  {error}
+                </div>
+              )}
 
               <Button
                 type="submit"
                 label={"Sign Up"}
                 widthBtn="100%"
                 btnIcon={signUpIcon}
+                disabled={!agreeToTerms}
               />
 
               <div className="text-xs text-center text-gray-500 pb-4 pt-1 px-0 sm:px-10">
@@ -198,7 +242,7 @@ const SignUpTutor = () => {
                 <u>
                   <Link href={FluentDoorRoutes.terms}>Our Terms</Link>
                 </u>{" "}
-                of Use and{" "}
+                and{" "}
                 <u>
                   <Link href={FluentDoorRoutes.policy}>Privacy Policy</Link>
                 </u>

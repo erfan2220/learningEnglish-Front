@@ -128,6 +128,7 @@ export type InputsProps = {
   icon2?: string;
   inputIcon?: string;
   disabled?: boolean;
+  required?: boolean;
 };
 
 export type CountryComponent = {
@@ -153,3 +154,13 @@ export type TutorialStepType = {
   //  picture:StaticImageData;
   flexRow: string;
 };
+
+export type User = {
+  email: string;
+  first_name: string;
+  id: number;
+  is_teacher: boolean;
+  last_name: string;
+  profile_picture: string | null;
+};
+

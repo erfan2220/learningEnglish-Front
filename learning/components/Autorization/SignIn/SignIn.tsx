@@ -8,12 +8,15 @@ import { useAuth } from "@/context/AuthContext";
 import { FluentDoorRoutes } from "@/routes/routes";
 import Layout from "@/components/Layout/Layout";
 import Inputs from "@/components/Common/Input/Input";
+import { api } from "@/lib/APIs/axiosInstance";
+import toast from "react-hot-toast";
+import { User } from "@/model/types";
 
 const LS_EMAIL_KEY = "le_remember_email";
 const LS_REMEMBER_KEY = "le_remember_me";
 
 const loginPic = "/images/signInPic.svg";
-const logo = "/images/logo2.png";
+const logo = "/images/logo.png";
 
 export default function SignIn() {
   const router = useRouter();
@@ -22,6 +25,8 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
+  const [me, setMe] = useState({});
+  const [isLogin, setIsLogin] = useState(false);
 
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>("");
@@ -67,31 +72,55 @@ export default function SignIn() {
 
     setBusy(true);
     try {
-      // Send the login request
-      // const response = await api.post('/api/login/', {
-      //   email,
-      //   password
-      // });
-
-      // Store the tokens
-      // localStorage.setItem('access_token', response.data.access);
-      // localStorage.setItem('refresh_token', response.data.refresh);
-      await login(email, password); // <-- use AuthProvider
-
-      // Redirect to home after login
-      router.push("/");
+      await login(email, password);
+      setIsLogin(true); // Trigger me data fetch
     } catch (err) {
-      // Handle any errors
       console.error(err);
       setError("Failed to authenticate");
-    } finally {
       setBusy(false);
     }
   }
 
+  // Handle redirect after me data is fetched
+  useEffect(() => {
+    if (isLogin && me && Object.keys(me).length > 0) {
+      // Type guard for me object
+      const user = me as User;
+
+      if (user.is_teacher) {
+        router.push(FluentDoorRoutes.tutorAuthentication);
+      } else {
+        router.push(FluentDoorRoutes.homePage);
+      }
+
+      setBusy(false);
+      setIsLogin(false);
+    }
+  }, [me, isLogin, router]);
+
   useEffect(() => {
     localStorage.setItem("emailForgotPassword", email);
   }, [email]);
+
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await api.get(`/api/me`);
+        setMe(res.data);
+      } catch (error) {
+        console.error("Fetching me failed:", error);
+        toast.error("Failed to fetch me. Please try again later.");
+        setBusy(false);
+        setIsLogin(false);
+      }
+    };
+
+    if (isLogin) {
+      fetchMe();
+    }
+  }, [isLogin]);
+
+  console.log("me:", me);
 
   return (
     <div className="w-full relative h-screen overflow-x-hidden overflow-y-hidden flex items-center justify-center px-2 gap-8 max-w-[1320px] mx-auto">
@@ -130,7 +159,6 @@ export default function SignIn() {
                 href="/signinGoogle"
                 className="flex gap-2 w-full border-2 mt-4 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-3"
               >
-                {/* Use asset from /public to avoid build-time image processing */}
                 <Image
                   src="/icons/google.svg"
                   alt="google icon"
@@ -248,7 +276,6 @@ export default function SignIn() {
               </form>
             </div>
           </Layout>
-          {/* ===================== */}
         </div>
       </main>
     </div>

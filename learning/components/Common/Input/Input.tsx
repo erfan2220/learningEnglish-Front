@@ -13,6 +13,7 @@ const Inputs: React.FC<InputsProps> = ({
   icon1,
   icon2,
   inputIcon,
+  required = false,
   disabled = false,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,6 +30,7 @@ const Inputs: React.FC<InputsProps> = ({
           placeholder={placeholder}
           value={value}
           disabled={disabled}
+          required={required}
           style={{
             width: width,
           }}

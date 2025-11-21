@@ -9,6 +9,8 @@ import { Tutor } from "@/model/tutorType";
 import { api } from "@/lib/APIs/axiosInstance";
 import { BeatLoader } from "react-spinners";
 import Pagination from "../../Common/Pagination/Pagination";
+import SelectDegree from "@/components/Course/Courses/SelectDegree";
+import SelectCountry from "@/components/Course/Courses/SelectCountry";
 
 const searchIcon = "/icons/searchIconGray.svg";
 
@@ -23,10 +25,12 @@ const TutorList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // filters
+  // filters - بدون localStorage
   const [filters, setFilters] = useState({
-    language: localStorage.getItem("languageFilterTutor") || "",
+    language: "",
     search: "",
+    degree: "",
+    country: "",
   });
 
   const [searchTerms, setSearchTerms] = useState("");
@@ -47,43 +51,27 @@ const TutorList = () => {
     fetchTutors();
   }, []);
 
-  // load filters from localStorage
-  useEffect(() => {
-    const language = localStorage.getItem("languageFilterTutor") || "";
-    const search = localStorage.getItem("searchTermsFilterTutor") || "";
+  // update filter و reset صفحه
+  const updateFilter = (key: string, value: string) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+    
+    // reset page to 1 هنگام تغییر فیلتر
+    if (CurrentPage !== 1) {
+      router.push("/tutor?page=1");
+    }
+  };
 
-    setFilters({ language, search });
-    setSearchTerms(search);
-  }, []);
-
+  // sync search terms with filters
   useEffect(() => {
-    return () => {
-      if (!window.location.pathname.includes("/tutor")) {
-        localStorage.removeItem("languageFilterTutor");
-        localStorage.removeItem("searchTermsFilterTutor");
-      }
-    };
-  }, []);
-
-  // save searchTerms to filters
-  useEffect(() => {
-    localStorage.setItem("searchTermsFilterTutor", searchTerms);
     setFilters((prev) => ({ ...prev, search: searchTerms }));
   }, [searchTerms]);
-
-  // update a filter and save to localStorage + reset page
-  const updateFilter = (key: string, value: string) => {
-    localStorage.setItem(`${key}FilterTutor`, value);
-    setFilters((prev) => ({ ...prev, [key]: value }));
-
-    // reset page to 1
-    router.push("/tutor?page=1");
-  };
 
   // filter tutors
   const filteredTutors = tutors.filter((tutor) => {
     const search = filters.search.toLowerCase();
     const language = filters.language.toLowerCase();
+    const degree = filters.degree.toLowerCase();
+    const country = filters.country.toLowerCase();
 
     const matchSearch =
       !search ||
@@ -91,16 +79,18 @@ const TutorList = () => {
       tutor.user.last_name.toLowerCase().includes(search);
 
     const tutorSubjects = (tutor.subjects || []).map((s) => s.toLowerCase());
-
+    const tutorCountry = tutor.country.toLowerCase() || "";
     const matchLanguage = !language || tutorSubjects.includes(language);
+    const matchCountry = !country || tutorCountry.includes(country);
 
-    // const matchPrice = !tutor.
-    //   ? true
-    //   : filters.price === "0"
-    //   ? Number(course.price_per_toman) === 0
-    //   : Number(course.price_per_toman) <= Number(filters.price);
+    // فیلتر مدرک تحصیلی
+    const matchDegree = !degree || 
+      (tutor.educations && tutor.educations.length > 0 && 
+       tutor.educations.some(edu => 
+        edu.degree?.toLowerCase().includes(degree)
+      ));
 
-    return matchSearch && matchLanguage;
+    return matchSearch && matchLanguage && matchDegree && matchCountry;
   });
 
   const firstIndex = (CurrentPage - 1) * ppg;
@@ -123,30 +113,34 @@ const TutorList = () => {
       </Layout>
 
       {/* filters */}
-      <div className="w-full mt-6 flex justify-between gap-1 items-center">
-        <div className="min-w-[320px] w-1/2">
+      <div className="w-full mt-6 flex justify-between gap-4 items-center flex-wrap">
+        <div className="min-w-[250px] flex-1">
           <Inputs
             type="text"
             value={searchTerms}
             onchange={(e) => setSearchTerms(e.target.value)}
-            placeholder={"search tutor"}
+            placeholder={"Search tutor"}
             inputIcon={searchIcon}
             width="100%"
           />
         </div>
-        <div className=" w-1/2">
+        <div className="min-w-[200px] flex-1">
           <SelectLanguage
             value={filters.language}
             onChange={(value) => updateFilter("language", value)}
           />
         </div>
-        <div>
-          {/* <SelectPrice
-              free={filters.price === "0"}
-              price={Number(filters.price) || 0}
-              onChangeFree={(value) => updateFilter("price", value ? "0" : "")}
-              onChangePrice={(value) => updateFilter("price", value.toString())}
-            /> */}
+        <div className="min-w-[200px] flex-1">
+          <SelectDegree
+            value={filters.degree}
+            onChange={(value) => updateFilter("degree", value)}
+          />
+        </div>
+         <div className="min-w-[200px] flex-1">
+          <SelectCountry
+            value={filters.country}
+            onChange={(value) => updateFilter("country", value)}
+          />
         </div>
       </div>
 
@@ -168,7 +162,7 @@ const TutorList = () => {
         </div>
       ) : error ? (
         <div className="flex justify-center items-center h-64">
-           <p className="text-center text-lg p-8 bg-white/80 rounded-2xl shadow-md border-4 border-[#afaeb2] text-[#6e6d75]">
+          <p className="text-center text-lg p-8 bg-white/80 rounded-2xl shadow-md border-4 border-[#afaeb2] text-[#6e6d75]">
             Error : {error}
           </p>
         </div>

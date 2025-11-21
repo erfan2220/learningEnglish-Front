@@ -20,7 +20,6 @@ const TutorShowCart = ({ tutorId }: Props) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const { user } = useAuth();
-  
 
   useEffect(() => {
     const fetchTutors = async () => {
@@ -51,7 +50,7 @@ const TutorShowCart = ({ tutorId }: Props) => {
     setTimeout(() => setIsAnimating(false), 300);
     setIsFavorite(!isFavorite);
   };
-console.log(user)
+  console.log(user);
   return (
     <div className="flex pb-4 px-4 flex-wrap items-center justify-center w-full h-[360px] sm:mx-2 [@media(min-width:400px)]:w-[320px] sm:w-[320px] rounded-lg border border-gray-300 bg-white shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
       <div className="flex flex-wrap w-full items-center justify-center gap-4 sm:p-2 sm:pb-0 p-1">
@@ -66,14 +65,19 @@ console.log(user)
             width={80}
             height={80}
             onError={() => setImgError(true)} // ✅ Next/Image-friendly fallback
-            className="rounded-full"
+            className="rounded-full object-cover w-[80px] h-[80px] sm:w-[80px] sm:h-[80px]"
           />
         </div>
 
         <div className="flex flex-col items-center">
-          <p className="text-sm font-bold text-[#45444A]">
-            {tutor.user?.first_name} {tutor.user?.last_name}
-          </p>
+          <span className="text-sm font-bold text-[#45444A]">
+            {`${tutor.user?.first_name} ${tutor.user?.last_name}`.length > 20
+              ? `${`${tutor.user?.first_name} ${tutor.user?.last_name}`.slice(
+                  0,
+                  20
+                )}...`
+              : `${tutor.user?.first_name} ${tutor.user?.last_name}`}
+          </span>
           <p className="text-xs text-[#8B8A8E]">Tutor</p>
           <div className="flex items-center gap-1">
             <Image
@@ -123,7 +127,7 @@ console.log(user)
 
       <div className="w-full flex justify-end text-xs text-[#45444A] mt-2">
         <p>
-          <Link href={`/tutor/detail/${tid}`}>
+          <Link href={`/tutor/detail/${tutor.id}`}>
             <u>view profile</u>
           </Link>
         </p>

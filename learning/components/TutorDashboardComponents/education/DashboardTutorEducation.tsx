@@ -7,6 +7,7 @@ import { countryList } from "@/mock/countryList";
 import Image from "next/image";
 import { api } from "@/lib/APIs/axiosInstance";
 import toast from "react-hot-toast";
+import { User } from "@/model/types";
 
 const instituteIcon = "/icons/institutionGray.svg";
 const locationIcon = "/icons/locationGray.svg";
@@ -15,9 +16,10 @@ const degreeIcon = "/icons/degreeGray.svg";
 const fieldIcon = "/icons/educationGray.svg";
 
 const DashboardTutorEducation = () => {
-  const [getEducation, setGetEducation] = useState([]);
-  const [me, setMe] = useState({});
+  const [educations, setEducations] = useState<any[]>([]);
+  const [me, setMe] = useState<User>();
 
+  // ⭐ fetch me
   useEffect(() => {
     const fetchMe = async () => {
       try {
@@ -25,86 +27,94 @@ const DashboardTutorEducation = () => {
         setMe(res.data);
       } catch (error) {
         console.error("Fetching me failed:", error);
-        toast.error("Failed to fetch me. Please try again later.");
+        toast.error("Failed to fetch me.");
       }
     };
     fetchMe();
   }, []);
 
-  console.log("me:", me);
-
+  // ⭐ fetch educations
   useEffect(() => {
     if (!me?.id) return;
 
     const fetchEducations = async () => {
       try {
-        const res = await api.get(`/api/tutor-educations/${me.id}`);
-        setGetEducation(res.data);
+        const res = await api.get(`/api/tutor-educations/?user=${me.id}`);
+console.log(res.data)
+        // اگر خالی بود، یک فرم جدید بساز
+        if (res.data.length === 0) {
+          setEducations([
+            {
+              id: null,
+              degree: "",
+              institution_name: "",
+              country: "",
+              city: "",
+              field: "",
+              start_date: "",
+              end_date: "",
+            },
+          ]);
+        } else {
+          // اگر قبلی بود، مقداردهی کن
+          const formatted = res.data.map((edu: any) => ({
+            id: edu.id,
+            degree: edu.degree || "",
+            institution_name: edu.institution_name || "",
+            country: edu.country || "",
+            city: edu.city || "",
+            field: edu.field || "",
+            start_date: edu.start_date || "",
+            end_date: edu.end_date || "",
+          }));
+
+          setEducations(formatted);
+        }
       } catch (error) {
         console.error("Fetching educations failed:", error);
-        toast.error("Failed to fetch educations. Please try again later.");
+        toast.error("Failed to fetch educations.");
       }
     };
 
     fetchEducations();
   }, [me]);
 
-  console.log(getEducation);
-
-  const [educations, setEducations] = useState([
-    {
-      degree: "",
-      institution: "",
-      country: "",
-      city: "",
-      field: "",
-      startDate: "",
-      endDate: "",
-    },
-  ]);
-
+  // ⭐ Add new education
   const handleAddEducation = () => {
     setEducations([
       ...educations,
       {
+        id: null,
         degree: "",
-        institution: "",
+        institution_name: "",
         country: "",
         city: "",
         field: "",
-        startDate: "",
-        endDate: "",
+        start_date: "",
+        end_date: "",
       },
     ]);
   };
 
+  // ⭐ Remove specific item
   const handleRemoveEducation = (index: number) => {
     const updated = educations.filter((_, i) => i !== index);
     setEducations(updated);
   };
 
-  const handleChange = (
-    index: number,
-    field:
-      | "degree"
-      | "institution"
-      | "country"
-      | "city"
-      | "field"
-      | "startDate"
-      | "endDate",
-    value: string
-  ) => {
+  // ⭐ Handle input change
+  const handleChange = (index: number, field: string, value: string) => {
     const updated = [...educations];
     updated[index][field] = value;
     setEducations(updated);
   };
 
+  // ⭐ Submit (POST or PATCH)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!me?.id) {
-      toast.error("User not found. Please try again.");
+      toast.error("User not found.");
       return;
     }
 
@@ -113,23 +123,29 @@ const DashboardTutorEducation = () => {
         educations.map((edu) => {
           const payload = {
             degree: edu.degree,
-            institution_name: edu.institution,
+            institution_name: edu.institution_name,
             country: edu.country,
             city: edu.city,
             field: edu.field,
-            start_date: edu.startDate,
-            end_date: edu.endDate,
+            start_date: edu.start_date,
+            end_date: edu.end_date,
             tutor: me.id,
           };
 
-          return api.patch(`/api/tutor-educations/${me.id}`, payload);
+          if (edu.id) {
+            // update existing
+            return api.patch(`/api/tutor-educations/${edu.id}/`, payload);
+          } else {
+            // create new
+            return api.post(`/api/tutor-educations/`, payload);
+          }
         })
       );
 
       toast.success("Educations updated successfully!");
-    } catch (error) {
-      console.error("Updating educations failed:", error);
-      toast.error("Failed to update educations. Please try again later.");
+    } catch (error: any) {
+      console.log("ERROR:", error?.response?.data);
+      toast.error("Failed to update educations.");
     }
   };
 
@@ -154,13 +170,13 @@ const DashboardTutorEducation = () => {
               </button>
             )}
 
+            {/* Degree */}
             <div className="w-full sm:w-[450px]">
               <label className="text-[#5C5A60] mx-2 text-xs mb-1 block">
                 Latest Degree
               </label>
               <div className="relative w-full">
                 <select
-                  name="selectDegree"
                   value={edu.degree}
                   onChange={(e) =>
                     handleChange(index, "degree", e.target.value)
@@ -175,7 +191,7 @@ const DashboardTutorEducation = () => {
                   <option value="Bachelor's Degree">
                     {"Bachelor's Degree"}
                   </option>
-                  <option value="Master's Degree">{"Master's Degree"}</option>
+                  <option value="Master's Degree">{`Master's Degree`}</option>
                   <option value="Doctor of Philosophy">PhD</option>
                   <option value="General Medical Doctor">Medical Doctor</option>
                   <option value="Specialist Medical Degree">
@@ -193,34 +209,35 @@ const DashboardTutorEducation = () => {
               </div>
             </div>
 
+            {/* Institution */}
             <div className="w-full sm:w-[450px]">
               <Inputs
                 placeholder="Institution Name"
                 type="text"
                 inputIcon={instituteIcon}
                 label="Institution Name"
-                value={edu.institution}
+                value={edu.institution_name}
                 onchange={(e) =>
-                  handleChange(index, "institution", e.target.value)
+                  handleChange(index, "institution_name", e.target.value)
                 }
                 width="100%"
               />
             </div>
 
+            {/* Country */}
             <div className="w-full sm:w-[450px]">
               <label className="text-[#5C5A60] mx-2 text-xs mb-1 block">
                 Institution Country
               </label>
               <div className="relative w-full">
                 <select
-                  name="selectCountry"
                   value={edu.country}
                   onChange={(e) =>
                     handleChange(index, "country", e.target.value)
                   }
                   className="text-[#5C5A60] w-full border-2 border-[#D2D2D2] focus:border-[#5F33E1] rounded-2xl px-10 py-2 bg-white/80 text-sm h-11 focus:outline-0"
                 >
-                  <option selected disabled value="">
+                  <option disabled value="">
                     --select country--
                   </option>
                   {countryList.map((country, index) => (
@@ -240,6 +257,7 @@ const DashboardTutorEducation = () => {
               </div>
             </div>
 
+            {/* City */}
             <div className="w-full sm:w-[450px]">
               <Inputs
                 placeholder="Institution City"
@@ -247,11 +265,14 @@ const DashboardTutorEducation = () => {
                 inputIcon={locationIcon}
                 label="Institution City"
                 value={edu.city}
-                onchange={(e) => handleChange(index, "city", e.target.value)}
+                onchange={(e) =>
+                  handleChange(index, "city", e.target.value)
+                }
                 width="100%"
               />
             </div>
 
+            {/* Field */}
             <div className="w-full sm:w-[450px]">
               <Inputs
                 placeholder="Field of Study"
@@ -259,40 +280,46 @@ const DashboardTutorEducation = () => {
                 inputIcon={fieldIcon}
                 label="Field of Study"
                 value={edu.field}
-                onchange={(e) => handleChange(index, "field", e.target.value)}
+                onchange={(e) =>
+                  handleChange(index, "field", e.target.value)
+                }
                 width="100%"
               />
             </div>
 
+            {/* Start Date */}
             <div className="w-full sm:w-[450px]">
               <Inputs
                 placeholder="Start Date"
                 type="date"
                 inputIcon={dateIcon}
                 label="Start Date"
-                value={edu.startDate}
+                value={edu.start_date}
                 onchange={(e) =>
-                  handleChange(index, "startDate", e.target.value)
+                  handleChange(index, "start_date", e.target.value)
                 }
                 width="100%"
               />
             </div>
 
+            {/* End Date */}
             <div className="w-full sm:w-[450px]">
               <Inputs
                 placeholder="End Date"
                 type="date"
                 inputIcon={dateIcon}
                 label="End Date"
-                value={edu.endDate}
-                onchange={(e) => handleChange(index, "endDate", e.target.value)}
+                value={edu.end_date}
+                onchange={(e) =>
+                  handleChange(index, "end_date", e.target.value)
+                }
                 width="100%"
               />
             </div>
           </div>
         ))}
 
-        {/* add new edu   */}
+        {/* Add new */}
         <p
           className="text-[#45444A] font-bold underline hover:cursor-pointer flex sm:items-center sm:justify-center mt-4"
           onClick={handleAddEducation}
@@ -300,7 +327,7 @@ const DashboardTutorEducation = () => {
           + Add Education
         </p>
 
-        {/*  submit btn */}
+        {/* Submit */}
         <div className="flex justify-end mt-8">
           <Button type="submit" label="Update Education" />
         </div>

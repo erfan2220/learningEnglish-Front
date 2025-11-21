@@ -2,11 +2,11 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import SwiperButton from "../../SwiperButton/SwiperButton";
 import { fetchTutors } from "@/services/tutors";
 import type { Tutor } from "@/model/tutorType";
 import { FluentDoorRoutes } from "@/routes/routes";
@@ -15,6 +15,7 @@ import TutorCart from "../TutorCart/TutorCart";
 const Slide = () => {
   const [tutors, setTutors] = useState<Tutor[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -62,21 +63,54 @@ const Slide = () => {
         )}
 
         {tutors && tutors.length > 0 && (
-          <Swiper
-            spaceBetween={24}
-            breakpoints={{
-              400: { slidesPerView: 1 },
-              750: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            <SwiperButton />
-            {tutors.map((tutor) => (
-              <SwiperSlide key={tutor.id}>
-                <TutorCart tutorData={tutor} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <>
+            <Swiper
+              spaceBetween={24}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              breakpoints={{
+                400: { slidesPerView: 1 },
+                750: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
+            >
+              {tutors.map((tutor) => (
+                <SwiperSlide key={tutor.id}>
+                  <TutorCart tutorData={tutor} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            
+            {/* دکمه‌ها Swiper */}
+            <div className="flex justify-between w-full absolute top-1/2 left-0 right-0 transform -translate-y-1/2 !z-50 px-5">
+              <button
+                onClick={() => swiperRef.current?.slidePrev()}
+                aria-label="arrow back"
+                className="hover:scale-105 transition-all duration-200 hidden sm:flex items-center justify-center rounded-full shadow-lg"
+              >
+                <Image
+                  src="/icons/arrowBackBtnPink.svg"
+                  alt="arrow back"
+                  width={32}
+                  height={32}
+                />
+              </button>
+
+              <button
+                onClick={() => swiperRef.current?.slideNext()}
+                aria-label="arrow forward"
+                className="hover:scale-105 transition-all duration-200 hidden sm:flex items-center justify-center rounded-full shadow-lg"
+              >
+                <Image
+                  src="/icons/arrowForwardBtnPink.svg"
+                  alt="arrow forward"
+                  width={32}
+                  height={32}
+                />
+              </button>
+            </div>
+          </>
         )}
       </div>
     </div>

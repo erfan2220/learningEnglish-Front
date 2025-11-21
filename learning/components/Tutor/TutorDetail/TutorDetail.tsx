@@ -62,6 +62,8 @@ const TutorDetail = ({ id }: { id: number }) => {
     }
   }, [id]);
 
+  console.log(tutor)
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -104,7 +106,7 @@ const TutorDetail = ({ id }: { id: number }) => {
   if (!tutor) {
     return (
       <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto mt-[60px]">
-        <p>Course not found</p>
+        <p>tutor not found</p>
       </div>
     );
   }

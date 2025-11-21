@@ -5,26 +5,35 @@ import Button from "@/components/Common/Button/Button";
 import Image from "next/image";
 import { api } from "@/lib/APIs/axiosInstance";
 import toast from "react-hot-toast";
+import { User } from "@/model/types";
 
 const certFile = "/icons/certFile.svg";
 const certIcon = "/icons/certificateGray.svg";
 const issueByIcon = "/icons/issueBy.svg";
 const dateIcon = "/icons/dayIcon.svg";
 
+interface CertItem {
+  id?: number;
+  certTitle: string;
+  issueBy: string;
+  issueDate: string;
+  imagePreview: string;
+  imageBase64: string;
+}
+
 const DashboardTutorCertification = () => {
-  const [certifications, setCertifications] = useState([
+  const [certifications, setCertifications] = useState<CertItem[]>([
     {
       certTitle: "",
       issueBy: "",
       issueDate: "",
       imagePreview: certFile,
-      imageBase64: "", // اینو اضافه کردیم برای ذخیره بیس ۶۴
+      imageBase64: "",
     },
   ]);
-  const [getCertification, setGetCertification] = useState([]);
-  const [me, setMe] = useState({});
-  // const { user } = useAuth();
-  // console.log(' user', user)
+
+  const [me, setMe] = useState<User>();
+  const [isLoading, setIsLoading] = useState(true);
 
   // گرفتن اطلاعات کاربر
   useEffect(() => {
@@ -34,7 +43,7 @@ const DashboardTutorCertification = () => {
         setMe(res.data);
       } catch (error) {
         console.error("Fetching me failed:", error);
-        toast.error("Failed to fetch me. Please try again later.");
+        toast.error("Failed to fetch user.");
       }
     };
     fetchMe();
@@ -43,21 +52,32 @@ const DashboardTutorCertification = () => {
   // گرفتن مدارک قبلی
   useEffect(() => {
     if (!me?.id) return;
+
     const fetchCertifications = async () => {
       try {
+        setIsLoading(true);
         const res = await api.get(`/api/tutor-certificates/?user=${me.id}`);
-        setGetCertification(res.data);
-        console.log('getCertification', res.data)
+
+        const formatted = res.data.map((cert: any) => ({
+          id: cert.id, // ⭐ شناسه مدرک
+          certTitle: cert.title || "",
+          issueBy: cert.issued_by || "",
+          issueDate: cert.issue_date || "",
+          imagePreview: cert.certificate_image || certFile,
+          imageBase64: cert.certificate_image || "",
+        }));
+
+        setCertifications(formatted);
       } catch (error) {
         console.error("Fetching certifications failed:", error);
-        toast.error("Failed to fetch certifications. Please try again later.");
+        toast.error("Failed to fetch certifications.");
+      } finally {
+        setIsLoading(false);
       }
     };
+
     fetchCertifications();
   }, [me]);
-
-  console.log(getCertification)
-  console.log('me', me)
 
   // افزودن مدرک جدید
   const handleAddCertification = () => {
@@ -73,24 +93,24 @@ const DashboardTutorCertification = () => {
     ]);
   };
 
-  // حذف مدرک
+  // حذف مدرک از صفحه
   const handleRemoveCertification = (index: number) => {
-    const updatedCerts = certifications.filter((_, i) => i !== index);
-    setCertifications(updatedCerts);
+    const updated = certifications.filter((_, i) => i !== index);
+    setCertifications(updated);
   };
 
-  // تغییر مقدار فیلدهای متنی
+  // تغییر فیلدهای متنی
   const handleChange = (
     index: number,
     field: "certTitle" | "issueBy" | "issueDate",
     value: string
   ) => {
-    const updatedCerts = [...certifications];
-    updatedCerts[index][field] = value;
-    setCertifications(updatedCerts);
+    const updated = [...certifications];
+    updated[index][field] = value;
+    setCertifications(updated);
   };
 
-  // تبدیل عکس به base64 و ذخیره در state
+  // بارگذاری عکس و تبدیل به base64
   const handleImageChange = async (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
@@ -100,22 +120,21 @@ const DashboardTutorCertification = () => {
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      const base64String = reader.result as string;
-      const updatedCerts = [...certifications];
-      updatedCerts[index].imagePreview = base64String; // برای نمایش در صفحه
-      updatedCerts[index].imageBase64 = base64String; // برای ارسال به API
-      setCertifications(updatedCerts);
+      const base64 = reader.result as string;
+
+      const updated = [...certifications];
+      updated[index].imagePreview = base64;
+      updated[index].imageBase64 = base64;
+      setCertifications(updated);
     };
+
     reader.readAsDataURL(file);
   };
 
-  // ارسال اطلاعات به API
+  // ارسال نهایی
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!me?.id) {
-      toast.error("User not found");
-      return;
-    }
+    if (!me?.id) return toast.error("User not found");
 
     try {
       for (const cert of certifications) {
@@ -126,12 +145,16 @@ const DashboardTutorCertification = () => {
           certificate_image: cert.imageBase64.startsWith("data:")
             ? cert.imageBase64
             : "",
-
-          // certificate_image: cert.imageBase64, // عکس به‌صورت base64
           tutor: me.id,
         };
 
-        await api.patch(`/api/tutor-certificates/${me.id}`, payload);
+        if (cert.id) {
+          //  مدرک قبلی  PATCH
+          await api.patch(`/api/tutor-certificates/${cert.id}/`, payload);
+        } else {
+          //  مدرک جدید  POST
+          await api.post(`/api/tutor-certificates/?user=${me.id}/`, payload);
+        }
       }
 
       toast.success("Certifications updated successfully!");
@@ -141,22 +164,23 @@ const DashboardTutorCertification = () => {
     }
   };
 
+  if (isLoading) return <div className="my-12 px-4">Loading...</div>;
+
   return (
-    <div className="my-12 px-1 md:px-4 lg:px-8">
+    <div className="my-12 px-4">
       <h1 className="text-[#45444A] font-bold text-2xl">Certifications</h1>
 
       <form onSubmit={handleSubmit}>
         {certifications.map((cert, index) => (
           <div
             key={index}
-            className="flex flex-col gap-3  mt-12 items-center justify-center border-b-2 border-[#BBBBBB] pb-6 relative"
+            className="flex flex-col gap-3 mt-12 items-center justify-center border-b-2 border-[#BBBBBB] pb-6 relative"
           >
-            {/* delete certification  */}
             {certifications.length > 1 && (
               <button
                 type="button"
                 onClick={() => handleRemoveCertification(index)}
-                className="absolute top-0 right-0 text-[#E13350] text-xs sm:text-sm font-bold underline"
+                className="absolute top-0 right-0 text-[#E13350] text-xs font-bold underline"
               >
                 Delete Certification
               </button>
@@ -175,6 +199,7 @@ const DashboardTutorCertification = () => {
                 width="100%"
               />
             </div>
+
             <div className="w-full sm:w-[450px]">
               <Inputs
                 placeholder="Issue By"
@@ -182,10 +207,13 @@ const DashboardTutorCertification = () => {
                 inputIcon={issueByIcon}
                 label="Issue By"
                 value={cert.issueBy}
-                onchange={(e) => handleChange(index, "issueBy", e.target.value)}
+                onchange={(e) =>
+                  handleChange(index, "issueBy", e.target.value)
+                }
                 width="100%"
               />
             </div>
+
             <div className="w-full sm:w-[450px]">
               <Inputs
                 placeholder="Issue Date"
@@ -202,11 +230,6 @@ const DashboardTutorCertification = () => {
 
             <div className="flex flex-col justify-center items-center my-4">
               <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-gray-300">
-                {/* <img
-                  src={cert.imagePreview}
-                  alt="cert"
-                  className="object-cover w-[120px] h-[120px]"
-                /> */}
                 <Image
                   src={cert.imagePreview}
                   alt="cert"
@@ -215,8 +238,9 @@ const DashboardTutorCertification = () => {
                   className="object-cover"
                 />
               </div>
+
               <label className="cursor-pointer text-blue-600 underline mt-2">
-                Upload photo
+                Upload Photo
                 <input
                   type="file"
                   accept="image/*"
@@ -228,16 +252,15 @@ const DashboardTutorCertification = () => {
           </div>
         ))}
 
-        {/* add new certification   */}
         <p
-          className="text-[#45444A] font-bold underline hover:cursor-pointer flex sm:items-center sm:justify-center mt-4"
+          className="text-[#45444A] font-bold underline hover:cursor-pointer mt-4"
           onClick={handleAddCertification}
         >
           + Add Certification
         </p>
 
         <div className="flex justify-end mt-8">
-          <Button type="submit" label={"update certification"} />
+          <Button type="submit" label={"Update Certification"} />
         </div>
       </form>
     </div>

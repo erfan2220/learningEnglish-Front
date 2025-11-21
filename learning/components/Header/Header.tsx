@@ -9,6 +9,9 @@ import { useAuth } from "@/context/AuthContext";
 import { FluentDoorRoutes } from "@/routes/routes";
 import Cookies from "js-cookie";
 
+const verifiedIcon = "/icons/tickGreen.svg";
+const unverifiedIcon = "/icons/unVerified.svg";
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false); // profile dropdown
   const [mobileOpen, setMobileOpen] = useState(false); // mobile nav
@@ -16,7 +19,12 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const { user, loading, logout } = useAuth();
+  const isVerified = false;
 
+  useEffect(() => {
+    localStorage.setItem("is_teacher", String(user?.is_teacher));
+    localStorage.setItem("is_verified", String(isVerified));
+  }, [isVerified, user?.is_teacher]);
   // close profile menu on outside click
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
@@ -46,6 +54,7 @@ export default function Header() {
   const handleLogout = async () => {
     await logout();
     setMenuOpen(false);
+    router.push(FluentDoorRoutes.homePage);
 
     // پاک کردن تمام کوکی‌ها
     const allCookies = Cookies.get();
@@ -121,6 +130,30 @@ export default function Header() {
                         {user.is_teacher ? "Tutor" : "Student"}
                       </b>
                     </div>
+                    {user.is_teacher && isVerified ? (
+                      <div className="flex items-center gap-2 mt-1 text-xs font-semibold">
+                        <Image
+                          src={verifiedIcon}
+                          alt="tick icon"
+                          width={20}
+                          height={20}
+                        />
+                        <p className="text-[#7A9E0D]">verified</p>
+                      </div>
+                    ) : (
+                      user.is_teacher &&
+                      !isVerified && (
+                        <div className="flex items-center gap-2 mt-1 text-xs font-semibold">
+                          <Image
+                            src={unverifiedIcon}
+                            alt="unverified icon"
+                            width={20}
+                            height={20}
+                          />
+                          <p className="text-[#E13350]">unverified</p>
+                        </div>
+                      )
+                    )}
                   </div>
                   <hr />
                   <button

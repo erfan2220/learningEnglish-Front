@@ -36,7 +36,9 @@ const TutorCart = ({ tutorData }: TutorCartProps) => {
           </div>
         )}
 
-        <div className="text-xl text-[#5C5A60] font-bold mt-2">{fullName}</div>
+        <div className="text-xl text-[#5C5A60] font-bold mt-2">
+          {fullName.length > 20 ? fullName.slice(0, 20) + "..." : fullName}
+        </div>
         <div className="text-sm text-[#8B8A8E] mb-4">Professional Tutor</div>
 
         <div className="flex flex-wrap gap-4">

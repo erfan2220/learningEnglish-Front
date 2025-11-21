@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { api } from "@/lib/APIs/axiosInstance";
+import Cookies from "js-cookie";
 
 type User = { id: number; email: string; first_name: string; last_name: string; is_teacher: boolean; profile_picture?: string | null; };
 
@@ -79,6 +80,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
         delete api.defaults.headers.common["Authorization"];
+        
+        // پاک کردن تمام کوکی‌ها
+        const allCookies = Cookies.get();
+        Object.keys(allCookies).forEach((cookieName) => {
+        Cookies.remove(cookieName);
+        });
+        
         setUser(null);
     }, []);
 

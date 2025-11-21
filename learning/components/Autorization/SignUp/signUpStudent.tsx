@@ -15,9 +15,10 @@ import axios from "axios";
 import Image from "next/image";
 import Button from "@/components/Common/Button/Button";
 import { FluentDoorRoutes } from "@/routes/routes";
+import { api } from "@/lib/APIs/axiosInstance";
 
 const signUpPic = "/images/signUpPic.svg";
-const logo = "/images/logo2.png";
+const logo = "/images/logo.png";
 
 const SignUpStudent = () => {
   const [firstName, setFirstName] = useState("");
@@ -46,7 +47,7 @@ const SignUpStudent = () => {
     try {
       const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/register/`;
 
-      const response = await axios.post(url, {
+      const response = await api.post(url, {
         email,
         password,
         first_name: firstName,
