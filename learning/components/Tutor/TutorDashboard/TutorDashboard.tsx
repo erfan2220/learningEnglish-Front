@@ -1,11 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
-
 import DashboardMenuItems from "../../DashboardMenuItems/DashboardMenuItems";
-// import MenuItemMessages fسrom "../../menuItemMessages/MenuItemMessages";
-
 import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
 
 const homeIcon = "/icons/homeIcon.svg";
 const certIcon = "/icons/certGray.svg";
@@ -23,25 +20,7 @@ interface TutorDashboardProps {
 
 const TutorDashboard = ({ children }: TutorDashboardProps) => {
   const role = "tutor";
-  const [isVerified, setIsVerified] = useState("");
-
-  useEffect(() => {
-    // مقدار اولیه
-    const verify = localStorage.getItem("is_verified");
-    setIsVerified(verify ?? "");
-
-    // لیسنر برای تغییرات localStorage
-    const handleStorageChange = () => {
-      const updatedValue = localStorage.getItem("is_verified");
-      setIsVerified(updatedValue ?? "");
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+  const { user } = useAuth();
 
   return (
     <div className="w-full px-1 md:px-6 min-h-[600px] mx-auto flex gap-2 mt-[90px] mb-4">
@@ -92,7 +71,7 @@ const TutorDashboard = ({ children }: TutorDashboardProps) => {
             width={"100%"}
           />
 
-          {isVerified === "true" && (
+          {user?.tutor_approved === true && (
             <DashboardMenuItems
               role={role}
               topic={"addCourse"}

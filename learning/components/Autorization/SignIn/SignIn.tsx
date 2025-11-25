@@ -25,7 +25,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
-  const [me, setMe] = useState({});
+  const [me, setMe] = useState<User>();
   const [isLogin, setIsLogin] = useState(false);
 
   const [busy, setBusy] = useState(false);
@@ -87,7 +87,7 @@ export default function SignIn() {
       // Type guard for me object
       const user = me as User;
 
-      if (user.is_teacher) {
+      if (user.is_teacher && me.tutor_approved !== true) {
         router.push(FluentDoorRoutes.tutorAuthentication);
       } else {
         router.push(FluentDoorRoutes.homePage);
@@ -119,8 +119,6 @@ export default function SignIn() {
       fetchMe();
     }
   }, [isLogin]);
-
-  console.log("me:", me);
 
   return (
     <div className="w-full relative h-screen overflow-x-hidden overflow-y-hidden flex items-center justify-center px-2 gap-8 max-w-[1320px] mx-auto">

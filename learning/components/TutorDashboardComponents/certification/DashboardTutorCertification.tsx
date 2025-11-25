@@ -5,7 +5,8 @@ import Button from "@/components/Common/Button/Button";
 import Image from "next/image";
 import { api } from "@/lib/APIs/axiosInstance";
 import toast from "react-hot-toast";
-import { User } from "@/model/types";
+import { TutorCertificate, User } from "@/model/types";
+import { BeatLoader } from "react-spinners";
 
 const certFile = "/icons/certFile.svg";
 const certIcon = "/icons/certificateGray.svg";
@@ -56,16 +57,18 @@ const DashboardTutorCertification = () => {
     const fetchCertifications = async () => {
       try {
         setIsLoading(true);
-        const res = await api.get(`/api/tutor-certificates/?user=${me.id}`);
+        const res = await api.get(`/api/tutors/?user=${me.id}`);
 
-        const formatted = res.data.map((cert: any) => ({
-          id: cert.id, // ⭐ شناسه مدرک
-          certTitle: cert.title || "",
-          issueBy: cert.issued_by || "",
-          issueDate: cert.issue_date || "",
-          imagePreview: cert.certificate_image || certFile,
-          imageBase64: cert.certificate_image || "",
-        }));
+        const formatted = res.data[0].certificates.map(
+          (cert: TutorCertificate) => ({
+            id: cert.id, // ⭐ شناسه مدرک
+            certTitle: cert.title || "",
+            issueBy: cert.issued_by || "",
+            issueDate: cert.issue_date || "",
+            imagePreview: cert.certificate_image || certFile,
+            imageBase64: cert.certificate_image || "",
+          })
+        );
 
         setCertifications(formatted);
       } catch (error) {
@@ -164,105 +167,109 @@ const DashboardTutorCertification = () => {
     }
   };
 
-  if (isLoading) return <div className="my-12 px-4">Loading...</div>;
-
   return (
     <div className="my-12 px-4">
       <h1 className="text-[#45444A] font-bold text-2xl">Certifications</h1>
 
-      <form onSubmit={handleSubmit}>
-        {certifications.map((cert, index) => (
-          <div
-            key={index}
-            className="flex flex-col gap-3 mt-12 items-center justify-center border-b-2 border-[#BBBBBB] pb-6 relative"
-          >
-            {certifications.length > 1 && (
-              <button
-                type="button"
-                onClick={() => handleRemoveCertification(index)}
-                className="absolute top-0 right-0 text-[#E13350] text-xs font-bold underline"
-              >
-                Delete Certification
-              </button>
-            )}
+      {isLoading ? (
+        <div className="m-6 text-gray-500 flex items-center justify-center h-[250px] w-full">
+          <BeatLoader color="#5F33E1" />
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          {certifications.map((cert, index) => (
+            <div
+              key={index}
+              className="flex flex-col gap-3 mt-12 items-center justify-center border-b-2 border-[#BBBBBB] pb-6 relative"
+            >
+              {certifications.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => handleRemoveCertification(index)}
+                  className="absolute top-0 right-0 text-[#E13350] text-xs font-bold underline"
+                >
+                  Delete Certification
+                </button>
+              )}
 
-            <div className="w-full sm:w-[450px]">
-              <Inputs
-                placeholder="Certification Title"
-                type="text"
-                inputIcon={certIcon}
-                label="Certification Title"
-                value={cert.certTitle}
-                onchange={(e) =>
-                  handleChange(index, "certTitle", e.target.value)
-                }
-                width="100%"
-              />
-            </div>
-
-            <div className="w-full sm:w-[450px]">
-              <Inputs
-                placeholder="Issue By"
-                type="text"
-                inputIcon={issueByIcon}
-                label="Issue By"
-                value={cert.issueBy}
-                onchange={(e) =>
-                  handleChange(index, "issueBy", e.target.value)
-                }
-                width="100%"
-              />
-            </div>
-
-            <div className="w-full sm:w-[450px]">
-              <Inputs
-                placeholder="Issue Date"
-                type="date"
-                inputIcon={dateIcon}
-                label="Issue Date"
-                value={cert.issueDate}
-                onchange={(e) =>
-                  handleChange(index, "issueDate", e.target.value)
-                }
-                width="100%"
-              />
-            </div>
-
-            <div className="flex flex-col justify-center items-center my-4">
-              <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-gray-300">
-                <Image
-                  src={cert.imagePreview}
-                  alt="cert"
-                  width={120}
-                  height={120}
-                  className="object-cover"
+              <div className="w-full sm:w-[450px]">
+                <Inputs
+                  placeholder="Certification Title"
+                  type="text"
+                  inputIcon={certIcon}
+                  label="Certification Title"
+                  value={cert.certTitle}
+                  onchange={(e) =>
+                    handleChange(index, "certTitle", e.target.value)
+                  }
+                  width="100%"
                 />
               </div>
 
-              <label className="cursor-pointer text-blue-600 underline mt-2">
-                Upload Photo
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleImageChange(index, e)}
-                  className="hidden"
+              <div className="w-full sm:w-[450px]">
+                <Inputs
+                  placeholder="Issue By"
+                  type="text"
+                  inputIcon={issueByIcon}
+                  label="Issue By"
+                  value={cert.issueBy}
+                  onchange={(e) =>
+                    handleChange(index, "issueBy", e.target.value)
+                  }
+                  width="100%"
                 />
-              </label>
+              </div>
+
+              <div className="w-full sm:w-[450px]">
+                <Inputs
+                  placeholder="Issue Date"
+                  type="date"
+                  inputIcon={dateIcon}
+                  label="Issue Date"
+                  value={cert.issueDate}
+                  onchange={(e) =>
+                    handleChange(index, "issueDate", e.target.value)
+                  }
+                  width="100%"
+                />
+              </div>
+
+              <div className="flex flex-col justify-center items-center my-4">
+                <div className="w-[120px] h-[120px] rounded-full overflow-hidden border-2 border-gray-300">
+                  <Image
+                    src={cert.imagePreview}
+                    alt="cert"
+                    width={120}
+                    height={120}
+                    className="object-cover"
+                  />
+                </div>
+
+                <label className="cursor-pointer text-blue-600 underline mt-2">
+                  Upload Photo
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageChange(index, e)}
+                    className="hidden"
+                  />
+                </label>
+              </div>
             </div>
+          ))}
+
+          <p
+            className="text-[#45444A] font-bold underline hover:cursor-pointer mt-4"
+            onClick={handleAddCertification}
+          >
+            + Add Certification
+          </p>
+
+          <div className="flex justify-end mt-8">
+            <Button type="submit" label={"Update Certification"} />
           </div>
-        ))}
-
-        <p
-          className="text-[#45444A] font-bold underline hover:cursor-pointer mt-4"
-          onClick={handleAddCertification}
-        >
-          + Add Certification
-        </p>
-
-        <div className="flex justify-end mt-8">
-          <Button type="submit" label={"Update Certification"} />
-        </div>
-      </form>
+        </form>
+      )}
     </div>
   );
 };

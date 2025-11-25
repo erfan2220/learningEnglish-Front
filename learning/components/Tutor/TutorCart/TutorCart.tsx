@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Tutor } from "@/model/tutorType";
 import dynamic from "next/dynamic";
 import { FluentDoorRoutes } from "@/routes/routes";
-import Country from "@/components/Common/Country/Country";
+// import Country from "@/components/Common/Country/Country";
 import Button from "@/components/Common/Button/Button";
 
 interface TutorCartProps {
@@ -41,8 +41,8 @@ const TutorCart = ({ tutorData }: TutorCartProps) => {
         </div>
         <div className="text-sm text-[#8B8A8E] mb-4">Professional Tutor</div>
 
-        <div className="flex flex-wrap gap-4">
-          {tutorData.languages_spoken.map((lang) => (
+        {/* <div className="flex flex-wrap gap-4">
+          {tutorData.languages_spoken?.map((lang) => (
             <div key={`${tutorData.id}-${lang}`}>
               <Country
                 countryName={lang}
@@ -51,8 +51,9 @@ const TutorCart = ({ tutorData }: TutorCartProps) => {
                 fontWeight="bold"
               />
             </div>
+           
           ))}
-        </div>
+        </div> */}
 
         <div className="mt-6">
           <p className="font-semibold text-[#5C5A60] text-sm">Price</p>

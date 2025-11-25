@@ -19,12 +19,7 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const { user, loading, logout } = useAuth();
-  const isVerified = false;
 
-  useEffect(() => {
-    localStorage.setItem("is_teacher", String(user?.is_teacher));
-    localStorage.setItem("is_verified", String(isVerified));
-  }, [isVerified, user?.is_teacher]);
   // close profile menu on outside click
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
@@ -64,6 +59,9 @@ export default function Header() {
 
     router.push(FluentDoorRoutes.homePage);
   };
+
+
+
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white/70 backdrop-blur-md shadow">
@@ -130,7 +128,7 @@ export default function Header() {
                         {user.is_teacher ? "Tutor" : "Student"}
                       </b>
                     </div>
-                    {user.is_teacher && isVerified ? (
+                    {user.is_teacher && user.tutor_approved === true ? (
                       <div className="flex items-center gap-2 mt-1 text-xs font-semibold">
                         <Image
                           src={verifiedIcon}
@@ -142,7 +140,7 @@ export default function Header() {
                       </div>
                     ) : (
                       user.is_teacher &&
-                      !isVerified && (
+                      user.tutor_approved !==true && (
                         <div className="flex items-center gap-2 mt-1 text-xs font-semibold">
                           <Image
                             src={unverifiedIcon}

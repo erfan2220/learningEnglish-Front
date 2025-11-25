@@ -1,16 +1,58 @@
 "use client";
-import React from "react";
-
-import { courseMockDetail } from "@/mock/courseMockData";
-import Country from "@/components/Common/Country/Country";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { tutorMockDetail } from "@/mock/tutorMockData";
 import Image from "next/image";
+import Country from "@/components/Common/Country/Country";
+import { api } from "@/lib/APIs/axiosInstance";
+import { User, TutorCourse } from "@/model/types";
+import toast from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
 
 const arrowIcon = "/icons/arrowBlue.svg";
 
 const DashboardTutorCourses = () => {
-  const personNumber = 0;
+  const [me, setMe] = useState<User>();
+  const [courses, setCourses] = useState<TutorCourse[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // گرفتن اطلاعات کاربر
+  useEffect(() => {
+    const fetchMe = async () => {
+      try {
+        const res = await api.get("/api/me");
+        setMe(res.data);
+      } catch (error) {
+        console.error("Fetching me failed:", error);
+        toast.error("Failed to fetch me. Please try again later.");
+      }
+    };
+    fetchMe();
+  }, []);
+
+  // گرفتن اطلاعات tutor و courses
+  useEffect(() => {
+    if (!me?.id) return;
+
+    const fetchTutorCourses = async () => {
+      try {
+        const res = await api.get(`/api/tutors/?user=${me.id}`);
+        const tutor = res.data[0];
+
+        if (!tutor || !tutor.courses) {
+          setCourses([]);
+        } else {
+          setCourses(tutor.courses);
+        }
+      } catch (error) {
+        console.error("Fetching courses failed:", error);
+        toast.error("Failed to fetch courses.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTutorCourses();
+  }, [me]);
 
   return (
     <div className="my-8">
@@ -24,55 +66,52 @@ const DashboardTutorCourses = () => {
         <p className="w-1/2 sm:w-1/4">Time</p>
       </div>
 
+      {loading && (
+        <div className="m-6 text-gray-500 flex items-center justify-center h-[250px] w-full">
+          <BeatLoader color="#5F33E1" />
+        </div>
+      )}
+
+      {!loading && courses.length === 0 && (
+        <p className="m-6 text-gray-500">No courses found.</p>
+      )}
+
       {/* Courses */}
-      {tutorMockDetail[personNumber].coursesList.map((tutorCourseId) => {
-        const course = courseMockDetail.find(
-          (course) => course.courseId === tutorCourseId
-        );
+      {courses.map((course) => (
+        <Link
+          href={`/dashboard/tutor/detail/courses/${course.id}`}
+          key={course.id}
+          className="flex text-[#45444A] px-2 md:px-8 mt-4 text-sm justify-between sm:justify-start items-center w-full h-[60px] bg-white rounded-2xl shadow-md hover:shadow-xl"
+        >
+          {/* Title */}
+          <p className="font-bold w-1/2 sm:w-1/4">{course.course_title}</p>
 
-        if (!course) return null;
+          {/* Tutor Name */}
+          <p className="hidden sm:block sm:w-1/4">
+            {me?.first_name} {me?.last_name}
+          </p>
 
-        return (
-          <Link
-            href={`/dashboard/tutor/detail/courses/${course.courseId}`}
-            key={course.id}
-            className="flex text-[#45444A] px-2 md:px-8 mt-4 text-sm justify-between sm:justify-start items-center w-full h-[60px] bg-white rounded-2xl shadow-md hover:shadow-xl"
-          >
-            <p className="font-bold w-1/2 sm:w-1/4">{course.courseTitle}</p>
-            <p className="hidden sm:block sm:w-1/4">
-              {course.tutorFirstName} {course.tutorLastName}
+          {/* Language */}
+          <div className="hidden sm:block sm:w-1/4">
+            <Country
+              flag={"/icons/ukFlag.svg"}
+              countryName={course.language}
+              width="24px"
+              textSize="14px"
+              fontWeight="normal"
+            />
+          </div>
+
+          {/* Time */}
+          <div className="flex w-1/2 sm:w-1/4 justify-between items-start">
+            <p>
+              {course.time_slots?.[0] || "No time"} ,{" "}
+              {course.days_available?.[0] || "No day"}
             </p>
-            <div className="hidden sm:block sm:w-1/4">
-              <Country
-                flag={course.courseLanguageFlag}
-                countryName={course.courseLanguage}
-                width={"24px"}
-                textSize={"14px"}
-                fontWeight={"normal"}
-              />
-            </div>
-            <div className="flex w-1/2 sm:w-1/4 justify-between items-start">
-              <p>
-                {course.courseTimeStart}-{course.courseTimeEnd},{" "}
-                {course.courseDay}
-              </p>
-              <div>
-                {/* <img
-                  src={"/icons/arrowBlue.svg"}
-                  alt="arrow icon"
-                  className="w-6 h-6"
-                /> */}
-                <Image
-                  src={arrowIcon}
-                  alt="arrow icon"
-                  width={24}
-                  height={24}
-                />
-              </div>
-            </div>
-          </Link>
-        );
-      })}
+            <Image src={arrowIcon} alt="arrow icon" width={24} height={24} />
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };
