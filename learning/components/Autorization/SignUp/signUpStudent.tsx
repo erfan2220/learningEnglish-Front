@@ -16,6 +16,7 @@ import Image from "next/image";
 import Button from "@/components/Common/Button/Button";
 import { FluentDoorRoutes } from "@/routes/routes";
 import { api } from "@/lib/APIs/axiosInstance";
+import { GoogleLogin } from "@react-oauth/google";
 
 const signUpPic = "/images/signUpPic.svg";
 const logo = "/images/logo.png";
@@ -146,21 +147,34 @@ const SignUpStudent = () => {
                   <Link href={"/signin"}>Sign In</Link>
                 </u>
               </p>
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  try {
+                    const googleToken = credentialResponse.credential;
 
-              <Link
-                href={"/signinGoogle"}
-                className="flex gap-2 w-full border-2 my-2 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-2"
-              >
-                <Image
-                  src="/icons/google.svg"
-                  alt="google icon"
-                  width={24}
-                  height={24}
-                />
-                <p className="text-[#727177] text-sm font-semibold">
-                  Continue with Google
-                </p>
-              </Link>
+                    const res = await api.post("/auth/google/", {
+                      token: googleToken,
+                      is_teacher: false,
+                    });
+
+                    const { access, refresh } = res.data;
+
+                    localStorage.setItem("access_token", access);
+                    localStorage.setItem("refresh_token", refresh);
+                    localStorage.setItem("is_teacher", "false");
+
+                    // دریافت پروفایل
+                    const userRes = await api.get("/api/me");
+                    console.log(userRes)
+
+                    router.push(FluentDoorRoutes.studentDashboard);
+                  } catch (error) {
+                    console.log(error);
+                    setError("Google signup failed");
+                  }
+                }}
+                onError={() => console.log("Google Login Failed")}
+              />
             </div>
 
             <div className="flex items-center justify-center gap-2 mb-2 mx-8">

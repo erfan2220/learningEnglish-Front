@@ -11,6 +11,7 @@ import Inputs from "@/components/Common/Input/Input";
 import { api } from "@/lib/APIs/axiosInstance";
 import toast from "react-hot-toast";
 import { User } from "@/model/types";
+import { GoogleLogin } from "@react-oauth/google";
 
 const LS_EMAIL_KEY = "le_remember_email";
 const LS_REMEMBER_KEY = "le_remember_me";
@@ -153,20 +154,44 @@ export default function SignIn() {
               </h1>
 
               {/* Social auth */}
-              <Link
-                href="/signinGoogle"
-                className="flex gap-2 w-full border-2 mt-4 border-[#D2D2D2] rounded-2xl hover:bg-[#D2C3FE] shadow-md bg-white/70 items-center justify-center py-3"
-              >
-                <Image
-                  src="/icons/google.svg"
-                  alt="google icon"
-                  width={20}
-                  height={20}
-                />
-                <span className="text-[#727177] text-sm font-semibold">
-                  Continue with Google
-                </span>
-              </Link>
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  try {
+                    const googleToken = credentialResponse.credential;
+
+                    const res = await api.post("/auth/google/login/", {
+                      token: googleToken,
+                    });
+
+                    const { access, refresh } = res.data;
+
+                    // ذخیره JWT
+                    localStorage.setItem("access_token", access);
+                    localStorage.setItem("refresh_token", refresh);
+
+                    // دریافت اطلاعات کاربر
+                    const userRes = await api.get("/api/me");
+                    const user = userRes.data;
+
+                    // ریدایرکت بر اساس نقش
+                    if (user.is_teacher) {
+                      if (user.tutor_approved === true) {
+                        router.push(FluentDoorRoutes.tutorDashboard);
+                      } else {
+                        router.push(FluentDoorRoutes.tutorAuthentication);
+                      }
+                    } else if (!user.is_teacher) {
+                      router.push(FluentDoorRoutes.studentDashboard);
+                    } else {
+                      router.push(FluentDoorRoutes.homePage);
+                    }
+                  } catch (error) {
+                    console.error(error);
+                    setError("Google login failed");
+                  }
+                }}
+                onError={() => console.log("Google Login Failed")}
+              />
 
               <div className="w-full flex items-center justify-center gap-2 mb-2 mx-8">
                 <hr className="flex-1 h-px my-4 border-1 border-[#BBBBBB]" />
