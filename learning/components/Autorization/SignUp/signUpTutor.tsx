@@ -75,7 +75,7 @@ const SignUpTutor = () => {
       // const user = userResponse.data;
 
       // هدایت به داشبورد معلم
-      router.push("/tutorDashboard");
+      router.push("/signin");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {

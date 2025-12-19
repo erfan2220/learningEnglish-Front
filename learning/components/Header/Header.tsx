@@ -8,11 +8,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { FluentDoorRoutes } from "@/routes/routes";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 const verifiedIcon = "/icons/tickGreen.svg";
 const unverifiedIcon = "/icons/unVerified.svg";
 
-export default function Header() {
+export default function Header()
+{
+
   const [menuOpen, setMenuOpen] = useState(false); // profile dropdown
   const [mobileOpen, setMobileOpen] = useState(false); // mobile nav
   const menuRef = useRef<HTMLDivElement>(null);
@@ -37,7 +40,25 @@ export default function Header() {
     setMobileOpen(false);
   }, [pathname]);
 
-  const onDashboard = () => {
+  const onDashboard = () =>
+  {
+
+
+    // if (user.is_teacher) {
+    //   if (user.tutor_approved !== true) {
+    //     // 🔔 ALERT FOR UNVERIFIED TUTOR
+    //     toast.error("You must upload your information first to access the dashboard.");
+    //     // if you prefer native: window.alert("You must upload your information first...");
+    //     router.push(FluentDoorRoutes.tutorAuthentication);
+    //   } else {
+    //     router.push(FluentDoorRoutes.tutorDashboard);
+    //   }
+    // } else {
+    //   router.push(FluentDoorRoutes.studentDashboard);
+    // }
+
+
+
     router.push(
       user?.is_teacher
         ? `${FluentDoorRoutes.tutorDashboard}`

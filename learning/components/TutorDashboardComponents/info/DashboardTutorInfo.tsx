@@ -178,13 +178,20 @@ const DashboardTutorInfo = () => {
         intro_video_file = await fileToBase64(videoInput.files[0]);
       }
 
-      // آماده کردن رشته زبان‌ها
-      const languages_spoken = entries
-        .map((entry) => `${entry.language}:${entry.level}`)
-        .join(",");
+      // // آماده کردن رشته زبان‌ها
+      // const languages_spoken = entries
+      //   .map((entry) => `${entry.language}:${entry.level}`)
+      //   .join(",");
+      //
+      // // رشته موضوع
+      // const subjects = selectedSubject;
 
-      // رشته موضوع
-      const subjects = selectedSubject;
+      const languages_spoken = entries
+          .filter(e => e.language && e.level)
+          .map(e => ({ language: e.language, level: e.level }));
+
+      const subjects = selectedSubject ? [selectedSubject] : [];
+
 
       // ساخت payload
       const payload = {
@@ -197,7 +204,7 @@ const DashboardTutorInfo = () => {
       };
 
       // فراخوانی API
-      await api.patch(`/api/tutors/${me.id}`, payload);
+      await api.patch(`/api/tutors/?user=${me?.id}`, payload);
 
       toast.success("Information updated successfully!");
     } catch (error) {
@@ -268,7 +275,7 @@ const DashboardTutorInfo = () => {
                 label="Email"
                 width="80%"
                 inputIcon={emailIcon}
-                value={email}
+                value={me?.email}
                 onchange={(e) => setEmail(e.target.value)}
               />
 

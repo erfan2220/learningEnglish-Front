@@ -208,7 +208,7 @@ export default function AuthorizationPage5() {
             <Button
               type="button"
               label={"Next Step"}
-              disabled={!canContinue}
+              // disabled={!canContinue}
               onclick={() =>
                 router.push(FluentDoorRoutes.tutorAuthenticationStep6)
               }
