@@ -34,7 +34,7 @@ const DashboardTutorInfo = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [me, setMe] = useState<User>();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [tutorId, setTutorId] = useState<number | null>(null);
   const [entries, setEntries] = useState([{ language: "", level: "" }]);
 
   const handleAdd = () => {
@@ -101,7 +101,8 @@ const DashboardTutorInfo = () => {
         const res = await api.get(`/api/tutors/?user=${me.id}`);
         const tutor = res.data[0];
         if (!tutor) return;
-
+        setTutorId(tutor.id);
+        console.log("tutorId", tutor.id);
         // image
         if (tutor.profile_picture) {
           setImagePreview(tutor.profile_picture);
@@ -166,6 +167,7 @@ const DashboardTutorInfo = () => {
       );
       let profile_picture = "";
       if (imageInput?.files?.[0]) {
+
         profile_picture = await fileToBase64(imageInput.files[0]);
       }
 
@@ -194,17 +196,38 @@ const DashboardTutorInfo = () => {
 
 
       // ساخت payload
-      const payload = {
-        profile_picture,
+      const payload:any = {
+        // profile_picture,
         languages_spoken,
         country: selectedCountry,
         subjects,
         phone_number: phoneNumber,
-        intro_video_file,
+        // intro_video_file,
       };
 
-      // فراخوانی API
-      await api.patch(`/api/tutors/?user=${me?.id}`, payload);
+      // ✅ only include file fields if user picked a file
+      if (imageInput?.files?.[0]) {
+        payload.profile_picture = imageInput.files[0];
+      }
+
+      if (videoInput?.files?.[0]) {
+        payload.intro_video_file = videoInput.files[0];
+      }
+
+      // ✅ send as multipart/form-data, not JSON
+      const formData = new FormData();
+      Object.entries(payload).forEach(([key, value]) => {
+        if (key === "languages_spoken" || key === "subjects") {
+          formData.append(key, JSON.stringify(value));
+        } else {
+          formData.append(key, value as any);
+        }
+      });
+
+      await api.patch(`/api/tutors/${tutorId}/`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
 
       toast.success("Information updated successfully!");
     } catch (error) {
