@@ -15,8 +15,19 @@ const dateIcon = "/icons/dayIcon.svg";
 const degreeIcon = "/icons/degreeGray.svg";
 const fieldIcon = "/icons/educationGray.svg";
 
+interface EducationItem {
+  id?: number | null;
+  degree: string;
+  institution_name: string;
+  country: string;
+  city: string;
+  field: string;
+  start_date: string;
+  end_date: string;
+}
+
 const DashboardTutorEducation = () => {
-  const [educations, setEducations] = useState<any[]>([]);
+  const [educations, setEducations] = useState<EducationItem[]>([]);
   const [me, setMe] = useState<User>();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,9 +37,8 @@ const DashboardTutorEducation = () => {
       try {
         const res = await api.get(`/api/me`);
         setMe(res.data);
-      } catch (error) {
-        console.error("Fetching me failed:", error);
-        toast.error("Failed to fetch me.");
+      } catch {
+        toast.error("Failed to fetch user info.");
       }
     };
     fetchMe();
@@ -42,38 +52,32 @@ const DashboardTutorEducation = () => {
       try {
         setIsLoading(true);
         const res = await api.get(`/api/tutor-educations/?user=${me.id}`);
-        console.log(res.data);
-        // اگر خالی بود، یک فرم جدید بساز
-        if (res.data.length === 0) {
-          setEducations([
-            {
-              id: null,
-              degree: "",
-              institution_name: "",
-              country: "",
-              city: "",
-              field: "",
-              start_date: "",
-              end_date: "",
-            },
-          ]);
-        } else {
-          // اگر قبلی بود، مقداردهی کن
-          const formatted = res.data.map((edu: TutorEducation) => ({
-            id: edu.id,
-            degree: edu.degree || "",
-            institution_name: edu.institution_name || "",
-            country: edu.country || "",
-            city: edu.city || "",
-            field: edu.field || "",
-            start_date: edu.start_date || "",
-            end_date: edu.end_date || "",
-          }));
+        const formatted = res.data.length
+          ? res.data.map((edu: TutorEducation) => ({
+              id: edu.id,
+              degree: edu.degree || "",
+              institution_name: edu.institution_name || "",
+              country: edu.country || "",
+              city: edu.city || "",
+              field: edu.field || "",
+              start_date: edu.start_date || "",
+              end_date: edu.end_date || "",
+            }))
+          : [
+              {
+                id: null,
+                degree: "",
+                institution_name: "",
+                country: "",
+                city: "",
+                field: "",
+                start_date: "",
+                end_date: "",
+              },
+            ];
 
-          setEducations(formatted);
-        }
-      } catch (error) {
-        console.error("Fetching educations failed:", error);
+        setEducations(formatted);
+      } catch {
         toast.error("Failed to fetch educations.");
       } finally {
         setIsLoading(false);
@@ -83,10 +87,10 @@ const DashboardTutorEducation = () => {
     fetchEducations();
   }, [me]);
 
-  // ⭐ Add new education
+  // ⭐ Add new
   const handleAddEducation = () => {
-    setEducations([
-      ...educations,
+    setEducations((prev) => [
+      ...prev,
       {
         id: null,
         degree: "",
@@ -100,32 +104,33 @@ const DashboardTutorEducation = () => {
     ]);
   };
 
-  // ⭐ Remove specific item
+  //  Remove
   const handleRemoveEducation = (index: number) => {
-    const updated = educations.filter((_, i) => i !== index);
-    setEducations(updated);
+    setEducations((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // ⭐ Handle input change
-  const handleChange = (index: number, field: string, value: string) => {
-    const updated = [...educations];
-    updated[index][field] = value;
-    setEducations(updated);
+  //  Change input
+  const handleChange = (
+    index: number,
+    field: keyof EducationItem,
+    value: string
+  ) => {
+    setEducations((prev) => {
+      const updated = [...prev];
+     (updated[index] as any)[field] = value;
+      return updated;
+    });
   };
 
-  // ⭐ Submit (POST or PATCH)
+  //  Submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!me?.id) {
-      toast.error("User not found.");
-      return;
-    }
+    if (!me?.id) return toast.error("User not found");
 
     try {
       await Promise.all(
         educations.map((edu) => {
-          const payload = {
+          const payload: any = {
             degree: edu.degree,
             institution_name: edu.institution_name,
             country: edu.country,
@@ -133,32 +138,31 @@ const DashboardTutorEducation = () => {
             field: edu.field,
             start_date: edu.start_date,
             end_date: edu.end_date,
-            tutor: me.id,
           };
 
-          if (edu.id) {
-            // update existing
-            return api.patch(`/api/tutor-educations/${edu.id}/`, payload);
-          } else {
-            // create new
-            return api.post(`/api/tutor-educations/`, payload);
+          if (!edu.id) {
+            // فقط برای آیتم جدید tutor را اضافه کن
+            payload.tutor = me.id;
           }
+
+          return edu.id
+            ? api.patch(`/api/tutor-educations/${edu.id}/`, payload)
+            : api.post(`/api/tutor-educations/`, payload);
         })
       );
 
       toast.success("Educations updated successfully!");
     } catch (error: any) {
-      console.log("ERROR:", error?.response?.data);
+      console.error(error?.response?.data);
       toast.error("Failed to update educations.");
     }
   };
 
   return (
-    <div className="my-12 px-1 md:px-4 lg:px-8">
+    <div className="my-12 px-4">
       <h1 className="text-[#45444A] font-bold text-2xl">Educations</h1>
-
       {isLoading ? (
-        <div className="m-6 text-gray-500 flex items-center justify-center h-[250px] w-full">
+        <div className="m-6 flex items-center justify-center h-[250px] w-full">
           <BeatLoader color="#5F33E1" />
         </div>
       ) : (
@@ -168,7 +172,6 @@ const DashboardTutorEducation = () => {
               key={index}
               className="flex flex-col gap-3 mt-12 items-center justify-center border-b-2 border-[#BBBBBB] pb-6 relative"
             >
-              {/* delete education  */}
               {educations.length > 1 && (
                 <button
                   type="button"
@@ -220,7 +223,7 @@ const DashboardTutorEducation = () => {
                 </div>
               </div>
 
-              {/* Institution */}
+              {/* Institution Name */}
               <div className="w-full sm:w-[450px]">
                 <Inputs
                   placeholder="Institution Name"

@@ -7,6 +7,7 @@ import { api } from "@/lib/APIs/axiosInstance";
 import toast from "react-hot-toast";
 import { TutorCertificate, User } from "@/model/types";
 import { BeatLoader } from "react-spinners";
+import { saveListItems } from "./saveListItems";
 
 const certFile = "/icons/certFile.svg";
 const certIcon = "/icons/certificateGray.svg";
@@ -20,6 +21,7 @@ interface CertItem {
   issueDate: string;
   imagePreview: string;
   imageBase64: string;
+  imageFile?: File;
 }
 
 const DashboardTutorCertification = () => {
@@ -59,17 +61,17 @@ const DashboardTutorCertification = () => {
         setIsLoading(true);
         const res = await api.get(`/api/tutors/?user=${me.id}`);
 
-        const formatted = res.data[0].certificates.map(
+        const formatted: CertItem[] = res.data[0].certificates.map(
           (cert: TutorCertificate) => ({
-            id: cert.id, // ⭐ شناسه مدرک
+            id: cert.id,
             certTitle: cert.title || "",
             issueBy: cert.issued_by || "",
             issueDate: cert.issue_date || "",
-            imagePreview: cert.certificate_image || certFile,
-            imageBase64: cert.certificate_image || "",
+            imagePreview: cert.certificate_image || certFile, // URL واقعی
+            imageBase64: "", // فقط برای آپلودهای جدید خالی
+            imageFile: undefined,
           })
         );
-
         setCertifications(formatted);
       } catch (error) {
         console.error("Fetching certifications failed:", error);
@@ -84,8 +86,8 @@ const DashboardTutorCertification = () => {
 
   // افزودن مدرک جدید
   const handleAddCertification = () => {
-    setCertifications([
-      ...certifications,
+    setCertifications((prev) => [
+      ...prev,
       {
         certTitle: "",
         issueBy: "",
@@ -96,10 +98,9 @@ const DashboardTutorCertification = () => {
     ]);
   };
 
-  // حذف مدرک از صفحه
+  // حذف مدرک
   const handleRemoveCertification = (index: number) => {
-    const updated = certifications.filter((_, i) => i !== index);
-    setCertifications(updated);
+    setCertifications((prev) => prev.filter((_, i) => i !== index));
   };
 
   // تغییر فیلدهای متنی
@@ -108,30 +109,30 @@ const DashboardTutorCertification = () => {
     field: "certTitle" | "issueBy" | "issueDate",
     value: string
   ) => {
-    const updated = [...certifications];
-    updated[index][field] = value;
-    setCertifications(updated);
+    setCertifications((prev) => {
+      const updated = [...prev];
+      updated[index][field] = value;
+      return updated;
+    });
   };
 
-  // بارگذاری عکس و تبدیل به base64
-  const handleImageChange = async (
+  // بارگذاری عکس
+  const handleImageChange = (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64 = reader.result as string;
+    const preview = URL.createObjectURL(file);
 
-      const updated = [...certifications];
-      updated[index].imagePreview = base64;
-      updated[index].imageBase64 = base64;
-      setCertifications(updated);
-    };
-
-    reader.readAsDataURL(file);
+    setCertifications((prev) => {
+      const updated = [...prev];
+      updated[index].imagePreview = preview; // برای رندر شدن تصویر جدید
+      updated[index].imageFile = file; // برای آپلود
+      updated[index].imageBase64 = ""; // خالی چون از فایل استفاده می‌کنیم
+      return updated;
+    });
   };
 
   // ارسال نهایی
@@ -140,30 +141,29 @@ const DashboardTutorCertification = () => {
     if (!me?.id) return toast.error("User not found");
 
     try {
-      for (const cert of certifications) {
-        const payload = {
-          title: cert.certTitle,
-          issued_by: cert.issueBy,
-          issue_date: cert.issueDate,
-          certificate_image: cert.imageBase64.startsWith("data:")
-            ? cert.imageBase64
-            : "",
-          tutor: me.id,
-        };
+      await saveListItems(
+        certifications,
+        `/api/tutor-certificates/?user=${me.id}/`,
+        (id) => `/api/tutor-certificates/${id}/`,
+        (cert, isCreate) => {
+          const formData = new FormData();
+          formData.append("title", cert.certTitle);
+          formData.append("issued_by", cert.issueBy);
+          formData.append("issue_date", cert.issueDate);
 
-        if (cert.id) {
-          //  مدرک قبلی  PATCH
-          await api.patch(`/api/tutor-certificates/${cert.id}/`, payload);
-        } else {
-          //  مدرک جدید  POST
-          await api.post(`/api/tutor-certificates/?user=${me.id}/`, payload);
+          if (isCreate) formData.append("tutor", String(me.id));
+
+          if (cert.imageFile)
+            formData.append("certificate_image", cert.imageFile);
+
+          return formData;
         }
-      }
+      );
 
       toast.success("Certifications updated successfully!");
-    } catch (error) {
-      console.error("Updating certifications failed:", error);
-      toast.error("Failed to update certifications.");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update certifications");
     }
   };
 

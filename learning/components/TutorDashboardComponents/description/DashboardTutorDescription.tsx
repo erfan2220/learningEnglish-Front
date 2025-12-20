@@ -1,10 +1,10 @@
 "use client";
-import Inputs from "@/components/Common/Input/Input";
-import React, { useEffect, useState } from "react";
-import { countryList } from "@/mock/countryList";
 
+import React, { useEffect, useState } from "react";
+import Inputs from "@/components/Common/Input/Input";
 import Button from "@/components/Common/Button/Button";
 import Image from "next/image";
+import { countryList } from "@/mock/countryList";
 import { api } from "@/lib/APIs/axiosInstance";
 import toast from "react-hot-toast";
 import { User } from "@/model/types";
@@ -14,7 +14,10 @@ const experienceIcon = "/icons/experienceGray.svg";
 const locationIcon = "/icons/locationGray.svg";
 const dateIcon = "/icons/dayIcon.svg";
 
-interface Experience {
+/* ===================== TYPES ===================== */
+
+interface ExperienceItem {
+  id?: number; // ⭐ برای تشخیص PATCH یا POST
   experience: string;
   organization: string;
   country: string;
@@ -24,14 +27,26 @@ interface Experience {
   describe: string;
 }
 
+type ExperienceField =
+  | "experience"
+  | "organization"
+  | "country"
+  | "city"
+  | "startDate"
+  | "endDate"
+  | "describe";
+
+/* ===================== COMPONENT ===================== */
+
 const DashboardTutorDescription = () => {
   const [bio, setBio] = useState("");
   const [teachingStyle, setTeachingStyle] = useState("");
   const [goalsTeach, setGoalsTeach] = useState("");
   const [expect, setExpect] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [tutorId, setTutorId] = useState<number | null>(null);
 
-  const [experience, setExperience] = useState([
+  const [experience, setExperience] = useState<ExperienceItem[]>([
     {
       experience: "",
       organization: "",
@@ -45,52 +60,58 @@ const DashboardTutorDescription = () => {
 
   const [me, setMe] = useState<User>();
 
-  // گرفتن اطلاعات کاربر
+  /* ===================== FETCH ME ===================== */
+
   useEffect(() => {
     const fetchMe = async () => {
       try {
-        const res = await api.get(`/api/me`);
+        const res = await api.get("/api/me");
         setMe(res.data);
-      } catch (error) {
-        console.error("Fetching me failed:", error);
-        toast.error("Failed to fetch me. Please try again later.");
+      } catch {
+        toast.error("Failed to fetch user");
       }
     };
+
     fetchMe();
   }, []);
 
-  // گرفتن تجربیات قبلی
+  /* ===================== FETCH TUTOR INFO ===================== */
+
   useEffect(() => {
     if (!me?.id) return;
 
     const fetchTutorInfo = async () => {
       try {
         setIsLoading(true);
+
         const res = await api.get(`/api/tutors/?user=${me.id}`);
         const tutor = res.data[0];
 
-        // Prefill text fields
+        setTutorId(tutor.id); // ⭐ این خیلی مهمه
+
         setBio(tutor.bio || "");
         setTeachingStyle(tutor.teaching_style || "");
         setExpect(tutor.expectation || "");
         setGoalsTeach(tutor.description || "");
 
-        // Prefill experiences
         if (tutor.experiences?.length > 0) {
-          const formatted = tutor.experiences.map((exp: any) => ({
-            experience: exp.title || "",
-            organization: exp.organization || "",
-            country: exp.country || "",
-            city: exp.city || "",
-            startDate: exp.start_date || "",
-            endDate: exp.end_date || "",
-            describe: exp.description || "",
-          }));
+          const formatted: ExperienceItem[] = tutor.experiences.map(
+            (exp: any) => ({
+              id: exp.id, // ⭐ خیلی مهم
+              experience: exp.title || "",
+              organization: exp.organization || "",
+              country: exp.country || "",
+              city: exp.city || "",
+              startDate: exp.start_date || "",
+              endDate: exp.end_date || "",
+              describe: exp.description || "",
+            })
+          );
+
           setExperience(formatted);
         }
-      } catch (error) {
-        console.error("Fetching tutor info failed:", error);
-        toast.error("Failed to fetch tutor info.");
+      } catch {
+        toast.error("Failed to fetch tutor info");
       } finally {
         setIsLoading(false);
       }
@@ -99,10 +120,11 @@ const DashboardTutorDescription = () => {
     fetchTutorInfo();
   }, [me]);
 
-  // افزودن تجربه جدید
+  /* ===================== EXPERIENCE ACTIONS ===================== */
+
   const handleAddExperience = () => {
-    setExperience([
-      ...experience,
+    setExperience((prev) => [
+      ...prev,
       {
         experience: "",
         organization: "",
@@ -115,67 +137,71 @@ const DashboardTutorDescription = () => {
     ]);
   };
 
-  // حذف تجربه
   const handleRemoveExperience = (index: number) => {
-    const updated = experience.filter((_, i) => i !== index);
-    setExperience(updated);
+    setExperience((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // تغییر مقدار فیلدها
   const handleChange = (
     index: number,
-    field: keyof Experience,
+    field: ExperienceField,
     value: string
   ) => {
-    const updated = [...experience];
-    updated[index][field] = value;
-    setExperience(updated);
+    setExperience((prev) => {
+      const updated = [...prev];
+      updated[index][field] = value;
+      return updated;
+    });
   };
 
-  // ارسال به API
+  /* ===================== SUBMIT ===================== */
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!me?.id) {
-      toast.error("User not found");
-      return;
-    }
+    if (!me?.id) return toast.error("User not found");
 
     try {
-      // آپدیت تجربه‌ها
-      const experiencePromises = experience.map((exp) => {
-        const payload = {
-          title: exp.experience,
-          organization: exp.organization,
-          country: exp.country,
-          city: exp.city,
-          start_date: exp.startDate,
-          end_date: exp.endDate,
-          description: exp.describe,
-          tutor: me.id,
-        };
+      // 🔹 experiences
+      await Promise.all(
+        experience.map((exp) => {
+          const payload: any = {
+            title: exp.experience,
+            organization: exp.organization,
+            country: exp.country,
+            city: exp.city,
+            start_date: exp.startDate,
+            end_date: exp.endDate,
+            description: exp.describe,
+          };
 
-        return api.patch(`/api/tutor-experiences/${me.id}`, payload);
-      });
+          if (exp.id) {
+            // ✅ PATCH
+            return api.patch(`/api/tutor-experiences/${exp.id}/`, payload);
+          } else {
+            // ✅ POST
+            payload.tutor = me.id;
+            return api.post("/api/tutor-experiences/", payload);
+          }
+        })
+      );
 
-      await Promise.all(experiencePromises);
+      // 🔹 tutor description fields
+      if (!tutorId) throw new Error("Tutor not found");
 
-      //  آپدیت توضیحات مدرس (bio, teaching_style, expectation, description)
-      const tutorPayload = {
+      await api.patch(`/api/tutors/${tutorId}/`, {
         bio,
         teaching_style: teachingStyle,
         expectation: expect,
         description: goalsTeach,
-      };
-
-      await api.patch(`/api/tutors/${me.id}`, tutorPayload);
+      });
 
       toast.success("Profile updated successfully!");
-    } catch (error) {
-      console.error("Updating tutor info failed:", error);
-      toast.error("Failed to update information.");
+    } catch (err: any) {
+      console.error(err?.response?.data);
+      toast.error("Failed to update information");
     }
   };
+
+  /* ===================== UI BELOW ===================== */
 
   return (
     <div className="my-12 px-1 md:px-4 lg:px-8">

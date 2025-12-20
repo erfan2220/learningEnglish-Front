@@ -229,6 +229,7 @@ const DashboardTutorInfo = () => {
       });
 
 
+
       toast.success("Information updated successfully!");
     } catch (error) {
       console.error("Updating tutor info failed:", error);
@@ -271,7 +272,7 @@ const DashboardTutorInfo = () => {
             <div className="w-full md:w-1/3 ml-4 flex md:items-start md:justify-center font-bold mt-4 md:mt-6 mb-4 md:mb-0">
               Personal Information
             </div>
-            <div className="w-full flex flex-col gap-1 md:w-2/3">
+            <div className="w-full flex flex-col gap-1 md:w-2/3 md:pr-32">
               <Inputs
                 type="text"
                 placeholder="First Name"
