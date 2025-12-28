@@ -3,7 +3,6 @@ import Layout from "../Layout/Layout";
 import Link from "next/link";
 import TutorialStep from "../TutorialStep/TutorialStep";
 import { stepsData } from "@/constant/stepsData";
-import { featuresData } from "@/constant/features";
 import { becomeTutorData, becomeTutorListData } from "@/constant/becomeTutor";
 import Slide from "../Tutor/Slide/Slide";
 import Button from "../Common/Button/Button";
@@ -11,8 +10,19 @@ import Image from "next/image";
 import { FluentDoorRoutes } from "@/routes/routes";
 import LanguageSection from "./+components/LanguageSection";
 import FeatureItemLandingPage from "./FeatureItemLandingPage/FeatureItemLandingPage";
+import initTranslations from "@/app/i18n";
 
-const LandingPage = () => {
+type LandingPageProps = {
+  params: {
+    locale: string;
+  };
+};
+
+const LandingPage = async (props: LandingPageProps) => {
+  const params = await props.params;
+  const locale = params.locale;
+  const { t } = await initTranslations(locale, ["home"]);
+  const headerList = ["li1", "li2", "li3"];
   return (
     <div className="p-2 pt-6 md:p-12 max-w-[1320px] mx-auto">
       {/* ====================header section==================== */}
@@ -22,13 +32,13 @@ const LandingPage = () => {
           <div className="flex flex-col-reverse md:flex-row items-center justify-between mx-4 my-6 md:mx-[60px]">
             <div className="w-full md:w-1/2">
               <h1 className="text-[#5C5A60] p-0 text-2xl md:text-4xl font-bold mb-4">
-                Speak Confidently, Learn Naturally
+                {t("home.header1")}
               </h1>
               <div className="mb-10">
-                {featuresData.map((feature) => (
+                {headerList.map((key, index) => (
                   <FeatureItemLandingPage
-                    key={feature.id}
-                    detail={feature.text}
+                    key={index}
+                    detail={t(`home.header.${key}`)}
                   />
                 ))}
               </div>

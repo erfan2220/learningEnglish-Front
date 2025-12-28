@@ -120,54 +120,119 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { decodeJwt } from "jose";
+import { i18nRouter } from "next-i18n-router";
+import i18nConfig from "./i18nConfig";
 
 export function middleware(req: NextRequest) {
-    const path = req.nextUrl.pathname;
+  // 1️⃣ i18n routing (اضافه کردن /fa /en اگر نبود)
+  const i18nResponse = i18nRouter(req, i18nConfig);
+  if (i18nResponse) return i18nResponse;
 
-    const needsAuth =
-        // path.startsWith("/dashboard") ||
-        path.startsWith("/account") ||
-        path.startsWith("/teacher");
+  const pathname = req.nextUrl.pathname;
 
-    if (!needsAuth) return NextResponse.next();
+  // pathname: /fa/account/profile
+  const segments = pathname.split("/");
+  const locale = segments[1]; // fa | en | fr
+  const restPath = `/${segments.slice(2).join("/")}`; // /account/profile
 
-    const token = req.cookies.get("access_token")?.value;
-    if (!token) {
-        const url = req.nextUrl.clone();
-        url.pathname = "/signin";
-        url.searchParams.set("next", path);
-        return NextResponse.redirect(url);
-    }
+  const needsAuth =
+    restPath.startsWith("/account") ||
+    restPath.startsWith("/teacher") ||
+    restPath.startsWith("/dashboard");
 
-    // Decode ONLY for UX; do not trust for data authorization
-    let claims: any;
-    try {
-        claims = decodeJwt(token);
-    } catch {
-        const url = req.nextUrl.clone();
-        url.pathname = "/signin";
-        url.searchParams.set("next", path);
-        return NextResponse.redirect(url);
-    }
+  if (!needsAuth) return NextResponse.next();
 
-    // Expired?
-    if (claims?.exp && Date.now() >= claims.exp * 1000) {
-        const url = req.nextUrl.clone();
-        url.pathname = "/signin";
-        url.searchParams.set("next", path);
-        return NextResponse.redirect(url);
-    }
+  const token = req.cookies.get("access_token")?.value;
 
-    // Role gating example: /teacher must be a teacher
-    if (path.startsWith("/teacher") && !claims?.is_teacher) {
-        const url = req.nextUrl.clone();
-        url.pathname = "/";
-        return NextResponse.redirect(url);
-    }
+  const redirectToSignin = () => {
+    const url = req.nextUrl.clone();
+    url.pathname = `/${locale}/signin`;
+    url.searchParams.set("next", restPath);
+    return NextResponse.redirect(url);
+  };
 
-    return NextResponse.next();
+  if (!token) return redirectToSignin();
+
+  let claims: any;
+  try {
+    claims = decodeJwt(token);
+  } catch {
+    return redirectToSignin();
+  }
+
+  // Expired?
+  if (claims?.exp && Date.now() >= claims.exp * 1000) {
+    return redirectToSignin();
+  }
+
+  // Role-based access
+  if (restPath.startsWith("/teacher") && !claims?.is_teacher) {
+    const url = req.nextUrl.clone();
+    url.pathname = `/${locale}`;
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/dashboard/:path*", "/account/:path*", "/teacher/:path*"],
+  matcher: ["/((?!api|static|.*\\..*|_next).*)"],
 };
+
+
+// export function middleware(req: NextRequest) {
+//   // 1️⃣ i18n routing (اضافه کردن /fa /en اگر نبود)
+//   const i18nResponse = i18nRouter(req, i18nConfig);
+//   if (i18nResponse) return i18nResponse;
+
+//   // =============================================
+//   const path = req.nextUrl.pathname;
+
+//   const needsAuth =
+//     // path.startsWith("/dashboard") ||
+//     path.startsWith("/account") || path.startsWith("/teacher");
+
+//   if (!needsAuth) return NextResponse.next();
+
+//   const token = req.cookies.get("access_token")?.value;
+//   if (!token) {
+//     const url = req.nextUrl.clone();
+//     url.pathname = "/signin";
+//     url.searchParams.set("next", path);
+//     return NextResponse.redirect(url);
+//   }
+
+//   // Decode ONLY for UX; do not trust for data authorization
+//   let claims: any;
+//   try {
+//     claims = decodeJwt(token);
+//   } catch {
+//     const url = req.nextUrl.clone();
+//     url.pathname = "/signin";
+//     url.searchParams.set("next", path);
+//     return NextResponse.redirect(url);
+//   }
+
+//   // Expired?
+//   if (claims?.exp && Date.now() >= claims.exp * 1000) {
+//     const url = req.nextUrl.clone();
+//     url.pathname = "/signin";
+//     url.searchParams.set("next", path);
+//     return NextResponse.redirect(url);
+//   }
+
+//   // Role gating example: /teacher must be a teacher
+//   if (path.startsWith("/teacher") && !claims?.is_teacher) {
+//     const url = req.nextUrl.clone();
+//     url.pathname = "/";
+//     return NextResponse.redirect(url);
+//   }
+
+//   return NextResponse.next();
+
+//   // =============================================
+// }
+
+// export const config = {
+//   matcher: ["/dashboard/:path*", "/account/:path*", "/teacher/:path*"],
+// };
