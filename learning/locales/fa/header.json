@@ -1,1 +1,19 @@
-{}
+{
+  "header": {
+    "courses": "دوره ها",
+    "dashboard": "داشبورد",
+    "FindTutor": "یافتن معلم",
+    "home": "صفحه اصلی",
+    "logout": "خروج",
+    "role": {
+      "admin": "مدیر",
+      "role": "نقش:",
+      "student": "دانشجو",
+      "tutor": "معلم"
+    },
+    "settings": "تنظیمات",
+    "singIn": "ورود",
+    "unverified": "تأیید نشده",
+    "verified": "تأیید شده"
+  }
+}

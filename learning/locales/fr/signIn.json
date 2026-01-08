@@ -1,0 +1,18 @@
+{
+  "signIn": {
+    "and": "et",
+    "becomeTutor": "Devenir un tuteur",
+    "email": "Email",
+    "forgot": "Mot de passe oublié ?",
+    "header": "Bonjour encore",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "or": "ou",
+    "password": "Mot de passe",
+    "policy": "Politique de confidentialité.",
+    "remember": "Souviens-toi de moi",
+    "signInBtn": "Se connecter",
+    "signUp": "Inscrivez-vous en tant qu'étudiant",
+    "term": "Conditions",
+    "text1": "En vous connectant, vous acceptez nos"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "signIn": {
+    "and": "and",
+    "becomeTutor": "Become a Tutor",
+    "email": "Email",
+    "forgot": "Forgot password?",
+    "header": "Hello Again",
+    "noAccount": "Don't have an account?",
+    "or": "or",
+    "password": "Password",
+    "policy": "Privacy Policy.",
+    "remember": "Remember me",
+    "signInBtn": "Sign In",
+    "signUp": "Sign up as a student",
+    "term": "Terms",
+    "text1": "By signing in you agree to our"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "faq": {
+    "tutor": {
+      "header": "FAQ des tuteurs",
+      "q1": "Combien de commission FluentDoor prend-il sur mes gains ?",
+      "q10": "Puis-je enseigner plus d'une langue sur FluentDoor ?",
+      "q11": "Quelle est l'importance des avis des étudiants pour mon profil ?",
+      "q12": "Quel équipement ai-je besoin pour commencer à enseigner ?",
+      "q2": "Comment les étudiants réservent-ils des leçons avec moi ? Dois-je les contacter ?",
+      "q3": "Dois-je payer un abonnement ou des frais supplémentaires pour accéder aux fonctionnalités de la plateforme ?",
+      "q4": "Puis-je définir mon propre tarif horaire sur FluentDoor ?",
+      "q5": "Quelle est la différence entre un enseignant professionnel et un tuteur communautaire ?",
+      "q6": "Quel type de soutien FluentDoor fournit-il pour trouver de nouveaux étudiants ?",
+      "q7": "Que se passe-t-il si un étudiant annule une leçon ?",
+      "q8": "Dois-je préparer des supports de cours, ou FluentDoor les fournit-il ?",
+      "q9": "Comment puis-je être payé pour mes leçons ?",
+      "s1": "FluentDoor prélève une commission de 15 % sur les frais de cours, qui est déduite avant que les gains n'atteignent votre portefeuille.",
+      "s10": "Oui—si vous parlez couramment plusieurs langues, vous pouvez les ajouter à votre profil et proposer des leçons dans chacune d'elles.",
+      "s11": "Très important : les avis positifs aident à augmenter votre visibilité et votre crédibilité, facilitant ainsi l'attraction de plus d'étudiants.",
+      "s12": "Un ordinateur ou une tablette avec une connexion Internet stable, un microphone de bonne qualité et une webcam sont les exigences de base. Un espace d'enseignement calme est également recommandé.",
+      "s2": "Les étudiants choisissent un créneau horaire parmi vos disponibilités. Vous pouvez refuser les demandes de réservation. L'algorithme de la plateforme promeut votre profil en fonction de l'activité et des évaluations.",
+      "s3": "Non, il n'y a pas de frais supplémentaires. Certaines fonctionnalités premium optionnelles comme 'FluentDoor Plus' peuvent exister, mais les fonctionnalités d'enseignement de base sont gratuites.",
+      "s4": "Oui, vous choisissez votre tarif horaire (minimum autour de 5 €). Beaucoup commencent plus bas pour obtenir des avis et augmentent progressivement leurs tarifs.",
+      "s5": "Les enseignants professionnels détiennent généralement des diplômes formels ou une expérience d'enseignement, tandis que les tuteurs communautaires peuvent ne pas en avoir - mais les deux créent des profils, fixent des tarifs et donnent des cours en ligne.",
+      "s6": "FluentDoor commercialise votre profil, met en avant de nouveaux enseignants et affiche des tuteurs actifs aux étudiants intéressés. S'engager avec la communauté aide également à augmenter la visibilité.",
+      "s7": "Si l'annulation se fait dans le délai autorisé, le cours est reprogrammé ou remboursé à l'étudiant. S'ils annulent tard, vous pouvez toujours recevoir un paiement partiel ou total.",
+      "s8": "FluentDoor ne fournit pas de contenu de leçon. Les tuteurs sont censés préparer leurs propres matériaux, bien que beaucoup partagent des ressources ou utilisent des outils en ligne pendant les sessions.",
+      "s9": "Les paiements sont transférés vers votre portefeuille FluentDoor et peuvent être retirés via Payoneer, virement bancaire ou d'autres méthodes prises en charge une fois le solde minimum atteint."
+    }
+  }
+}

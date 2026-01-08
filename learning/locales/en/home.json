@@ -1,10 +1,43 @@
 {
   "home": {
+    "becomeTutor": {
+      "btn": "become a tutor",
+      "context": "Join our global community of tutors and start teaching online today. Share your knowledge, inspire learners, and grow your income — all from the comfort of home.",
+      "header": "Become a Tutor",
+      "l1": "Connect with motivated students worldwide",
+      "l2": "Build your own teaching schedule and brand",
+      "l3": "Receive secure payments, hassle-free."
+    },
+    "bookNowBtn": "book now",
+    "countryEng": "English",
+    "countryFr": "French",
+    "countryPrs": "Persian",
+    "guid": {
+      "mainHeader": "How it works:",
+      "step1": {
+        "header": "Find your tutor",
+        "step": "step 1:",
+        "text": "Connect with experienced language tutors who match your goals and learning style."
+      },
+      "step2": {
+        "header": "Start Learning",
+        "step": "step 2:",
+        "text": "Jump right into fun, interactive lessons designed to help you speak with confidence."
+      },
+      "step3": {
+        "header": "Listen, Learn, Speak with Confidence",
+        "step": "step 3:",
+        "text": "Start with real-life conversations, build your vocabulary through reading, and practice writing in context. Step by step, you’ll gain the confidence to use your new language anywhere."
+      }
+    },
     "header1": "Speak Confidently, Learn Naturally",
     "header": {
       "li1": "Practice every day with fun and simple exercises",
       "li2": "Test yourself with interactive quizzes and track your progress",
       "li3": "Speak confidently in real-life situations"
-    }
+    },
+    "startBtn": "start now",
+    "tutors": "Tutors",
+    "tutorsMore": "more"
   }
 }

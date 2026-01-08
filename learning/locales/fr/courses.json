@@ -1,0 +1,43 @@
+{
+  "course": {
+    "filter": {
+      "all": "Tout",
+      "day": {
+        "fri": "Vendredi",
+        "heder": "Jour",
+        "mon": "Lundi",
+        "sat": "Samedi",
+        "sun": "Dimanche",
+        "thurs": "Jeudi",
+        "tus": "Mardi",
+        "wed": "Mercredi"
+      },
+      "header": "Filtrer les cours",
+      "language": {
+        "eng": "Anglais",
+        "fa": "Persan",
+        "fr": "Français",
+        "header": "Langue"
+      },
+      "level": {
+        "a1": "A1 - Élémentaire",
+        "a2": "A2 - Élémentaire",
+        "b1": "B1 - Intermédiaire",
+        "b2": "B2 - Intermédiaire",
+        "c1": "C1 - Avancé",
+        "c2": "C2 - Avancé"
+      },
+      "price": {
+        "dollar": "Dollar",
+        "free": "Seulement des cours gratuits",
+        "header": "Prix",
+        "toman": "Toman",
+        "up": "Jusqu'à : "
+      },
+      "search": "chercher des cours",
+      "time": "Temps"
+    },
+    "notFound": "Aucun cours trouvé",
+    "result": "Résultats"
+  }
+}

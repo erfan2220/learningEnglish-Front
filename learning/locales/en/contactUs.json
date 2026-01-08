@@ -1,0 +1,24 @@
+{
+  "contact": {
+    "Email": "Email",
+    "h2": "How to Reach Us:",
+    "h3": "What You Can Contact Us About:",
+    "h4": "Stay Connected:",
+    "header": "Contact Us",
+    "phone": "Phone:",
+    "Telegram": "Telegram:",
+    "text1": "We’re always excited to hear from you! At FluentDoor, our goal is to make language learning engaging, effective, and personalized. Whether you’re a student looking to improve your skills, a teacher wanting to collaborate, or just have a question about our services, our team is here to help.",
+    "text2": {
+      "content1": "Any questions about our platform, courses, or features.",
+      "content2": "Experiencing technical issues or need help navigating your account.",
+      "content3": "Interested in becoming a tutor or partnering with us.",
+      "content4": "Your thoughts help us improve and create better learning experiences.",
+      "h1": "General Inquiries:",
+      "h2": "Support:",
+      "h3": "Collaboration & Partnerships:",
+      "h4": "Feedback & Suggestions:"
+    },
+    "text3": "Our team strives to respond to every inquiry within 24 hours. We value every message and look forward to helping you achieve your language learning goals.",
+    "text4": "Follow us on social media and subscribe to our newsletter for the latest updates, tips, and learning resources. Your journey to becoming a confident language learner starts here!"
+  }
+}

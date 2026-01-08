@@ -3,13 +3,28 @@ import Country from "@/components/Common/Country/Country";
 import Layout from "@/components/Layout/Layout";
 import { FluentDoorRoutes } from "@/routes/routes";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import initTranslations from "@/app/i18n";
+import { usePathname } from "next/navigation";
 
 const LanguageSection = () => {
+ const pathname = usePathname(); // مسیر فعلی رو می‌گیره
+  const localeFromPath = pathname.split("/")[1]; // اولین segment رو به عنوان locale بگیر
+  const locale = localeFromPath || "en"; // default
+
+  const [t, setT] = useState<(key: string) => string>(() => (key) => key);
+
+  useEffect(() => {
+    const loadTranslations = async () => {
+      const { t: tFunc } = await initTranslations(locale, ["home"]);
+      setT(() => tFunc);
+    };
+    loadTranslations();
+  }, [locale]);
   return (
     <div>
       <Layout>
@@ -39,7 +54,8 @@ const LanguageSection = () => {
                 >
                   <Country
                     flag={"icons/ukFlag.svg"}
-                    countryName={"English"}
+                                                           countryName={t("home.countryEng")}
+
                     width={"32px"}
                     textSize={"18px"}
                     fontWeight={"bold"}
@@ -57,7 +73,8 @@ const LanguageSection = () => {
                 >
                   <Country
                     flag={"icons/frenchFlag.svg"}
-                    countryName={"French"}
+                                       countryName={t("home.countryFr")}
+
                     width={"32px"}
                     textSize={"18px"}
                     fontWeight={"16px"}
@@ -75,7 +92,7 @@ const LanguageSection = () => {
                 >
                   <Country
                     flag={"icons/irFlag.svg"}
-                    countryName={"Persian"}
+                    countryName={t("home.countryPrs")}
                     width={"32px"}
                     textSize={"18px"}
                     fontWeight={"bold"}

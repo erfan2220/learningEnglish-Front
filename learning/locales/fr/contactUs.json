@@ -1,0 +1,24 @@
+{
+  "contact": {
+    "Email": "Email",
+    "h2": "Comment nous contacter :",
+    "h3": "Ce dont vous pouvez nous contacter :",
+    "h4": "Restez Connecté :",
+    "header": "Contactez-nous",
+    "phone": "Téléphone :",
+    "Telegram": "Telegram :",
+    "text1": "Nous sommes toujours ravis d'avoir de vos nouvelles ! Chez FluentDoor, notre objectif est de rendre l'apprentissage des langues engageant, efficace et personnalisé. Que vous soyez un étudiant cherchant à améliorer vos compétences, un enseignant souhaitant collaborer, ou que vous ayez simplement une question sur nos services, notre équipe est là pour vous aider.",
+    "text2": {
+      "content1": "Des questions sur notre plateforme, nos cours ou nos fonctionnalités.",
+      "content2": "Rencontrez des problèmes techniques ou avez besoin d'aide pour naviguer dans votre compte.",
+      "content3": "Intéressé à devenir tuteur ou à vous associer avec nous.",
+      "content4": "Vos réflexions nous aident à améliorer et à créer de meilleures expériences d'apprentissage.",
+      "h1": "Demandes générales :",
+      "h2": "Support :",
+      "h3": "Collaboration et Partenariats :",
+      "h4": "Retour & Suggestions :"
+    },
+    "text3": "Notre équipe s'efforce de répondre à chaque demande dans les 24 heures. Nous valorisons chaque message et sommes impatients de vous aider à atteindre vos objectifs d'apprentissage des langues.",
+    "text4": "Suivez-nous sur les réseaux sociaux et abonnez-vous à notre newsletter pour les dernières mises à jour, conseils et ressources d'apprentissage. Votre parcours pour devenir un apprenant de langue confiant commence ici !"
+  }
+}

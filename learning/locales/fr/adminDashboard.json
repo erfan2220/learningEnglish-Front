@@ -1,0 +1,38 @@
+{
+  "adminDashboard": {
+    "addArticle": {
+      "addBtn": "Ajouter un article",
+      "addingBtn": "ajout",
+      "Author": "Auteur",
+      "Content": "Contenu",
+      "difficult": {
+        "advance": "Avancé",
+        "easy": "Facile",
+        "header": "niveau de difficulté",
+        "intermediate": "Intermédiaire"
+      },
+      "header": "Ajouter un article",
+      "link": "Lien associé",
+      "time": "Temps de lecture",
+      "Title": "Titre",
+      "toastErr": "Veuillez remplir tous les champs.",
+      "toastSucsess": "Article ajouté avec succès.",
+      "Upload": "Télécharger la bannière"
+    },
+    "article": {
+      "deleteBtn": "supprimer",
+      "editBtn": "éditer",
+      "header": "Articles"
+    },
+    "bills": {
+      "header": "Factures"
+    },
+    "dashboard": {
+      "header": "Tableau de bord"
+    },
+    "updateArticle": {
+      "cancelBtn": "annuler",
+      "updateBtn": "mettre à jour l'article"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "adminDashboard": {
+    "addArticle": {
+      "addBtn": "Add Article",
+      "addingBtn": "adding",
+      "Author": "Author",
+      "Content": "Content",
+      "difficult": {
+        "advance": "Advanced",
+        "easy": "Easy",
+        "header": "difficulty Level",
+        "intermediate": "Intermediate"
+      },
+      "header": "Add Article",
+      "link": "Related Link",
+      "time": "Reading Time",
+      "Title": "Title",
+      "toastErr": "Please fill in all fields.",
+      "toastSucsess": "Article added successfully.",
+      "Upload": "Upload Banner"
+    },
+    "article": {
+      "deleteBtn": "delete",
+      "editBtn": "edit",
+      "header": "Articles"
+    },
+    "bills": {
+      "header": "Bills"
+    },
+    "dashboard": {
+      "header": "Dashboard"
+    },
+    "updateArticle": {
+      "cancelBtn": "cancel",
+      "updateBtn": "update article"
+    }
+  }
+}

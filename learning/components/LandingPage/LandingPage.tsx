@@ -43,7 +43,7 @@ const LandingPage = async (props: LandingPageProps) => {
                 ))}
               </div>
               <Link href={`${FluentDoorRoutes.courses}`}>
-                <Button label={"start now"} type="button" />
+                <Button label={t("home.startBtn")} type="button" />
               </Link>
             </div>
 

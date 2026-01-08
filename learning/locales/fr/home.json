@@ -1,10 +1,43 @@
 {
   "home": {
+    "becomeTutor": {
+      "btn": "devenir un tuteur",
+      "context": "Rejoignez notre communauté mondiale de tuteurs et commencez à enseigner en ligne dès aujourd'hui. Partagez vos connaissances, inspirez les apprenants et augmentez vos revenus — le tout depuis le confort de votre maison.",
+      "header": "Devenir un tuteur",
+      "l1": "Connectez-vous avec des étudiants motivés du monde entier",
+      "l2": "Créez votre propre emploi du temps d'enseignement et votre marque",
+      "l3": "Recevez des paiements sécurisés, sans tracas."
+    },
+    "bookNowBtn": "réservez maintenant",
+    "countryEng": "Anglais",
+    "countryFr": "Français",
+    "countryPrs": "Persan",
+    "guid": {
+      "mainHeader": "Comment ça fonctionne :",
+      "step1": {
+        "header": "Trouvez votre tuteur",
+        "step": "étape 1 :",
+        "text": "Connectez-vous avec des tuteurs de langue expérimentés qui correspondent à vos objectifs et à votre style d'apprentissage."
+      },
+      "step2": {
+        "header": "Commencer à apprendre",
+        "step": "étape 2 :",
+        "text": "Plongez directement dans des leçons amusantes et interactives conçues pour vous aider à parler avec confiance."
+      },
+      "step3": {
+        "header": "Écoutez, apprenez, parlez avec confiance",
+        "step": "étape 3 :",
+        "text": "Commencez par des conversations réelles, enrichissez votre vocabulaire par la lecture et pratiquez l'écriture dans un contexte. Pas à pas, vous gagnerez la confiance nécessaire pour utiliser votre nouvelle langue partout."
+      }
+    },
     "header1": "Parlez avec confiance, apprenez naturellement",
     "header": {
       "li1": "Pratiquez tous les jours avec des exercices amusants et simples",
       "li2": "Testez-vous avec des quiz interactifs et suivez vos progrès",
       "li3": "Parlez avec confiance dans des situations réelles"
-    }
+    },
+    "startBtn": "commencer maintenant",
+    "tutors": "Tuteurs",
+    "tutorsMore": "plus"
   }
 }

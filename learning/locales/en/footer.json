@@ -1,0 +1,29 @@
+{
+  "footer": {
+    "Languages": {
+      "learneg": "Learn English",
+      "learnFa": "Learn Persian",
+      "learnFr": "Learn France"
+    },
+    "more": {
+      "contact": "Contact Us",
+      "FAQ": "FAQ",
+      "header": "More",
+      "policy": "Policies & Regulations",
+      "terms": "Service Terms"
+    },
+    "resources": {
+      "article": "Articles",
+      "challenge": "Language Challenge",
+      "header": "Learning Resources",
+      "test": "Language Test"
+    },
+    "tutor": {
+      "bocemTutor": "Become a Tutor",
+      "eng": "English Tutor",
+      "fa": "Persian Tutor",
+      "fr": "French Tutor",
+      "header": "Teacher & Tutor"
+    }
+  }
+}

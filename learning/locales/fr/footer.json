@@ -1,0 +1,29 @@
+{
+  "footer": {
+    "Languages": {
+      "learneg": "Apprendre l'anglais",
+      "learnFa": "Apprendre le persan",
+      "learnFr": "Apprendre la France"
+    },
+    "more": {
+      "contact": "Contactez-nous",
+      "FAQ": "FAQ",
+      "header": "Plus",
+      "policy": "Politiques et règlements",
+      "terms": "Conditions de service"
+    },
+    "resources": {
+      "article": "Articles",
+      "challenge": "Défi linguistique",
+      "header": "Ressources d'apprentissage",
+      "test": "Test de langue"
+    },
+    "tutor": {
+      "bocemTutor": "Devenir un tuteur",
+      "eng": "Tuteur d'anglais",
+      "fa": "Tuteur persan",
+      "fr": "Tuteur de français",
+      "header": "Enseignant & Tuteur"
+    }
+  }
+}

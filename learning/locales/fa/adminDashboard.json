@@ -1,0 +1,38 @@
+{
+  "adminDashboard": {
+    "addArticle": {
+      "addBtn": "افزودن مقاله",
+      "addingBtn": "اضافه کردن",
+      "Author": "نویسنده",
+      "Content": "محتوا",
+      "difficult": {
+        "advance": "پیشرفته",
+        "easy": "آسان",
+        "header": "سطح دشواری",
+        "intermediate": "متوسط"
+      },
+      "header": "افزودن مقاله",
+      "link": "لینک مرتبط",
+      "time": "زمان خواندن",
+      "Title": "عنوان",
+      "toastErr": "لطفاً تمام فیلدها را پر کنید.",
+      "toastSucsess": "مقاله با موفقیت اضافه شد.",
+      "Upload": "بارگذاری بنر"
+    },
+    "article": {
+      "deleteBtn": "حذف",
+      "editBtn": "ویرایش",
+      "header": "مقالات"
+    },
+    "bills": {
+      "header": "صورتحساب ها"
+    },
+    "dashboard": {
+      "header": "داشبورد"
+    },
+    "updateArticle": {
+      "cancelBtn": "لغو",
+      "updateBtn": "به‌روزرسانی مقاله"
+    }
+  }
+}

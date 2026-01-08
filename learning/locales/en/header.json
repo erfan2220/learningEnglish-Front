@@ -1,1 +1,19 @@
-{}
+{
+  "header": {
+    "courses": "Courses",
+    "dashboard": "Dashboard",
+    "FindTutor": "Find Tutor",
+    "home": "Home Page",
+    "logout": "Sign Out",
+    "role": {
+      "admin": "Admin",
+      "role": "Role:",
+      "student": "Student",
+      "tutor": "Tutor"
+    },
+    "settings": "Settings",
+    "singIn": "Sign In",
+    "unverified": "unverified",
+    "verified": "verified"
+  }
+}

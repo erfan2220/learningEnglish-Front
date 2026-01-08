@@ -1,0 +1,43 @@
+{
+  "course": {
+    "filter": {
+      "all": "All",
+      "day": {
+        "fri": "Friday",
+        "heder": "Day",
+        "mon": "Monday",
+        "sat": "Saturday",
+        "sun": "Sunday",
+        "thurs": "Thursday",
+        "tus": "Tuesday",
+        "wed": "Wednesday"
+      },
+      "header": "Filter Courses",
+      "language": {
+        "eng": "English",
+        "fa": "Persian",
+        "fr": "French",
+        "header": "Language"
+      },
+      "level": {
+        "a1": "A1 - Elementary",
+        "a2": "A2 - Elementary",
+        "b1": "B1 - Intermediate",
+        "b2": "B2 - Intermediate",
+        "c1": "C1 - Advance",
+        "c2": "C2 - Advance"
+      },
+      "price": {
+        "dollar": "Dollar",
+        "free": "Only Free Courses",
+        "header": "Price",
+        "toman": "Toman",
+        "up": "Up to: "
+      },
+      "search": "search courses",
+      "time": "Time"
+    },
+    "notFound": "No courses found",
+    "result": "Results"
+  }
+}

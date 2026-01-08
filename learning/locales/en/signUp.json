@@ -1,0 +1,23 @@
+{
+  "signUp": {
+    "agree": "I agree to the terms",
+    "and": "and",
+    "continue": "By clicking Log in or Continue with, you agree to ",
+    "email": "Email",
+    "enterEmail": "enter your Email...",
+    "enterFname": "enter your first name...",
+    "enterLname": "enter your last name...",
+    "enterPassword": "enter your password...",
+    "fname": "First Name",
+    "haveAccount": "Already have an account?",
+    "header": "Sign Up as a Tutor",
+    "headerStudent": "Sign Up as a Student",
+    "lname": "Last Name",
+    "or": "or",
+    "password": "Password",
+    "policy": "Privacy Policy",
+    "signIn": "Sign In",
+    "signUpBtn": "Sign Up",
+    "terms": "Terms"
+  }
+}

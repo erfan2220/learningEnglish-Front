@@ -1,0 +1,23 @@
+{
+  "signUp": {
+    "agree": "J'accepte les termes",
+    "and": "et",
+    "continue": "En cliquant sur Se connecter ou Continuer avec, vous acceptez de ",
+    "email": "Email",
+    "enterEmail": "entrez votre e-mail...",
+    "enterFname": "entrez votre prénom...",
+    "enterLname": "entrez votre nom de famille...",
+    "enterPassword": "entrez votre mot de passe...",
+    "fname": "Prénom",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "header": "Inscrivez-vous en tant que tuteur",
+    "headerStudent": "Inscrivez-vous en tant qu'étudiant",
+    "lname": "Nom de famille",
+    "or": "ou",
+    "password": "Mot de passe",
+    "policy": "Politique de confidentialité",
+    "signIn": "Se connecter",
+    "signUpBtn": "S'inscrire",
+    "terms": "Conditions"
+  }
+}

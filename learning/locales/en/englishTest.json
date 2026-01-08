@@ -1,0 +1,89 @@
+{
+  "test": {
+    "header": "English Placement Test – Discover Your True Level",
+    "part2": {
+      "header": "✨ Why Take This Test?",
+      "l1": {
+        "content": "Get a reliable evaluation of your current English level, based on internationally recognized standards (CEFR: A0 to C2).",
+        "heder": "Accurate Assessment"
+      },
+      "l2": {
+        "content": "No more wasting time on lessons that are too easy or too hard. With your real level defined, your learning becomes faster and more effective.",
+        "header": "Save Time and Energy"
+      },
+      "l3": {
+        "content": "After finishing the test, you’ll receive tailored recommendations to help you focus on the areas you need the most.",
+        "header": "Personalized Learning Roadmap"
+      },
+      "l4": {
+        "content": "Whether you want to study abroad, apply for a job, or simply communicate better, knowing your level gives you the confidence to move forward.",
+        "header": "Confidence in Your Progress"
+      }
+    },
+    "part3": {
+      "header": "🕒 What to Expect?",
+      "l1": {
+        "content": "Around 15–20 minutes. Short enough to stay focused, long enough to measure your skills effectively.",
+        "header": "Test Duration"
+      },
+      "l2": {
+        "content": "Multiple-choice questions covering grammar, vocabulary, and reading comprehension.",
+        "header": "Question Types"
+      },
+      "l3": {
+        "content": "Get your score instantly, along with your CEFR level (A0–C2).",
+        "header": "Immediate Results"
+      },
+      "l4": {
+        "content": "Receive recommendations on which courses, exercises, or lessons fit your level best.",
+        "header": "Next Steps"
+      }
+    },
+    "part4": {
+      "header": "📊 CEFR Levels Explained",
+      "l1": {
+        "content": "You are just starting out. Don’t worry — everyone begins here.",
+        "header": "A0 – Absolute Beginner"
+      },
+      "l2": {
+        "content": "You can use simple phrases and understand very basic expressions.",
+        "header": "A1 – Beginner"
+      },
+      "l3": {
+        "content": "You can handle everyday conversations on familiar topics.",
+        "header": "A2 – Elementary"
+      },
+      "l4": {
+        "content": "You can communicate about common subjects and understand longer texts.",
+        "header": "B1 – Intermediate"
+      },
+      "l5": {
+        "content": "You can communicate about common subjects and understand longer texts.",
+        "header": "B2 – Upper-Intermediate"
+      },
+      "l6": {
+        "content": "You are confident and fluent in most academic, social, or professional situations.",
+        "header": "C1 – Advanced"
+      },
+      "l7": {
+        "content": "You understand nearly everything with ease and express yourself naturally.",
+        "header": "C2 – Proficient"
+      }
+    },
+    "part5": {
+      "header": "✅ Tips for Best Results",
+      "l1": "Take the test in a quiet place without distractions.",
+      "l2": "Don’t guess — if you don’t know the answer, select “I don’t know”. This makes your result more accurate.",
+      "l3": "Be honest — the goal is not a perfect score, but a true reflection of your level.",
+      "l4": "Relax and enjoy the process. Think of it as the first step toward your success in learning English."
+    },
+    "part6": {
+      "header": "🚀 Ready to Begin?",
+      "l1": "Your English learning journey starts here. In just a few minutes, you’ll know your exact level and how to improve step by step.",
+      "l2": "👉 Click the button below and start your test now!"
+    },
+    "startBtn": "Start Now",
+    "text1": "Welcome to our English Placement Test – the smartest way to find out exactly where you stand on your language learning journey. Whether you are a complete beginner, an intermediate learner, or an advanced speaker, this test will give you a clear picture of your skills and help you plan your next steps with confidence.",
+    "text2": "Learning a language is like building a house: without knowing your foundation, you can’t build the right structure on top. That’s why a placement test is essential — it shows you your strengths, weaknesses, and the best path forward."
+  }
+}

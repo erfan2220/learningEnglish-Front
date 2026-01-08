@@ -1,1 +1,19 @@
-{}
+{
+  "header": {
+    "courses": "Cours",
+    "dashboard": "Tableau de bord",
+    "FindTutor": "Trouver un tuteur",
+    "home": "Page d'accueil",
+    "logout": "Se déconnecter",
+    "role": {
+      "admin": "Admin",
+      "role": "Rôle :",
+      "student": "Étudiant",
+      "tutor": "Tuteur"
+    },
+    "settings": "Paramètres",
+    "singIn": "Se connecter",
+    "unverified": "non vérifié",
+    "verified": "vérifié"
+  }
+}

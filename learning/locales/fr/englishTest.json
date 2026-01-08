@@ -1,0 +1,89 @@
+{
+  "test": {
+    "header": "Test de placement en anglais – Découvrez votre véritable niveau",
+    "part2": {
+      "header": "✨ Pourquoi passer ce test ?",
+      "l1": {
+        "content": "Obtenez une évaluation fiable de votre niveau d'anglais actuel, basée sur des normes reconnues internationalement (CECR : A0 à C2).",
+        "heder": "Évaluation précise"
+      },
+      "l2": {
+        "content": "Ne perdez plus de temps avec des leçons trop faciles ou trop difficiles. Avec votre niveau réel défini, votre apprentissage devient plus rapide et plus efficace.",
+        "header": "Gagnez du temps et de l'énergie"
+      },
+      "l3": {
+        "content": "Après avoir terminé le test, vous recevrez des recommandations personnalisées pour vous aider à vous concentrer sur les domaines qui vous nécessitent le plus.",
+        "header": "Feuille de route d'apprentissage personnalisée"
+      },
+      "l4": {
+        "content": "Que vous souhaitiez étudier à l'étranger, postuler pour un emploi ou simplement mieux communiquer, connaître votre niveau vous donne la confiance nécessaire pour aller de l'avant.",
+        "header": "Confiance dans vos progrès"
+      }
+    },
+    "part3": {
+      "header": "🕒 Que faut-il attendre ?",
+      "l1": {
+        "content": "Environ 15 à 20 minutes. Assez court pour rester concentré, assez long pour mesurer vos compétences de manière efficace.",
+        "header": "Durée du test"
+      },
+      "l2": {
+        "content": "Questions à choix multiples couvrant la grammaire, le vocabulaire et la compréhension de lecture.",
+        "header": "Types de questions"
+      },
+      "l3": {
+        "content": "Obtenez votre score instantanément, ainsi que votre niveau CECR (A0–C2).",
+        "header": "Résultats immédiats"
+      },
+      "l4": {
+        "content": "Recevez des recommandations sur les cours, exercices ou leçons qui correspondent le mieux à votre niveau.",
+        "header": "Prochaines étapes"
+      }
+    },
+    "part4": {
+      "header": "📊 Niveaux CECR expliqués",
+      "l1": {
+        "content": "Vous débutez. Ne vous inquiétez pas, tout le monde commence ici.",
+        "header": "A0 – Débutant absolu"
+      },
+      "l2": {
+        "content": "Vous pouvez utiliser des phrases simples et comprendre des expressions très basiques.",
+        "header": "A1 – Débutant"
+      },
+      "l3": {
+        "content": "Vous pouvez gérer des conversations quotidiennes sur des sujets familiers.",
+        "header": "A2 – Élémentaire"
+      },
+      "l4": {
+        "content": "Vous pouvez communiquer sur des sujets communs et comprendre des textes plus longs.",
+        "header": "B1 – Intermédiaire"
+      },
+      "l5": {
+        "content": "Vous pouvez communiquer sur des sujets communs et comprendre des textes plus longs.",
+        "header": "B2 – Intermédiaire supérieur"
+      },
+      "l6": {
+        "content": "Vous êtes confiant et à l'aise dans la plupart des situations académiques, sociales ou professionnelles.",
+        "header": "C1 – Avancé"
+      },
+      "l7": {
+        "content": "Vous comprenez presque tout avec aisance et vous vous exprimez naturellement.",
+        "header": "C2 – Compétent"
+      }
+    },
+    "part5": {
+      "header": "✅ Conseils pour de meilleurs résultats",
+      "l1": "Passez le test dans un endroit calme sans distractions.",
+      "l2": "Ne devinez pas — si vous ne connaissez pas la réponse, sélectionnez « Je ne sais pas ». Cela rend votre résultat plus précis.",
+      "l3": "Soyez honnête — l'objectif n'est pas un score parfait, mais une véritable réflexion de votre niveau.",
+      "l4": "Détendez-vous et profitez du processus. Considérez cela comme le premier pas vers votre succès dans l'apprentissage de l'anglais."
+    },
+    "part6": {
+      "header": "🚀 Prêt à commencer ?",
+      "l1": "Votre parcours d'apprentissage de l'anglais commence ici. En quelques minutes, vous connaîtrez votre niveau exact et comment vous améliorer étape par étape.",
+      "l2": "👉 Cliquez sur le bouton ci-dessous et commencez votre test maintenant !"
+    },
+    "startBtn": "Commencer maintenant",
+    "text1": "Bienvenue à notre test de placement en anglais – le moyen le plus intelligent de découvrir exactement où vous en êtes dans votre parcours d'apprentissage des langues. Que vous soyez un débutant complet, un apprenant intermédiaire ou un locuteur avancé, ce test vous donnera une image claire de vos compétences et vous aidera à planifier vos prochaines étapes en toute confiance.",
+    "text2": "Apprendre une langue, c'est comme construire une maison : sans connaître votre fondation, vous ne pouvez pas construire la bonne structure par-dessus. C'est pourquoi un test de placement est essentiel : il vous montre vos forces, vos faiblesses et le meilleur chemin à suivre."
+  }
+}
